@@ -7,6 +7,9 @@ using UnityEngine.SceneManagement;
 
 public class GameCtr : MonoBehaviour
 {
+    [SerializeField] private GameObject levelText;
+    [SerializeField] private GameObject parentLevelText;
+    [SerializeField] private List<Sprite> sprites;
     public static GameCtr instance;
     public GameObject HexagridPrefab;
     public GameObject BulongPrefab;
@@ -48,6 +51,8 @@ public class GameCtr : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -61,6 +66,34 @@ public class GameCtr : MonoBehaviour
         yield return new WaitForSeconds(0.5f); // Change the delay time as needed
         onGenerateGrid();
     }
+    public void buttonNext()
+    {
+        nextLv();
+        SceneManager.LoadScene(0);
+    }
+    public void ReplayLoseBtn()
+    {
+        // var rect = losePopup.GetComponent<RectTransform>();
+        // rect.DOAnchorPos(new Vector2(rect.anchoredPosition.x, 2000), 0.5f)
+        //     .SetEase(Ease.InFlash)
+        //     .OnComplete(() => { SceneManager.LoadScene(0); });
+    }
+    public void SetLevelText()
+    {
+        var level = PlayerPrefs.GetInt("lv");
+        string levelString = level.ToString();
+        foreach (var digit in levelString)
+        {
+            int digitValue = (int)char.GetNumericValue(digit);
+            var imageLevelClone = Instantiate(levelText, Vector2.zero, Quaternion.identity, parentLevelText.transform);
+            var imageLevel = imageLevelClone.GetComponent<Image>();
+            imageLevel.sprite = sprites[digitValue];
+        }
+    }
+    public void ReplayBtn()
+    {
+        SceneManager.LoadScene(0);
+    }
 
     void setUpLv()
     {
@@ -70,6 +103,18 @@ public class GameCtr : MonoBehaviour
             PlayerPrefs.SetInt("lv", lv);
         }
 
+    }
+
+    public void nextLv()
+    {
+        // GameFirebase.SendEvent("level-win", PlayerPrefs.GetInt("lv").ToString());
+
+        int lv = PlayerPrefs.GetInt("lv") + 1;
+        if (lv > 15)
+        {
+            lv = 1;
+        }
+        PlayerPrefs.SetInt("lv", lv);
     }
 
     void onGenerateGrid()
