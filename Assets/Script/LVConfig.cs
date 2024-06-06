@@ -23,6 +23,7 @@ public class LVConfig : MonoBehaviour
     public List<Level> levels = new List<Level>();
     public List<Sprite> BulongBodyColor;
     public List<Sprite> BulongFaceColor;
+    public List<Sprite> BulongFaceColor2;
     public List<Sprite> ScewColor;
     public static LVConfig instance;
     public static LVConfig Instance
@@ -63,58 +64,71 @@ public class LVConfig : MonoBehaviour
                     new List<SubLevel>
                     {
 
-                          new SubLevel {row= 9,col= 4,type= 2,  color= 0},
-                        new SubLevel {row= 9,col= 5,type= 2,  color= 1},
-                        new SubLevel {row= 8,col= 2,type= 2,  color= 0},
-                        new SubLevel {row= 6,col= 2,type= 2, color= 1},
-                        new SubLevel {row= 8,col= 6,type= 2,  color= 0},
-                        new SubLevel {row= 6,col= 4,type= 2,  color= 1},
-                        new SubLevel {row= 6,col= 6,type= 2,  color= 6},
+                        new SubLevel {row= 0,col= 1,type= 2,  color= 0},
+                        new SubLevel {row= 1,col= 2,type= 2,  color= 1},
+                        new SubLevel {row= 1,col= 3,type= 2,  color= 2},
+                        new SubLevel {row= 3,col= 4,type= 2, color= 3},
+                        new SubLevel {row= 2,col= 2,type= 2,  color= 4},
+                        new SubLevel {row= 3,col= 2,type= 2,  color= 5},
+                        new SubLevel {row= 3,col= 5,type= 2,  color= 6},
+                        new SubLevel {row= 3,col= 6,type= 2,  color= 7},
+                        new SubLevel {row= 3,col= 0,type= 2,  color= 7},
 
-                        // new SubLevel {row= 9,col= 4,type= 1,  color= 0},
-                        // new SubLevel {row= 9,col= 5,type= 1,  color= 1},
-                        // new SubLevel {row= 8,col= 2,type= 1,  color= 4},
-                        // new SubLevel {row= 6,col= 2,type= 1, color= 6},
-                        new SubLevel {row= 8,col= 6,type= 1,  color= 0},
-                        new SubLevel {row= 6,col= 4,type= 1,  color= 1},
+                        new SubLevel {row= 0,col= 1,type= 1,  color= 0},
+                        new SubLevel {row= 1,col= 2,type= 1,  color= 1},
+                        new SubLevel {row= 1,col= 3,type= 1,  color= 2},
+                        new SubLevel {row= 3,col= 4,type= 1, color= 3},
+                        new SubLevel {row= 2,col= 2,type= 1,  color= 4},
+                        new SubLevel {row= 3,col= 2,type= 1,  color= 5},
+                        new SubLevel {row= 3,col= 5,type= 1,  color= 6},
+                        new SubLevel {row= 3,col= 6,type= 1,  color= 7},
+
 
 
                     },
                     new List<SubLevel>
                     {
 
-                          new SubLevel {row= 9,col= 4,type= 2,  color= 0},
-                        new SubLevel {row= 9,col= 5,type= 2,  color= 1},
-                        new SubLevel {row= 8,col= 2,type= 2,  color= 0},
-                        new SubLevel {row= 6,col= 2,type= 2, color= 1},
-                        new SubLevel {row= 8,col= 6,type= 2,  color= 0},
-                        new SubLevel {row= 6,col= 4,type= 2,  color= 1},
-                        new SubLevel {row= 6,col= 6,type= 2,  color= 6},
+                       new SubLevel {row= 0,col= 1,type= 2,  color= 0},
+                        new SubLevel {row= 1,col= 2,type= 2,  color= 1},
+                        new SubLevel {row= 1,col= 3,type= 2,  color= 2},
+                        new SubLevel {row= 3,col= 4,type= 2, color= 3},
+                        new SubLevel {row= 2,col= 2,type= 2,  color= 4},
+                        new SubLevel {row= 3,col= 2,type= 2,  color= 5},
+                        new SubLevel {row= 3,col= 5,type= 2,  color= 6},
+                        new SubLevel {row= 3,col= 6,type= 2,  color= 7},
+                         new SubLevel {row= 3,col= 0,type= 2,  color= 7},
 
-                        // new SubLevel {row= 9,col= 4,type= 1,  color= 0},
-                        // new SubLevel {row= 9,col= 5,type= 1,  color= 1},
-                        // new SubLevel {row= 8,col= 2,type= 1,  color= 4},
-                        // new SubLevel {row= 6,col= 2,type= 1, color= 6},
-                        new SubLevel {row= 8,col= 6,type= 1,  color= 0},
-                        new SubLevel {row= 6,col= 4,type= 1,  color= 1},
+                          new SubLevel {row= 0,col= 1,type= 1,  color= 0},
+                        new SubLevel {row= 1,col= 2,type= 1,  color= 1},
+                        new SubLevel {row= 1,col= 3,type= 1,  color= 2},
+                        new SubLevel {row= 3,col= 4,type= 1, color= 3},
+                        new SubLevel {row= 2,col= 2,type= 1,  color= 4},
+                        new SubLevel {row= 3,col= 2,type= 1,  color= 5},
+                        new SubLevel {row= 3,col= 5,type= 1,  color= 6},
+                        new SubLevel {row= 3,col= 6,type= 1,  color= 7},
                     },
                     new List<SubLevel>
                     {
 
-                          new SubLevel {row= 9,col= 4,type= 2,  color= 0},
-                        new SubLevel {row= 9,col= 5,type= 2,  color= 1},
-                        new SubLevel {row= 8,col= 2,type= 2,  color= 0},
-                        new SubLevel {row= 6,col= 2,type= 2, color= 1},
-                        new SubLevel {row= 8,col= 6,type= 2,  color= 0},
-                        new SubLevel {row= 6,col= 4,type= 2,  color= 1},
-                        // new SubLevel {row= 6,col= 6,type= 2,  color= 6},
+                       new SubLevel {row= 0,col= 1,type= 2,  color= 0},
+                        new SubLevel {row= 1,col= 2,type= 2,  color= 1},
+                        new SubLevel {row= 1,col= 3,type= 2,  color= 2},
+                        new SubLevel {row= 3,col= 4,type= 2, color= 3},
+                        new SubLevel {row= 2,col= 2,type= 2,  color= 4},
+                        new SubLevel {row= 3,col= 2,type= 2,  color= 5},
+                        new SubLevel {row= 3,col= 5,type= 2,  color= 6},
+                        new SubLevel {row= 3,col= 6,type= 2,  color= 7},
+                         new SubLevel {row= 3,col= 0,type= 2,  color= 7},
 
-                        // new SubLevel {row= 9,col= 4,type= 1,  color= 0},
-                        // new SubLevel {row= 9,col= 5,type= 1,  color= 1},
-                        // new SubLevel {row= 8,col= 2,type= 1,  color= 4},
-                        // new SubLevel {row= 6,col= 2,type= 1, color= 6},
-                        new SubLevel {row= 8,col= 6,type= 1,  color= 0},
-                        new SubLevel {row= 6,col= 4,type= 1,  color= 1},
+                          new SubLevel {row= 0,col= 1,type= 1,  color= 0},
+                        new SubLevel {row= 1,col= 2,type= 1,  color= 1},
+                        new SubLevel {row= 1,col= 3,type= 1,  color= 2},
+                        new SubLevel {row= 3,col= 4,type= 1, color= 3},
+                        new SubLevel {row= 2,col= 2,type= 1,  color= 4},
+                        new SubLevel {row= 3,col= 2,type= 1,  color= 5},
+                        new SubLevel {row= 3,col= 5,type= 1,  color= 6},
+                        new SubLevel {row= 3,col= 6,type= 1,  color= 7},
                     },
                 },
 

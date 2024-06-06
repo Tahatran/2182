@@ -78,7 +78,7 @@ public class Screw : MonoBehaviour
         Vector3 screwPosition = transform.position;
 
         // Tạo một hình cầu với bán kính nhỏ xung quanh vị trí của Screw
-        float radius = 0.1f; // Điều chỉnh bán kính theo kích thước của Screw và Bulong
+        float radius = 0.5f; // Điều chỉnh bán kính theo kích thước của Screw và Bulong
         Collider[] colliders = Physics.OverlapSphere(screwPosition, radius);
 
         // Duyệt qua tất cả các Collider trong vùng cầu

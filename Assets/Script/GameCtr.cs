@@ -180,7 +180,7 @@ public class GameCtr : MonoBehaviour
                 if (targetGrid)
                 {
                     // Instantiate đối tượng prefab tại vị trí của targetGrid
-                    var instantiatedObject = Instantiate(prefabToInstantiate, targetGrid.transform);
+                    var instantiatedObject = Instantiate(prefabToInstantiate, targetGrid.transform.position, Quaternion.identity, targetGrid.transform);
                     // Cập nhật tỷ lệ scale của đối tượng tạo ra
                     instantiatedObject.transform.localScale = new Vector3(1.66f, 1.66f, 1.66f);
 
@@ -213,9 +213,29 @@ public class GameCtr : MonoBehaviour
             // Tìm và cập nhật sprite của phần thân và mặt của Bulong
             var bulongBody = obj.transform.Find("Bulongbody").GetComponent<SpriteRenderer>();
             var bulongFace = obj.transform.Find("Bulongface").GetComponent<SpriteRenderer>();
+            var bulongFace2 = obj.transform.Find("Bulongface2").GetComponent<SpriteRenderer>();
 
             bulongBody.sprite = LVConfig.Instance.BulongBodyColor[colorIndex];
+            if (colorIndex == 0 || colorIndex == 2 || colorIndex == 3 || colorIndex == 5)
+            {
+                // obj.transform.Find("Bulongbody").GetComponent<Transform>().rotation = Quaternion.Euler(0f, 0f, 90f);
+                bulongBody.transform.rotation = Quaternion.Euler(0f, 0f, 90f);
+            }
+            //chỉnh lại góc quay do hình bị lệch.
             bulongFace.sprite = LVConfig.Instance.BulongFaceColor[colorIndex];
+            if (colorIndex == 2 || colorIndex == 4 || colorIndex == 5)
+            {
+                // obj.transform.Find("Bulongface").GetComponent<Transform>().rotation = Quaternion.Euler(0f, 0f, 90f);
+                bulongFace.transform.rotation = Quaternion.Euler(0f, 0f, 90f);
+            }
+
+            bulongFace2.sprite = LVConfig.Instance.BulongFaceColor2[colorIndex];
+            if (colorIndex == 2 || colorIndex == 5)
+            {
+                // obj.transform.Find("Bulongface2").GetComponent<Transform>().rotation = Quaternion.Euler(0f, 0f, 90f);
+                bulongFace2.transform.rotation = Quaternion.Euler(0f, 0f, 90f);
+            }
+            //gắn tag
             obj.tag = colorIndex.ToString();
         }
         // Nếu loại của subLevel là 2 (Screw)
@@ -224,6 +244,10 @@ public class GameCtr : MonoBehaviour
             // Tìm và cập nhật sprite của Screw
             var scew = obj.transform.Find("Screw").GetComponent<SpriteRenderer>();
             scew.sprite = LVConfig.Instance.ScewColor[colorIndex];
+            if (colorIndex == 7)
+            {
+                obj.transform.Find("Screw").GetComponent<Transform>().rotation = Quaternion.Euler(0f, 0f, 0f);
+            }
             obj.tag = colorIndex.ToString();
         }
     }

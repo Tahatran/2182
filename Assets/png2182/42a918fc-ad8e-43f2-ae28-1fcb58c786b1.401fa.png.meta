@@ -43,7 +43,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -134,7 +134,217 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: 42a918fc-ad8e-43f2-ae28-1fcb58c786b1.401fa_0
+      rect:
+        serializedVersion: 2
+        x: 17
+        y: 1
+        width: 67
+        height: 97
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1d67af6136bfbe744a43fd7379ae2ebf
+      internalID: -920063411
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 42a918fc-ad8e-43f2-ae28-1fcb58c786b1.401fa_1
+      rect:
+        serializedVersion: 2
+        x: 125
+        y: 1
+        width: 42
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 825090c8987be4444a01843af485b16a
+      internalID: 1376042586
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 42a918fc-ad8e-43f2-ae28-1fcb58c786b1.401fa_2
+      rect:
+        serializedVersion: 2
+        x: 218
+        y: 1
+        width: 63
+        height: 97
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6689a204c310d5f47b4fde316a4c6f23
+      internalID: -547873121
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 42a918fc-ad8e-43f2-ae28-1fcb58c786b1.401fa_3
+      rect:
+        serializedVersion: 2
+        x: 321
+        y: 1
+        width: 60
+        height: 95
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 725ce263e2cdefe46a8a493f273d0a9f
+      internalID: -1018371079
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 42a918fc-ad8e-43f2-ae28-1fcb58c786b1.401fa_4
+      rect:
+        serializedVersion: 2
+        x: 417
+        y: 1
+        width: 66
+        height: 95
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dae28e00fd4c4704aa1a9f4c1db93fb5
+      internalID: 265404533
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 42a918fc-ad8e-43f2-ae28-1fcb58c786b1.401fa_5
+      rect:
+        serializedVersion: 2
+        x: 521
+        y: 1
+        width: 60
+        height: 95
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e40a997053eeb824ca2cd025e4ab6ec1
+      internalID: -648549759
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 42a918fc-ad8e-43f2-ae28-1fcb58c786b1.401fa_6
+      rect:
+        serializedVersion: 2
+        x: 618
+        y: 1
+        width: 65
+        height: 95
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b80e13905a4f8a04ebd578c1f0d7f85b
+      internalID: 1903665123
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 42a918fc-ad8e-43f2-ae28-1fcb58c786b1.401fa_7
+      rect:
+        serializedVersion: 2
+        x: 720
+        y: 2
+        width: 61
+        height: 94
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 137087e5c919da04993abc5d4055922c
+      internalID: 1415184736
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 42a918fc-ad8e-43f2-ae28-1fcb58c786b1.401fa_8
+      rect:
+        serializedVersion: 2
+        x: 818
+        y: 2
+        width: 65
+        height: 97
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7af12b7ec838c2a489797e633f90de4e
+      internalID: 242180996
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 42a918fc-ad8e-43f2-ae28-1fcb58c786b1.401fa_9
+      rect:
+        serializedVersion: 2
+        x: 918
+        y: 2
+        width: 65
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 15fc433ff7da5414bb0960e07b1e46eb
+      internalID: 1089279994
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -145,7 +355,17 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      42a918fc-ad8e-43f2-ae28-1fcb58c786b1.401fa_0: -920063411
+      42a918fc-ad8e-43f2-ae28-1fcb58c786b1.401fa_1: 1376042586
+      42a918fc-ad8e-43f2-ae28-1fcb58c786b1.401fa_2: -547873121
+      42a918fc-ad8e-43f2-ae28-1fcb58c786b1.401fa_3: -1018371079
+      42a918fc-ad8e-43f2-ae28-1fcb58c786b1.401fa_4: 265404533
+      42a918fc-ad8e-43f2-ae28-1fcb58c786b1.401fa_5: -648549759
+      42a918fc-ad8e-43f2-ae28-1fcb58c786b1.401fa_6: 1903665123
+      42a918fc-ad8e-43f2-ae28-1fcb58c786b1.401fa_7: 1415184736
+      42a918fc-ad8e-43f2-ae28-1fcb58c786b1.401fa_8: 242180996
+      42a918fc-ad8e-43f2-ae28-1fcb58c786b1.401fa_9: 1089279994
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
