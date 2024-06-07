@@ -4,12 +4,15 @@ using UnityEngine;
 using UnityEngine.UI;
 using Unity.VisualScripting;
 using UnityEngine.SceneManagement;
+using DG.Tweening;
 
 public class GameCtr : MonoBehaviour
 {
     [SerializeField] private GameObject levelText;
     [SerializeField] private GameObject parentLevelText;
     [SerializeField] private List<Sprite> sprites;
+    [SerializeField] private GameObject bgblue;
+    [SerializeField] private GameObject LosePanel;
     public static GameCtr instance;
     public GameObject HexagridPrefab;
     public GameObject BulongPrefab;
@@ -166,13 +169,17 @@ public class GameCtr : MonoBehaviour
         }
     }
 
+    [ContextMenu("CheckTags")]
     void CheckTags()
     {
         foreach (string tag in bulongTags)
         {
             if (!crewTags.Contains(tag))
             {
-                Debug.Log("Lose: Tag " + tag + " from lstBulong is not in lstCrew");
+                bgblue.transform.DOMoveY(-10f, 0.3f).SetEase(Ease.OutQuad).OnComplete(() =>
+                  {
+                      LosePanel.SetActive(true);
+                  });
             }
         }
     }
