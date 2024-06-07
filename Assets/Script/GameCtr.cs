@@ -34,8 +34,8 @@ public class GameCtr : MonoBehaviour
     public List<GameObject> lstBulong;
     public List<GameObject> lstCrew;
 
-    private List<string> bulongTags = new List<string>(); // List chứa các tag của Bulong
-    private List<string> crewTags = new List<string>(); // List chứa các tag của Screw
+    public List<string> bulongTags = new List<string>(); // List chứa các tag của Bulong
+    public List<string> crewTags = new List<string>(); // List chứa các tag của Screw
     public int lv = 1;
     // public Text Map;
 
@@ -149,6 +149,7 @@ public class GameCtr : MonoBehaviour
 
     public void CheckLose()
     {
+        Debug.Log("aa");
         CheckWin();
         CheckTags();
     }
@@ -172,11 +173,13 @@ public class GameCtr : MonoBehaviour
     [ContextMenu("CheckTags")]
     void CheckTags()
     {
-        foreach (string tag in bulongTags)
+        Debug.Log("Lose1");
+        foreach (string tag in crewTags)
         {
-            if (!crewTags.Contains(tag))
+            if (!bulongTags.Contains(tag))
             {
-                bgblue.transform.DOMoveY(-10f, 0.3f).SetEase(Ease.OutQuad).OnComplete(() =>
+                Debug.Log("Lose");
+                bgblue.transform.DOMoveY(-0.8f, 0.3f).SetEase(Ease.OutQuad).OnComplete(() =>
                   {
                       LosePanel.SetActive(true);
                   });
@@ -245,12 +248,37 @@ public class GameCtr : MonoBehaviour
                     // Thêm đối tượng vào danh sách tương ứng (lstBulong hoặc lstCrew) dựa trên loại của subLevel
                     if (subLevel.type == 1)
                     {
+                        instantiatedObject.GetComponent<BulongAction>().col = subLevel.col;
+                        instantiatedObject.GetComponent<BulongAction>().row = subLevel.row;
+                        // instantiatedObject.transform.localScale = new Vector3(1.7f, 1.7f, 1.7f);
                         lstBulong.Add(instantiatedObject);
                     }
                     else if (subLevel.type == 2)
                     {
+                        instantiatedObject.GetComponent<Screw>().col = subLevel.col;
+                        instantiatedObject.GetComponent<Screw>().row = subLevel.row;
                         lstCrew.Add(instantiatedObject);
                     }
+                }
+            }
+        }
+        foreach (var screwObject in lstCrew)
+        {
+            var screw = screwObject.GetComponent<Screw>();
+            var rowS = screw.row;
+            var colS = screw.col;
+
+            foreach (var bulongObject in lstBulong)
+            {
+                var bulongAction = bulongObject.GetComponent<BulongAction>();
+                var rowB = bulongAction.row;
+                var colB = bulongAction.col;
+
+                if (rowS == rowB && colS == colB)
+                {
+                    screw.HasBulong = true;
+                    screw.Bulong = bulongObject;
+                    break; // Dừng vòng lặp khi đã tìm thấy Bulong tương ứng
                 }
             }
         }

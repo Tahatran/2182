@@ -2,58 +2,194 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using DG.Tweening.Plugins.Options;
+using System;
 
 public class Screw : MonoBehaviour
 {
+    private Coroutine toggleCoroutine;
+    public bool HasBulong;
+    public GameObject Bulong;
+    public int col;
+    public int row;
     // Start is called before the first frame update
     void Start()
     {
         GetComponent<Collider2D>().enabled = true;
     }
 
-    void MoveBulong()
+    BulongAction GetClickedBulong()
     {
         GameCtr gameCtrInstance = GameObject.FindObjectOfType<GameCtr>();
-        if (gameCtrInstance != null)
+        foreach (GameObject bulongGameObject in gameCtrInstance.lstBulong)
         {
-            foreach (GameObject bulongGameObject in gameCtrInstance.lstBulong)
+            BulongAction bulongAction = bulongGameObject.GetComponent<BulongAction>();
+            if (bulongAction.IsClicked)
             {
-                BulongAction bulongAction = bulongGameObject.GetComponent<BulongAction>();
-                // Kiểm tra nếu isClicked của phần tử là true
-                if (bulongAction.IsClicked)
+                return bulongAction;
+            }
+        }
+        // Trả về null nếu không tìm thấy Bulong nào có IsClicked là true
+        return null;
+    }
+    void MoveBulong()
+    {
+        if (HasBulong)
+        {
+            BulongAction bulongAction = GetClickedBulong();
+            if (bulongAction != null)
+            {
+
+                Debug.Log("2");
+                Tweenup(Bulong);
+                TweenDown(bulongAction.gameObject);
+                HasBulong = false;
+
+            }
+            else
+            {
+                Debug.Log("3");
+                Tweenup(Bulong);
+                HasBulong = false;
+            }
+        }
+        else
+        {
+
+            BulongAction bulongAction3 = GetClickedBulong();
+            if (bulongAction3 != null)
+            {
+                try
                 {
-                    // Thực hiện lệnh của MoveBulong
-                    bool bulongAtScrewPosition = CheckForBulongAtScrewPosition();
-                    // Debug.Log(bulongAtScrewPosition);
-                    if (!bulongAtScrewPosition && this.gameObject.tag == bulongAction.gameObject.tag)
+                    if (bulongAction3.tag == this.gameObject.tag)
                     {
-                        // Debug.Log("MoveBulong");
-                        Vector3 upPosition = new Vector3(transform.position.x, transform.position.y + 0.5f, transform.position.z);
-                        bulongAction.IsClicked = false;
+                        Vector3 upPosition = new Vector3(transform.position.x, transform.position.y + 0.3f, transform.position.z);
+                        bulongAction3.IsClicked = false;
                         // Tween Bulong đến vị trí mới để di chuyển lên trên Screw
-                        bulongGameObject.transform.DOMove(upPosition, 0.3f).SetEase(Ease.OutQuad)
-                        // bulongAction.BulongBody.transform.DOScale(0f, 0.3f).SetEase(Ease.OutQuad)
-                            .OnComplete(() => TweenDown(bulongGameObject)); // Gọi hàm TweenDown khi di chuyển lên hoàn thành
+                        bulongAction3.transform.DOMove(upPosition, 0.2f).SetEase(Ease.OutQuad);
+                        bulongAction3.BulongBody.transform.DOScale(0f, 0.3f).SetEase(Ease.OutQuad)
+                        .OnComplete(() => TweenDowndone(bulongAction3.gameObject));
                     }
-                    else
+                    else if (bulongAction3.row == Bulong.GetComponent<BulongAction>().row && bulongAction3.col == Bulong.GetComponent<BulongAction>().col)
                     {
-                        // Lắc Bulong tại chỗ nếu không cùng tag hoặc không ở đúng vị trí
-                        bulongGameObject.transform.DOShakePosition(0.3f, new Vector3(0.05f, 0, 0));
+                        Debug.Log("5");
+                        TweenDown(Bulong);
                     }
+                    else if (bulongAction3.tag == this.gameObject.tag)
+                    {
+                        bulongAction3.transform.DOShakePosition(0.3f, new Vector3(0.05f, 0, 0));
+                    }
+                }
+                catch
+                {
+                    bulongAction3.transform.DOShakePosition(0.3f, new Vector3(0.05f, 0, 0));
                 }
             }
         }
-
     }
+
+    void Tweenup(GameObject Bulong)
+    {
+        Debug.Log("3");
+        var bulongface = Bulong.transform.Find("Bulongface").gameObject;
+        var bulongbody = Bulong.transform.Find("Bulongface").gameObject;
+        var bulongface2 = Bulong.transform.Find("Bulongface2").gameObject;
+        float targetY = transform.position.y + 0.3f;
+        Sequence sequence = DOTween.Sequence();
+        // Bắt đầu coroutine để toggle faces
+        if (toggleCoroutine != null)
+        {
+            StopCoroutine(toggleCoroutine);
+        }
+        toggleCoroutine = StartCoroutine(ToggleFacesWhileTweening(bulongface, bulongface2));
+        // Tween di chuyển lên
+        sequence.Append(Bulong.transform.DOMoveY(targetY, 0.2f).SetEase(Ease.OutQuad)).OnComplete(() =>
+        {
+            if (toggleCoroutine != null)
+            {
+                StopCoroutine(toggleCoroutine);
+            }
+        });
+        // Tween scale của BulongBody từ 0 đến 0.45 sau khi tween position kết thúc
+        sequence.Join(Bulong.GetComponent<BulongAction>().BulongBody.transform.DOScale(0.45f, 0.1f).SetEase(Ease.OutQuad));
+        Bulong.GetComponent<BulongAction>().IsClicked = true;
+        HasBulong = false;
+    }
+
 
     void TweenDown(GameObject bulongGameObject)
     {
+
+        var bulongFace = bulongGameObject.transform.Find("Bulongface").gameObject;
+        var bulongFace2 = bulongGameObject.transform.Find("Bulongface2").gameObject;
+
         // Tạo vị trí mới cho Bulong để di chuyển xuống dưới
-        Vector3 downPosition = new Vector3(bulongGameObject.transform.position.x, bulongGameObject.transform.position.y - 0.5f, bulongGameObject.transform.position.z);
+        Vector3 downPosition = new Vector3(bulongGameObject.transform.position.x, bulongGameObject.transform.position.y - 0.3f, bulongGameObject.transform.position.z);
+        if (toggleCoroutine != null)
+        {
+            StopCoroutine(toggleCoroutine);
+        }
+        toggleCoroutine = StartCoroutine(ToggleFacesWhileTweening(bulongFace, bulongFace2));
 
         // Tween Bulong xuống vị trí mới
-        bulongGameObject.transform.DOMove(downPosition, 0.3f).SetEase(Ease.OutQuad);
-        bulongGameObject.GetComponent<BulongAction>().BulongBody.transform.DOScale(0f, 0.5f).SetEase(Ease.OutQuad).OnComplete(() =>
+        bulongGameObject.transform.DOMove(downPosition, 0.2f).SetEase(Ease.OutQuad).OnUpdate(() =>
+                    {
+                        if (toggleCoroutine != null)
+                        {
+                            StopCoroutine(toggleCoroutine);
+                        }
+                        bulongFace.SetActive(true);
+                        bulongFace2.SetActive(false);
+                    });
+        bulongGameObject.GetComponent<BulongAction>().BulongBody.transform.DOScale(0f, 0.2f).SetEase(Ease.OutQuad);
+        HasBulong = true;
+        bulongGameObject.GetComponent<BulongAction>().IsClicked = false;
+        GameCtr gameCtrInstance = GameObject.FindObjectOfType<GameCtr>();
+        foreach (var screwObject in gameCtrInstance.lstCrew)
+        {
+            var screw = screwObject.GetComponent<Screw>();
+            var rowS = screw.row;
+            var colS = screw.col;
+
+            foreach (var bulongObject in gameCtrInstance.lstBulong)
+            {
+                var bulongAction = bulongObject.GetComponent<BulongAction>();
+                var rowB = bulongAction.row;
+                var colB = bulongAction.col;
+
+                if (rowS == rowB && colS == colB)
+                {
+                    screw.HasBulong = true;
+                    screw.Bulong = bulongObject;
+                    break; // Dừng vòng lặp khi đã tìm thấy Bulong tương ứng
+                }
+            }
+        }
+    }
+
+    void TweenDowndone(GameObject bulongGameObject)
+    {
+        var bulongFace = bulongGameObject.transform.Find("Bulongface").gameObject;
+        var bulongFace2 = bulongGameObject.transform.Find("Bulongface2").gameObject;
+        // Tạo vị trí mới cho Bulong để di chuyển xuống dưới
+        Vector3 downPosition = new Vector3(bulongGameObject.transform.position.x, bulongGameObject.transform.position.y - 0.3f, bulongGameObject.transform.position.z);
+        if (toggleCoroutine != null)
+        {
+            StopCoroutine(toggleCoroutine);
+        }
+        toggleCoroutine = StartCoroutine(ToggleFacesWhileTweening(bulongFace, bulongFace2));
+
+        // Tween Bulong xuống vị trí mới
+        bulongGameObject.transform.DOMove(downPosition, 0.2f).SetEase(Ease.OutQuad).OnUpdate(() =>
+                    {
+                        if (toggleCoroutine != null)
+                        {
+                            StopCoroutine(toggleCoroutine);
+                        }
+                        bulongFace.SetActive(true);
+                        bulongFace2.SetActive(false);
+                    });
+        bulongGameObject.GetComponent<BulongAction>().BulongBody.transform.DOScale(0f, 0.2f).SetEase(Ease.OutQuad).OnComplete(() =>
             {
                 this.gameObject.transform.DOScale(0, 0.3f).SetEase(Ease.OutQuad);
                 bulongGameObject.transform.DOScale(0, 0.3f).SetEase(Ease.OutQuad).OnComplete(() =>
@@ -64,6 +200,7 @@ public class Screw : MonoBehaviour
                     {
                         gameCtrInstance.lstBulong.Remove(bulongGameObject);
                         gameCtrInstance.lstCrew.Remove(this.gameObject);
+                        UpdateRemainingTags();
                         gameCtrInstance.CheckLose();
                         Destroy(bulongGameObject);
                         Destroy(this.gameObject);
@@ -72,30 +209,62 @@ public class Screw : MonoBehaviour
             });
     }
 
-    bool CheckForBulongAtScrewPosition()
+    void UpdateRemainingTags()
     {
-        // Lấy vị trí hiện tại của Screw
-        Vector3 screwPosition = transform.position;
+        GameCtr gameCtrInstance = GameObject.FindObjectOfType<GameCtr>();
+        gameCtrInstance.bulongTags.Clear();
+        gameCtrInstance.crewTags.Clear();
 
-        // Tạo một hình cầu với bán kính nhỏ xung quanh vị trí của Screw
-        float radius = 0.5f; // Điều chỉnh bán kính theo kích thước của Screw và Bulong
-        Collider[] colliders = Physics.OverlapSphere(screwPosition, radius);
-
-        // Duyệt qua tất cả các Collider trong vùng cầu
-
-        if (colliders.Length > 0)
+        // Cập nhật tag từ danh sách lstCrew
+        foreach (var screwObject in gameCtrInstance.lstCrew)
         {
-            // Tìm thấy đối tượng Bulong tại vị trí của Screw
-            return true;
+            var screw = screwObject.GetComponent<Screw>();
+            var tag = screwObject.tag;
+            if (!gameCtrInstance.crewTags.Contains(tag))
+            {
+                gameCtrInstance.crewTags.Add(tag);
+            }
         }
 
-        // Nếu không tìm thấy Bulong tại vị trí của Screw
-        return false;
+        // Cập nhật tag từ danh sách lstBulong
+        foreach (var bulongObject in gameCtrInstance.lstBulong)
+        {
+            var bulongAction = bulongObject.GetComponent<BulongAction>();
+            var tag = bulongObject.tag;
+            if (!gameCtrInstance.bulongTags.Contains(tag))
+            {
+                gameCtrInstance.bulongTags.Add(tag);
+            }
+        }
     }
+
 
     void OnMouseDown()
     {
         MoveBulong();
+    }
+
+    IEnumerator ToggleFacesWhileTweening(GameObject BuLongface, GameObject Bulongface2)
+    {
+        while (true)
+        {
+            ToggleBulongFaces(BuLongface, Bulongface2);
+            yield return new WaitForSeconds(0.05f); // Điều chỉnh thời gian chờ theo ý muốn
+        }
+    }
+    void ToggleBulongFaces(GameObject BuLongface, GameObject Bulongface2)
+    {
+        // Bật tắt xen kẽ giữa Bulongface và Bulongface2
+        if (BuLongface.activeSelf)
+        {
+            BuLongface.SetActive(false);
+            Bulongface2.SetActive(true);
+        }
+        else
+        {
+            BuLongface.SetActive(true);
+            Bulongface2.SetActive(false);
+        }
     }
 
 

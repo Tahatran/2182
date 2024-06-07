@@ -9,8 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5877940475838911780}
-  - component: {fileID: 8885446048943646216}
   - component: {fileID: 7753154616112449190}
+  - component: {fileID: 5540501733999912704}
   m_Layer: 0
   m_Name: 'Screw '
   m_TagString: Untagged
@@ -34,8 +34,20 @@ Transform:
   - {fileID: 1967082967287095345}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!60 &8885446048943646216
-PolygonCollider2D:
+--- !u!114 &7753154616112449190
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1721916082773330434}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e8cf867d73ff4c4aa60c261de6f6106, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!58 &5540501733999912704
+CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -67,38 +79,8 @@ PolygonCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Points:
-    m_Paths:
-    - - {x: 0.22146797, y: 0.44745785}
-      - {x: -0.23645514, y: 0.44043124}
-      - {x: -0.4712231, y: 0.13513589}
-      - {x: -0.47880995, y: -0.13657424}
-      - {x: -0.27022138, y: -0.42075315}
-      - {x: 0.23721398, y: -0.42877916}
-      - {x: 0.4828795, y: -0.14461303}
-      - {x: 0.4848081, y: 0.16914266}
-  m_UseDelaunayMesh: 0
---- !u!114 &7753154616112449190
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1721916082773330434}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8e8cf867d73ff4c4aa60c261de6f6106, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  serializedVersion: 2
+  m_Radius: 0.6
 --- !u!1 &7336898777854741682
 GameObject:
   m_ObjectHideFlags: 0
