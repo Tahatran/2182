@@ -12,6 +12,9 @@ public class GameCtr : MonoBehaviour
     [SerializeField] private GameObject parentLevelText;
     [SerializeField] private List<Sprite> sprites;
     [SerializeField] private GameObject bgblue;
+    [SerializeField] private GameObject UI;
+    [SerializeField] private GameObject Winpanel;
+    [SerializeField] private GameObject ScrewWin;
     [SerializeField] private GameObject LosePanel;
     public static GameCtr instance;
     public GameObject HexagridPrefab;
@@ -24,7 +27,6 @@ public class GameCtr : MonoBehaviour
 
     public int colNumber;
     public int rowNumber;
-    public List<GameObject> listPrefabs;
 
     public List<Sprite> BulongfacespriteList;
     public List<Sprite> BulongbodyspriteList;
@@ -37,10 +39,8 @@ public class GameCtr : MonoBehaviour
     public List<string> bulongTags = new List<string>(); // List chứa các tag của Bulong
     public List<string> crewTags = new List<string>(); // List chứa các tag của Screw
     public int lv = 1;
-    // public Text Map;
 
     private float hexWidth = 1.0f; // chiều rộng của một hexagon
-    // private float hexHeight = Mathf.Sqrt(1.25f) / 2 * 1.0f;
     private float hexHeight = Mathf.Sqrt(0.8f) / 2 * 1.0f;
 
     private void Awake()
@@ -55,13 +55,23 @@ public class GameCtr : MonoBehaviour
         }
     }
 
-
     // Start is called before the first frame update
     void Start()
     {
         Input.multiTouchEnabled = false;
         setUpLv();
-        StartCoroutine(DelayedGenerateGrid());
+        SetLevelText();
+        loadgame();
+        // StartCoroutine(DelayedGenerateGrid());
+    }
+
+    void loadgame()
+    {
+        UI.transform.DOMoveY(-0.1f, 0.3f).SetEase(Ease.OutQuad).OnComplete(() =>
+                  {
+                      parentLevelText.SetActive(true);
+                      StartCoroutine(DelayedGenerateGrid());
+                  });
     }
 
     IEnumerator DelayedGenerateGrid()
@@ -83,13 +93,42 @@ public class GameCtr : MonoBehaviour
     }
     public void SetLevelText()
     {
+        // Lấy giá trị level từ PlayerPrefs
         var level = PlayerPrefs.GetInt("lv");
-        string levelString = level.ToString();
-        foreach (var digit in levelString)
+
+        // Chuyển giá trị level thành chuỗi
+        // string levelString = level.ToString();
+        string levelString = "10";
+        // Debug.Log("level" + levelString);
+
+        // Xóa tất cả các hình ảnh con trước đó (nếu có)
+        foreach (Transform child in parentLevelText.transform)
         {
-            int digitValue = (int)char.GetNumericValue(digit);
+            Destroy(child.gameObject);
+        }
+
+        // Đặt khoảng cách giữa các chữ số
+        float spacing = 0.65f; // điều chỉnh khoảng cách giữa các chữ số tùy thuộc vào yêu cầu của bạn
+
+        // Duyệt qua từng chữ số trong chuỗi levelString
+        for (int i = 0; i < levelString.Length; i++)
+        {
+            // Chuyển chữ số thành giá trị số nguyên
+            int digitValue = (int)char.GetNumericValue(levelString[i]);
+
+            // Instantiate một bản sao của levelText và đặt nó làm con của parentLevelText
             var imageLevelClone = Instantiate(levelText, Vector2.zero, Quaternion.identity, parentLevelText.transform);
-            var imageLevel = imageLevelClone.GetComponent<Image>();
+
+            // Tính toán vị trí x của hình ảnh chữ số
+            float xPos = i * spacing;
+
+            // Đặt vị trí của imageLevelClone
+            imageLevelClone.transform.localPosition = new Vector3(xPos, 0, 0);
+            imageLevelClone.transform.localScale = new Vector3(1, 1, 1);
+
+            var imageLevel = imageLevelClone.GetComponent<SpriteRenderer>();
+
+            // Gắn sprite tương ứng với chữ số
             imageLevel.sprite = sprites[digitValue];
         }
     }
@@ -102,7 +141,7 @@ public class GameCtr : MonoBehaviour
     {
         if (!PlayerPrefs.HasKey("lv"))
         {
-            lv = 1;
+            lv = 10;
             PlayerPrefs.SetInt("lv", lv);
         }
 
@@ -149,7 +188,6 @@ public class GameCtr : MonoBehaviour
 
     public void CheckLose()
     {
-        Debug.Log("aa");
         CheckWin();
         CheckTags();
     }
@@ -170,16 +208,13 @@ public class GameCtr : MonoBehaviour
         }
     }
 
-    [ContextMenu("CheckTags")]
     void CheckTags()
     {
-        Debug.Log("Lose1");
         foreach (string tag in crewTags)
         {
             if (!bulongTags.Contains(tag))
             {
-                Debug.Log("Lose");
-                bgblue.transform.DOMoveY(-0.8f, 0.3f).SetEase(Ease.OutQuad).OnComplete(() =>
+                bgblue.transform.DOMoveY(-0.5f, 0.3f).SetEase(Ease.OutQuad).OnComplete(() =>
                   {
                       LosePanel.SetActive(true);
                   });
@@ -192,6 +227,16 @@ public class GameCtr : MonoBehaviour
         if (lstBulong.Count == 0)
         {
             Debug.Log("Win");
+            GameObject lastCrew = lstCrew[0];
+            Winpanel.SetActive(true);
+            Vector3 targetPosition = ScrewWin.transform.position;
+            UI.transform.DOMoveY(0.1f, 0.3f).SetEase(Ease.OutQuad).OnComplete(() =>
+                  {
+                      lastCrew.transform.DOMove(targetPosition, 0.3f).SetEase(Ease.OutQuad).OnComplete(() =>
+                        {
+
+                        });
+                  });
         }
     }
 
