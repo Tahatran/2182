@@ -63,95 +63,174 @@ public class LVConfig : MonoBehaviour
                 {
                     new List<SubLevel>
                     {
-
-                  new SubLevel {row= 6, col= 0, type= 2, color= 3}, // 7-1=6, 1-1=0, 4-1=3
-new SubLevel {row= 6, col= 0, type= 1, color= 2}, // 7-1=6, 1-1=0, 3-1=2
-
-new SubLevel {row= 7, col= 0, type= 2, color= 5}, // 8-1=7, 1-1=0, 6-1=5
-new SubLevel {row= 7, col= 0, type= 1, color= 2}, // 8-1=7, 1-1=0, 3-1=2
-
-new SubLevel {row= 7, col= 1, type= 2, color= 5}, // 8-1=7, 2-1=1, 6-1=5
-
-
-new SubLevel {row= 8, col= 0, type= 2, color= 3}, // 9-1=8, 1-1=0, 4-1=3
-new SubLevel {row= 8, col= 0, type= 1, color= 5}, // 9-1=8, 1-1=0, 6-1=5
-
-new SubLevel {row= 9, col= 0, type= 2, color= 5}, // 10-1=9, 1-1=0, 6-1=5
-new SubLevel {row= 9, col= 0, type= 1, color= 3}, // 10-1=9, 1-1=0, 4-1=3
-
-new SubLevel {row= 9, col= 1, type= 2, color= 2}, // 10-1=9, 2-1=1, 3-1=2
-new SubLevel {row= 9, col= 1, type= 1, color= 5}, // 10-1=9, 2-1=1, 6-1=5
-
-new SubLevel {row= 10, col= 0, type= 2, color= 3}, // 11-1=10, 1-1=0, 4-1=3
-new SubLevel {row= 10, col= 0, type= 1, color= 2}, // 11-1=10, 1-1=0, 3-1=2
-
-new SubLevel {row= 11, col= 0, type= 2, color= 2}, // 12-1=11, 1-1=0, 3-1=2
-new SubLevel {row= 11, col= 0, type= 1, color= 3}, // 12-1=11, 1-1=0, 4-1=3
-
-new SubLevel {row= 11, col= 1, type= 2, color= 2}, // 12-1=11, 2-1=1, 3-1=2
-new SubLevel {row= 11, col= 1, type= 1, color= 3}, // 12-1=11, 2-1=1, 4-1=3
-
+                        new SubLevel {row= 0, col= 1, type= 2, color= 5},
+                        new SubLevel {row= 0, col= 1, type= 1, color= 4},
+                        new SubLevel {row= 0, col= 3, type= 2, color= 4},
+                        new SubLevel {row= 0, col= 3, type= 1, color= 5},
+                        new SubLevel {row= 0, col= 4, type= 2, color= 6},
+                        new SubLevel {row= 0, col= 4, type= 1, color= 3},
+                        new SubLevel {row= 1, col= 3, type= 2, color= 5},
+                        new SubLevel {row= 1, col= 3, type= 1, color= 3},
+                        new SubLevel {row= 2, col= 3, type= 2, color= 7},
+                        new SubLevel {row= 2, col= 3, type= 1, color= 2},
+                        new SubLevel {row= 2, col= 4, type= 2, color= 4},
+                        new SubLevel {row= 2, col= 4, type= 1, color= 7},
+                        new SubLevel {row= 3, col= 2, type= 2, color= 3},
+                        new SubLevel {row= 3, col= 2, type= 1, color= 6},
+                        new SubLevel {row= 3, col= 3, type= 2, color= 7},
+                        new SubLevel {row= 3, col= 3, type= 1, color= 4},
+                        new SubLevel {row= 3, col= 4, type= 2, color= 6},
+                        new SubLevel {row= 3, col= 4, type= 1, color= 2},
+                        new SubLevel {row= 4, col= 3, type= 2, color= 7},
+                        new SubLevel {row= 4, col= 3, type= 1, color= 5},
+                        new SubLevel {row= 4, col= 4, type= 2, color= 2},
+                        new SubLevel {row= 4, col= 4, type= 1, color= 7},
+                        new SubLevel {row= 4, col= 5, type= 2, color= 2},
+                        new SubLevel {row= 4, col= 5, type= 1, color= 6},
+                        new SubLevel {row= 5, col= 2, type= 2, color= 3},
+                        new SubLevel {row= 5, col= 2, type= 1, color= 5},
+                        new SubLevel {row= 5, col= 3, type= 2, color= 0},
+                        new SubLevel {row= 5, col= 3, type= 1, color= 5},
+                        new SubLevel {row= 5, col= 4, type= 2, color= 4},
+                        new SubLevel {row= 5, col= 4, type= 1, color= 2},
+                        new SubLevel {row= 6, col= 2, type= 2, color= 4},
+                        new SubLevel {row= 6, col= 2, type= 1, color= 1},
+                        new SubLevel {row= 6, col= 3, type= 2, color= 3},
+                        new SubLevel {row= 6, col= 3, type= 1, color= 0},
+                        new SubLevel {row= 6, col= 4, type= 2, color= 1},
+                        new SubLevel {row= 6, col= 4, type= 1, color= 4},
+                        new SubLevel {row= 6, col= 5, type= 2, color= 6},
+                        new SubLevel {row= 7, col= 2, type= 2, color= 2},
+                        new SubLevel {row= 7, col= 2, type= 1, color= 4},
+                        new SubLevel {row= 7, col= 3, type= 2, color= 4},
+                        new SubLevel {row= 7, col= 3, type= 1, color= 5},
+                        new SubLevel {row= 7, col= 4, type= 2, color= 4},
+                        new SubLevel {row= 7, col= 4, type= 1, color= 1},
+                        new SubLevel {row= 8, col= 4, type= 2, color= 5},
+                        new SubLevel {row= 8, col= 4, type= 1, color= 2},
+                        new SubLevel {row= 9, col= 2, type= 2, color= 7},
+                        new SubLevel {row= 9, col= 2, type= 1, color= 5},
+                        new SubLevel {row= 9, col= 3, type= 2, color= 0},
+                        new SubLevel {row= 9, col= 3, type= 1, color= 3},
+                        new SubLevel {row= 9, col= 4, type= 2, color= 5},
+                        new SubLevel {row= 9, col= 4, type= 1, color= 0},
+                        new SubLevel {row= 0, col= 2, type= 2, color= 5},
+                        new SubLevel {row= 0, col= 2, type= 1, color= 7},
 
                     },
                     new List<SubLevel>
                     {
 
-                                   new SubLevel {row= 6, col= 0, type= 2, color= 3}, // 7-1=6, 1-1=0, 4-1=3
-new SubLevel {row= 6, col= 0, type= 1, color= 2}, // 7-1=6, 1-1=0, 3-1=2
-
-new SubLevel {row= 7, col= 0, type= 2, color= 5}, // 8-1=7, 1-1=0, 6-1=5
-new SubLevel {row= 7, col= 0, type= 1, color= 2}, // 8-1=7, 1-1=0, 3-1=2
-
-new SubLevel {row= 7, col= 1, type= 2, color= 5}, // 8-1=7, 2-1=1, 6-1=5
-
-
-new SubLevel {row= 8, col= 0, type= 2, color= 3}, // 9-1=8, 1-1=0, 4-1=3
-new SubLevel {row= 8, col= 0, type= 1, color= 5}, // 9-1=8, 1-1=0, 6-1=5
-
-new SubLevel {row= 9, col= 0, type= 2, color= 5}, // 10-1=9, 1-1=0, 6-1=5
-new SubLevel {row= 9, col= 0, type= 1, color= 3}, // 10-1=9, 1-1=0, 4-1=3
-
-new SubLevel {row= 9, col= 1, type= 2, color= 2}, // 10-1=9, 2-1=1, 3-1=2
-new SubLevel {row= 9, col= 1, type= 1, color= 5}, // 10-1=9, 2-1=1, 6-1=5
-
-new SubLevel {row= 10, col= 0, type= 2, color= 3}, // 11-1=10, 1-1=0, 4-1=3
-new SubLevel {row= 10, col= 0, type= 1, color= 2}, // 11-1=10, 1-1=0, 3-1=2
-
-new SubLevel {row= 11, col= 0, type= 2, color= 2}, // 12-1=11, 1-1=0, 3-1=2
-new SubLevel {row= 11, col= 0, type= 1, color= 3}, // 12-1=11, 1-1=0, 4-1=3
-
-new SubLevel {row= 11, col= 1, type= 2, color= 2}, // 12-1=11, 2-1=1, 3-1=2
-new SubLevel {row= 11, col= 1, type= 1, color= 3}, // 12-1=11, 2-1=1, 4-1=3
+                        new SubLevel {row= 0, col= 1, type= 2, color= 5},
+                        new SubLevel {row= 0, col= 1, type= 1, color= 4},
+                        new SubLevel {row= 0, col= 3, type= 2, color= 4},
+                        new SubLevel {row= 0, col= 3, type= 1, color= 5},
+                        new SubLevel {row= 0, col= 4, type= 2, color= 6},
+                        new SubLevel {row= 0, col= 4, type= 1, color= 3},
+                        new SubLevel {row= 1, col= 3, type= 2, color= 5},
+                        new SubLevel {row= 1, col= 3, type= 1, color= 3},
+                        new SubLevel {row= 2, col= 3, type= 2, color= 7},
+                        new SubLevel {row= 2, col= 3, type= 1, color= 2},
+                        new SubLevel {row= 2, col= 4, type= 2, color= 4},
+                        new SubLevel {row= 2, col= 4, type= 1, color= 7},
+                        new SubLevel {row= 3, col= 2, type= 2, color= 3},
+                        new SubLevel {row= 3, col= 2, type= 1, color= 6},
+                        new SubLevel {row= 3, col= 3, type= 2, color= 7},
+                        new SubLevel {row= 3, col= 3, type= 1, color= 4},
+                        new SubLevel {row= 3, col= 4, type= 2, color= 6},
+                        new SubLevel {row= 3, col= 4, type= 1, color= 2},
+                        new SubLevel {row= 4, col= 3, type= 2, color= 7},
+                        new SubLevel {row= 4, col= 3, type= 1, color= 5},
+                        new SubLevel {row= 4, col= 4, type= 2, color= 2},
+                        new SubLevel {row= 4, col= 4, type= 1, color= 7},
+                        new SubLevel {row= 4, col= 5, type= 2, color= 2},
+                        new SubLevel {row= 4, col= 5, type= 1, color= 6},
+                        new SubLevel {row= 5, col= 2, type= 2, color= 3},
+                        new SubLevel {row= 5, col= 2, type= 1, color= 5},
+                        new SubLevel {row= 5, col= 3, type= 2, color= 0},
+                        new SubLevel {row= 5, col= 3, type= 1, color= 5},
+                        new SubLevel {row= 5, col= 4, type= 2, color= 4},
+                        new SubLevel {row= 5, col= 4, type= 1, color= 2},
+                        new SubLevel {row= 6, col= 2, type= 2, color= 4},
+                        new SubLevel {row= 6, col= 2, type= 1, color= 1},
+                        new SubLevel {row= 6, col= 3, type= 2, color= 3},
+                        new SubLevel {row= 6, col= 3, type= 1, color= 0},
+                        new SubLevel {row= 6, col= 4, type= 2, color= 1},
+                        new SubLevel {row= 6, col= 4, type= 1, color= 4},
+                        new SubLevel {row= 6, col= 5, type= 2, color= 6},
+                        new SubLevel {row= 7, col= 2, type= 2, color= 2},
+                        new SubLevel {row= 7, col= 2, type= 1, color= 4},
+                        new SubLevel {row= 7, col= 3, type= 2, color= 4},
+                        new SubLevel {row= 7, col= 3, type= 1, color= 5},
+                        new SubLevel {row= 7, col= 4, type= 2, color= 4},
+                        new SubLevel {row= 7, col= 4, type= 1, color= 1},
+                        new SubLevel {row= 8, col= 4, type= 2, color= 5},
+                        new SubLevel {row= 8, col= 4, type= 1, color= 2},
+                        new SubLevel {row= 9, col= 2, type= 2, color= 7},
+                        new SubLevel {row= 9, col= 2, type= 1, color= 5},
+                        new SubLevel {row= 9, col= 3, type= 2, color= 0},
+                        new SubLevel {row= 9, col= 3, type= 1, color= 3},
+                        new SubLevel {row= 9, col= 4, type= 2, color= 5},
+                        new SubLevel {row= 9, col= 4, type= 1, color= 0},
+                        new SubLevel {row= 0, col= 2, type= 2, color= 5},
+                        new SubLevel {row= 0, col= 2, type= 1, color= 7},
                     },
                     new List<SubLevel>
                     {
+                        new SubLevel {row= 0, col= 1, type= 2, color= 5},
+                        new SubLevel {row= 0, col= 1, type= 1, color= 4},
+                        new SubLevel {row= 0, col= 3, type= 2, color= 4},
+                        new SubLevel {row= 0, col= 3, type= 1, color= 5},
+                        new SubLevel {row= 0, col= 4, type= 2, color= 6},
+                        new SubLevel {row= 0, col= 4, type= 1, color= 3},
+                        new SubLevel {row= 1, col= 3, type= 2, color= 5},
+                        new SubLevel {row= 1, col= 3, type= 1, color= 3},
+                        new SubLevel {row= 2, col= 3, type= 2, color= 7},
+                        new SubLevel {row= 2, col= 3, type= 1, color= 2},
+                        new SubLevel {row= 2, col= 4, type= 2, color= 4},
+                        new SubLevel {row= 2, col= 4, type= 1, color= 7},
+                        new SubLevel {row= 3, col= 2, type= 2, color= 3},
+                        new SubLevel {row= 3, col= 2, type= 1, color= 6},
+                        new SubLevel {row= 3, col= 3, type= 2, color= 7},
+                        new SubLevel {row= 3, col= 3, type= 1, color= 4},
+                        new SubLevel {row= 3, col= 4, type= 2, color= 6},
+                        new SubLevel {row= 3, col= 4, type= 1, color= 2},
+                        new SubLevel {row= 4, col= 3, type= 2, color= 7},
+                        new SubLevel {row= 4, col= 3, type= 1, color= 5},
+                        new SubLevel {row= 4, col= 4, type= 2, color= 2},
+                        new SubLevel {row= 4, col= 4, type= 1, color= 7},
+                        new SubLevel {row= 4, col= 5, type= 2, color= 2},
+                        new SubLevel {row= 4, col= 5, type= 1, color= 6},
+                        new SubLevel {row= 5, col= 2, type= 2, color= 3},
+                        new SubLevel {row= 5, col= 2, type= 1, color= 5},
+                        new SubLevel {row= 5, col= 3, type= 2, color= 0},
+                        new SubLevel {row= 5, col= 3, type= 1, color= 5},
+                        new SubLevel {row= 5, col= 4, type= 2, color= 4},
+                        new SubLevel {row= 5, col= 4, type= 1, color= 2},
+                        new SubLevel {row= 6, col= 2, type= 2, color= 4},
+                        new SubLevel {row= 6, col= 2, type= 1, color= 1},
+                        new SubLevel {row= 6, col= 3, type= 2, color= 3},
+                        new SubLevel {row= 6, col= 3, type= 1, color= 0},
+                        new SubLevel {row= 6, col= 4, type= 2, color= 1},
+                        new SubLevel {row= 6, col= 4, type= 1, color= 4},
+                        new SubLevel {row= 6, col= 5, type= 2, color= 6},
+                        new SubLevel {row= 7, col= 2, type= 2, color= 2},
+                        new SubLevel {row= 7, col= 2, type= 1, color= 4},
+                        new SubLevel {row= 7, col= 3, type= 2, color= 4},
+                        new SubLevel {row= 7, col= 3, type= 1, color= 5},
+                        new SubLevel {row= 7, col= 4, type= 2, color= 4},
+                        new SubLevel {row= 7, col= 4, type= 1, color= 1},
+                        new SubLevel {row= 8, col= 4, type= 2, color= 5},
+                        new SubLevel {row= 8, col= 4, type= 1, color= 2},
+                        new SubLevel {row= 9, col= 2, type= 2, color= 7},
+                        new SubLevel {row= 9, col= 2, type= 1, color= 5},
+                        new SubLevel {row= 9, col= 3, type= 2, color= 0},
+                        new SubLevel {row= 9, col= 3, type= 1, color= 3},
+                        new SubLevel {row= 9, col= 4, type= 2, color= 5},
+                        new SubLevel {row= 9, col= 4, type= 1, color= 0},
+                        new SubLevel {row= 0, col= 2, type= 2, color= 5},
+                        new SubLevel {row= 0, col= 2, type= 1, color= 7},
 
-                                        new SubLevel {row= 6, col= 0, type= 2, color= 3}, // 7-1=6, 1-1=0, 4-1=3
-new SubLevel {row= 6, col= 0, type= 1, color= 2}, // 7-1=6, 1-1=0, 3-1=2
-
-new SubLevel {row= 7, col= 0, type= 2, color= 5}, // 8-1=7, 1-1=0, 6-1=5
-new SubLevel {row= 7, col= 0, type= 1, color= 2}, // 8-1=7, 1-1=0, 3-1=2
-
-new SubLevel {row= 7, col= 1, type= 2, color= 5}, // 8-1=7, 2-1=1, 6-1=5
-
-
-new SubLevel {row= 8, col= 0, type= 2, color= 3}, // 9-1=8, 1-1=0, 4-1=3
-new SubLevel {row= 8, col= 0, type= 1, color= 5}, // 9-1=8, 1-1=0, 6-1=5
-
-new SubLevel {row= 9, col= 0, type= 2, color= 5}, // 10-1=9, 1-1=0, 6-1=5
-new SubLevel {row= 9, col= 0, type= 1, color= 3}, // 10-1=9, 1-1=0, 4-1=3
-
-new SubLevel {row= 9, col= 1, type= 2, color= 2}, // 10-1=9, 2-1=1, 3-1=2
-new SubLevel {row= 9, col= 1, type= 1, color= 5}, // 10-1=9, 2-1=1, 6-1=5
-
-new SubLevel {row= 10, col= 0, type= 2, color= 3}, // 11-1=10, 1-1=0, 4-1=3
-new SubLevel {row= 10, col= 0, type= 1, color= 2}, // 11-1=10, 1-1=0, 3-1=2
-
-new SubLevel {row= 11, col= 0, type= 2, color= 2}, // 12-1=11, 1-1=0, 3-1=2
-new SubLevel {row= 11, col= 0, type= 1, color= 3}, // 12-1=11, 1-1=0, 4-1=3
-
-new SubLevel {row= 11, col= 1, type= 2, color= 2}, // 12-1=11, 2-1=1, 3-1=2
-new SubLevel {row= 11, col= 1, type= 1, color= 3}, // 12-1=11, 2-1=1, 4-1=3
                     },
                 },
 
@@ -163,30 +242,494 @@ new SubLevel {row= 11, col= 1, type= 1, color= 3}, // 12-1=11, 2-1=1, 4-1=3
                 {
                      new List<SubLevel>
                     {
-                        new SubLevel {row= 9,col= 4,type= 1,  color= 6},
-                        new SubLevel {row= 9,col= 5,type= 1,  color= 6},
-                        new SubLevel {row= 8,col= 2,type= 1,  color= 5},
-                        new SubLevel {row= 7,col= 3,type= 1, color= 5},
-                        new SubLevel {row= 7,col= 4,type= 1,  color= 5},
-                        new SubLevel {row= 6,col= 2,type= 1,  color= 6},
+                        new SubLevel {row= 6, col= 3, type= 2, color= 1},
+                        new SubLevel {row= 6, col= 3, type= 1, color= 4},
+                        new SubLevel {row= 6, col= 4, type= 2, color= 1},
+                        new SubLevel {row= 6, col= 4, type= 1, color= 4},
+                        new SubLevel {row= 7, col= 3, type= 2, color= 4},
+                        new SubLevel {row= 7, col= 3, type= 1, color= 1},
+                        new SubLevel {row= 6, col= 2, type= 2, color= 4},
+
                     },
                     new List<SubLevel>
                     {
-                        new SubLevel {row= 10,col= 2,type= 1, color= 5},
-                        new SubLevel {row= 10,col= 4,type= 1, color= 5},
-                        new SubLevel {row= 9,col= 3,type= 1, color= 6},
-                        new SubLevel {row= 9,col= 5,type= 1,  color= 5},
-                        new SubLevel {row= 8,col= 4,type= 1,  color= 6},
-                        new SubLevel {row= 7,col= 5,type= 1, color= 6},
+                        new SubLevel {row= 6, col= 3, type= 2, color= 1},
+                        new SubLevel {row= 6, col= 3, type= 1, color= 4},
+                        new SubLevel {row= 6, col= 4, type= 2, color= 1},
+                        new SubLevel {row= 6, col= 4, type= 1, color= 4},
+                        new SubLevel {row= 7, col= 3, type= 2, color= 4},
+                        new SubLevel {row= 7, col= 3, type= 1, color= 1},
+                        new SubLevel {row= 6, col= 2, type= 2, color= 4},
+
                     },
                     new List<SubLevel>
                     {
-                        new SubLevel {row= 10,col= 2,type= 1,  color= 5},
-                        new SubLevel {row= 10,col= 4,type= 1,  color= 5},
-                        new SubLevel {row= 9,col= 3,type= 1,  color= 6},
-                        new SubLevel {row= 9,col= 4,type= 1,  color= 6},
-                        new SubLevel {row= 7,col= 3,type= 1,  color= 6},
-                        new SubLevel {row= 7,col= 5,type= 1, color= 5},
+                        new SubLevel {row= 6, col= 3, type= 2, color= 1},
+                        new SubLevel {row= 6, col= 3, type= 1, color= 4},
+                        new SubLevel {row= 6, col= 4, type= 2, color= 1},
+                        new SubLevel {row= 6, col= 4, type= 1, color= 4},
+                        new SubLevel {row= 7, col= 3, type= 2, color= 4},
+                        new SubLevel {row= 7, col= 3, type= 1, color= 1},
+                        new SubLevel {row= 6, col= 2, type= 2, color= 4},
+
+                    },
+                },
+
+            },
+            new Level
+            {
+                lv = 3,
+                subLevelsLists = new List<List<SubLevel>>
+                {
+                     new List<SubLevel>
+                    {
+                        new SubLevel {row= 3, col= 3, type= 2, color= 6},
+                        new SubLevel {row= 3, col= 3, type= 1, color= 4},
+                        new SubLevel {row= 5, col= 3, type= 2, color= 7},
+                        new SubLevel {row= 5, col= 3, type= 1, color= 6},
+                        new SubLevel {row= 6, col= 3, type= 2, color= 4},
+                        new SubLevel {row= 6, col= 4, type= 2, color= 4},
+                        new SubLevel {row= 6, col= 4, type= 1, color= 6},
+                        new SubLevel {row= 7, col= 3, type= 2, color= 6},
+                        new SubLevel {row= 7, col= 3, type= 1, color= 7},
+
+                    },
+                    new List<SubLevel>
+                    {
+                        new SubLevel {row= 3, col= 3, type= 2, color= 6},
+                        new SubLevel {row= 3, col= 3, type= 1, color= 4},
+                        new SubLevel {row= 5, col= 3, type= 2, color= 7},
+                        new SubLevel {row= 5, col= 3, type= 1, color= 6},
+                        new SubLevel {row= 6, col= 3, type= 2, color= 4},
+                        new SubLevel {row= 6, col= 4, type= 2, color= 4},
+                        new SubLevel {row= 6, col= 4, type= 1, color= 6},
+                        new SubLevel {row= 7, col= 3, type= 2, color= 6},
+                        new SubLevel {row= 7, col= 3, type= 1, color= 7},
+
+                    },
+                    new List<SubLevel>
+                    {
+                        new SubLevel {row= 3, col= 3, type= 2, color= 6},
+                        new SubLevel {row= 3, col= 3, type= 1, color= 4},
+                        new SubLevel {row= 5, col= 3, type= 2, color= 7},
+                        new SubLevel {row= 5, col= 3, type= 1, color= 6},
+                        new SubLevel {row= 6, col= 3, type= 2, color= 4},
+                        new SubLevel {row= 6, col= 4, type= 2, color= 4},
+                        new SubLevel {row= 6, col= 4, type= 1, color= 6},
+                        new SubLevel {row= 7, col= 3, type= 2, color= 6},
+                        new SubLevel {row= 7, col= 3, type= 1, color= 7},
+                    },
+                },
+
+            },
+            new Level
+            {
+                lv = 4,
+                subLevelsLists = new List<List<SubLevel>>
+                {
+                     new List<SubLevel>
+                    {
+                        new SubLevel {row= 3, col= 3, type= 2, color= 6},
+                        new SubLevel {row= 3, col= 3, type= 1, color= 4},
+                        new SubLevel {row= 4, col= 3, type= 2, color= 4},
+                        new SubLevel {row= 4, col= 3, type= 1, color= 5},
+                        new SubLevel {row= 4, col= 4, type= 2, color= 6},
+                        new SubLevel {row= 4, col= 4, type= 1, color= 5},
+                        new SubLevel {row= 5, col= 3, type= 2, color= 6},
+                        new SubLevel {row= 6, col= 3, type= 2, color= 4},
+                        new SubLevel {row= 6, col= 3, type= 1, color= 6},
+                        new SubLevel {row= 6, col= 4, type= 2, color= 4},
+                        new SubLevel {row= 6, col= 4, type= 1, color= 5},
+                        new SubLevel {row= 7, col= 3, type= 2, color= 5},
+                        new SubLevel {row= 7, col= 3, type= 1, color= 4},
+                        new SubLevel {row= 8, col= 3, type= 2, color= 5},
+                        new SubLevel {row= 8, col= 3, type= 1, color= 4},
+                        new SubLevel {row= 8, col= 4, type= 2, color= 5},
+                        new SubLevel {row= 8, col= 4, type= 1, color= 6},
+
+                    },
+                    new List<SubLevel>
+                    {
+                        new SubLevel {row= 3, col= 3, type= 2, color= 6},
+                        new SubLevel {row= 3, col= 3, type= 1, color= 4},
+                        new SubLevel {row= 4, col= 3, type= 2, color= 4},
+                        new SubLevel {row= 4, col= 3, type= 1, color= 5},
+                        new SubLevel {row= 4, col= 4, type= 2, color= 6},
+                        new SubLevel {row= 4, col= 4, type= 1, color= 5},
+                        new SubLevel {row= 5, col= 3, type= 2, color= 6},
+                        new SubLevel {row= 6, col= 3, type= 2, color= 4},
+                        new SubLevel {row= 6, col= 3, type= 1, color= 6},
+                        new SubLevel {row= 6, col= 4, type= 2, color= 4},
+                        new SubLevel {row= 6, col= 4, type= 1, color= 5},
+                        new SubLevel {row= 7, col= 3, type= 2, color= 5},
+                        new SubLevel {row= 7, col= 3, type= 1, color= 4},
+                        new SubLevel {row= 8, col= 3, type= 2, color= 5},
+                        new SubLevel {row= 8, col= 3, type= 1, color= 4},
+                        new SubLevel {row= 8, col= 4, type= 2, color= 5},
+                        new SubLevel {row= 8, col= 4, type= 1, color= 6},
+
+                    },
+                    new List<SubLevel>
+                    {
+                        new SubLevel {row= 3, col= 3, type= 2, color= 6},
+                        new SubLevel {row= 3, col= 3, type= 1, color= 4},
+                        new SubLevel {row= 4, col= 3, type= 2, color= 4},
+                        new SubLevel {row= 4, col= 3, type= 1, color= 5},
+                        new SubLevel {row= 4, col= 4, type= 2, color= 6},
+                        new SubLevel {row= 4, col= 4, type= 1, color= 5},
+                        new SubLevel {row= 5, col= 3, type= 2, color= 6},
+                        new SubLevel {row= 6, col= 3, type= 2, color= 4},
+                        new SubLevel {row= 6, col= 3, type= 1, color= 6},
+                        new SubLevel {row= 6, col= 4, type= 2, color= 4},
+                        new SubLevel {row= 6, col= 4, type= 1, color= 5},
+                        new SubLevel {row= 7, col= 3, type= 2, color= 5},
+                        new SubLevel {row= 7, col= 3, type= 1, color= 4},
+                        new SubLevel {row= 8, col= 3, type= 2, color= 5},
+                        new SubLevel {row= 8, col= 3, type= 1, color= 4},
+                        new SubLevel {row= 8, col= 4, type= 2, color= 5},
+                        new SubLevel {row= 8, col= 4, type= 1, color= 6},
+                    },
+                },
+
+            },
+            new Level
+            {
+                lv = 5,
+                subLevelsLists = new List<List<SubLevel>>
+                {
+                     new List<SubLevel>
+                    {
+                        new SubLevel {row= 2, col= 3, type= 2, color= 1},
+                        new SubLevel {row= 2, col= 3, type= 1, color= 3},
+                        new SubLevel {row= 3, col= 2, type= 2, color= 5},
+                        new SubLevel {row= 3, col= 2, type= 1, color= 3},
+                        new SubLevel {row= 3, col= 3, type= 2, color= 3},
+                        new SubLevel {row= 3, col= 3, type= 1, color= 5},
+                        new SubLevel {row= 4, col= 3, type= 2, color= 1},
+                        new SubLevel {row= 4, col= 3, type= 1, color= 5},
+                        new SubLevel {row= 4, col= 4, type= 2, color= 5},
+                        new SubLevel {row= 4, col= 4, type= 1, color= 1},
+                        new SubLevel {row= 5, col= 2, type= 2, color= 1},
+                        new SubLevel {row= 5, col= 2, type= 1, color= 5},
+                        new SubLevel {row= 5, col= 3, type= 2, color= 3},
+                        new SubLevel {row= 5, col= 4, type= 2, color= 3},
+                        new SubLevel {row= 5, col= 4, type= 1, color= 1},
+                        new SubLevel {row= 6, col= 3, type= 2, color= 3},
+                        new SubLevel {row= 6, col= 3, type= 1, color= 1},
+                        new SubLevel {row= 6, col= 4, type= 2, color= 5},
+                        new SubLevel {row= 6, col= 4, type= 1, color= 3},
+                        new SubLevel {row= 7, col= 3, type= 2, color= 1},
+                        new SubLevel {row= 7, col= 3, type= 1, color= 3},
+                        new SubLevel {row= 7, col= 4, type= 2, color= 5},
+                        new SubLevel {row= 7, col= 4, type= 1, color= 1},
+                        new SubLevel {row= 8, col= 4, type= 2, color= 3},
+                        new SubLevel {row= 8, col= 4, type= 1, color= 5},
+
+                    },
+                    new List<SubLevel>
+                    {
+                        new SubLevel {row= 2, col= 3, type= 2, color= 1},
+                        new SubLevel {row= 2, col= 3, type= 1, color= 3},
+                        new SubLevel {row= 3, col= 2, type= 2, color= 5},
+                        new SubLevel {row= 3, col= 2, type= 1, color= 3},
+                        new SubLevel {row= 3, col= 3, type= 2, color= 3},
+                        new SubLevel {row= 3, col= 3, type= 1, color= 5},
+                        new SubLevel {row= 4, col= 3, type= 2, color= 1},
+                        new SubLevel {row= 4, col= 3, type= 1, color= 5},
+                        new SubLevel {row= 4, col= 4, type= 2, color= 5},
+                        new SubLevel {row= 4, col= 4, type= 1, color= 1},
+                        new SubLevel {row= 5, col= 2, type= 2, color= 1},
+                        new SubLevel {row= 5, col= 2, type= 1, color= 5},
+                        new SubLevel {row= 5, col= 3, type= 2, color= 3},
+                        new SubLevel {row= 5, col= 4, type= 2, color= 3},
+                        new SubLevel {row= 5, col= 4, type= 1, color= 1},
+                        new SubLevel {row= 6, col= 3, type= 2, color= 3},
+                        new SubLevel {row= 6, col= 3, type= 1, color= 1},
+                        new SubLevel {row= 6, col= 4, type= 2, color= 5},
+                        new SubLevel {row= 6, col= 4, type= 1, color= 3},
+                        new SubLevel {row= 7, col= 3, type= 2, color= 1},
+                        new SubLevel {row= 7, col= 3, type= 1, color= 3},
+                        new SubLevel {row= 7, col= 4, type= 2, color= 5},
+                        new SubLevel {row= 7, col= 4, type= 1, color= 1},
+                        new SubLevel {row= 8, col= 4, type= 2, color= 3},
+                        new SubLevel {row= 8, col= 4, type= 1, color= 5},
+                    },
+                    new List<SubLevel>
+                    {
+                        new SubLevel {row= 2, col= 3, type= 2, color= 1},
+                        new SubLevel {row= 2, col= 3, type= 1, color= 3},
+                        new SubLevel {row= 3, col= 2, type= 2, color= 5},
+                        new SubLevel {row= 3, col= 2, type= 1, color= 3},
+                        new SubLevel {row= 3, col= 3, type= 2, color= 3},
+                        new SubLevel {row= 3, col= 3, type= 1, color= 5},
+                        new SubLevel {row= 4, col= 3, type= 2, color= 1},
+                        new SubLevel {row= 4, col= 3, type= 1, color= 5},
+                        new SubLevel {row= 4, col= 4, type= 2, color= 5},
+                        new SubLevel {row= 4, col= 4, type= 1, color= 1},
+                        new SubLevel {row= 5, col= 2, type= 2, color= 1},
+                        new SubLevel {row= 5, col= 2, type= 1, color= 5},
+                        new SubLevel {row= 5, col= 3, type= 2, color= 3},
+                        new SubLevel {row= 5, col= 4, type= 2, color= 3},
+                        new SubLevel {row= 5, col= 4, type= 1, color= 1},
+                        new SubLevel {row= 6, col= 3, type= 2, color= 3},
+                        new SubLevel {row= 6, col= 3, type= 1, color= 1},
+                        new SubLevel {row= 6, col= 4, type= 2, color= 5},
+                        new SubLevel {row= 6, col= 4, type= 1, color= 3},
+                        new SubLevel {row= 7, col= 3, type= 2, color= 1},
+                        new SubLevel {row= 7, col= 3, type= 1, color= 3},
+                        new SubLevel {row= 7, col= 4, type= 2, color= 5},
+                        new SubLevel {row= 7, col= 4, type= 1, color= 1},
+                        new SubLevel {row= 8, col= 4, type= 2, color= 3},
+                        new SubLevel {row= 8, col= 4, type= 1, color= 5},
+                    },
+                },
+
+            },
+            new Level
+            {
+                lv = 6,
+                subLevelsLists = new List<List<SubLevel>>
+                {
+                     new List<SubLevel>
+                    {
+                        new SubLevel {row= 1, col= 3, type= 2, color= 5},
+                        new SubLevel {row= 1, col= 3, type= 1, color= 4},
+                        new SubLevel {row= 2, col= 3, type= 2, color= 4},
+                        new SubLevel {row= 2, col= 3, type= 1, color= 5},
+                        new SubLevel {row= 2, col= 4, type= 2, color= 6},
+                        new SubLevel {row= 2, col= 4, type= 1, color= 3},
+                        new SubLevel {row= 3, col= 3, type= 2, color= 5},
+                        new SubLevel {row= 3, col= 3, type= 1, color= 3},
+                        new SubLevel {row= 4, col= 3, type= 2, color= 7},
+                        new SubLevel {row= 4, col= 3, type= 1, color= 2},
+                        new SubLevel {row= 4, col= 4, type= 2, color= 4},
+                        new SubLevel {row= 4, col= 4, type= 1, color= 7},
+                        new SubLevel {row= 5, col= 2, type= 2, color= 3},
+                        new SubLevel {row= 5, col= 2, type= 1, color= 6},
+                        new SubLevel {row= 5, col= 3, type= 2, color= 7},
+                        new SubLevel {row= 5, col= 3, type= 1, color= 4},
+                        new SubLevel {row= 5, col= 4, type= 2, color= 6},
+                        new SubLevel {row= 5, col= 4, type= 1, color= 2},
+                        new SubLevel {row= 6, col= 3, type= 2, color= 7},
+                        new SubLevel {row= 6, col= 3, type= 1, color= 5},
+                        new SubLevel {row= 6, col= 4, type= 2, color= 2},
+                        new SubLevel {row= 6, col= 4, type= 1, color= 7},
+                        new SubLevel {row= 6, col= 5, type= 2, color= 2},
+                        new SubLevel {row= 6, col= 5, type= 1, color= 6},
+                        new SubLevel {row= 7, col= 2, type= 2, color= 3},
+                        new SubLevel {row= 7, col= 2, type= 1, color= 5},
+                        new SubLevel {row= 7, col= 3, type= 2, color= 0},
+                        new SubLevel {row= 7, col= 3, type= 1, color= 5},
+                        new SubLevel {row= 7, col= 4, type= 2, color= 4},
+                        new SubLevel {row= 7, col= 4, type= 1, color= 2},
+                        new SubLevel {row= 8, col= 2, type= 2, color= 4},
+                        new SubLevel {row= 8, col= 2, type= 1, color= 1},
+                        new SubLevel {row= 8, col= 3, type= 2, color= 3},
+                        new SubLevel {row= 8, col= 3, type= 1, color= 0},
+                        new SubLevel {row= 8, col= 4, type= 2, color= 1},
+                        new SubLevel {row= 8, col= 4, type= 1, color= 4},
+                        new SubLevel {row= 8, col= 5, type= 2, color= 6},
+                        new SubLevel {row= 9, col= 2, type= 2, color= 2},
+                        new SubLevel {row= 9, col= 2, type= 1, color= 4},
+                        new SubLevel {row= 9, col= 3, type= 2, color= 4},
+                        new SubLevel {row= 9, col= 3, type= 1, color= 5},
+                        new SubLevel {row= 9, col= 4, type= 2, color= 4},
+                        new SubLevel {row= 9, col= 4, type= 1, color= 1},
+                        new SubLevel {row= 10, col= 4, type= 2, color= 5},
+                        new SubLevel {row= 10, col= 4, type= 1, color= 4},
+                        new SubLevel {row= 11, col= 2, type= 2, color= 7},
+                        new SubLevel {row= 11, col= 2, type= 1, color= 5},
+                        new SubLevel {row= 11, col= 3, type= 2, color= 0},
+                        new SubLevel {row= 11, col= 3, type= 1, color= 3},
+                        new SubLevel {row= 11, col= 4, type= 2, color= 5},
+                        new SubLevel {row= 11, col= 4, type= 1, color= 0},
+                        new SubLevel {row= 13, col= 3, type= 2, color= 5},
+                        new SubLevel {row= 13, col= 3, type= 1, color= 7},
+
+
+                    },
+                    new List<SubLevel>
+                    {
+                        new SubLevel {row= 1, col= 3, type= 2, color= 5},
+                        new SubLevel {row= 1, col= 3, type= 1, color= 4},
+                        new SubLevel {row= 2, col= 3, type= 2, color= 4},
+                        new SubLevel {row= 2, col= 3, type= 1, color= 5},
+                        new SubLevel {row= 2, col= 4, type= 2, color= 6},
+                        new SubLevel {row= 2, col= 4, type= 1, color= 3},
+                        new SubLevel {row= 3, col= 3, type= 2, color= 5},
+                        new SubLevel {row= 3, col= 3, type= 1, color= 3},
+                        new SubLevel {row= 4, col= 3, type= 2, color= 7},
+                        new SubLevel {row= 4, col= 3, type= 1, color= 2},
+                        new SubLevel {row= 4, col= 4, type= 2, color= 4},
+                        new SubLevel {row= 4, col= 4, type= 1, color= 7},
+                        new SubLevel {row= 5, col= 2, type= 2, color= 3},
+                        new SubLevel {row= 5, col= 2, type= 1, color= 6},
+                        new SubLevel {row= 5, col= 3, type= 2, color= 7},
+                        new SubLevel {row= 5, col= 3, type= 1, color= 4},
+                        new SubLevel {row= 5, col= 4, type= 2, color= 6},
+                        new SubLevel {row= 5, col= 4, type= 1, color= 2},
+                        new SubLevel {row= 6, col= 3, type= 2, color= 7},
+                        new SubLevel {row= 6, col= 3, type= 1, color= 5},
+                        new SubLevel {row= 6, col= 4, type= 2, color= 2},
+                        new SubLevel {row= 6, col= 4, type= 1, color= 7},
+                        new SubLevel {row= 6, col= 5, type= 2, color= 2},
+                        new SubLevel {row= 6, col= 5, type= 1, color= 6},
+                        new SubLevel {row= 7, col= 2, type= 2, color= 3},
+                        new SubLevel {row= 7, col= 2, type= 1, color= 5},
+                        new SubLevel {row= 7, col= 3, type= 2, color= 0},
+                        new SubLevel {row= 7, col= 3, type= 1, color= 5},
+                        new SubLevel {row= 7, col= 4, type= 2, color= 4},
+                        new SubLevel {row= 7, col= 4, type= 1, color= 2},
+                        new SubLevel {row= 8, col= 2, type= 2, color= 4},
+                        new SubLevel {row= 8, col= 2, type= 1, color= 1},
+                        new SubLevel {row= 8, col= 3, type= 2, color= 3},
+                        new SubLevel {row= 8, col= 3, type= 1, color= 0},
+                        new SubLevel {row= 8, col= 4, type= 2, color= 1},
+                        new SubLevel {row= 8, col= 4, type= 1, color= 4},
+                        new SubLevel {row= 8, col= 5, type= 2, color= 6},
+                        new SubLevel {row= 9, col= 2, type= 2, color= 2},
+                        new SubLevel {row= 9, col= 2, type= 1, color= 4},
+                        new SubLevel {row= 9, col= 3, type= 2, color= 4},
+                        new SubLevel {row= 9, col= 3, type= 1, color= 5},
+                        new SubLevel {row= 9, col= 4, type= 2, color= 4},
+                        new SubLevel {row= 9, col= 4, type= 1, color= 1},
+                        new SubLevel {row= 10, col= 4, type= 2, color= 5},
+                        new SubLevel {row= 10, col= 4, type= 1, color= 4},
+                        new SubLevel {row= 11, col= 2, type= 2, color= 7},
+                        new SubLevel {row= 11, col= 2, type= 1, color= 5},
+                        new SubLevel {row= 11, col= 3, type= 2, color= 0},
+                        new SubLevel {row= 11, col= 3, type= 1, color= 3},
+                        new SubLevel {row= 11, col= 4, type= 2, color= 5},
+                        new SubLevel {row= 11, col= 4, type= 1, color= 0},
+                        new SubLevel {row= 13, col= 3, type= 2, color= 5},
+                        new SubLevel {row= 13, col= 3, type= 1, color= 7},
+
+                    },
+                    new List<SubLevel>
+                    {
+                        new SubLevel {row= 1, col= 3, type= 2, color= 5},
+                        new SubLevel {row= 1, col= 3, type= 1, color= 4},
+                        new SubLevel {row= 2, col= 3, type= 2, color= 4},
+                        new SubLevel {row= 2, col= 3, type= 1, color= 5},
+                        new SubLevel {row= 2, col= 4, type= 2, color= 6},
+                        new SubLevel {row= 2, col= 4, type= 1, color= 3},
+                        new SubLevel {row= 3, col= 3, type= 2, color= 5},
+                        new SubLevel {row= 3, col= 3, type= 1, color= 3},
+                        new SubLevel {row= 4, col= 3, type= 2, color= 7},
+                        new SubLevel {row= 4, col= 3, type= 1, color= 2},
+                        new SubLevel {row= 4, col= 4, type= 2, color= 4},
+                        new SubLevel {row= 4, col= 4, type= 1, color= 7},
+                        new SubLevel {row= 5, col= 2, type= 2, color= 3},
+                        new SubLevel {row= 5, col= 2, type= 1, color= 6},
+                        new SubLevel {row= 5, col= 3, type= 2, color= 7},
+                        new SubLevel {row= 5, col= 3, type= 1, color= 4},
+                        new SubLevel {row= 5, col= 4, type= 2, color= 6},
+                        new SubLevel {row= 5, col= 4, type= 1, color= 2},
+                        new SubLevel {row= 6, col= 3, type= 2, color= 7},
+                        new SubLevel {row= 6, col= 3, type= 1, color= 5},
+                        new SubLevel {row= 6, col= 4, type= 2, color= 2},
+                        new SubLevel {row= 6, col= 4, type= 1, color= 7},
+                        new SubLevel {row= 6, col= 5, type= 2, color= 2},
+                        new SubLevel {row= 6, col= 5, type= 1, color= 6},
+                        new SubLevel {row= 7, col= 2, type= 2, color= 3},
+                        new SubLevel {row= 7, col= 2, type= 1, color= 5},
+                        new SubLevel {row= 7, col= 3, type= 2, color= 0},
+                        new SubLevel {row= 7, col= 3, type= 1, color= 5},
+                        new SubLevel {row= 7, col= 4, type= 2, color= 4},
+                        new SubLevel {row= 7, col= 4, type= 1, color= 2},
+                        new SubLevel {row= 8, col= 2, type= 2, color= 4},
+                        new SubLevel {row= 8, col= 2, type= 1, color= 1},
+                        new SubLevel {row= 8, col= 3, type= 2, color= 3},
+                        new SubLevel {row= 8, col= 3, type= 1, color= 0},
+                        new SubLevel {row= 8, col= 4, type= 2, color= 1},
+                        new SubLevel {row= 8, col= 4, type= 1, color= 4},
+                        new SubLevel {row= 8, col= 5, type= 2, color= 6},
+                        new SubLevel {row= 9, col= 2, type= 2, color= 2},
+                        new SubLevel {row= 9, col= 2, type= 1, color= 4},
+                        new SubLevel {row= 9, col= 3, type= 2, color= 4},
+                        new SubLevel {row= 9, col= 3, type= 1, color= 5},
+                        new SubLevel {row= 9, col= 4, type= 2, color= 4},
+                        new SubLevel {row= 9, col= 4, type= 1, color= 1},
+                        new SubLevel {row= 10, col= 4, type= 2, color= 5},
+                        new SubLevel {row= 10, col= 4, type= 1, color= 4},
+                        new SubLevel {row= 11, col= 2, type= 2, color= 7},
+                        new SubLevel {row= 11, col= 2, type= 1, color= 5},
+                        new SubLevel {row= 11, col= 3, type= 2, color= 0},
+                        new SubLevel {row= 11, col= 3, type= 1, color= 3},
+                        new SubLevel {row= 11, col= 4, type= 2, color= 5},
+                        new SubLevel {row= 11, col= 4, type= 1, color= 0},
+                        new SubLevel {row= 13, col= 3, type= 2, color= 5},
+                        new SubLevel {row= 13, col= 3, type= 1, color= 7},
+                    },
+                },
+
+            },
+            new Level
+            {
+                lv = 7,
+                subLevelsLists = new List<List<SubLevel>>
+                {
+                     new List<SubLevel>
+                    {
+                        new SubLevel {row= 3, col= 3, type= 2, color= 6},
+                        new SubLevel {row= 3, col= 3, type= 1, color= 4},
+                        new SubLevel {row= 4, col= 3, type= 2, color= 4},
+                        new SubLevel {row= 4, col= 3, type= 1, color= 5},
+                        new SubLevel {row= 4, col= 4, type= 2, color= 6},
+                        new SubLevel {row= 4, col= 4, type= 1, color= 5},
+                        new SubLevel {row= 5, col= 3, type= 2, color= 6},
+                        new SubLevel {row= 6, col= 3, type= 2, color= 4},
+                        new SubLevel {row= 6, col= 3, type= 1, color= 6},
+                        new SubLevel {row= 6, col= 4, type= 2, color= 4},
+                        new SubLevel {row= 6, col= 4, type= 1, color= 5},
+                        new SubLevel {row= 7, col= 3, type= 2, color= 5},
+                        new SubLevel {row= 7, col= 3, type= 1, color= 4},
+                        new SubLevel {row= 8, col= 3, type= 2, color= 5},
+                        new SubLevel {row= 8, col= 3, type= 1, color= 4},
+                        new SubLevel {row= 8, col= 4, type= 2, color= 5},
+                        new SubLevel {row= 8, col= 4, type= 1, color= 6},
+
+                    },
+                    new List<SubLevel>
+                    {
+                        new SubLevel {row= 3, col= 3, type= 2, color= 6},
+                        new SubLevel {row= 3, col= 3, type= 1, color= 4},
+                        new SubLevel {row= 4, col= 3, type= 2, color= 4},
+                        new SubLevel {row= 4, col= 3, type= 1, color= 5},
+                        new SubLevel {row= 4, col= 4, type= 2, color= 6},
+                        new SubLevel {row= 4, col= 4, type= 1, color= 5},
+                        new SubLevel {row= 5, col= 3, type= 2, color= 6},
+                        new SubLevel {row= 6, col= 3, type= 2, color= 4},
+                        new SubLevel {row= 6, col= 3, type= 1, color= 6},
+                        new SubLevel {row= 6, col= 4, type= 2, color= 4},
+                        new SubLevel {row= 6, col= 4, type= 1, color= 5},
+                        new SubLevel {row= 7, col= 3, type= 2, color= 5},
+                        new SubLevel {row= 7, col= 3, type= 1, color= 4},
+                        new SubLevel {row= 8, col= 3, type= 2, color= 5},
+                        new SubLevel {row= 8, col= 3, type= 1, color= 4},
+                        new SubLevel {row= 8, col= 4, type= 2, color= 5},
+                        new SubLevel {row= 8, col= 4, type= 1, color= 6},
+
+                    },
+                    new List<SubLevel>
+                    {
+                        new SubLevel {row= 3, col= 3, type= 2, color= 6},
+                        new SubLevel {row= 3, col= 3, type= 1, color= 4},
+                        new SubLevel {row= 4, col= 3, type= 2, color= 4},
+                        new SubLevel {row= 4, col= 3, type= 1, color= 5},
+                        new SubLevel {row= 4, col= 4, type= 2, color= 6},
+                        new SubLevel {row= 4, col= 4, type= 1, color= 5},
+                        new SubLevel {row= 5, col= 3, type= 2, color= 6},
+                        new SubLevel {row= 6, col= 3, type= 2, color= 4},
+                        new SubLevel {row= 6, col= 3, type= 1, color= 6},
+                        new SubLevel {row= 6, col= 4, type= 2, color= 4},
+                        new SubLevel {row= 6, col= 4, type= 1, color= 5},
+                        new SubLevel {row= 7, col= 3, type= 2, color= 5},
+                        new SubLevel {row= 7, col= 3, type= 1, color= 4},
+                        new SubLevel {row= 8, col= 3, type= 2, color= 5},
+                        new SubLevel {row= 8, col= 3, type= 1, color= 4},
+                        new SubLevel {row= 8, col= 4, type= 2, color= 5},
+                        new SubLevel {row= 8, col= 4, type= 1, color= 6},
                     },
                 },
 
