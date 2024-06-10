@@ -34,6 +34,7 @@ public class Screw : MonoBehaviour
     }
     void MoveBulong()
     {
+        Audio.instance.sfxScrew.Play();
         // killTween();
         // DOTween.KillAll();
         if (HasBulong)
@@ -80,11 +81,13 @@ public class Screw : MonoBehaviour
                     }
                     else if (bulongAction3.tag == this.gameObject.tag)
                     {
+                        Audio.instance.shak.Play();
                         bulongAction3.transform.DOShakePosition(0.3f, new Vector3(0.05f, 0, 0));
                     }
                 }
                 catch
                 {
+                    Audio.instance.shak.Play();
                     bulongAction3.transform.DOShakePosition(0.3f, new Vector3(0.05f, 0, 0));
                 }
             }

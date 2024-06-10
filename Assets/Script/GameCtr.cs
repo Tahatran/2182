@@ -30,6 +30,8 @@ public class GameCtr : MonoBehaviour
     public GameObject gridContainer;
     public GameObject objectContainer;
 
+    public Toggle audioToggle;
+
     public int colNumber;
     public int rowNumber;
 
@@ -91,7 +93,9 @@ public class GameCtr : MonoBehaviour
     }
     public void ReplayLoseBtn()
     {
-        Debug.Log("aaaa");
+        Audio.instance.sfxClick.Stop();
+        Audio.instance.sfxClick.Play();
+        // Debug.Log("aaaa");
         SceneManager.LoadScene(0);
         // var rect = losePopup.GetComponent<RectTransform>();
         // rect.DOAnchorPos(new Vector2(rect.anchoredPosition.x, 2000), 0.5f)
@@ -142,6 +146,8 @@ public class GameCtr : MonoBehaviour
 
     public void ReplayBtn()
     {
+        Audio.instance.sfxClick.Stop();
+        Audio.instance.sfxClick.Play();
         SceneManager.LoadScene(0);
     }
 
@@ -258,6 +264,8 @@ public class GameCtr : MonoBehaviour
                 if (!tagExists)
                 {
                     // Debug.Log("aaa");
+                    // Audio.instance.sfxWin.Stop();
+                    Audio.instance.sfxLose.Play();
                     var screw2 = screwObject.transform.Find("Screw").gameObject;
                     var spriteRenderer = screw2.GetComponent<SpriteRenderer>();
                     if (spriteRenderer != null)
@@ -326,7 +334,7 @@ public class GameCtr : MonoBehaviour
     {
         if (lstBulong.Count == 0)
         {
-            Debug.Log("Win");
+            Audio.instance.sfxWin.Play();
             GameObject lastCrew = lstCrew[0];
 
             Vector3 targetPosition = ScrewWin.transform.position;
