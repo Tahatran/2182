@@ -389,8 +389,8 @@ public class GameCtr : MonoBehaviour
     void onGenerateObject()
     {
         // Lấy level hiện tại từ danh sách levels dựa trên giá trị lv lưu trong PlayerPrefs
-        var currentLevel = LVConfig.Instance.levels[0];
-        // var currentLevel = LVConfig.Instance.levels[PlayerPrefs.GetInt("lv") - 1];
+        // var currentLevel = LVConfig.Instance.levels[0];
+        var currentLevel = LVConfig.Instance.levels[PlayerPrefs.GetInt("lv") - 1];
         // Chọn ngẫu nhiên một sub-level từ danh sách sub-levels của level hiện tại
         int randomSubLevelIndex = Random.Range(0, currentLevel.subLevelsLists.Count);
         var subLevels = currentLevel.subLevelsLists[randomSubLevelIndex];
@@ -439,7 +439,7 @@ public class GameCtr : MonoBehaviour
                     {
                         instantiatedObject.GetComponent<BulongAction>().col = subLevel.col;
                         instantiatedObject.GetComponent<BulongAction>().row = subLevel.row;
-                        instantiatedObject.transform.localScale = new Vector3(0.7f, 0.7f, 0.7f);
+                        instantiatedObject.transform.localScale = new Vector3(0.8f, 0.8f, 0.8f);
                         lstBulong.Add(instantiatedObject);
                     }
                     else if (subLevel.type == 2)
