@@ -439,7 +439,7 @@ public class GameCtr : MonoBehaviour
                     {
                         instantiatedObject.GetComponent<BulongAction>().col = subLevel.col;
                         instantiatedObject.GetComponent<BulongAction>().row = subLevel.row;
-                        // instantiatedObject.transform.localScale = new Vector3(1.7f, 1.7f, 1.7f);
+                        instantiatedObject.transform.localScale = new Vector3(0.7f, 0.7f, 0.7f);
                         lstBulong.Add(instantiatedObject);
                     }
                     else if (subLevel.type == 2)
@@ -476,6 +476,7 @@ public class GameCtr : MonoBehaviour
 
     void UpdateSprite(GameObject obj, SubLevel subLevel, int colorIndex)
     {
+        // obj.GetComponent<Transform>().localScale = new Vector3(2f, 2f, 2f);
         // Nếu loại của subLevel là 1 (Bulong)
         if (subLevel.type == 1)
         {
