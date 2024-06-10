@@ -40,7 +40,7 @@ public class Screw : MonoBehaviour
             if (bulongAction != null)
             {
 
-                Debug.Log("2");
+                // Debug.Log("2");
                 Tweenup(Bulong);
                 TweenDown(bulongAction.gameObject);
                 HasBulong = false;
@@ -48,7 +48,7 @@ public class Screw : MonoBehaviour
             }
             else
             {
-                Debug.Log("3");
+                // Debug.Log("3");
                 Tweenup(Bulong);
                 HasBulong = false;
             }
@@ -66,8 +66,8 @@ public class Screw : MonoBehaviour
                         Vector3 upPosition = new Vector3(transform.position.x, transform.position.y + 0.3f, transform.position.z);
                         bulongAction3.IsClicked = false;
                         // Tween Bulong đến vị trí mới để di chuyển lên trên Screw
-                        bulongAction3.transform.DOMove(upPosition, 0.2f).SetEase(Ease.OutQuad);
-                        bulongAction3.BulongBody.transform.DOScale(0f, 0.3f).SetEase(Ease.OutQuad)
+                        bulongAction3.transform.DOMove(upPosition, 0.2f).SetEase(Ease.OutQuad)
+                        // bulongAction3.BulongBody.transform.DOScale(0f, 0.3f).SetEase(Ease.OutQuad)
                         .OnComplete(() => TweenDowndone(bulongAction3.gameObject));
                     }
                     else if (bulongAction3.row == Bulong.GetComponent<BulongAction>().row && bulongAction3.col == Bulong.GetComponent<BulongAction>().col)
@@ -90,7 +90,7 @@ public class Screw : MonoBehaviour
 
     void Tweenup(GameObject Bulong)
     {
-        Debug.Log("3");
+        // Debug.Log("3");
         var bulongface = Bulong.transform.Find("Bulongface").gameObject;
         var bulongbody = Bulong.transform.Find("Bulongface").gameObject;
         var bulongface2 = Bulong.transform.Find("Bulongface2").gameObject;
@@ -140,8 +140,9 @@ public class Screw : MonoBehaviour
                         }
                         bulongFace.SetActive(true);
                         bulongFace2.SetActive(false);
+                        bulongGameObject.GetComponent<BulongAction>().BulongBody.transform.DOScale(0f, 0.3f).SetEase(Ease.OutQuad);
                     });
-        bulongGameObject.GetComponent<BulongAction>().BulongBody.transform.DOScale(0f, 0.2f).SetEase(Ease.OutQuad);
+
         HasBulong = true;
         bulongGameObject.GetComponent<BulongAction>().IsClicked = false;
         GameCtr gameCtrInstance = GameObject.FindObjectOfType<GameCtr>();
@@ -225,6 +226,19 @@ public class Screw : MonoBehaviour
                 gameCtrInstance.crewTags.Add(tag);
             }
         }
+
+        //  foreach (var screwObject in gameCtrInstance.lstCrew)
+        // {
+        //     var screw = screwObject.GetComponent<Screw>();
+        //     var tag = screwObject.tag;
+        //     if (!gameCtrInstance.crewTags.Contains(tag))
+        //     {
+        //         if (screw.HasBulong == false)
+        //         {
+        //             gameCtrInstance.crewTags.Add(screw.tag);
+        //         }
+        //         gameCtrInstance.crewTags.Add(tag);
+        //     }
 
         // Cập nhật tag từ danh sách lstBulong
         foreach (var bulongObject in gameCtrInstance.lstBulong)
