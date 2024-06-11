@@ -434,10 +434,10 @@ public class GameCtr : MonoBehaviour
     {
         // Lấy level hiện tại từ danh sách levels dựa trên giá trị lv lưu trong PlayerPrefs
         // var currentLevel = LVConfig.Instance.levels[0];
-        // var currentLevel = LVConfig.Instance.levels[PlayerPrefs.GetInt("lv") - 1];
+        var currentLevel = LVConfig.Instance.levels[PlayerPrefs.GetInt("lv") - 1];
 
         //dễ nhất lv2
-        var currentLevel = LVConfig.Instance.levels[7];
+        // var currentLevel = LVConfig.Instance.levels[7];
         // Chọn ngẫu nhiên một sub-level từ danh sách sub-levels của level hiện tại
         int randomSubLevelIndex = Random.Range(0, currentLevel.subLevelsLists.Count);
         var subLevels = currentLevel.subLevelsLists[randomSubLevelIndex];
