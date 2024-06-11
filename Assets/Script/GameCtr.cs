@@ -267,6 +267,7 @@ public class GameCtr : MonoBehaviour
                 {
                     // Debug.Log("aaa");
                     // Audio.instance.sfxLose.Stop();
+                    // Input.
                     btnReset.SetActive(false);
                     audioToggle.gameObject.SetActive(false);
                     Audio.instance.sfxLose.Play();
@@ -379,7 +380,7 @@ public class GameCtr : MonoBehaviour
     public void NextLV()
     {
         // Call the delay method with a delay time of 0.5 seconds and the action to load the next level
-        DelayMethod(0.5f, () =>
+        DelayMethod(0.8f, () =>
         {
             nextLv();
             SceneManager.LoadScene(0);
@@ -424,10 +425,10 @@ public class GameCtr : MonoBehaviour
     {
         // Lấy level hiện tại từ danh sách levels dựa trên giá trị lv lưu trong PlayerPrefs
         // var currentLevel = LVConfig.Instance.levels[0];
-        var currentLevel = LVConfig.Instance.levels[PlayerPrefs.GetInt("lv") - 1];
+        // var currentLevel = LVConfig.Instance.levels[PlayerPrefs.GetInt("lv") - 1];
 
         //dễ nhất lv2
-        // var currentLevel = LVConfig.Instance.levels[2];
+        var currentLevel = LVConfig.Instance.levels[2];
         // Chọn ngẫu nhiên một sub-level từ danh sách sub-levels của level hiện tại
         int randomSubLevelIndex = Random.Range(0, currentLevel.subLevelsLists.Count);
         var subLevels = currentLevel.subLevelsLists[randomSubLevelIndex];
@@ -508,7 +509,7 @@ public class GameCtr : MonoBehaviour
                 }
             }
         }
-        ReadTags();
+        // ReadTags();
     }
 
     void UpdateSprite(GameObject obj, SubLevel subLevel, int colorIndex)
