@@ -10,11 +10,18 @@ public class GameCtr : MonoBehaviour
 {
     [SerializeField] private GameObject levelText;
     [SerializeField] private GameObject parentLevelText;
+    [SerializeField] private GameObject LevelPannel;
+    [SerializeField] private GameObject parentLevelTextLose;
     [SerializeField] private List<Sprite> sprites;
     [SerializeField] private GameObject bgblue;
     [SerializeField] private GameObject UI;
     [SerializeField] private GameObject Winpanel;
     [SerializeField] private GameObject ScrewWin;
+    [SerializeField] private GameObject WINtext;
+    [SerializeField] private GameObject PLAYtext;
+    [SerializeField] private GameObject btnReset;
+
+    public List<GameObject> lstBling;
     [SerializeField] private GameObject LosePanel;
     public static GameCtr instance;
     public GameObject HexagridPrefab;
@@ -24,6 +31,8 @@ public class GameCtr : MonoBehaviour
     public GameObject BulongModelPrefab;
     public GameObject gridContainer;
     public GameObject objectContainer;
+
+    public Toggle audioToggle;
 
     public int colNumber;
     public int rowNumber;
@@ -60,7 +69,7 @@ public class GameCtr : MonoBehaviour
     {
         Input.multiTouchEnabled = false;
         setUpLv();
-        SetLevelText();
+        SetLevelText(parentLevelText);
         loadgame();
         // StartCoroutine(DelayedGenerateGrid());
     }
@@ -86,19 +95,23 @@ public class GameCtr : MonoBehaviour
     }
     public void ReplayLoseBtn()
     {
+        // Audio.instance.sfxClick.Stop();
+        Audio.instance.sfxClick.Play();
+        // Debug.Log("aaaa");
+        SceneManager.LoadScene(0);
         // var rect = losePopup.GetComponent<RectTransform>();
         // rect.DOAnchorPos(new Vector2(rect.anchoredPosition.x, 2000), 0.5f)
         //     .SetEase(Ease.InFlash)
         //     .OnComplete(() => { SceneManager.LoadScene(0); });
     }
-    public void SetLevelText()
+    public void SetLevelText(GameObject parentLevelText)
     {
         // Lấy giá trị level từ PlayerPrefs
         var level = PlayerPrefs.GetInt("lv");
 
         // Chuyển giá trị level thành chuỗi
         // string levelString = level.ToString();
-        string levelString = "10";
+        string levelString = level.ToString();
         // Debug.Log("level" + levelString);
 
         // Xóa tất cả các hình ảnh con trước đó (nếu có)
@@ -108,7 +121,7 @@ public class GameCtr : MonoBehaviour
         }
 
         // Đặt khoảng cách giữa các chữ số
-        float spacing = 0.65f; // điều chỉnh khoảng cách giữa các chữ số tùy thuộc vào yêu cầu của bạn
+        float spacing = 0.55f; // điều chỉnh khoảng cách giữa các chữ số tùy thuộc vào yêu cầu của bạn
 
         // Duyệt qua từng chữ số trong chuỗi levelString
         for (int i = 0; i < levelString.Length; i++)
@@ -124,7 +137,7 @@ public class GameCtr : MonoBehaviour
 
             // Đặt vị trí của imageLevelClone
             imageLevelClone.transform.localPosition = new Vector3(xPos, 0, 0);
-            imageLevelClone.transform.localScale = new Vector3(1, 1, 1);
+            imageLevelClone.transform.localScale = new Vector3(0.8f, 0.8f, 0.8f);
 
             var imageLevel = imageLevelClone.GetComponent<SpriteRenderer>();
 
@@ -132,8 +145,11 @@ public class GameCtr : MonoBehaviour
             imageLevel.sprite = sprites[digitValue];
         }
     }
+
     public void ReplayBtn()
     {
+        // Audio.instance.sfxClick.Stop();
+        Audio.instance.sfxClick.Play();
         SceneManager.LoadScene(0);
     }
 
@@ -141,7 +157,7 @@ public class GameCtr : MonoBehaviour
     {
         if (!PlayerPrefs.HasKey("lv"))
         {
-            lv = 10;
+            lv = 1;
             PlayerPrefs.SetInt("lv", lv);
         }
 
@@ -189,7 +205,11 @@ public class GameCtr : MonoBehaviour
     public void CheckLose()
     {
         CheckWin();
-        CheckTags();
+        if (lstCrew.Count != 1)
+        {
+            CheckTags();
+        }
+
     }
 
     void ReadTags()
@@ -204,20 +224,112 @@ public class GameCtr : MonoBehaviour
 
         foreach (GameObject crew in lstCrew)
         {
-            crewTags.Add(crew.tag);
+            if (crew.GetComponent<Screw>().HasBulong == false)
+            {
+                crewTags.Add(crew.tag);
+            }
         }
     }
 
     void CheckTags()
     {
-        foreach (string tag in crewTags)
+        // foreach (string tag in crewTags)
+        // {
+        //     if (!bulongTags.Contains(tag))
+        //     {
+        //         bgblue.transform.DOMoveY(-0.5f, 0.3f).SetEase(Ease.OutQuad).OnComplete(() =>
+        //           {
+        //               LosePanel.SetActive(true);
+        //               SetLevelText(parentLevelTextLose);
+        //           });
+        //     }
+        // }
+        foreach (var screwObject in lstCrew)
         {
-            if (!bulongTags.Contains(tag))
+            var screw = screwObject.GetComponent<Screw>();
+
+            if (!screw.HasBulong)
             {
-                bgblue.transform.DOMoveY(-0.5f, 0.3f).SetEase(Ease.OutQuad).OnComplete(() =>
-                  {
-                      LosePanel.SetActive(true);
-                  });
+                string screwTag = screw.tag;
+                bool tagExists = false;
+
+                foreach (var bulongObject in lstBulong)
+                {
+                    var bulong = bulongObject.GetComponent<BulongAction>();
+                    if (bulong.tag == screwTag)
+                    {
+                        tagExists = true;
+                        break;
+                    }
+                }
+
+                if (!tagExists)
+                {
+                    // Debug.Log("aaa");
+                    // Audio.instance.sfxLose.Stop();
+                    btnReset.SetActive(false);
+                    audioToggle.gameObject.SetActive(false);
+                    Audio.instance.sfxLose.Play();
+                    var screw2 = screwObject.transform.Find("Screw").gameObject;
+                    var spriteRenderer = screw2.GetComponent<SpriteRenderer>();
+                    if (spriteRenderer != null)
+                    {
+                        Color originalColor = spriteRenderer.color;
+                        spriteRenderer.DOColor(Color.red, 0.1f).SetLoops(5, LoopType.Yoyo).OnKill(() =>
+                        {
+                            spriteRenderer.color = originalColor;
+                        }).OnComplete(() =>
+                         {
+                             LevelPannel.SetActive(false);
+                             TweenScrews();
+                             bgblue.transform.DOMoveY(-0.5f, 0.3f).SetEase(Ease.OutQuad).OnComplete(() =>
+                                {
+                                    LosePanel.SetActive(true);
+                                    SetLevelText(parentLevelTextLose);
+                                });
+                         });
+                    }
+
+                    break; // Thực hiện hàm khác và dừng kiểm tra thêm các `screw` khác
+                }
+            }
+        }
+    }
+
+    void TweenScrews()
+    {
+        foreach (var screwObject in lstCrew)
+        {
+            var screw = screwObject.transform.Find("Screw").gameObject;
+            var screwComponent = screwObject.GetComponent<Screw>();
+            var bulong = screwComponent.Bulong;
+
+            float xPosition = screw.transform.position.x;
+            float targetX = xPosition < 0 ? -5f : 5f; // Xác định vị trí mục tiêu dựa trên giá trị x hiện tại
+
+            // Bay lên và di chuyển theo hình parabol
+            List<Vector3> path = new List<Vector3>
+            {
+                screw.transform.position,
+                new Vector3(targetX, screw.transform.position.y + 2f, screw.transform.position.z),
+                new Vector3(targetX, screw.transform.position.y - 5f, screw.transform.position.z)
+            };
+
+            // Thực hiện tween theo đường cong hình parabol
+            screw.transform.DOPath(path.ToArray(), 2f, PathType.CatmullRom).SetEase(Ease.OutQuad);
+
+            if (bulong != null)
+            {
+                // Bay lên và di chuyển theo hình parabol
+                List<Vector3> bulongPath = new List<Vector3>
+                {
+                    bulong.transform.position,
+                    new Vector3(targetX, bulong.transform.position.y + 2f, bulong.transform.position.z),
+                    new Vector3(targetX, bulong.transform.position.y - 5f, bulong.transform.position.z)
+                };
+
+                // Thực hiện tween theo đường cong hình parabol
+                bulong.transform.DOPath(bulongPath.ToArray(), 2f, PathType.CatmullRom).SetEase(Ease.OutQuad);
             }
         }
     }
@@ -226,17 +338,82 @@ public class GameCtr : MonoBehaviour
     {
         if (lstBulong.Count == 0)
         {
-            Debug.Log("Win");
+            // Audio.instance.sfxWin.Stop();
+            Audio.instance.sfxWin.Play();
             GameObject lastCrew = lstCrew[0];
-            Winpanel.SetActive(true);
+            btnReset.SetActive(false);
+            audioToggle.gameObject.SetActive(false);
             Vector3 targetPosition = ScrewWin.transform.position;
-            UI.transform.DOMoveY(0.1f, 0.3f).SetEase(Ease.OutQuad).OnComplete(() =>
+            UI.transform.DOMoveY(1f, 0.3f).SetEase(Ease.OutQuad).OnComplete(() =>
                   {
-                      lastCrew.transform.DOMove(targetPosition, 0.3f).SetEase(Ease.OutQuad).OnComplete(() =>
+                      lastCrew.transform.DOMove(targetPosition, 0.2f).SetEase(Ease.OutQuad).OnUpdate(() =>
+                    {
+                        Winpanel.SetActive(true);
+                        var spriteRenderer = ScrewWin.GetComponent<SpriteRenderer>();
+                        if (spriteRenderer != null)
                         {
+                            spriteRenderer.DOFade(1f, 0.5f); // Tăng opacity lên 255 (1f tương ứng với 255/255)
+                        }
+                    }).OnComplete(() =>
+                        {
+                            lastCrew.SetActive(false);
+                            WINtext.transform.DOMoveX(-0.2f, 0.15f).SetEase(Ease.OutQuad).OnUpdate(() =>
+                            {
+                                PLAYtext.transform.DOMoveX(-4f, 0.15f).SetEase(Ease.OutQuad).OnComplete(() =>
+                                {
+                                    WINtext.transform.DOMoveX(-0.5f, 0.1f).SetEase(Ease.OutQuad);
+                                    PLAYtext.transform.DOMoveX(-3.7f, 0.1f).SetEase(Ease.OutQuad).OnComplete(() =>
+                                    {
+                                        StartCoroutine(ToggleGameObjectsContinuously(0.05f));
+                                        NextLV();
+                                    });
+                                });
+                            });
+
 
                         });
                   });
+        }
+    }
+
+    public void NextLV()
+    {
+        // Call the delay method with a delay time of 0.5 seconds and the action to load the next level
+        DelayMethod(0.5f, () =>
+        {
+            nextLv();
+            SceneManager.LoadScene(0);
+        });
+    }
+
+    // Method to handle the delay
+    public void DelayMethod(float delay, System.Action action)
+    {
+        StartCoroutine(DelayCoroutine(delay, action));
+    }
+
+    // Coroutine to handle the delay and call the action
+    private IEnumerator DelayCoroutine(float delay, System.Action action)
+    {
+        // Wait for the specified amount of time
+        yield return new WaitForSeconds(delay);
+
+        // Execute the action
+        action.Invoke();
+    }
+
+
+    IEnumerator ToggleGameObjectsContinuously(float toggleInterval)
+    {
+        while (true)
+        {
+            foreach (var gameObject in lstBling)
+            {
+                bool isActive = Random.Range(0, 2) == 0; // 50% cơ hội bật hoặc tắt
+                gameObject.SetActive(isActive);
+            }
+
+            yield return new WaitForSeconds(toggleInterval);
         }
     }
 
@@ -246,7 +423,11 @@ public class GameCtr : MonoBehaviour
     void onGenerateObject()
     {
         // Lấy level hiện tại từ danh sách levels dựa trên giá trị lv lưu trong PlayerPrefs
-        var currentLevel = LVConfig.Instance.levels[0];
+        // var currentLevel = LVConfig.Instance.levels[0];
+        var currentLevel = LVConfig.Instance.levels[PlayerPrefs.GetInt("lv") - 1];
+
+        //dễ nhất lv2
+        // var currentLevel = LVConfig.Instance.levels[2]];
         // Chọn ngẫu nhiên một sub-level từ danh sách sub-levels của level hiện tại
         int randomSubLevelIndex = Random.Range(0, currentLevel.subLevelsLists.Count);
         var subLevels = currentLevel.subLevelsLists[randomSubLevelIndex];
@@ -295,7 +476,7 @@ public class GameCtr : MonoBehaviour
                     {
                         instantiatedObject.GetComponent<BulongAction>().col = subLevel.col;
                         instantiatedObject.GetComponent<BulongAction>().row = subLevel.row;
-                        // instantiatedObject.transform.localScale = new Vector3(1.7f, 1.7f, 1.7f);
+                        instantiatedObject.transform.localScale = new Vector3(0.8f, 0.8f, 0.8f);
                         lstBulong.Add(instantiatedObject);
                     }
                     else if (subLevel.type == 2)
@@ -332,6 +513,7 @@ public class GameCtr : MonoBehaviour
 
     void UpdateSprite(GameObject obj, SubLevel subLevel, int colorIndex)
     {
+        // obj.GetComponent<Transform>().localScale = new Vector3(2f, 2f, 2f);
         // Nếu loại của subLevel là 1 (Bulong)
         if (subLevel.type == 1)
         {
