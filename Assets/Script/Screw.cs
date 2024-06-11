@@ -73,7 +73,7 @@ public class Screw : MonoBehaviour
                         // Tween Bulong đến vị trí mới để di chuyển lên trên Screw
                         bulongAction3.transform.DOMove(upPosition, 0.2f).SetEase(Ease.OutQuad)
                         // bulongAction3.BulongBody.transform.DOScale(0f, 0.3f).SetEase(Ease.OutQuad)
-                        .OnComplete(() => TweenDowndone(bulongAction3.gameObject));
+                         .OnComplete(() => DOVirtual.DelayedCall(0.1f, () => TweenDowndone(bulongAction3.gameObject)));
                     }
                     else if (bulongAction3.row == Bulong.GetComponent<BulongAction>().row && bulongAction3.col == Bulong.GetComponent<BulongAction>().col)
                     {
