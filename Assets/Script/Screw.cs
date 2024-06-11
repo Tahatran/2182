@@ -84,14 +84,16 @@ public class Screw : MonoBehaviour
                     {
                         // Audio.instance.shak.Stop();
                         Audio.instance.shak.Play();
-                        bulongAction3.transform.DOShakePosition(0.3f, new Vector3(0.05f, 0, 0));
+                        bulongAction3.transform.DOShakePosition(0.3f, new Vector3(0.05f, 0, 0), 10, 20, false, true);
+
                     }
                 }
                 catch
                 {
                     // Audio.instance.shak.Stop();
                     Audio.instance.shak.Play();
-                    bulongAction3.transform.DOShakePosition(0.3f, new Vector3(0.05f, 0, 0));
+                    bulongAction3.transform.DOShakePosition(0.3f, new Vector3(0.05f, 0, 0), 10, 20, false, true);
+
                 }
             }
         }
