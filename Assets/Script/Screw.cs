@@ -150,6 +150,7 @@ public class Screw : MonoBehaviour
              var fireworkInstance = Instantiate(firework, bulongbodyUp.transform.position, Quaternion.identity, gameObject.transform);
              ParticleSystemRenderer psRenderer = fireworkInstance.GetComponent<ParticleSystemRenderer>();
              psRenderer.sortingOrder = 100;
+             Destroy(fireworkInstance, 3f);
          });
         sequence.Append(Bulong.transform.DOMoveY(targetY, 0.2f).SetEase(Ease.OutQuad)).OnUpdate(() =>
                     {
