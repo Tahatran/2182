@@ -12,7 +12,7 @@ public class Lose : MonoBehaviour
     }
     public void ReplayLoseBtn()
     {
-        Debug.Log("aaaa");
+        // Debug.Log("aaaa");
         SceneManager.LoadScene(0);
         // var rect = losePopup.GetComponent<RectTransform>();
         // rect.DOAnchorPos(new Vector2(rect.anchoredPosition.x, 2000), 0.5f)
