@@ -34,7 +34,7 @@ public class Screw : MonoBehaviour
     }
     void MoveBulong()
     {
-        Audio.instance.sfxScrew.Play();
+
         // killTween();
         // DOTween.KillAll();
         if (HasBulong)
@@ -44,8 +44,8 @@ public class Screw : MonoBehaviour
             {
 
                 // Debug.Log("2");
-                Tweenup(Bulong);
                 TweenDown(bulongAction.gameObject);
+                Tweenup(Bulong);
                 HasBulong = false;
 
             }
@@ -81,22 +81,20 @@ public class Screw : MonoBehaviour
                     }
                     else if (bulongAction3.tag == this.gameObject.tag)
                     {
+                        // Audio.instance.shak.Stop();
                         Audio.instance.shak.Play();
                         bulongAction3.transform.DOShakePosition(0.3f, new Vector3(0.05f, 0, 0));
                     }
                 }
                 catch
                 {
+                    // Audio.instance.shak.Stop();
                     Audio.instance.shak.Play();
                     bulongAction3.transform.DOShakePosition(0.3f, new Vector3(0.05f, 0, 0));
                 }
             }
         }
         resetOnOffBulong();
-        // if (toggleCoroutine != null)
-        // {
-        //     StopCoroutine(toggleCoroutine);
-        // }
     }
 
     void resetOnOffBulong()
@@ -122,6 +120,10 @@ public class Screw : MonoBehaviour
 
     void Tweenup(GameObject Bulong)
     {
+        // Audio.instance.sfxScrew.Stop();
+        Audio.instance.sfxScrew.Play();
+        Audio.instance.sfxScrew2.Play();
+
         // DOTween.KillAll();
         // Debug.Log("3");
         var bulongfaceUp = Bulong.transform.Find("Bulongface").gameObject;
@@ -163,6 +165,9 @@ public class Screw : MonoBehaviour
 
     void TweenDown(GameObject bulongGameObject)
     {
+        // Audio.instance.sfxScrew.Stop();
+        Audio.instance.sfxScrew.Play();
+        Audio.instance.sfxScrew2.Play();
         // DOTween.KillAll();
         var bulongFaceDown = bulongGameObject.transform.Find("Bulongface").gameObject;
         var bulongFace2Down = bulongGameObject.transform.Find("Bulongface2").gameObject;
@@ -222,6 +227,7 @@ public class Screw : MonoBehaviour
 
     void TweenDowndone(GameObject bulongGameObject)
     {
+        Audio.instance.sfxgone.Play();
         var bulongFaceDone = bulongGameObject.transform.Find("Bulongface").gameObject;
         var bulongFace2Done = bulongGameObject.transform.Find("Bulongface2").gameObject;
         // Tạo vị trí mới cho Bulong để di chuyển xuống dưới

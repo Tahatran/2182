@@ -19,6 +19,8 @@ public class GameCtr : MonoBehaviour
     [SerializeField] private GameObject ScrewWin;
     [SerializeField] private GameObject WINtext;
     [SerializeField] private GameObject PLAYtext;
+    [SerializeField] private GameObject btnReset;
+
     public List<GameObject> lstBling;
     [SerializeField] private GameObject LosePanel;
     public static GameCtr instance;
@@ -93,7 +95,7 @@ public class GameCtr : MonoBehaviour
     }
     public void ReplayLoseBtn()
     {
-        Audio.instance.sfxClick.Stop();
+        // Audio.instance.sfxClick.Stop();
         Audio.instance.sfxClick.Play();
         // Debug.Log("aaaa");
         SceneManager.LoadScene(0);
@@ -119,7 +121,7 @@ public class GameCtr : MonoBehaviour
         }
 
         // Đặt khoảng cách giữa các chữ số
-        float spacing = 0.65f; // điều chỉnh khoảng cách giữa các chữ số tùy thuộc vào yêu cầu của bạn
+        float spacing = 0.55f; // điều chỉnh khoảng cách giữa các chữ số tùy thuộc vào yêu cầu của bạn
 
         // Duyệt qua từng chữ số trong chuỗi levelString
         for (int i = 0; i < levelString.Length; i++)
@@ -135,7 +137,7 @@ public class GameCtr : MonoBehaviour
 
             // Đặt vị trí của imageLevelClone
             imageLevelClone.transform.localPosition = new Vector3(xPos, 0, 0);
-            imageLevelClone.transform.localScale = new Vector3(1, 1, 1);
+            imageLevelClone.transform.localScale = new Vector3(0.8f, 0.8f, 0.8f);
 
             var imageLevel = imageLevelClone.GetComponent<SpriteRenderer>();
 
@@ -146,7 +148,7 @@ public class GameCtr : MonoBehaviour
 
     public void ReplayBtn()
     {
-        Audio.instance.sfxClick.Stop();
+        // Audio.instance.sfxClick.Stop();
         Audio.instance.sfxClick.Play();
         SceneManager.LoadScene(0);
     }
@@ -264,7 +266,9 @@ public class GameCtr : MonoBehaviour
                 if (!tagExists)
                 {
                     // Debug.Log("aaa");
-                    // Audio.instance.sfxWin.Stop();
+                    // Audio.instance.sfxLose.Stop();
+                    btnReset.SetActive(false);
+                    audioToggle.gameObject.SetActive(false);
                     Audio.instance.sfxLose.Play();
                     var screw2 = screwObject.transform.Find("Screw").gameObject;
                     var spriteRenderer = screw2.GetComponent<SpriteRenderer>();
@@ -334,9 +338,11 @@ public class GameCtr : MonoBehaviour
     {
         if (lstBulong.Count == 0)
         {
+            // Audio.instance.sfxWin.Stop();
             Audio.instance.sfxWin.Play();
             GameObject lastCrew = lstCrew[0];
-
+            btnReset.SetActive(false);
+            audioToggle.gameObject.SetActive(false);
             Vector3 targetPosition = ScrewWin.transform.position;
             UI.transform.DOMoveY(1f, 0.3f).SetEase(Ease.OutQuad).OnComplete(() =>
                   {
@@ -372,8 +378,28 @@ public class GameCtr : MonoBehaviour
 
     public void NextLV()
     {
-        nextLv();
-        SceneManager.LoadScene(0);
+        // Call the delay method with a delay time of 0.5 seconds and the action to load the next level
+        DelayMethod(0.5f, () =>
+        {
+            nextLv();
+            SceneManager.LoadScene(0);
+        });
+    }
+
+    // Method to handle the delay
+    public void DelayMethod(float delay, System.Action action)
+    {
+        StartCoroutine(DelayCoroutine(delay, action));
+    }
+
+    // Coroutine to handle the delay and call the action
+    private IEnumerator DelayCoroutine(float delay, System.Action action)
+    {
+        // Wait for the specified amount of time
+        yield return new WaitForSeconds(delay);
+
+        // Execute the action
+        action.Invoke();
     }
 
 
@@ -399,6 +425,9 @@ public class GameCtr : MonoBehaviour
         // Lấy level hiện tại từ danh sách levels dựa trên giá trị lv lưu trong PlayerPrefs
         // var currentLevel = LVConfig.Instance.levels[0];
         var currentLevel = LVConfig.Instance.levels[PlayerPrefs.GetInt("lv") - 1];
+
+        //dễ nhất lv2
+        // var currentLevel = LVConfig.Instance.levels[2]];
         // Chọn ngẫu nhiên một sub-level từ danh sách sub-levels của level hiện tại
         int randomSubLevelIndex = Random.Range(0, currentLevel.subLevelsLists.Count);
         var subLevels = currentLevel.subLevelsLists[randomSubLevelIndex];

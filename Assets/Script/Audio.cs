@@ -10,6 +10,7 @@ public class Audio : MonoBehaviour
     public AudioSource sfxFire;
     public AudioSource sfxWin;
     public AudioSource sfxScrew;
+    public AudioSource sfxScrew2;
     public AudioSource sfxLose;
     public AudioSource shak;
     public bool isStart = true;
@@ -17,7 +18,7 @@ public class Audio : MonoBehaviour
     public GameObject panelStart;
     public bool isPanelStartOpen = false;
 
-    [HideInInspector]
+    // [HideInInspector]
     public int musicState, soundState;
     public static Audio instance;
 
@@ -42,8 +43,6 @@ public class Audio : MonoBehaviour
         //     ToogleMusic(false);
         // }
 
-
-        //bat len
         // sound
         GameCtr gameCtrInstance = GameObject.FindObjectOfType<GameCtr>();
         if (PlayerPrefs.GetInt("Sound") == 1)
@@ -101,7 +100,7 @@ public class Audio : MonoBehaviour
     {
         GameCtr gameCtrInstance = GameObject.FindObjectOfType<GameCtr>();
         toogle = !gameCtrInstance.audioToggle.isOn;
-        Debug.Log("audio bool : " + toogle);
+        // Debug.Log("audio bool : " + toogle);
         if (toogle)
         {
 
