@@ -112,6 +112,7 @@ public class GameCtr : MonoBehaviour
         // Chuyển giá trị level thành chuỗi
         // string levelString = level.ToString();
         string levelString = level.ToString();
+        // string levelString = "2";
         // Debug.Log("level" + levelString);
 
         // Xóa tất cả các hình ảnh con trước đó (nếu có)
@@ -121,7 +122,7 @@ public class GameCtr : MonoBehaviour
         }
 
         // Đặt khoảng cách giữa các chữ số
-        float spacing = 0.55f; // điều chỉnh khoảng cách giữa các chữ số tùy thuộc vào yêu cầu của bạn
+        float spacing = 0.5f; // điều chỉnh khoảng cách giữa các chữ số tùy thuộc vào yêu cầu của bạn
 
         // Duyệt qua từng chữ số trong chuỗi levelString
         for (int i = 0; i < levelString.Length; i++)
@@ -136,7 +137,15 @@ public class GameCtr : MonoBehaviour
             float xPos = i * spacing;
 
             // Đặt vị trí của imageLevelClone
-            imageLevelClone.transform.localPosition = new Vector3(xPos, 0, 0);
+            if (int.Parse(levelString) < 10)
+            {
+                imageLevelClone.transform.localPosition = new Vector3(xPos + 0.3f, 0, 0);
+            }
+            else
+            {
+                imageLevelClone.transform.localPosition = new Vector3(xPos, 0, 0);
+            }
+
             imageLevelClone.transform.localScale = new Vector3(0.8f, 0.8f, 0.8f);
 
             var imageLevel = imageLevelClone.GetComponent<SpriteRenderer>();
@@ -428,7 +437,7 @@ public class GameCtr : MonoBehaviour
         // var currentLevel = LVConfig.Instance.levels[PlayerPrefs.GetInt("lv") - 1];
 
         //dễ nhất lv2
-        var currentLevel = LVConfig.Instance.levels[2];
+        var currentLevel = LVConfig.Instance.levels[7];
         // Chọn ngẫu nhiên một sub-level từ danh sách sub-levels của level hiện tại
         int randomSubLevelIndex = Random.Range(0, currentLevel.subLevelsLists.Count);
         var subLevels = currentLevel.subLevelsLists[randomSubLevelIndex];

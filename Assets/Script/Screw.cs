@@ -9,6 +9,7 @@ public class Screw : MonoBehaviour
 {
     private Coroutine toggleCoroutine;
     private Coroutine toggleCoroutine2;
+    public GameObject firework;
     public bool HasBulong;
     public GameObject Bulong;
     public int col;
@@ -143,15 +144,22 @@ public class Screw : MonoBehaviour
         }
         toggleCoroutine2 = StartCoroutine(ToggleFacesWhileTweening(bulongfaceUp, bulongface2));
         // Tween di chuyển lên
+
+        DOVirtual.DelayedCall(0.05f, () =>
+         {
+             var fireworkInstance = Instantiate(firework, bulongbodyUp.transform.position, Quaternion.identity, gameObject.transform);
+             ParticleSystemRenderer psRenderer = fireworkInstance.GetComponent<ParticleSystemRenderer>();
+             psRenderer.sortingOrder = 100;
+         });
         sequence.Append(Bulong.transform.DOMoveY(targetY, 0.2f).SetEase(Ease.OutQuad)).OnUpdate(() =>
                     {
-                        // DOVirtual.DelayedCall(0.05f, () =>
-                        // {
+
                         Bulong.GetComponent<BulongAction>().BulongBody.transform.DOScale(0.45f, 0.18f).SetEase(Ease.OutQuad);
-                        // });
+
                     })
         .OnComplete(() =>
         {
+
             if (toggleCoroutine2 != null)
             {
                 StopCoroutine(toggleCoroutine2);
