@@ -147,7 +147,7 @@ public class Screw : MonoBehaviour
                     {
                         // DOVirtual.DelayedCall(0.05f, () =>
                         // {
-                        Bulong.GetComponent<BulongAction>().BulongBody.transform.DOScale(0.45f, 0.2f).SetEase(Ease.OutQuad);
+                        Bulong.GetComponent<BulongAction>().BulongBody.transform.DOScale(0.45f, 0.18f).SetEase(Ease.OutQuad);
                         // });
                     })
         .OnComplete(() =>
