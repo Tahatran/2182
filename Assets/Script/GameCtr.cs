@@ -375,6 +375,7 @@ public class GameCtr : MonoBehaviour
                             {
                                 PLAYtext.transform.DOMoveX(-4f, 0.15f).SetEase(Ease.OutQuad).OnComplete(() =>
                                 {
+                                    // lỗi next 2 level 1 lúc có thể là do 2 hàm dưới cùng gọi sau khi OnComplete. Di rời hàm +1 vào level ra ngoài hoặc sửa lại tween để không bị lỗi. 
                                     WINtext.transform.DOMoveX(-0.5f, 0.1f).SetEase(Ease.OutQuad);
                                     PLAYtext.transform.DOMoveX(-3.7f, 0.1f).SetEase(Ease.OutQuad).OnComplete(() =>
                                     {
