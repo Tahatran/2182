@@ -88,11 +88,11 @@ public class GameCtr : MonoBehaviour
         yield return new WaitForSeconds(0.5f); // Change the delay time as needed
         onGenerateGrid();
     }
-    public void buttonNext()
-    {
-        nextLv();
-        SceneManager.LoadScene(0);
-    }
+    // public void buttonNext()
+    // {
+    //     nextLv();
+    //     SceneManager.LoadScene(0);
+    // }
     public void ReplayLoseBtn()
     {
         // Audio.instance.sfxClick.Stop();
@@ -174,7 +174,7 @@ public class GameCtr : MonoBehaviour
 
     public void nextLv()
     {
-        Debug.Log("next");
+        // Debug.Log("next");
         // GameFirebase.SendEvent("level-win", PlayerPrefs.GetInt("lv").ToString());
 
         int lv = PlayerPrefs.GetInt("lv") + 1;
@@ -378,7 +378,7 @@ public class GameCtr : MonoBehaviour
                                     {
                                         StartCoroutine(ToggleGameObjectsContinuously(0.05f));
                                         // NextLV();
-                                        StartCoroutine(DelayedNextLevel(0.8f));
+                                        StartCoroutine(DelayedNextLevel(1.2f));
                                     });
                                 });
                             });
