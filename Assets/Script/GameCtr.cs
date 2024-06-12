@@ -67,6 +67,7 @@ public class GameCtr : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        DOTween.KillAll();
         Input.multiTouchEnabled = false;
         setUpLv();
         SetLevelText(parentLevelText);
@@ -215,11 +216,8 @@ public class GameCtr : MonoBehaviour
 
     public void CheckLose()
     {
-        if (lstCrew.Count == 1)
-        {
-            CheckWin();
-        }
-        else if (lstCrew.Count != 1)
+        CheckWin();
+        if (lstCrew.Count != 1)
         {
             CheckTags();
         }
@@ -358,6 +356,7 @@ public class GameCtr : MonoBehaviour
             GameObject lastCrew = lstCrew[0];
             btnReset.SetActive(false);
             audioToggle.gameObject.SetActive(false);
+            nextLv();
             Vector3 targetPosition = ScrewWin.transform.position;
             UI.transform.DOMoveY(1f, 0.3f).SetEase(Ease.OutQuad).OnComplete(() =>
                   {
@@ -405,20 +404,18 @@ public class GameCtr : MonoBehaviour
 
 
     // Method to handle the delay
-    public void DelayMethod(float delay, System.Action action)
-    {
-        StartCoroutine(DelayCoroutine(delay, action));
-    }
+    // public void DelayMethod(float delay, System.Action action)
+    // {
+    //     StartCoroutine(DelayCoroutine(delay, action));
+    // }
     private IEnumerator DelayedNextLevel(float delay)
     {
         yield return new WaitForSeconds(delay);
-        NextLV();
+        autonextlvwhenwin();
     }
 
-    public void NextLV()
+    public void autonextlvwhenwin()
     {
-        nextLv();
-        DOTween.KillAll();
         SceneManager.LoadScene(0);
     }
 
