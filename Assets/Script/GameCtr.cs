@@ -174,6 +174,7 @@ public class GameCtr : MonoBehaviour
 
     public void nextLv()
     {
+        Debug.Log("next");
         // GameFirebase.SendEvent("level-win", PlayerPrefs.GetInt("lv").ToString());
 
         int lv = PlayerPrefs.GetInt("lv") + 1;
@@ -182,6 +183,7 @@ public class GameCtr : MonoBehaviour
             lv = 1;
         }
         PlayerPrefs.SetInt("lv", lv);
+        Debug.Log(PlayerPrefs.GetInt("lv"));
     }
 
     void onGenerateGrid()
@@ -375,7 +377,8 @@ public class GameCtr : MonoBehaviour
                                     PLAYtext.transform.DOMoveX(-3.7f, 0.1f).SetEase(Ease.OutQuad).OnComplete(() =>
                                     {
                                         StartCoroutine(ToggleGameObjectsContinuously(0.05f));
-                                        NextLV();
+                                        // NextLV();
+                                        StartCoroutine(DelayedNextLevel(0.8f));
                                     });
                                 });
                             });
@@ -386,20 +389,32 @@ public class GameCtr : MonoBehaviour
         }
     }
 
-    public void NextLV()
-    {
-        // Call the delay method with a delay time of 0.5 seconds and the action to load the next level
-        DelayMethod(0.8f, () =>
-        {
-            nextLv();
-            SceneManager.LoadScene(0);
-        });
-    }
+    // public void NextLV()
+    // {
+    //     // Call the delay method with a delay time of 0.5 seconds and the action to load the next level
+    //     DelayMethod(0.8f, () =>
+    //     {
+    //         nextLv();
+    //         SceneManager.LoadScene(0);
+    //     });
+    // }
+
 
     // Method to handle the delay
     public void DelayMethod(float delay, System.Action action)
     {
         StartCoroutine(DelayCoroutine(delay, action));
+    }
+    private IEnumerator DelayedNextLevel(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        NextLV();
+    }
+
+    public void NextLV()
+    {
+        nextLv();
+        SceneManager.LoadScene(0);
     }
 
     // Coroutine to handle the delay and call the action
@@ -437,9 +452,10 @@ public class GameCtr : MonoBehaviour
         var currentLevel = LVConfig.Instance.levels[PlayerPrefs.GetInt("lv") - 1];
 
         //dễ nhất lv2
-        // var currentLevel = LVConfig.Instance.levels[7];
+        // var currentLevel = LVConfig.Instance.levels[15];
         // Chọn ngẫu nhiên một sub-level từ danh sách sub-levels của level hiện tại
-        int randomSubLevelIndex = Random.Range(0, currentLevel.subLevelsLists.Count);
+        // int randomSubLevelIndex = Random.Range(0, currentLevel.subLevelsLists.Count);
+        int randomSubLevelIndex = 0;
         var subLevels = currentLevel.subLevelsLists[randomSubLevelIndex];
 
         // Cập nhật text của Map với chỉ số sub-level được chọn
