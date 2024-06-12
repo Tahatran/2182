@@ -51,6 +51,7 @@ public class GameCtr : MonoBehaviour
 
     private float hexWidth = 1.0f; // chiều rộng của một hexagon
     private float hexHeight = Mathf.Sqrt(0.8f) / 2 * 1.0f;
+    private bool isNextLvCalled = false;
 
     private void Awake()
     {
@@ -184,7 +185,7 @@ public class GameCtr : MonoBehaviour
             lv = 1;
         }
         PlayerPrefs.SetInt("lv", lv);
-        Debug.Log(PlayerPrefs.GetInt("lv"));
+        // Debug.Log(PlayerPrefs.GetInt("lv"));
     }
 
     void onGenerateGrid()
@@ -375,19 +376,20 @@ public class GameCtr : MonoBehaviour
                             {
                                 PLAYtext.transform.DOMoveX(-4f, 0.15f).SetEase(Ease.OutQuad).OnComplete(() =>
                                 {
-                                    // lỗi next 2 level 1 lúc có thể là do 2 hàm dưới cùng gọi sau khi OnComplete. Di rời hàm +1 vào level ra ngoài hoặc sửa lại tween để không bị lỗi. 
+                                    // lỗi next 2 level 1 lúc có thể là do 2 hàm dưới cùng gọi sau khi OnComplete. Di rời hàm +1 vào level ra ngoài hoặc sửa lại tween hoặc đặt biến check để không bị lỗi. 
                                     WINtext.transform.DOMoveX(-0.5f, 0.1f).SetEase(Ease.OutQuad);
                                     PLAYtext.transform.DOMoveX(-3.7f, 0.1f).SetEase(Ease.OutQuad).OnComplete(() =>
                                     {
-                                        StartCoroutine(ToggleGameObjectsContinuously(0.05f));
-                                        // NextLV();
-                                        StartCoroutine(DelayedNextLevel(1f));
-
+                                        if (!isNextLvCalled)
+                                        {
+                                            isNextLvCalled = true;
+                                            StartCoroutine(ToggleGameObjectsContinuously(0.05f));
+                                            // NextLV();
+                                            StartCoroutine(DelayedNextLevel(1f));
+                                        }
                                     });
                                 });
                             });
-
-
                         });
                   });
         }

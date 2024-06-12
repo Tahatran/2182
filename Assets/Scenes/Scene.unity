@@ -3392,7 +3392,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 628836615}
         m_TargetAssemblyTypeName: GameCtr, Assembly-CSharp
-        m_MethodName: buttonNext
+        m_MethodName: CheckLose
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
