@@ -88,11 +88,11 @@ public class GameCtr : MonoBehaviour
         yield return new WaitForSeconds(0.5f); // Change the delay time as needed
         onGenerateGrid();
     }
-    // public void buttonNext()
-    // {
-    //     nextLv();
-    //     SceneManager.LoadScene(0);
-    // }
+    public void buttonNext()
+    {
+        nextLv();
+        SceneManager.LoadScene(0);
+    }
     public void ReplayLoseBtn()
     {
         // Audio.instance.sfxClick.Stop();
@@ -215,8 +215,11 @@ public class GameCtr : MonoBehaviour
 
     public void CheckLose()
     {
-        CheckWin();
-        if (lstCrew.Count != 1)
+        if (lstCrew.Count == 1)
+        {
+            CheckWin();
+        }
+        else if (lstCrew.Count != 1)
         {
             CheckTags();
         }
@@ -378,7 +381,7 @@ public class GameCtr : MonoBehaviour
                                     {
                                         StartCoroutine(ToggleGameObjectsContinuously(0.05f));
                                         // NextLV();
-                                        StartCoroutine(DelayedNextLevel(1.2f));
+                                        StartCoroutine(DelayedNextLevel(1f));
                                     });
                                 });
                             });
