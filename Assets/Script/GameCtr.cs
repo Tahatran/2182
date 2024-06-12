@@ -382,6 +382,7 @@ public class GameCtr : MonoBehaviour
                                         StartCoroutine(ToggleGameObjectsContinuously(0.05f));
                                         // NextLV();
                                         StartCoroutine(DelayedNextLevel(1f));
+
                                     });
                                 });
                             });
@@ -417,6 +418,7 @@ public class GameCtr : MonoBehaviour
     public void NextLV()
     {
         nextLv();
+        DOTween.KillAll();
         SceneManager.LoadScene(0);
     }
 
