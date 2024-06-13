@@ -191,11 +191,11 @@ public class Screw : MonoBehaviour
 
     void turnofftt()
     {
-        // if (PlayerPrefs.GetInt("lv") == 1)
-        // {
-        TweenOnOff tt = GameObject.FindObjectOfType<TweenOnOff>();
-        tt.gameObject.SetActive(false);
-        // }
+        if (PlayerPrefs.GetInt("lv") == 1)
+        {
+            TweenOnOff tt = GameObject.FindObjectOfType<TweenOnOff>();
+            tt.gameObject.SetActive(false);
+        }
     }
 
 
@@ -265,7 +265,7 @@ public class Screw : MonoBehaviour
 
     void TweenDowndone(GameObject bulongGameObject)
     {
-
+        turnofftt();
         //check lose
         GameCtr gameCtrInstance = GameObject.FindObjectOfType<GameCtr>();
         if (gameCtrInstance != null)
@@ -292,7 +292,7 @@ public class Screw : MonoBehaviour
         // Tween Bulong xuống vị trí mới
         bulongGameObject.transform.DOMove(downPosition, 0.19f).SetEase(Ease.OutQuad).OnComplete(() =>
                     {
-                        turnofftt();
+
                         if (toggleCoroutine != null)
                         {
                             StopCoroutine(toggleCoroutine);
