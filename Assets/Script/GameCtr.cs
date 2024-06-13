@@ -71,6 +71,8 @@ public class GameCtr : MonoBehaviour
         DOTween.KillAll();
         Input.multiTouchEnabled = false;
         setUpLv();
+        // lv = 1;
+        // PlayerPrefs.SetInt("lv", lv);
         SetLevelText(parentLevelText);
         loadgame();
         // StartCoroutine(DelayedGenerateGrid());
@@ -457,7 +459,7 @@ public class GameCtr : MonoBehaviour
         var currentLevel = LVConfig.Instance.levels[PlayerPrefs.GetInt("lv") - 1];
 
         //dễ nhất lv2
-        // var currentLevel = LVConfig.Instance.levels[15];
+        // var currentLevel = LVConfig.Instance.levels[0];
         // Chọn ngẫu nhiên một sub-level từ danh sách sub-levels của level hiện tại
         // int randomSubLevelIndex = Random.Range(0, currentLevel.subLevelsLists.Count);
         int randomSubLevelIndex = 0;
