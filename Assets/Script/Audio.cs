@@ -16,6 +16,8 @@ public class Audio : MonoBehaviour
     public bool isStart = true;
     public AudioSource[] soundList;
     public GameObject panelStart;
+    public GameObject On;
+    public GameObject Off;
     public bool isPanelStartOpen = false;
 
     // [HideInInspector]
@@ -51,13 +53,17 @@ public class Audio : MonoBehaviour
 
         if (soundState == 1)
         {
-            gameCtrInstance.audioToggle.isOn = false;
-            ToogleSound(gameCtrInstance.audioToggle.isOn);
+            On.SetActive(false);
+            Off.SetActive(true);
+            // gameCtrInstance.audioToggle.isOn = false;
+            // ToogleSound(gameCtrInstance.audioToggle.isOn);
         }
         else
         {
-            gameCtrInstance.audioToggle.isOn = true;
-            ToogleSound(gameCtrInstance.audioToggle.isOn);
+            On.SetActive(false);
+            Off.SetActive(true);
+            // gameCtrInstance.audioToggle.isOn = true;
+            // ToogleSound(gameCtrInstance.audioToggle.isOn);
         }
         if (FindObjectsOfType(typeof(Audio)).Length > 1)
         {
@@ -99,11 +105,12 @@ public class Audio : MonoBehaviour
     public void ToogleSound(bool toogle)
     {
         GameCtr gameCtrInstance = GameObject.FindObjectOfType<GameCtr>();
-        toogle = !gameCtrInstance.audioToggle.isOn;
+        // toogle = !gameCtrInstance.audioToggle.isOn;
         // Debug.Log("audio bool : " + toogle);
-        if (toogle)
+        if (On.activeSelf == false)
         {
-
+            On.SetActive(true);
+            Off.SetActive(false);
             for (int i = 0; i < soundList.Length; i++)
             {
                 soundList[i].volume = 1.0f;
@@ -117,6 +124,8 @@ public class Audio : MonoBehaviour
 
         else
         {
+            On.SetActive(false);
+            Off.SetActive(true);
             for (int i = 0; i < soundList.Length; i++)
                 soundList[i].volume = 0.0f;
             soundState = 0;

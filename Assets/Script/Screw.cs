@@ -18,6 +18,7 @@ public class Screw : MonoBehaviour
     void Start()
     {
         GetComponent<Collider2D>().enabled = true;
+        resetOnOffBulong();
     }
 
     BulongAction GetClickedBulong()
@@ -36,7 +37,7 @@ public class Screw : MonoBehaviour
     }
     void MoveBulong()
     {
-
+        resetOnOffBulong();
         // killTween();
         // DOTween.KillAll();
         if (HasBulong)
@@ -300,6 +301,7 @@ public class Screw : MonoBehaviour
                         bulongFaceDone.SetActive(true);
                         bulongFace2Done.SetActive(false);
                     });
+        //có thể chỉnh cực này để xuống sâu hơn.
         bulongGameObject.GetComponent<BulongAction>().BulongBody.transform.DOScale(0f, 0.2f).SetEase(Ease.OutQuad).OnComplete(() =>
             {
                 this.gameObject.transform.DOScale(0, 0.2f).SetEase(Ease.OutQuad);

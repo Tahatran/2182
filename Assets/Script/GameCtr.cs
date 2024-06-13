@@ -9,6 +9,7 @@ using DG.Tweening;
 public class GameCtr : MonoBehaviour
 {
     [SerializeField] private GameObject levelText;
+    [SerializeField] private GameObject levelText2;
     [SerializeField] private GameObject parentLevelText;
     [SerializeField] private GameObject LevelPannel;
     [SerializeField] private GameObject parentLevelTextLose;
@@ -32,7 +33,7 @@ public class GameCtr : MonoBehaviour
     public GameObject gridContainer;
     public GameObject objectContainer;
 
-    public Toggle audioToggle;
+    public GameObject audioToggle;
 
     public int colNumber;
     public int rowNumber;
@@ -159,6 +160,57 @@ public class GameCtr : MonoBehaviour
         }
     }
 
+    public void SetLevelTextEnd(GameObject parentLevelText)
+    {
+        // Lấy giá trị level từ PlayerPrefs
+        var level = PlayerPrefs.GetInt("lv");
+
+        // Chuyển giá trị level thành chuỗi
+        // string levelString = level.ToString();
+        string levelString = level.ToString();
+        // string levelString = "2";
+        // Debug.Log("level" + levelString);
+
+        // Xóa tất cả các hình ảnh con trước đó (nếu có)
+        foreach (Transform child in parentLevelText.transform)
+        {
+            Destroy(child.gameObject);
+        }
+
+        // Đặt khoảng cách giữa các chữ số
+        float spacing = 100f; // điều chỉnh khoảng cách giữa các chữ số tùy thuộc vào yêu cầu của bạn
+
+        // Duyệt qua từng chữ số trong chuỗi levelString
+        for (int i = 0; i < levelString.Length; i++)
+        {
+            // Chuyển chữ số thành giá trị số nguyên
+            int digitValue = (int)char.GetNumericValue(levelString[i]);
+
+            // Instantiate một bản sao của levelText và đặt nó làm con của parentLevelText
+            var imageLevelClone = Instantiate(levelText2, Vector2.zero, Quaternion.identity, parentLevelText.transform);
+
+            // Tính toán vị trí x của hình ảnh chữ số
+            float xPos = i * spacing;
+            // Đặt vị trí của imageLevelClone
+            RectTransform rectTransform = imageLevelClone.GetComponent<RectTransform>();
+            if (int.Parse(levelString) < 10)
+            {
+                rectTransform.localPosition = new Vector3(0, 0, 0);
+            }
+            else
+            {
+                rectTransform.localPosition = new Vector3(xPos - 50f, 0, 0);
+            }
+            imageLevelClone.GetComponent<Image>().SetNativeSize();
+            // imageLevelClone.transform.localScale = new Vector3(0.8f, 0.8f, 0.8f);
+
+            var imageLevel = imageLevelClone.GetComponent<Image>();
+
+            // Gắn sprite tương ứng với chữ số
+            imageLevel.sprite = sprites[digitValue];
+        }
+    }
+
     public void ReplayBtn()
     {
         // Audio.instance.sfxClick.Stop();
@@ -217,6 +269,35 @@ public class GameCtr : MonoBehaviour
         onGenerateObject();
     }
 
+    public void btnTest()
+    {
+        foreach (var screwObject in lstCrew)
+        {
+            var screw = screwObject.GetComponent<Screw>();
+            btnReset.SetActive(false);
+            audioToggle.gameObject.SetActive(false);
+            Audio.instance.sfxLose.Play();
+            var screw2 = screwObject.transform.Find("Screw").gameObject;
+            var spriteRenderer = screw2.GetComponent<SpriteRenderer>();
+            if (spriteRenderer != null)
+            {
+                Color originalColor = spriteRenderer.color;
+                spriteRenderer.DOColor(Color.red, 0.1f).SetLoops(5, LoopType.Yoyo).OnKill(() =>
+                {
+                    spriteRenderer.color = originalColor;
+                }).OnComplete(() =>
+                 {
+                     LevelPannel.SetActive(false);
+                     TweenScrews();
+                     bgblue.transform.DOMoveY(-0.5f, 0.3f).SetEase(Ease.OutQuad).OnComplete(() =>
+                        {
+                            LosePanel.SetActive(true);
+                            SetLevelTextEnd(parentLevelTextLose);
+                        });
+                 });
+            }
+        }
+    }
     public void CheckLose()
     {
         CheckWin();
@@ -301,7 +382,7 @@ public class GameCtr : MonoBehaviour
                              bgblue.transform.DOMoveY(-0.5f, 0.3f).SetEase(Ease.OutQuad).OnComplete(() =>
                                 {
                                     LosePanel.SetActive(true);
-                                    SetLevelText(parentLevelTextLose);
+                                    SetLevelTextEnd(parentLevelTextLose);
                                 });
                          });
                     }
