@@ -53,17 +53,24 @@ public class Audio : MonoBehaviour
 
         if (soundState == 1)
         {
-            On.SetActive(false);
-            Off.SetActive(true);
+            On.SetActive(true);
+            Off.SetActive(false);
+            for (int i = 0; i < soundList.Length; i++)
+            {
+                soundList[i].volume = 1.0f;
+            }
             // gameCtrInstance.audioToggle.isOn = false;
-            // ToogleSound(gameCtrInstance.audioToggle.isOn);
+            // ToogleSound();
         }
         else
         {
             On.SetActive(false);
             Off.SetActive(true);
+            for (int i = 0; i < soundList.Length; i++)
+                soundList[i].volume = 0.0f;
+            soundState = 0;
             // gameCtrInstance.audioToggle.isOn = true;
-            // ToogleSound(gameCtrInstance.audioToggle.isOn);
+            // ToogleSound();
         }
         if (FindObjectsOfType(typeof(Audio)).Length > 1)
         {
@@ -73,8 +80,6 @@ public class Audio : MonoBehaviour
 
         instance = this;
         Application.targetFrameRate = 60;
-
-
         DontDestroyOnLoad(gameObject);
 
     }
@@ -102,12 +107,12 @@ public class Audio : MonoBehaviour
 
     }
 
-    public void ToogleSound(bool toogle)
+    public void ToogleSound()
     {
         GameCtr gameCtrInstance = GameObject.FindObjectOfType<GameCtr>();
         // toogle = !gameCtrInstance.audioToggle.isOn;
         // Debug.Log("audio bool : " + toogle);
-        if (On.activeSelf == false)
+        if (Off.activeSelf == true || On.activeSelf == false)
         {
             On.SetActive(true);
             Off.SetActive(false);
@@ -115,14 +120,14 @@ public class Audio : MonoBehaviour
             {
                 soundList[i].volume = 1.0f;
             }
-            soundList[5].volume = 0.3f;
+            // soundList[0].volume = 0.3f;
 
 
             soundState = 1;
             PlayerPrefs.SetInt("Sound", 1);
         }
 
-        else
+        else if (On.activeSelf == true || Off.activeSelf == false)
         {
             On.SetActive(false);
             Off.SetActive(true);
