@@ -14,7 +14,7 @@
     <service android:name="com.google.firebase.messaging.MessageForwardingService" android:permission="android.permission.BIND_JOB_SERVICE" android:exported="false"></service>
     <meta-data
      android:name="com.google.android.gms.ads.APPLICATION_ID"
-     android:value="ca-app-pub-5904408074441373~5872969041"/>
+     android:value="ca-app-pub-3940256099942544~3347511713"/>
 
   </application>
 </manifest>

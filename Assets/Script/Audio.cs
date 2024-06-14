@@ -27,6 +27,19 @@ public class Audio : MonoBehaviour
     private void Awake()
     {
 
+        // DontDestroyOnLoad(gameObject);
+
+    }
+    // Start is called before the first frame update
+    void Start()
+    {
+        GameObject foundObject = GameObject.Find("On");
+        On = foundObject;
+        GameObject foundObject2 = GameObject.Find("Off");
+        Off = foundObject2;
+
+        //
+
         // if (!PlayerPrefs.HasKey("Music"))
         //     PlayerPrefs.SetInt("Music", 1);
         if (!PlayerPrefs.HasKey("Sound"))
@@ -46,7 +59,7 @@ public class Audio : MonoBehaviour
         // }
 
         // sound
-        GameCtr gameCtrInstance = GameObject.FindObjectOfType<GameCtr>();
+        // GameCtr gameCtrInstance = GameObject.FindObjectOfType<GameCtr>();
         if (PlayerPrefs.GetInt("Sound") == 1)
             soundState = 1;
         else soundState = 0;
@@ -80,12 +93,8 @@ public class Audio : MonoBehaviour
 
         instance = this;
         Application.targetFrameRate = 60;
-        DontDestroyOnLoad(gameObject);
 
-    }
-    // Start is called before the first frame update
-    void Start()
-    {
+
         isStart = true;
         isPanelStartOpen = true;
     }

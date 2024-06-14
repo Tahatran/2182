@@ -620,7 +620,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &88322604
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1788,8 +1788,8 @@ MonoBehaviour:
   - {fileID: 942859676}
   - {fileID: 1726788527}
   panelStart: {fileID: 0}
-  On: {fileID: 2122605671}
-  Off: {fileID: 88322603}
+  On: {fileID: 0}
+  Off: {fileID: 0}
   isPanelStartOpen: 0
   musicState: 0
   soundState: 0

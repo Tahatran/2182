@@ -23,22 +23,22 @@ namespace Nami.Controller
 
         // These ad units are configured to always serve test ads.
 #if UNITY_ANDROID
-        private string _adOpenId = "ca-app-pub-5904408074441373/8900274444";
-        private string _adBannerId = "ca-app-pub-5904408074441373/3374569304";
-        private string _adInterId = "ca-app-pub-5904408074441373/5641639991";
-        private string _adRewardId = "ca-app-pub-5904408074441373/1213356117";
+        private string _adOpenId = "ca-app-pub-3940256099942544/9257395921";
+        private string _adBannerId = "ca-app-pub-3940256099942544/6300978111";
+        private string _adInterId = "ca-app-pub-3940256099942544/1033173712";
+        private string _adRewardId = "ca-app-pub-3940256099942544/5224354917";
 
-        private string _adInterOpenId = "ca-app-pub-5904408074441373/1213356117";
-        private string _adNativeBannerId = "ca-app-pub-5904408074441373/8806767499";
+        private string _adInterOpenId = "ca-app-pub-3940256099942544~3347511713";
+        private string _adNativeBannerId = "ca-app-pub-3940256099942544/2247696110";
 
 #elif UNITY_IPHONE
-        private string _adOpenId = "ca-app-pub-5904408074441373/2638619432";
-        private string _adBannerId = "ca-app-pub-5904408074441373/2119243672";
-        private string _adInterId = "ca-app-pub-5904408074441373/5136790267";
-        private string _adRewardId = "ca-app-pub-5904408074441373/1213356117";
+        private string _adOpenId = "ca-app-pub-3940256099942544/9257395921";
+        private string _adBannerId = "ca-app-pub-3940256099942544/6300978111";
+        private string _adInterId = "ca-app-pub-3940256099942544/1033173712";
+        private string _adRewardId = "ca-app-pub-3940256099942544/5224354917";
 
-        private string _adInterOpenId = "ca-app-pub-5904408074441373/4777697613";
-        private string _adNativeBannerId = "ca-app-pub-5904408074441373/8806767499";
+        private string _adInterOpenId = "ca-app-pub-3940256099942544/1033173712";
+        private string _adNativeBannerId = "ca-app-pub-3940256099942544/2247696110";
 
 #else
         private string _adOpenId = "unused";
@@ -47,7 +47,7 @@ namespace Nami.Controller
         // Start is called before the first frame update
         private void Awake()
         {
-            if(ads != null)
+            if (ads != null)
             {
                 Destroy(gameObject);
                 return;
@@ -160,8 +160,8 @@ namespace Nami.Controller
             AppOpenAd.Load(_adOpenId, adRequest,
                 (AppOpenAd ad, LoadAdError error) =>
                 {
-              // if error is not null, the load request failed.
-              if (error != null || ad == null)
+                    // if error is not null, the load request failed.
+                    if (error != null || ad == null)
                     {
                         Debug.LogWarning("app open ad failed to load an ad " +
                                        "with error : " + error);
@@ -389,8 +389,8 @@ namespace Nami.Controller
             InterstitialAd.Load(_adInterId, adRequest,
                 (InterstitialAd ad, LoadAdError error) =>
                 {
-              // if error is not null, the load request failed.
-              if (error != null || ad == null)
+                    // if error is not null, the load request failed.
+                    if (error != null || ad == null)
                     {
                         Debug.LogWarning("interstitial ad failed to load an ad " +
                                        "with error : " + error);
@@ -414,7 +414,7 @@ namespace Nami.Controller
             //#if UNITY_EDITOR
             //            return;
             //#endif
-            if (ConditionShowInterAd() == false) return;
+            //if (ConditionShowInterAd() == false) return;
 
             if (_interstitialAd != null && _interstitialAd.CanShowAd())
             {
@@ -676,7 +676,7 @@ namespace Nami.Controller
                 _justShowInterAd = true;
                 _rewardImpression = false;
                 _rewardAdComplete = onComplete;
-                _rewardAd.Show((reward)=>
+                _rewardAd.Show((reward) =>
                 {
                     Debug.Log(string.Format("Rewarded ad granted a reward: {0} {1}",
                                             reward.Amount,
@@ -740,8 +740,9 @@ namespace Nami.Controller
             //Debug.Log("App State changed to : " + state);
             // if the app is Foregrounded and the ad is available, show it.
             if (state == AppState.Foreground)
-            { 
-                if(isSkipOpenAdAfterIntersAd && _justShowInterAd) {
+            {
+                if (isSkipOpenAdAfterIntersAd && _justShowInterAd)
+                {
                     _justShowInterAd = false;
                     return;
                 }

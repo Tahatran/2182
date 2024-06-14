@@ -51,7 +51,7 @@ public class GameCtr : MonoBehaviour
     public List<string> bulongTags = new List<string>(); // List chứa các tag của Bulong
     public List<string> crewTags = new List<string>(); // List chứa các tag của Screw
     public int lv = 1;
-    public int check3ads = 1;
+    // public int check3ads = 1;
 
     private float hexWidth = 1.0f; // chiều rộng của một hexagon
     private float hexHeight = Mathf.Sqrt(0.8f) / 2 * 1.0f;
@@ -73,6 +73,14 @@ public class GameCtr : MonoBehaviour
     void Start()
     {
         GameAds.Get.ShowBanner();
+        //3 game ban ads
+        //check3ads = PlayerPrefs.GetInt("Check3ads") + 1;
+        if ((PlayerPrefs.GetInt("lv") - 1) % 3 == 0)
+        {
+            GameAds.Get.ShowInterstitialAd();
+            //check3ads = 1;
+        }
+        // PlayerPrefs.SetInt("Check3ads", check3ads);
         GameFirebase.SendEvent("start_level", "id_level", PlayerPrefs.GetInt("lv").ToString());
         Debug.Log("log-event-start_level----id_level: " + PlayerPrefs.GetInt("lv"));
         DOTween.KillAll();
@@ -234,11 +242,11 @@ public class GameCtr : MonoBehaviour
         }
 
         //check 3 game bawns ads
-        if (!PlayerPrefs.HasKey("Check3ads"))
-        {
-            check3ads = 1;
-            PlayerPrefs.SetInt("Check3ads", check3ads);
-        }
+        // if (!PlayerPrefs.HasKey("Check3ads"))
+        // {
+        //     check3ads = 1;
+        //     PlayerPrefs.SetInt("Check3ads", check3ads);
+        // }
 
         if (!PlayerPrefs.HasKey("number_tries"))
         {
@@ -266,15 +274,6 @@ public class GameCtr : MonoBehaviour
         }
         PlayerPrefs.SetInt("lv", lv);
         // Debug.Log(PlayerPrefs.GetInt("lv"));
-
-        //3 game ban ads
-        check3ads = PlayerPrefs.GetInt("Check3ads") + 1;
-        if (check3ads >= 3)
-        {
-            GameAds.Get.ShowInterstitialAd();
-            check3ads = 1;
-        }
-        PlayerPrefs.SetInt("Check3ads", check3ads);
 
         //
         CheckLogFirebase.Instance.TimeEnd = Time.time;
