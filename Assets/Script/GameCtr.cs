@@ -75,7 +75,7 @@ public class GameCtr : MonoBehaviour
         GameAds.Get.ShowBanner();
         //3 game ban ads
         //check3ads = PlayerPrefs.GetInt("Check3ads") + 1;
-        if ((PlayerPrefs.GetInt("lv") - 1) % 3 == 0)
+        if (PlayerPrefs.GetInt("lv") % 3 == 0)
         {
             GameAds.Get.ShowInterstitialAd();
             //check3ads = 1;
