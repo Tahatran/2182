@@ -51,7 +51,7 @@ public class GameCtr : MonoBehaviour
     public List<string> bulongTags = new List<string>(); // List chứa các tag của Bulong
     public List<string> crewTags = new List<string>(); // List chứa các tag của Screw
     public int lv = 1;
-    public int check3ads = 0;
+    public int check3ads = 1;
 
     private float hexWidth = 1.0f; // chiều rộng của một hexagon
     private float hexHeight = Mathf.Sqrt(0.8f) / 2 * 1.0f;
@@ -236,7 +236,7 @@ public class GameCtr : MonoBehaviour
         //check 3 game bawns ads
         if (!PlayerPrefs.HasKey("Check3ads"))
         {
-            check3ads = 0;
+            check3ads = 1;
             PlayerPrefs.SetInt("Check3ads", check3ads);
         }
 
@@ -272,7 +272,7 @@ public class GameCtr : MonoBehaviour
         if (check3ads >= 3)
         {
             GameAds.Get.ShowInterstitialAd();
-            check3ads = 0;
+            check3ads = 1;
         }
         PlayerPrefs.SetInt("Check3ads", check3ads);
 
