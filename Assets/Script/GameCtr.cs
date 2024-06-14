@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Nami.Controller;
 using UnityEngine.UI;
 using Unity.VisualScripting;
 using UnityEngine.SceneManagement;
 using DG.Tweening;
+using System;
 
 public class GameCtr : MonoBehaviour
 {
@@ -49,6 +51,7 @@ public class GameCtr : MonoBehaviour
     public List<string> bulongTags = new List<string>(); // List chứa các tag của Bulong
     public List<string> crewTags = new List<string>(); // List chứa các tag của Screw
     public int lv = 1;
+    public int check3ads = 0;
 
     private float hexWidth = 1.0f; // chiều rộng của một hexagon
     private float hexHeight = Mathf.Sqrt(0.8f) / 2 * 1.0f;
@@ -69,6 +72,9 @@ public class GameCtr : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        GameAds.Get.ShowBanner();
+        GameFirebase.SendEvent("start_level", "id_level", PlayerPrefs.GetInt("lv").ToString());
+        Debug.Log("log-event-start_level----id_level: " + PlayerPrefs.GetInt("lv"));
         DOTween.KillAll();
         Input.multiTouchEnabled = false;
         setUpLv();
@@ -215,6 +221,7 @@ public class GameCtr : MonoBehaviour
     {
         // Audio.instance.sfxClick.Stop();
         Audio.instance.sfxClick.Play();
+        // GameAds.Get.ShowInterstitialAd();
         SceneManager.LoadScene(0);
     }
 
@@ -225,6 +232,25 @@ public class GameCtr : MonoBehaviour
             lv = 1;
             PlayerPrefs.SetInt("lv", lv);
         }
+
+        //check 3 game bawns ads
+        if (!PlayerPrefs.HasKey("Check3ads"))
+        {
+            check3ads = 0;
+            PlayerPrefs.SetInt("Check3ads", check3ads);
+        }
+
+        if (!PlayerPrefs.HasKey("number_tries"))
+        {
+            int number = 0;
+            PlayerPrefs.SetInt("number_tries", number);
+        }
+        if (!PlayerPrefs.HasKey("time_play"))
+        {
+            int time = 0;
+            PlayerPrefs.SetFloat("time_play", time);
+        }
+
 
     }
 
@@ -240,6 +266,73 @@ public class GameCtr : MonoBehaviour
         }
         PlayerPrefs.SetInt("lv", lv);
         // Debug.Log(PlayerPrefs.GetInt("lv"));
+
+        //3 game ban ads
+        check3ads = PlayerPrefs.GetInt("Check3ads") + 1;
+        if (check3ads >= 3)
+        {
+            GameAds.Get.ShowInterstitialAd();
+            check3ads = 0;
+        }
+        PlayerPrefs.SetInt("Check3ads", check3ads);
+
+        //
+        CheckLogFirebase.Instance.TimeEnd = Time.time;
+        CheckLogFirebase.Instance.TotalTimeMap();
+        GameFirebase.SendEvent("complete_level",
+        "id_level", PlayerPrefs.GetInt("lv").ToString(),
+        "number_tries", (CheckLogFirebase.Instance.TotalNumberTries + PlayerPrefs.GetInt("number_tries")).ToString(),
+        "time_play", Math.Round(CheckLogFirebase.Instance.TotalTime + PlayerPrefs.GetFloat("time_play")).ToString());
+        PlayerPrefs.SetInt("number_tries", 0);
+        PlayerPrefs.SetFloat("time_play", 0);
+        Debug.Log("check-log-complete_level----id_level: " + PlayerPrefs.GetInt("lv"));
+        Debug.Log("check-log-complete_level----number_tries: " + CheckLogFirebase.Instance.TotalNumberTries);
+        Debug.Log("check-log-complete-level----time_play: " + CheckLogFirebase.Instance.TotalTime.ToString());
+        CheckLogFirebase.Instance.TotalNumberTries = 0;
+    }
+
+    protected void OnApplicationPause(bool pauseStatus)
+    {
+        if (pauseStatus)
+        {
+            CheckLogFirebase.Instance.TotalTimePause();
+            if (CheckLogFirebase.Instance.TimePause > 0)
+            {
+                GameFirebase.SendEvent("pause_game",
+                "time_play", Math.Round(CheckLogFirebase.Instance.TimePause).ToString(),
+                "id_level", PlayerPrefs.GetInt("lv").ToString(),
+                "number_tries", CheckLogFirebase.Instance.TotalNumberTries.ToString()
+                );
+                PlayerPrefs.SetInt("number_tries", CheckLogFirebase.Instance.TotalNumberTries);
+                PlayerPrefs.SetFloat("time_play", CheckLogFirebase.Instance.TimePause);
+                Debug.Log("check-log-pause_game----time_play" + CheckLogFirebase.Instance.TimePause);
+                Debug.Log("check-log-pause_game----id_level" + PlayerPrefs.GetInt("lv"));
+                Debug.Log("check-log-pause_game----number_tries" + CheckLogFirebase.Instance.TotalNumberTries);
+
+            }
+        }
+        else
+        {
+        }
+    }
+    protected void OnApplicationQuit()
+    {
+        CheckLogFirebase.Instance.TotalTimePause();
+        if (CheckLogFirebase.Instance.TimePause > 0)
+        {
+            GameFirebase.SendEvent("pause_game",
+            "time_play", Math.Round(CheckLogFirebase.Instance.TimePause).ToString(),
+            "id_level", PlayerPrefs.GetInt("lv").ToString(),
+            "number_tries", CheckLogFirebase.Instance.TotalNumberTries.ToString()
+            );
+            PlayerPrefs.SetInt("number_tries", CheckLogFirebase.Instance.TotalNumberTries);
+            PlayerPrefs.SetFloat("time_play", CheckLogFirebase.Instance.TimePause);
+            Debug.Log("check-log-pause_game----time_play" + CheckLogFirebase.Instance.TimePause);
+            Debug.Log("check-log-pause_game----id_level" + PlayerPrefs.GetInt("lv").ToString());
+            Debug.Log("check-log-pause_game----number_tries" + CheckLogFirebase.Instance.TotalNumberTries);
+
+        }
+
     }
 
     void onGenerateGrid()
@@ -367,6 +460,7 @@ public class GameCtr : MonoBehaviour
                     btnReset.SetActive(false);
                     audioToggle.gameObject.SetActive(false);
                     Audio.instance.sfxLose.Play();
+                    GameFirebase.SendEvent("Level", "level-game-lose " + PlayerPrefs.GetInt("lv"));
                     var screw2 = screwObject.transform.Find("Screw").gameObject;
                     var spriteRenderer = screw2.GetComponent<SpriteRenderer>();
                     if (spriteRenderer != null)
@@ -522,7 +616,7 @@ public class GameCtr : MonoBehaviour
         {
             foreach (var gameObject in lstBling)
             {
-                bool isActive = Random.Range(0, 2) == 0; // 50% cơ hội bật hoặc tắt
+                bool isActive = UnityEngine.Random.Range(0, 2) == 0; // 50% cơ hội bật hoặc tắt
                 gameObject.SetActive(isActive);
             }
 
@@ -535,6 +629,7 @@ public class GameCtr : MonoBehaviour
     [ContextMenu("onGenerateObject")]
     void onGenerateObject()
     {
+
         // Lấy level hiện tại từ danh sách levels dựa trên giá trị lv lưu trong PlayerPrefs
         // var currentLevel = LVConfig.Instance.levels[0];
         var currentLevel = LVConfig.Instance.levels[PlayerPrefs.GetInt("lv") - 1];
