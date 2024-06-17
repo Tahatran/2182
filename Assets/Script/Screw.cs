@@ -44,7 +44,7 @@ public class Screw : MonoBehaviour
         if (HasBulong)
         {
             BulongAction bulongAction = GetClickedBulong();
-            if (bulongAction != null)
+            if (bulongAction != null && bulongAction.row != Bulong.GetComponent<BulongAction>().row || bulongAction != null && bulongAction.col != Bulong.GetComponent<BulongAction>().col)
             {
 
                 // Debug.Log("2");
@@ -53,7 +53,16 @@ public class Screw : MonoBehaviour
                 // HasBulong = false;
 
             }
-            else
+            else if (bulongAction != null && bulongAction.row == Bulong.GetComponent<BulongAction>().row && bulongAction != null && bulongAction.col == Bulong.GetComponent<BulongAction>().col)
+            {
+
+                // Debug.Log("10");
+                // Tweenup(Bulong);
+                TweenDown(bulongAction.gameObject);
+                // HasBulong = false;
+
+            }
+            else if (bulongAction == null)
             {
                 // Debug.Log("3");
                 Tweenup(Bulong);
@@ -62,41 +71,55 @@ public class Screw : MonoBehaviour
         }
         else
         {
-
             BulongAction bulongAction3 = GetClickedBulong();
             if (bulongAction3 != null)
             {
-                try
+                if (bulongAction3.tag == this.gameObject.tag)
                 {
-                    if (bulongAction3.tag == this.gameObject.tag)
+                    GameCtr gameCtrInstance = GameObject.FindObjectOfType<GameCtr>();
+                    foreach (var screwObject in gameCtrInstance.lstCrew)
                     {
-                        // Debug.Log("try");
-                        Vector3 upPosition = new Vector3(transform.position.x, transform.position.y + 0.3f, transform.position.z);
-                        bulongAction3.IsClicked = false;
-                        // Tween Bulong đến vị trí mới để di chuyển lên trên Screw
-                        bulongAction3.transform.DOMove(upPosition, 0.2f).SetEase(Ease.OutQuad)
-                        // bulongAction3.BulongBody.transform.DOScale(0f, 0.3f).SetEase(Ease.OutQuad)
-                         .OnComplete(() => DOVirtual.DelayedCall(0.1f, () => TweenDowndone(bulongAction3.gameObject)));
+                        var screw = screwObject.GetComponent<Screw>();
+                        var rowS = screw.row;
+                        var colS = screw.col;
+                        var Bulongrow = bulongAction3.GetComponent<BulongAction>().row;
+                        var Bulongcol = bulongAction3.GetComponent<BulongAction>().col;
+                        if (rowS == Bulongrow && colS == Bulongcol)
+                        {
+                            screw.HasBulong = false;
+                        }
                     }
-                    else if (bulongAction3.row == Bulong.GetComponent<BulongAction>().row && bulongAction3.col == Bulong.GetComponent<BulongAction>().col)
-                    {
-                        // Debug.Log("5");
-                        TweenDown(Bulong);
-                    }
-                    else if (bulongAction3.tag == this.gameObject.tag)
-                    {
-                        // Audio.instance.shak.Stop();
-                        Audio.instance.shak.Play();
-                        bulongAction3.transform.DOShakePosition(0.3f, new Vector3(0.05f, 0, 0), 10, 20, false, true);
-
-                    }
+                    HasBulong = false;
+                    bulongAction3.GetComponent<BulongAction>().IsClicked = false;
+                    // Debug.Log("try");
+                    Vector3 upPosition = new Vector3(transform.position.x, transform.position.y + 0.3f, transform.position.z);
+                    // bulongAction3.IsClicked = false;
+                    // Tween Bulong đến vị trí mới để di chuyển lên trên Screw
+                    bulongAction3.transform.DOMove(upPosition, 0.2f).SetEase(Ease.OutQuad)
+                     // bulongAction3.BulongBody.transform.DOScale(0f, 0.3f).SetEase(Ease.OutQuad)
+                     .OnComplete(() => DOVirtual.DelayedCall(0.1f, () => TweenDowndone(bulongAction3.gameObject)));
                 }
-                catch
+                // else if (bulongAction3.row == Bulong.GetComponent<BulongAction>().row && bulongAction3.col == Bulong.GetComponent<BulongAction>().col)
+                // {
+                //     Debug.Log("5");
+                //     TweenDown(Bulong);
+                // }
+                // else if (bulongAction3.tag != this.gameObject.tag)
+                // {
+                //     Debug.Log("7");
+                //     // Audio.instance.shak.Stop();
+                //     Audio.instance.shak.Play();
+                //     bulongAction3.transform.DOShakePosition(0.3f, new Vector3(0.05f, 0, 0), 10, 20, false, true);
+
+                // }
+
+                else
                 {
+                    // Debug.Log("8");
                     // Audio.instance.shak.Stop();
                     Audio.instance.shak.Play();
-                    bulongAction3.transform.DOShakePosition(0.3f, new Vector3(0.05f, 0, 0), 10, 20, false, true);
-
+                    // bulongAction3.transform.DOShakePosition(0.3f, new Vector3(0.05f, 0, 0), 10, 90, false, true);
+                    bulongAction3.transform.DOShakePosition(0.1f, new Vector3(0.2f, 0, 0), 2, 10, false, true);
                 }
             }
         }
@@ -126,6 +149,7 @@ public class Screw : MonoBehaviour
 
     void Tweenup(GameObject Bulong)
     {
+        Bulong.GetComponent<BulongAction>().IsClicked = true;
         // Audio.instance.sfxScrew.Stop();
         Audio.instance.sfxScrew.Play();
         Audio.instance.sfxScrew2.Play();
@@ -169,7 +193,7 @@ public class Screw : MonoBehaviour
                 bulongfaceUp.SetActive(true);
                 bulongface2.SetActive(false);
             }
-            Bulong.GetComponent<BulongAction>().IsClicked = true;
+
             // HasBulong = false;
             movett();
 
@@ -228,7 +252,7 @@ public class Screw : MonoBehaviour
 
 
         // Tạo vị trí mới cho Bulong để di chuyển xuống dưới
-        Vector3 downPosition = new Vector3(bulongGameObject.transform.position.x, pos.y, bulongGameObject.transform.position.z);
+        Vector3 downPosition = new Vector3(pos.x, pos.y, bulongGameObject.transform.position.z);
         if (toggleCoroutine != null)
         {
             StopCoroutine(toggleCoroutine);
@@ -283,6 +307,7 @@ public class Screw : MonoBehaviour
 
     void TweenDowndone(GameObject bulongGameObject)
     {
+        bulongGameObject.GetComponent<BulongAction>().IsClicked = false;
         turnofftt();
         //check lose
         GameCtr gameCtrInstance = GameObject.FindObjectOfType<GameCtr>();

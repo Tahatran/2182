@@ -19,6 +19,8 @@ namespace Nami.Controller
         private bool _initializing = false;
 
         public bool _checkUMP = false;
+        public float checktime = 0;
+
 
 
         // These ad units are configured to always serve test ads.
@@ -111,10 +113,10 @@ namespace Nami.Controller
             });
         }
 
-        //private void Update()
-        //{
-        //    CheckAutoInterAd();
-        //}
+        private void Update()
+        {
+            checktime += Time.deltaTime;
+        }
 
         #region OpenAd
 
@@ -364,7 +366,7 @@ namespace Nami.Controller
 
         private InterstitialAd _interstitialAd;
         [SerializeField]
-        private float time_inter_ad = 60f;
+        private float time_inter_ad = 180f;
         private float time_count_inter_ad = 0f;
         private float time_count_wait = 0f;
 
@@ -414,7 +416,7 @@ namespace Nami.Controller
             //#if UNITY_EDITOR
             //            return;
             //#endif
-            //if (ConditionShowInterAd() == false) return;
+            if (ConditionShowInterAd() == false) return;
 
             if (_interstitialAd != null && _interstitialAd.CanShowAd())
             {
