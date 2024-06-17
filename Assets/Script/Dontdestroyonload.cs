@@ -8,10 +8,15 @@ public class Dontdestroyonload : MonoBehaviour
 
     public float checktime = 0;
     public bool isAdsPlay = false;
-    public bool checkads = false;
+    // public bool checkads = false;
     public static Dontdestroyonload instance;
     private void Awake()
     {
+        if (instance != null)
+        {
+            Destroy(gameObject);
+            return;
+        }
         instance = this;
         DontDestroyOnLoad(gameObject);
     }
@@ -19,21 +24,22 @@ public class Dontdestroyonload : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        checktime = 180f;
+        checktime = GameAds.Get.Time_inter_ad;
         isAdsPlay = false;
     }
 
     public void ads()
     {
 
-        if (isAdsPlay && checkads == true)
-        // if (isAdsPlay)
+        // if (isAdsPlay && checkads == true)
+        if (isAdsPlay)
         {
-            GameAds.Get.ShowInterstitialAd();
             checktime = GameAds.Get.Time_inter_ad;
             isAdsPlay = false;
-            checktime = 180f;
-            Debug.Log("Ads Play");
+            // checktime = 180f;
+            // checkads = false;
+            GameAds.Get.ShowInterstitialAd();
+            // Debug.Log("Ads Play");
         }
     }
 
@@ -46,7 +52,7 @@ public class Dontdestroyonload : MonoBehaviour
             checktime = 0;
             isAdsPlay = true;
         }
-        ads();
+        // ads();
 
     }
 }

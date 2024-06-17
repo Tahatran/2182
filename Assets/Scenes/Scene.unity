@@ -993,6 +993,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   checktime: 0
   isAdsPlay: 0
+  checkads: 0
 --- !u!4 &286246252
 Transform:
   m_ObjectHideFlags: 0
@@ -1652,7 +1653,6 @@ MonoBehaviour:
   bulongTags: []
   crewTags: []
   lv: 1
-  checkads: 0
 --- !u!4 &628836616
 Transform:
   m_ObjectHideFlags: 0
