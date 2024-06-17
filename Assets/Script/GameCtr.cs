@@ -51,9 +51,9 @@ public class GameCtr : MonoBehaviour
     public List<string> bulongTags = new List<string>(); // List chứa các tag của Bulong
     public List<string> crewTags = new List<string>(); // List chứa các tag của Screw
     public int lv = 1;
-    public int check3ads = 0;
+    // public int check3ads = 0;
     // public float checktime = 0;
-    private bool checkads = false;
+    // public bool checkads = false;
 
     private float hexWidth = 1.0f; // chiều rộng của một hexagon
     private float hexHeight = Mathf.Sqrt(0.8f) / 2 * 1.0f;
@@ -75,7 +75,11 @@ public class GameCtr : MonoBehaviour
     void Start()
     {
         GameAds.Get.ShowBanner();
-
+        // if (checkads == true)
+        // {
+        //     GameAds.Get.ShowInterstitialAd();
+        //     checkads = false;
+        // }
         // if (PlayerPrefs.GetInt("Check3ads") > 2 && checktime > 180f)
         // {
         //     GameAds.Get.ShowInterstitialAd();
@@ -120,6 +124,8 @@ public class GameCtr : MonoBehaviour
         // Audio.instance.sfxClick.Stop();
         Audio.instance.sfxClick.Play();
         // Debug.Log("aaaa");
+        Dontdestroyonload.instance.checkads = true;
+
         SceneManager.LoadScene(0);
         // var rect = losePopup.GetComponent<RectTransform>();
         // rect.DOAnchorPos(new Vector2(rect.anchoredPosition.x, 2000), 0.5f)
@@ -233,6 +239,7 @@ public class GameCtr : MonoBehaviour
         // Audio.instance.sfxClick.Stop();
         Audio.instance.sfxClick.Play();
         // GameAds.Get.ShowInterstitialAd();
+
         SceneManager.LoadScene(0);
     }
 
@@ -245,11 +252,11 @@ public class GameCtr : MonoBehaviour
         }
 
         // check 3 game bawns ads
-        if (!PlayerPrefs.HasKey("Check3ads"))
-        {
-            check3ads = 0;
-            PlayerPrefs.SetInt("Check3ads", check3ads);
-        }
+        // if (!PlayerPrefs.HasKey("Check3ads"))
+        // {
+        //     check3ads = 0;
+        //     PlayerPrefs.SetInt("Check3ads", check3ads);
+        // }
 
         if (!PlayerPrefs.HasKey("number_tries"))
         {
@@ -276,9 +283,12 @@ public class GameCtr : MonoBehaviour
             lv = 1;
         }
         PlayerPrefs.SetInt("lv", lv);
+        // checkads = true;
         // Debug.Log(PlayerPrefs.GetInt("lv"));
-        check3ads = PlayerPrefs.GetInt("Check3ads") + 1;
-        PlayerPrefs.SetInt("Check3ads", check3ads);
+
+        //3 game ban ads
+        // check3ads = PlayerPrefs.GetInt("Check3ads") + 1;
+        // PlayerPrefs.SetInt("Check3ads", check3ads);
 
         //
         CheckLogFirebase.Instance.TimeEnd = Time.time;
@@ -336,8 +346,8 @@ public class GameCtr : MonoBehaviour
             Debug.Log("check-log-pause_game----number_tries" + CheckLogFirebase.Instance.TotalNumberTries);
 
         }
-        check3ads = 0;
-        PlayerPrefs.SetInt("Check3ads", check3ads);
+        // check3ads = 0;
+        // PlayerPrefs.SetInt("Check3ads", check3ads);
 
     }
 
@@ -602,11 +612,7 @@ public class GameCtr : MonoBehaviour
 
     public void autonextlvwhenwin()
     {
-        if (GameAds.Get.checktime > 180f)
-        {
-            GameAds.Get.ShowInterstitialAd();
-            GameAds.Get.checktime = 0;
-        }
+        Dontdestroyonload.instance.checkads = true;
         SceneManager.LoadScene(0);
     }
 

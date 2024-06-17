@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Bacon;
 using GoogleMobileAds.Api;
 using GoogleMobileAds.Common;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace Nami.Controller
@@ -19,7 +20,7 @@ namespace Nami.Controller
         private bool _initializing = false;
 
         public bool _checkUMP = false;
-        public float checktime = 0;
+
 
 
 
@@ -65,6 +66,7 @@ namespace Nami.Controller
                 RequestConsentUMP();
             else
                 InitAd();
+
         }
 
         private void RequestConsentUMP()
@@ -113,10 +115,10 @@ namespace Nami.Controller
             });
         }
 
-        private void Update()
-        {
-            checktime += Time.deltaTime;
-        }
+        // private void Update()
+        // {
+
+        // }
 
         #region OpenAd
 
@@ -370,6 +372,7 @@ namespace Nami.Controller
         private float time_count_inter_ad = 0f;
         private float time_count_wait = 0f;
 
+        public float Time_inter_ad => time_inter_ad;
         /// <summary>
         /// Loads the interstitial ad.
         /// </summary>
