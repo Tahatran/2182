@@ -38,6 +38,7 @@ public class Dontdestroyonload : MonoBehaviour
             isAdsPlay = false;
             // checktime = 180f;
             // checkads = false;
+            GameAds.Get.LoadAdsInter();
             GameAds.Get.ShowInterstitialAd();
             // Debug.Log("Ads Play");
         }

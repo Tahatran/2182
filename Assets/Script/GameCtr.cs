@@ -23,6 +23,7 @@ public class GameCtr : MonoBehaviour
     [SerializeField] private GameObject WINtext;
     [SerializeField] private GameObject PLAYtext;
     [SerializeField] private GameObject btnReset;
+    [SerializeField] private GameObject SoundandReplay;
 
     public List<GameObject> lstBling;
     [SerializeField] private GameObject LosePanel;
@@ -103,7 +104,11 @@ public class GameCtr : MonoBehaviour
 
     void loadgame()
     {
-        UI.transform.DOMoveY(-0.1f, 0.3f).SetEase(Ease.OutQuad).OnComplete(() =>
+        UI.transform.DOMoveY(-0.1f, 0.3f).SetEase(Ease.OutQuad).OnUpdate(() =>
+        {
+            SoundandReplay.GetComponent<RectTransform>().DOAnchorPosY(-115, 0.3f).SetEase(Ease.OutQuad);
+        })
+        .OnComplete(() =>
                   {
                       parentLevelText.SetActive(true);
                       StartCoroutine(DelayedGenerateGrid());

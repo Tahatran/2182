@@ -800,7 +800,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -115}
+  m_AnchoredPosition: {x: 0, y: 192}
   m_SizeDelta: {x: 0, y: 250}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &212970897
@@ -914,7 +914,7 @@ RectTransform:
   m_GameObject: {fileID: 283496656}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.1, y: 1.1, z: 1.1}
+  m_LocalScale: {x: 1.25, y: 1.25, z: 1.25}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 36346208}
@@ -937,7 +937,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 0.702134, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1603,6 +1603,7 @@ MonoBehaviour:
   WINtext: {fileID: 1791794506}
   PLAYtext: {fileID: 1456390526}
   btnReset: {fileID: 37051357}
+  SoundandReplay: {fileID: 204551226}
   lstBling:
   - {fileID: 1091659742}
   - {fileID: 1577411543}
@@ -3157,8 +3158,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 429cc8bc0af864d31b8e6cd06dbb7e4e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  devKey: 
-  appID: 
+  devKey: Qhno4yJY6KHmZp9uS9DRe4
+  appID: nami.screw.tinkerer.puzzlegame
   isDebug: 0
   getConversionData: 0
 --- !u!1 &1168467513
@@ -4873,8 +4874,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0.18, y: -2.2810254, z: -2479.9043}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 1473130401}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4919,7 +4920,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 7
-  m_Sprite: {fileID: 21300000, guid: 231173c525638c240a323af208ac5aee, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 1dd5f04339d758342bc8b2844bc10eb8, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_FlipX: 0
   m_FlipY: 0
