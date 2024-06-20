@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using Nami.Controller;
 using UnityEngine.UI;
-using Unity.VisualScripting;
 using UnityEngine.SceneManagement;
 using DG.Tweening;
 using System;

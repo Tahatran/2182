@@ -20,6 +20,9 @@ namespace Nami.Controller
         private bool _initializing = false;
 
         public bool _checkUMP = false;
+        private float time_count_refesh = 0f;
+        private float time_refresh = 1f;
+
 
 
 
@@ -108,17 +111,24 @@ namespace Nami.Controller
 
         public void LoadAllAds()
         {
-            LoadInterstitialAd();
             LoadAppOpenAd(() =>
             {
                 ShowAppOpenAd();
             });
+            LoadRewardAd();
+            //LoadInterstitialAd();
+            LoadBanner();
         }
 
-        // private void Update()
-        // {
-
-        // }
+        private void Update()
+        {
+            time_count_refesh += Time.deltaTime;
+            if (time_count_refesh >= time_refresh)
+            {
+                time_count_refesh = 0f;
+                CheckLoadInterAd();
+            }
+        }
 
         #region OpenAd
 
@@ -369,8 +379,12 @@ namespace Nami.Controller
         private InterstitialAd _interstitialAd;
         [SerializeField]
         private float time_inter_ad = 180f;
+        private float time_reload_inter_ad = 15f;
         private float time_count_inter_ad = 0f;
         private float time_count_wait = 0f;
+        private bool inter_ads_loading = false;
+        private bool inter_ads_waiting_show = false;
+
 
         public float Time_inter_ad => time_inter_ad;
         /// <summary>
@@ -384,7 +398,7 @@ namespace Nami.Controller
                 _interstitialAd.Destroy();
                 _interstitialAd = null;
             }
-
+            inter_ads_loading = true;
             Debug.Log("Loading the interstitial ad.");
             //return;
             // create our request used to load the ad.
@@ -399,6 +413,8 @@ namespace Nami.Controller
                     {
                         Debug.LogWarning("interstitial ad failed to load an ad " +
                                        "with error : " + error);
+                        inter_ads_loading = false;
+
                         return;
                     }
 
@@ -406,8 +422,9 @@ namespace Nami.Controller
                               + ad.GetResponseInfo());
 
                     _interstitialAd = ad;
-
+                    inter_ads_waiting_show = true;
                     Inter_RegisterReloadHandler(ad);
+                    inter_ads_loading = false;
                 });
         }
 
@@ -441,9 +458,10 @@ namespace Nami.Controller
                 Debug.Log("Interstitial Ad full screen content closed.");
 
                 // Reload the ad so that we can show another as soon as possible.
-                LoadInterstitialAd();
+                //LoadInterstitialAd();
 
                 ResetTimeInterAd();
+                inter_ads_waiting_show = false;
             };
             // Raised when the ad failed to open full screen content.
             interstitialAd.OnAdFullScreenContentFailed += (AdError error) =>
@@ -452,10 +470,10 @@ namespace Nami.Controller
                                "with error : " + error);
 
                 // Reload the ad so that we can show another as soon as possible.
-                LoadInterstitialAd();
+                //LoadInterstitialAd();
 
                 ResetTimeInterAd();
-
+                inter_ads_waiting_show = false;
             };
         }
 
@@ -486,6 +504,17 @@ namespace Nami.Controller
             //time_count_inter_ad = 0;
             time_count_inter_ad = Time.realtimeSinceStartup;
             time_count_wait = 0;
+        }
+        private void CheckLoadInterAd()
+        {
+
+            var time_check = Time.realtimeSinceStartup - (time_count_inter_ad - time_count_wait);
+            if (time_check >= (time_inter_ad - time_reload_inter_ad))
+            {
+                if (inter_ads_loading == false && inter_ads_waiting_show == false)
+                    LoadInterstitialAd();
+            }
+
         }
 
         #endregion
