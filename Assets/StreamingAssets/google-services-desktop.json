@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "942872498699",
+    "project_id": "nami-h11-screw-tinkerer",
+    "storage_bucket": "nami-h11-screw-tinkerer.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:942872498699:android:c50aded4e0d9e63f07ed0e",
+        "android_client_info": {
+          "package_name": "nami.screw.tinkerer.puzzlegame"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDeWgEXpLpFVbQ_wiyAqS9VoNJxjfBjBno"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

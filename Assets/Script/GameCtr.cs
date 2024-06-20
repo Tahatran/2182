@@ -10,6 +10,7 @@ using System;
 
 public class GameCtr : MonoBehaviour
 {
+    // adb shell setprop debug.firebase.analytics.app nami.screw.tinkerer.puzzlegame
     [SerializeField] private GameObject levelText;
     [SerializeField] private GameObject levelText2;
     [SerializeField] private GameObject parentLevelText;
@@ -88,8 +89,7 @@ public class GameCtr : MonoBehaviour
         //     PlayerPrefs.SetInt("Check3ads", check3ads);
         // }
 
-        GameFirebase.SendEvent("start_level", "id_level", PlayerPrefs.GetInt("lv").ToString());
-        Debug.Log("log-event-start_level----id_level: " + PlayerPrefs.GetInt("lv"));
+
         DOTween.KillAll();
         Input.multiTouchEnabled = false;
         setUpLv();
@@ -97,6 +97,8 @@ public class GameCtr : MonoBehaviour
         // PlayerPrefs.SetInt("lv", lv);
         SetLevelText(parentLevelText);
         loadgame();
+        GameFirebase.SendEvent("start_level", "id_level", PlayerPrefs.GetInt("lv").ToString());
+        // Debug.Log("log-event-start_level----id_level: " + PlayerPrefs.GetInt("lv"));
         // StartCoroutine(DelayedGenerateGrid());
     }
 
@@ -113,6 +115,7 @@ public class GameCtr : MonoBehaviour
     {
         yield return new WaitForSeconds(0.5f); // Change the delay time as needed
         onGenerateGrid();
+
     }
     public void buttonNext()
     {
@@ -123,9 +126,11 @@ public class GameCtr : MonoBehaviour
     {
         // Audio.instance.sfxClick.Stop();
         Audio.instance.sfxClick.Play();
+        // CheckLogFirebase.Instance.TotalNumberTries += 1;
+
         // Debug.Log("aaaa");
 
-
+        GameFirebase.SendEvent("Level", "level-game-lose " + PlayerPrefs.GetInt("lv"));
         SceneManager.LoadScene(0);
         // var rect = losePopup.GetComponent<RectTransform>();
         // rect.DOAnchorPos(new Vector2(rect.anchoredPosition.x, 2000), 0.5f)
@@ -239,7 +244,8 @@ public class GameCtr : MonoBehaviour
         // Audio.instance.sfxClick.Stop();
         Audio.instance.sfxClick.Play();
         // GameAds.Get.ShowInterstitialAd();
-
+        ShowLogFireBase.Instance.AddNumberTriesLevel();
+        // Debug.Log(ShowLogFireBase.Instance.numberTrise);
         SceneManager.LoadScene(0);
     }
 
@@ -258,11 +264,11 @@ public class GameCtr : MonoBehaviour
         //     PlayerPrefs.SetInt("Check3ads", check3ads);
         // }
 
-        if (!PlayerPrefs.HasKey("number_tries"))
-        {
-            int number = 0;
-            PlayerPrefs.SetInt("number_tries", number);
-        }
+        // if (!PlayerPrefs.HasKey("number_tries"))
+        // {
+        //     int number = 0;
+        //     PlayerPrefs.SetInt("number_tries", number);
+        // }
         if (!PlayerPrefs.HasKey("time_play"))
         {
             int time = 0;
@@ -277,6 +283,18 @@ public class GameCtr : MonoBehaviour
         // Debug.Log("next");
         // GameFirebase.SendEvent("level-win", PlayerPrefs.GetInt("lv").ToString());
 
+        // CheckLogFirebase.Instance.TimeEnd = Time.time;
+        // CheckLogFirebase.Instance.TotalTimeMap();
+        // GameFirebase.SendEvent("complete_level",
+        // "id_level", PlayerPrefs.GetInt("lv").ToString(),
+        // "number_tries", (CheckLogFirebase.Instance.TotalNumberTries + PlayerPrefs.GetInt("number_tries")).ToString(),
+        // "time_play", Math.Round(CheckLogFirebase.Instance.TotalTime + PlayerPrefs.GetFloat("time_play")).ToString());
+        // PlayerPrefs.SetInt("number_tries", 0);
+        // PlayerPrefs.SetFloat("time_play", 0);
+        // Debug.Log("check-log-complete_level----id_level: " + PlayerPrefs.GetInt("lv"));
+        // Debug.Log("check-log-complete_level----number_tries: " + CheckLogFirebase.Instance.TotalNumberTries);
+        // Debug.Log("check-log-complete-level----time_play: " + CheckLogFirebase.Instance.TotalTime.ToString());
+        // CheckLogFirebase.Instance.TotalNumberTries = 1;
         int lv = PlayerPrefs.GetInt("lv") + 1;
         if (lv > 15)
         {
@@ -291,61 +309,50 @@ public class GameCtr : MonoBehaviour
         // PlayerPrefs.SetInt("Check3ads", check3ads);
 
         //
-        CheckLogFirebase.Instance.TimeEnd = Time.time;
-        CheckLogFirebase.Instance.TotalTimeMap();
-        GameFirebase.SendEvent("complete_level",
-        "id_level", PlayerPrefs.GetInt("lv").ToString(),
-        "number_tries", (CheckLogFirebase.Instance.TotalNumberTries + PlayerPrefs.GetInt("number_tries")).ToString(),
-        "time_play", Math.Round(CheckLogFirebase.Instance.TotalTime + PlayerPrefs.GetFloat("time_play")).ToString());
-        PlayerPrefs.SetInt("number_tries", 0);
-        PlayerPrefs.SetFloat("time_play", 0);
-        Debug.Log("check-log-complete_level----id_level: " + PlayerPrefs.GetInt("lv"));
-        Debug.Log("check-log-complete_level----number_tries: " + CheckLogFirebase.Instance.TotalNumberTries);
-        Debug.Log("check-log-complete-level----time_play: " + CheckLogFirebase.Instance.TotalTime.ToString());
-        CheckLogFirebase.Instance.TotalNumberTries = 0;
+
     }
 
     protected void OnApplicationPause(bool pauseStatus)
     {
-        if (pauseStatus)
-        {
-            CheckLogFirebase.Instance.TotalTimePause();
-            if (CheckLogFirebase.Instance.TimePause > 0)
-            {
-                GameFirebase.SendEvent("pause_game",
-                "time_play", Math.Round(CheckLogFirebase.Instance.TimePause).ToString(),
-                "id_level", PlayerPrefs.GetInt("lv").ToString(),
-                "number_tries", CheckLogFirebase.Instance.TotalNumberTries.ToString()
-                );
-                PlayerPrefs.SetInt("number_tries", CheckLogFirebase.Instance.TotalNumberTries);
-                PlayerPrefs.SetFloat("time_play", CheckLogFirebase.Instance.TimePause);
-                Debug.Log("check-log-pause_game----time_play" + CheckLogFirebase.Instance.TimePause);
-                Debug.Log("check-log-pause_game----id_level" + PlayerPrefs.GetInt("lv"));
-                Debug.Log("check-log-pause_game----number_tries" + CheckLogFirebase.Instance.TotalNumberTries);
+        // if (pauseStatus)
+        // {
+        //     CheckLogFirebase.Instance.TotalTimePause();
+        //     if (CheckLogFirebase.Instance.TimePause > 0)
+        //     {
+        //         GameFirebase.SendEvent("pause_game",
+        //         "time_play", Math.Round(CheckLogFirebase.Instance.TimePause).ToString(),
+        //         "id_level", PlayerPrefs.GetInt("lv").ToString(),
+        //         "number_tries", CheckLogFirebase.Instance.TotalNumberTries.ToString()
+        //         );
+        //         PlayerPrefs.SetInt("number_tries", CheckLogFirebase.Instance.TotalNumberTries);
+        //         PlayerPrefs.SetFloat("time_play", CheckLogFirebase.Instance.TimePause);
+        //         Debug.Log("check-log-pause_game----time_play" + CheckLogFirebase.Instance.TimePause);
+        //         Debug.Log("check-log-pause_game----id_level" + PlayerPrefs.GetInt("lv"));
+        //         Debug.Log("check-log-pause_game----number_tries" + CheckLogFirebase.Instance.TotalNumberTries);
 
-            }
-        }
-        else
-        {
-        }
+        //     }
+        // }
+        // else
+        // {
+        // }
     }
     protected void OnApplicationQuit()
     {
-        CheckLogFirebase.Instance.TotalTimePause();
-        if (CheckLogFirebase.Instance.TimePause > 0)
-        {
-            GameFirebase.SendEvent("pause_game",
-            "time_play", Math.Round(CheckLogFirebase.Instance.TimePause).ToString(),
-            "id_level", PlayerPrefs.GetInt("lv").ToString(),
-            "number_tries", CheckLogFirebase.Instance.TotalNumberTries.ToString()
-            );
-            PlayerPrefs.SetInt("number_tries", CheckLogFirebase.Instance.TotalNumberTries);
-            PlayerPrefs.SetFloat("time_play", CheckLogFirebase.Instance.TimePause);
-            Debug.Log("check-log-pause_game----time_play" + CheckLogFirebase.Instance.TimePause);
-            Debug.Log("check-log-pause_game----id_level" + PlayerPrefs.GetInt("lv").ToString());
-            Debug.Log("check-log-pause_game----number_tries" + CheckLogFirebase.Instance.TotalNumberTries);
+        // CheckLogFirebase.Instance.TotalTimePause();
+        // if (CheckLogFirebase.Instance.TimePause > 0)
+        // {
+        //     GameFirebase.SendEvent("pause_game",
+        //     "time_play", Math.Round(CheckLogFirebase.Instance.TimePause).ToString(),
+        //     "id_level", PlayerPrefs.GetInt("lv").ToString(),
+        //     "number_tries", CheckLogFirebase.Instance.TotalNumberTries.ToString()
+        //     );
+        //     PlayerPrefs.SetInt("number_tries", CheckLogFirebase.Instance.TotalNumberTries);
+        //     PlayerPrefs.SetFloat("time_play", CheckLogFirebase.Instance.TimePause);
+        //     Debug.Log("check-log-pause_game----time_play" + CheckLogFirebase.Instance.TimePause);
+        //     Debug.Log("check-log-pause_game----id_level" + PlayerPrefs.GetInt("lv").ToString());
+        //     Debug.Log("check-log-pause_game----number_tries" + CheckLogFirebase.Instance.TotalNumberTries);
 
-        }
+        // }
         // check3ads = 0;
         // PlayerPrefs.SetInt("Check3ads", check3ads);
 
@@ -476,6 +483,9 @@ public class GameCtr : MonoBehaviour
                     btnReset.SetActive(false);
                     audioToggle.gameObject.SetActive(false);
                     Audio.instance.sfxLose.Play();
+                    ShowLogFireBase.Instance.AddNumberTriesLevel();
+                    Debug.Log(ShowLogFireBase.Instance.numberTrise);
+                    // ShowLogFireBase.Instance.AddNumberTriesLevel();
                     GameFirebase.SendEvent("Level", "level-game-lose " + PlayerPrefs.GetInt("lv"));
                     var screw2 = screwObject.transform.Find("Screw").gameObject;
                     var spriteRenderer = screw2.GetComponent<SpriteRenderer>();
@@ -547,7 +557,9 @@ public class GameCtr : MonoBehaviour
         if (lstBulong.Count == 0)
         {
             // Audio.instance.sfxWin.Stop();
+            // CheckLogFirebase.Instance.TimeStart = Time.time;
             Audio.instance.sfxWin.Play();
+            ShowLogFireBase.Instance.ShowCompleteLevel();
             GameObject lastCrew = lstCrew[0];
             btnReset.SetActive(false);
             audioToggle.gameObject.SetActive(false);
@@ -735,6 +747,7 @@ public class GameCtr : MonoBehaviour
                 }
             }
         }
+
         // ReadTags();
     }
 

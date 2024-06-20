@@ -26,19 +26,19 @@ namespace Nami.Controller
 
         // These ad units are configured to always serve test ads.
 #if UNITY_ANDROID
-        private string _adOpenId = "ca-app-pub-3940256099942544/9257395921";
-        private string _adBannerId = "ca-app-pub-3940256099942544/6300978111";
-        private string _adInterId = "ca-app-pub-3940256099942544/1033173712";
-        private string _adRewardId = "ca-app-pub-3940256099942544/5224354917";
+        private string _adOpenId = "ca-app-pub-4119271324924135/3150466736";
+        private string _adBannerId = "ca-app-pub-4119271324924135/3701131076";
+        private string _adInterId = "ca-app-pub-4119271324924135/7089711741";
+        private string _adRewardId = "ca-app-pub-4119271324924135/5776630076";
 
         private string _adInterOpenId = "ca-app-pub-3940256099942544~3347511713";
         private string _adNativeBannerId = "ca-app-pub-3940256099942544/2247696110";
 
 #elif UNITY_IPHONE
-        private string _adOpenId = "ca-app-pub-3940256099942544/9257395921";
-        private string _adBannerId = "ca-app-pub-3940256099942544/6300978111";
-        private string _adInterId = "ca-app-pub-3940256099942544/1033173712";
-        private string _adRewardId = "ca-app-pub-3940256099942544/5224354917";
+        private string _adOpenId = "ca-app-pub-4119271324924135/3150466736";
+        private string _adBannerId = "ca-app-pub-4119271324924135/3701131076";
+        private string _adInterId = "ca-app-pub-4119271324924135/7089711741";
+        private string _adRewardId = "ca-app-pub-4119271324924135/5776630076";
 
         private string _adInterOpenId = "ca-app-pub-3940256099942544/1033173712";
         private string _adNativeBannerId = "ca-app-pub-3940256099942544/2247696110";
