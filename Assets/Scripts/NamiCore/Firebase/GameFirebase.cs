@@ -20,7 +20,7 @@ namespace Nami.Controller
         // Start is called before the first frame update
         void Awake()
         {
-            if(api != null)
+            if (api != null)
             {
                 Destroy(gameObject);
                 return;
@@ -37,7 +37,8 @@ namespace Nami.Controller
         private void InitFirebase()
         {
             //Debug.Log("start init");
-            Firebase.FirebaseApp.CheckAndFixDependenciesAsync().ContinueWithOnMainThread(task => {
+            Firebase.FirebaseApp.CheckAndFixDependenciesAsync().ContinueWithOnMainThread(task =>
+            {
                 var dependencyStatus = task.Result;
                 if (dependencyStatus == Firebase.DependencyStatus.Available)
                 {
@@ -103,13 +104,15 @@ namespace Nami.Controller
             {
                 case Firebase.RemoteConfig.LastFetchStatus.Success:
                     Firebase.RemoteConfig.FirebaseRemoteConfig.DefaultInstance.ActivateAsync()
-                    .ContinueWithOnMainThread(task => {
+                    .ContinueWithOnMainThread(task =>
+                    {
                         //Debug.Log(string.Format("Remote data loaded and ready (last fetch time {0}).",
                         //           info.FetchTime));
 
                         //how to get value
-                        //var value_get = Firebase.RemoteConfig.FirebaseRemoteConfig.DefaultInstance
-                        //                          .GetValue("key_value").LongValue;
+                        var value_get = Firebase.RemoteConfig.FirebaseRemoteConfig.DefaultInstance
+                                                 .GetValue("time_inter_ad").LongValue;
+                        GameAds.Get.time_inter_ad = value_get;
                     });
 
                     break;
