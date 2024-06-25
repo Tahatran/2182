@@ -978,7 +978,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &286246251
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3130,7 +3130,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _checkUMP: 1
   isSkipOpenAdAfterIntersAd: 0
-  time_inter_ad: 180
+  time_inter_ad: 60
+  time_reload_inter_ad: 15
 --- !u!4 &1152596599
 Transform:
   m_ObjectHideFlags: 0

@@ -247,6 +247,7 @@ public class GameCtr : MonoBehaviour
     {
         // Audio.instance.sfxClick.Stop();
         Audio.instance.sfxClick.Play();
+        // GameAds.Get.LoadAdsInter();
         // GameAds.Get.ShowInterstitialAd();
         ShowLogFireBase.Instance.AddNumberTriesLevel();
         // Debug.Log(ShowLogFireBase.Instance.numberTrise);
@@ -507,7 +508,8 @@ public class GameCtr : MonoBehaviour
                                 {
                                     LosePanel.SetActive(true);
                                     SetLevelTextEnd(parentLevelTextLose);
-                                    Dontdestroyonload.instance.ads();
+                                    // Dontdestroyonload.instance.ads();
+                                    GameAds.Get.ShowInterstitialAd();
                                 });
                          });
                     }
@@ -595,7 +597,8 @@ public class GameCtr : MonoBehaviour
                                             isNextLvCalled = true;
                                             StartCoroutine(ToggleGameObjectsContinuously(0.05f));
                                             // NextLV();
-                                            Dontdestroyonload.instance.ads();
+                                            // Dontdestroyonload.instance.ads();
+                                            GameAds.Get.ShowInterstitialAd();
                                             StartCoroutine(DelayedNextLevel(1f));
                                         }
                                     });

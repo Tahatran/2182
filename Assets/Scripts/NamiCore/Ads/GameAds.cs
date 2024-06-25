@@ -62,14 +62,12 @@ namespace Nami.Controller
             DontDestroyOnLoad(gameObject);
         }
 
-
         private void Start()
         {
             if (_checkUMP)
                 RequestConsentUMP();
             else
                 InitAd();
-
         }
 
         private void RequestConsentUMP()
@@ -115,7 +113,7 @@ namespace Nami.Controller
             {
                 ShowAppOpenAd();
             });
-            //LoadRewardAd();
+            LoadRewardAd();
             //LoadInterstitialAd();
             LoadBanner();
         }
@@ -378,15 +376,14 @@ namespace Nami.Controller
 
         private InterstitialAd _interstitialAd;
         [SerializeField]
-        public float time_inter_ad = 180f;
+        public float time_inter_ad = 10f;
+        [SerializeField]
         private float time_reload_inter_ad = 15f;
         private float time_count_inter_ad = 0f;
         private float time_count_wait = 0f;
         private bool inter_ads_loading = false;
         private bool inter_ads_waiting_show = false;
 
-
-        public float Time_inter_ad => time_inter_ad;
         /// <summary>
         /// Loads the interstitial ad.
         /// </summary>
@@ -427,7 +424,7 @@ namespace Nami.Controller
                     inter_ads_loading = false;
                 });
         }
-        public void LoadAdsInter() => LoadInterstitialAd();
+
         /// <summary>
         /// Shows the interstitial ad.
         /// </summary>
@@ -436,7 +433,7 @@ namespace Nami.Controller
             //#if UNITY_EDITOR
             //            return;
             //#endif
-            // if (ConditionShowInterAd() == false) return;
+            if (ConditionShowInterAd() == false) return;
 
             if (_interstitialAd != null && _interstitialAd.CanShowAd())
             {
@@ -505,6 +502,7 @@ namespace Nami.Controller
             time_count_inter_ad = Time.realtimeSinceStartup;
             time_count_wait = 0;
         }
+
         private void CheckLoadInterAd()
         {
 
@@ -516,7 +514,6 @@ namespace Nami.Controller
             }
 
         }
-
         #endregion
 
         #region Inter_OpenAd
@@ -687,8 +684,6 @@ namespace Nami.Controller
                     {
                         Debug.LogWarning("reward ad failed to load an ad " +
                                        "with error : " + error);
-                        _rewardImpression = false;
-                        _rewardAdComplete?.Invoke(_rewardImpression);
                         return;
                     }
 
@@ -698,15 +693,6 @@ namespace Nami.Controller
                     _rewardAd = ad;
 
                     Reward_RegisterReloadHandler(ad);
-
-                    if (_rewardAdComplete != null)
-                    {
-                        _justShowInterAd = true;
-                        _rewardAd.Show((reward) =>
-                        {
-                            Debug.Log("Rewarded ad granted a reward");
-                        });
-                    }
                 });
         }
 
@@ -737,14 +723,6 @@ namespace Nami.Controller
             }
         }
 
-        public void LoadAndShowRewardAd(System.Action<bool> onComplete)
-        {
-            _rewardImpression = false;
-            _rewardAdComplete = onComplete;
-
-            LoadRewardAd();
-        }
-
         private void Reward_RegisterReloadHandler(RewardedAd rewardAd)
         {
             // Raised when an impression is recorded for an ad.
@@ -761,7 +739,7 @@ namespace Nami.Controller
 
                 _rewardAdComplete?.Invoke(_rewardImpression);
                 // Reload the ad so that we can show another as soon as possible.
-                //LoadRewardAd();
+                LoadRewardAd();
 
                 ResetTimeInterAd();
             };
@@ -773,11 +751,13 @@ namespace Nami.Controller
 
                 _rewardAdComplete?.Invoke(_rewardImpression);
                 // Reload the ad so that we can show another as soon as possible.
-                //LoadRewardAd();
+                LoadRewardAd();
 
                 ResetTimeInterAd();
+
             };
         }
+
 
         #endregion
 
@@ -812,3 +792,4 @@ namespace Nami.Controller
         }
     }
 }
+

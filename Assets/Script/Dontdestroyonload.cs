@@ -24,35 +24,36 @@ public class Dontdestroyonload : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        checktime = GameAds.Get.Time_inter_ad;
-        isAdsPlay = false;
+        // checktime = GameAds.Get.Time_inter_ad;
+        // isAdsPlay = false;
     }
 
     public void ads()
     {
 
         // if (isAdsPlay && checkads == true)
-        if (isAdsPlay)
-        {
-            checktime = GameAds.Get.Time_inter_ad;
-            isAdsPlay = false;
-            // checktime = 180f;
-            // checkads = false;
-            GameAds.Get.LoadAdsInter();
-            GameAds.Get.ShowInterstitialAd();
-            // Debug.Log("Ads Play");
-        }
+        // if (isAdsPlay)
+        // {
+        Debug.LogError("adssssssssssssssssss");
+        // GameAds.Get.LoadAdsInter();
+        GameAds.Get.ShowInterstitialAd();
+        // checktime = GameAds.Get.Time_inter_ad;
+        // isAdsPlay = false;
+        // checktime = 180f;
+        // checkads = false;
+        // Debug.Log("Ads Play");
+        // }
     }
 
     // Update is called once per frame
     private void Update()
     {
-        checktime -= Time.deltaTime;
-        if (checktime <= 0)
-        {
-            checktime = 0;
-            isAdsPlay = true;
-        }
+        // checktime -= Time.deltaTime;
+        // if (checktime <= 0)
+        // {
+        //     checktime = 0;
+        //     isAdsPlay = true;
+        // }
         // ads();
 
     }
