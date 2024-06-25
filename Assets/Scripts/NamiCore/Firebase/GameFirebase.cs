@@ -68,6 +68,7 @@ namespace Nami.Controller
             Application.logMessageReceived += HandleLog;
 
             firebaseInitialized = true;
+            LoadRemoteConfig();
 
             //HandleLog("send test ", "stack trace ", LogType.Exception);
             Debug.Log("Initialize Firebase.");
