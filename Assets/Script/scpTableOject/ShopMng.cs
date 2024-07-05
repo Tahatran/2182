@@ -10,11 +10,10 @@ public class ShopMng : MonoBehaviour
     public ShopItemSO SkinItemData;
 
     public GameObject ShopContent;
+    public GameObject ShopContent2;
     public GameObject ItemPrefab;
-    public GameObject btnGet;
     public GameObject btnAds;
     private int id;
-
 
     // Start is called before the first frame update
     void Start()
@@ -36,44 +35,61 @@ public class ShopMng : MonoBehaviour
 
     public void Ads()
     {
-        //show ads o day
+        // Show ads logic here
         btnAds.SetActive(false);
     }
 
     public void LoadShop()
     {
-        foreach (ItemData item in SkinItemData.Items)
+        int itemsPerPage = 8; // Number of items per page
+
+        // Clear existing items in both ShopContent and ShopContent2
+        ClearShopContent(ShopContent);
+        ClearShopContent(ShopContent2);
+
+        // Loop through SkinItemData.Items and distribute items between ShopContent and ShopContent2
+        for (int i = 0; i < SkinItemData.Items.Count; i++)
         {
-            GameObject Item = Instantiate(ItemPrefab, ShopContent.transform);
+            ItemData item = SkinItemData.Items[i];
+            GameObject Item = Instantiate(ItemPrefab);
+
+            if (i < itemsPerPage)
+            {
+                // Add item to ShopContent
+                Item.transform.SetParent(ShopContent.transform, false);
+            }
+            else
+            {
+                // Add item to ShopContent2
+                Item.transform.SetParent(ShopContent2.transform, false);
+            }
+
             if (item.IsBuy)
             {
                 Item.GetComponent<Image>().sprite = item.ItemImg;
                 Item.GetComponent<Button>().onClick.AddListener(() =>
                 {
-                    //thực hiện truyền tham số/ gán vật liệu ở đây
-                    // DataConfig.EffectIndex = item.Id;
-                    id = item.Id;
-                    Item.transform.GetChild(0).gameObject.SetActive(true);
+                    id = item.Id; // Set the ID for purchasing
+                    Item.transform.GetChild(0).gameObject.SetActive(true); // Activate some UI element
                 });
             }
             else
             {
-                //set img = ? img
-                // HideSelectEffect(shopEffectContent.transform);
-                // getBtn.interactable = true;
-                btnAds.SetActive(true);
-                Item.transform.GetChild(0).gameObject.SetActive(true);
+                // Handle non-buyable items
+                btnAds.SetActive(true); // Example: activate an ad button
+                Item.transform.GetChild(0).gameObject.SetActive(true); // Activate some UI element
             }
         }
 
-        ShopContent.SetActive(true);
+        ShopContent.SetActive(true); // Ensure ShopContent is active after loading
     }
 
-    private void HideSelectEffect(Transform content)
+    private void ClearShopContent(GameObject content)
     {
-        for (int i = 0; i < content.childCount; i++)
+        // Clear existing items in a given ShopContent GameObject
+        foreach (Transform child in content.transform)
         {
-            content.GetChild(i).GetChild(0).gameObject.SetActive(false);
+            Destroy(child.gameObject);
         }
     }
 }
