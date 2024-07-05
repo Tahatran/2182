@@ -96,13 +96,13 @@ public class GameCtr : MonoBehaviour
         // lv = 1;
         // PlayerPrefs.SetInt("lv", lv);
         SetLevelText(parentLevelText);
-        loadgame();
+        // loadgame();
         GameFirebase.SendEvent("start_level", "id_level", PlayerPrefs.GetInt("lv").ToString());
         // Debug.Log("log-event-start_level----id_level: " + PlayerPrefs.GetInt("lv"));
         // StartCoroutine(DelayedGenerateGrid());
     }
 
-    void loadgame()
+    public void loadgame()
     {
         UI.transform.DOMoveY(-0.1f, 0.3f).SetEase(Ease.OutQuad).OnUpdate(() =>
         {
@@ -760,6 +760,7 @@ public class GameCtr : MonoBehaviour
 
     void UpdateSprite(GameObject obj, SubLevel subLevel, int colorIndex)
     {
+        LVConfig.Instance.list();
         // obj.GetComponent<Transform>().localScale = new Vector3(2f, 2f, 2f);
         // Nếu loại của subLevel là 1 (Bulong)
         if (subLevel.type == 1)
@@ -776,18 +777,21 @@ public class GameCtr : MonoBehaviour
                 bulongBody.transform.rotation = Quaternion.Euler(0f, 0f, 90f);
             }
             //chỉnh lại góc quay do hình bị lệch.
-            bulongFace.sprite = LVConfig.Instance.BulongFaceColor[colorIndex];
-            if (colorIndex == 2 || colorIndex == 4 || colorIndex == 5)
+            bulongFace.sprite = LVConfig.Instance.BulongColorFace[DataConfig.EffectIndex][colorIndex];
+            if (DataConfig.EffectIndex == 0)
             {
-                // obj.transform.Find("Bulongface").GetComponent<Transform>().rotation = Quaternion.Euler(0f, 0f, 90f);
-                bulongFace.transform.rotation = Quaternion.Euler(0f, 0f, 90f);
-            }
+                if (colorIndex == 2 || colorIndex == 4 || colorIndex == 5)
+                {
+                    // obj.transform.Find("Bulongface").GetComponent<Transform>().rotation = Quaternion.Euler(0f, 0f, 90f);
+                    bulongFace.transform.rotation = Quaternion.Euler(0f, 0f, 90f);
+                }
 
-            bulongFace2.sprite = LVConfig.Instance.BulongFaceColor2[colorIndex];
-            if (colorIndex == 2 || colorIndex == 5)
-            {
-                // obj.transform.Find("Bulongface2").GetComponent<Transform>().rotation = Quaternion.Euler(0f, 0f, 90f);
-                bulongFace2.transform.rotation = Quaternion.Euler(0f, 0f, 90f);
+                bulongFace2.sprite = LVConfig.Instance.BulongColorFace2[DataConfig.EffectIndex][colorIndex];
+                if (colorIndex == 2 || colorIndex == 5)
+                {
+                    // obj.transform.Find("Bulongface2").GetComponent<Transform>().rotation = Quaternion.Euler(0f, 0f, 90f);
+                    bulongFace2.transform.rotation = Quaternion.Euler(0f, 0f, 90f);
+                }
             }
             //gắn tag
             obj.tag = colorIndex.ToString();

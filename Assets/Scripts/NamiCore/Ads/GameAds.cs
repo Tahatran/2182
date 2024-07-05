@@ -376,7 +376,7 @@ namespace Nami.Controller
 
         private InterstitialAd _interstitialAd;
         [SerializeField]
-        public float time_inter_ad = 10f;
+        public float time_inter_ad = 60f;
         [SerializeField]
         private float time_reload_inter_ad = 15f;
         private float time_count_inter_ad = 0f;

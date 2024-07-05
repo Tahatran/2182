@@ -22,12 +22,27 @@ public class LVConfig : MonoBehaviour
 {
     public List<Level> levels = new List<Level>();
     public List<Sprite> BulongBodyColor;
+
     public List<Sprite> BulongFaceColor;
     public List<Sprite> BulongFaceColor2;
+
+    public List<Sprite> BulongFaceColor11;
+    public List<Sprite> BulongFaceColor12;
+
+    public List<Sprite> BulongFaceColor21;
+    public List<Sprite> BulongFaceColor22;
+
+    public List<Sprite> BulongFaceColor31;
+    public List<Sprite> BulongFaceColor32;
+
+    public List<List<Sprite>> BulongColorFace = new List<List<Sprite>>();
+    public List<List<Sprite>> BulongColorFace2 = new List<List<Sprite>>();
+
     public List<Sprite> ScewColor;
     public static LVConfig instance;
     public static LVConfig Instance
     {
+
         get
         {
             if (instance == null)
@@ -51,9 +66,24 @@ public class LVConfig : MonoBehaviour
             instance = this;
         }
     }
+    public void list()
+    {
+        BulongColorFace.Add(BulongFaceColor);
+        BulongColorFace.Add(BulongFaceColor11);
+        BulongColorFace.Add(BulongFaceColor21);
+        BulongColorFace.Add(BulongFaceColor31);
+
+        BulongColorFace2.Add(BulongFaceColor2);
+        BulongColorFace2.Add(BulongFaceColor12);
+        BulongColorFace2.Add(BulongFaceColor22);
+        BulongColorFace2.Add(BulongFaceColor32);
+
+    }
 
     void Start()
     {
+
+
         levels = new List<Level>
         {
             new Level
