@@ -2,11 +2,10 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-
 public class SwipePagination : MonoBehaviour, IEndDragHandler
 {
     [SerializeField] int maxPage;
-    int currentPage = 1; // Start at page 1
+    public int currentPage;
     Vector3 targetPos;
     [SerializeField] Vector3 pageStep;
     [SerializeField] RectTransform levelPagesRect;
@@ -16,7 +15,7 @@ public class SwipePagination : MonoBehaviour, IEndDragHandler
 
     private void Awakke()
     {
-        currentPage = 1;
+        currentPage = 0;
         targetPos = levelPagesRect.localPosition;
         dragThreshould = Screen.width / 3;
     }
@@ -37,7 +36,7 @@ public class SwipePagination : MonoBehaviour, IEndDragHandler
 
     public void Previous()
     {
-        if (currentPage > 1)
+        if (currentPage > 0)
         {
             currentPage--;
             targetPos -= pageStep;
@@ -50,6 +49,7 @@ public class SwipePagination : MonoBehaviour, IEndDragHandler
         // Use LeanTween to move the RectTransform
         // LeanTween.moveLocal(levelPagesRect.gameObject, targetPos, tweenTime)
         //          .setEase(tweenType);
+        Debug.Log(targetPos);
         levelPagesRect.LeanMoveLocal(targetPos, tweenTime).setEase(tweenType);
     }
 

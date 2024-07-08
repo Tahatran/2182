@@ -251,7 +251,31 @@ public class GameCtr : MonoBehaviour
         // GameAds.Get.ShowInterstitialAd();
         ShowLogFireBase.Instance.AddNumberTriesLevel();
         // Debug.Log(ShowLogFireBase.Instance.numberTrise);
-        SceneManager.LoadScene(0);
+
+        // xoa cac phan tu 
+        lstBulong.Clear();
+        lstCrew.Clear();
+        foreach (Transform child in objectContainer.transform)
+        {
+            Destroy(child.gameObject);
+        }
+        UI.transform.DOMoveY(0.1f, 0.3f).SetEase(Ease.OutQuad).OnUpdate(() =>
+        {
+            SoundandReplay.GetComponent<RectTransform>().DOAnchorPosY(115, 0.3f).SetEase(Ease.OutQuad);
+        })
+        .OnComplete(() =>
+                  {
+                      UI.transform.DOMoveY(-0.1f, 0.3f).SetEase(Ease.OutQuad).OnUpdate(() =>
+                        {
+                            SoundandReplay.GetComponent<RectTransform>().DOAnchorPosY(-115, 0.3f).SetEase(Ease.OutQuad);
+                        })
+                          .OnComplete(() =>
+                                {
+                                    // StartCoroutine(DelayedGenerateGrid());
+                                    onGenerateObject();
+                                });
+                  });
+        // SceneManager.LoadScene(0);
     }
 
     void setUpLv()
