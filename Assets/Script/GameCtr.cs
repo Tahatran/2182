@@ -75,7 +75,7 @@ public class GameCtr : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        GameAds.Get.ShowBanner();
+        // GameAds.Get.ShowBanner();
         // if (checkads == true)
         // {
         //     GameAds.Get.ShowInterstitialAd();

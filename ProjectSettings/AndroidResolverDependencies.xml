@@ -6,8 +6,10 @@
     <package>com.google.ads.mediation:applovin:12.1.0.1</package>
     <package>com.google.ads.mediation:facebook:6.15.0.0</package>
     <package>com.google.ads.mediation:ironsource:7.6.0.0</package>
+    <package>com.google.ads.mediation:mintegral:16.7.11.0</package>
     <package>com.google.ads.mediation:pangle:5.7.0.1.0</package>
     <package>com.google.ads.mediation:unity:4.9.2.0</package>
+    <package>com.google.ads.mediation:vungle:7.1.0.0</package>
     <package>com.google.android.gms:play-services-ads:22.6.0</package>
     <package>com.google.android.gms:play-services-base:18.3.0</package>
     <package>com.google.android.ump:user-messaging-platform:2.1.0</package>
