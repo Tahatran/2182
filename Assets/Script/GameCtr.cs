@@ -413,6 +413,32 @@ public class GameCtr : MonoBehaviour
         }
         onGenerateObject();
     }
+    public void onGenerateGrid2(GameObject a)
+    {
+        for (int i = 0; i < rowNumber; i++)
+        {
+            for (int j = 0; j < colNumber; j++)
+            {
+                // Tính toán vị trí của từng hexagon
+                float xPos = j * hexWidth * 0.3f;
+                float yPos = i * hexHeight * 0.7f;
+
+                // Nếu hàng là hàng lẻ thì dịch chuyển vị trí của hexagon
+                if (j % 2 == 1)
+                {
+                    yPos += hexHeight / 2.5f;
+                }
+
+                var tempGrid = Instantiate(a, gridContainer.transform);
+                tempGrid.transform.localPosition = new Vector3(xPos, yPos, 10);
+                var gridRender = tempGrid.GetComponent<GridPrefab>();
+                gridRender.col = j;
+                gridRender.row = i;
+                lstGrid.Add(gridRender);
+            }
+        }
+        // onGenerateObject();
+    }
 
     public void btnTest()
     {

@@ -95,7 +95,7 @@ public class LVConfig : MonoBehaviour
                     {
                         new SubLevel {row= 4, col= 3, type= 2, color= 6},
                         new SubLevel {row= 5, col= 3, type= 1, color= 6},
-                         new SubLevel {row= 5, col= 3, type= 2, color= 2},
+                        new SubLevel {row= 5, col= 3, type= 2, color= 2},
 
 
                     },

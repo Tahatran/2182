@@ -1,10 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using TMPro.Examples;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ImageCtr : MonoBehaviour
 {
+    //
+    public GameObject TextLevel;
+    public GameObject btnDelete;
+    public GameObject btnDelete2;
+    public GameObject btnGen1;
+    public GameObject btnGen2;
+    public bool Delete1;
+    public bool Delete2;
+    public bool gen;
+    private string textLevelstring = "";
     //list cac oc de chon
     public List<GameObject> lstScewImage;
 
@@ -47,7 +60,11 @@ public class ImageCtr : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        onGenerateGrid();
+        btnDelete.GetComponent<Button>().onClick.AddListener(Edit);
+        btnDelete2.GetComponent<Button>().onClick.AddListener(Edit2);
+        btnGen1.GetComponent<Button>().onClick.AddListener(GenMap1);
+        btnGen2.GetComponent<Button>().onClick.AddListener(GenMap2);
+        // onGenerateGrid();
     }
 
     void onGenerateGrid()
@@ -76,6 +93,116 @@ public class ImageCtr : MonoBehaviour
         }
         // onGenerateObject();
     }
+
+
+    public void btnOutput()
+    {
+        GenLevelfromGrid();
+    }
+
+    public void GenLevelfromGrid()
+    {
+        if (gen)
+        {
+            textLevelstring = "";
+            for (int i = 0; i < GameCtr.instance.lstGrid.Count; i++)
+            {
+                gridComponent grid = GameCtr.instance.lstGrid[i].GetComponent<gridComponent>();
+                if (grid.bulong != null)
+                {
+                    Debug.Log(GameCtr.instance.lstGrid[i].GetComponent<GridPrefab>().row);
+                    Debug.Log(GameCtr.instance.lstGrid[i].GetComponent<GridPrefab>().col);
+                    Debug.Log(grid.bulong.tag);
+
+                    string text = "new SubLevel {row= " + GameCtr.instance.lstGrid[i].GetComponent<GridPrefab>().row + ", col=" + GameCtr.instance.lstGrid[i].GetComponent<GridPrefab>().col + ", type= 2, color= " + grid.bulong.tag + "},\n";
+                    textLevelstring += text;
+                    Debug.Log(textLevelstring);
+                    TextLevel.GetComponent<TextMeshProUGUI>().text = textLevelstring;
+                    // Debug.Log(TextLevel);
+                    // Debug.Log(TextLevel.text);
+                }
+                if (grid.screw != null)
+                {
+                    Debug.Log(GameCtr.instance.lstGrid[i].GetComponent<GridPrefab>().row);
+                    Debug.Log(GameCtr.instance.lstGrid[i].GetComponent<GridPrefab>().col);
+                    Debug.Log(grid.screw.tag);
+
+                    string text = "new SubLevel {row= " + GameCtr.instance.lstGrid[i].GetComponent<GridPrefab>().row + ", col=" + GameCtr.instance.lstGrid[i].GetComponent<GridPrefab>().col + ", type= 1, color= " + grid.screw.tag + "},\n";
+                    textLevelstring += text;
+                    Debug.Log(textLevelstring);
+                    TextLevel.GetComponent<TextMeshProUGUI>().text = textLevelstring;
+                }
+            }
+        }
+        else
+        {
+            textLevelstring = "";
+            for (int i = 0; i < lstGrid.Count; i++)
+            {
+                gridComponent grid = lstGrid[i].GetComponent<gridComponent>();
+                if (grid.bulong != null)
+                {
+                    Debug.Log(lstGrid[i].GetComponent<GridPrefab>().row);
+                    Debug.Log(lstGrid[i].GetComponent<GridPrefab>().col);
+                    Debug.Log(grid.bulong.tag);
+
+                    string text = "new SubLevel {row= " + lstGrid[i].GetComponent<GridPrefab>().row + ", col=" + lstGrid[i].GetComponent<GridPrefab>().col + ", type= 2, color= " + grid.bulong.tag + "},\n";
+                    textLevelstring += text;
+                    Debug.Log(textLevelstring);
+                    TextLevel.GetComponent<TextMeshProUGUI>().text = textLevelstring;
+                    // Debug.Log(TextLevel);
+                    // Debug.Log(TextLevel.text);
+                }
+                if (grid.screw != null)
+                {
+                    Debug.Log(lstGrid[i].GetComponent<GridPrefab>().row);
+                    Debug.Log(lstGrid[i].GetComponent<GridPrefab>().col);
+                    Debug.Log(grid.screw.tag);
+
+                    string text = "new SubLevel {row= " + lstGrid[i].GetComponent<GridPrefab>().row + ", col=" + lstGrid[i].GetComponent<GridPrefab>().col + ", type= 1, color= " + grid.screw.tag + "},\n";
+                    textLevelstring += text;
+                    Debug.Log(textLevelstring);
+                    TextLevel.GetComponent<TextMeshProUGUI>().text = textLevelstring;
+                }
+            }
+        }
+    }
+    public void Edit()
+    {
+        btnDelete.GetComponent<Image>().color = Color.red;
+        btnDelete2.GetComponent<Image>().color = Color.white;
+        Delete1 = true;
+        Delete2 = false;
+    }
+    public void Edit2()
+    {
+        btnDelete2.GetComponent<Image>().color = Color.red;
+        btnDelete.GetComponent<Image>().color = Color.white;
+        Delete2 = true;
+        Delete1 = false;
+    }
+
+    public void GenMap1()
+    {
+        foreach (Transform child in gridContainer.transform)
+        {
+            Destroy(child.gameObject);
+        }
+        lstGrid.Clear();
+        GameCtr.instance.onGenerateGrid2(HexagridPrefab);
+        gen = true;
+    }
+    public void GenMap2()
+    {
+        foreach (Transform child in GameCtr.instance.gridContainer.transform)
+        {
+            Destroy(child.gameObject);
+        }
+        GameCtr.instance.lstGrid.Clear();
+        onGenerateGrid();
+        gen = false;
+    }
+
 
     /////////////////////////////////////////////////
     //     void onGenerateGrid()
