@@ -773,6 +773,9 @@ public class GameCtr : MonoBehaviour
                         instantiatedObject.GetComponent<BulongAction>().col = subLevel.col;
                         instantiatedObject.GetComponent<BulongAction>().row = subLevel.row;
                         instantiatedObject.transform.localScale = new Vector3(0.8f, 0.8f, 0.8f);
+                        //ty le scale
+                        // instantiatedObject.transform.localScale = new Vector3(0.3f, 0.3f, 0.3f);
+
                         lstBulong.Add(instantiatedObject);
                     }
                     else if (subLevel.type == 2)

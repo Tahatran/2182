@@ -5468,7 +5468,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1384735641
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5481,6 +5481,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2bb5ce91d25f26a47b9f31aabb553a04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  TextLevel: {fileID: 0}
+  btnDelete: {fileID: 0}
+  btnDelete2: {fileID: 0}
+  btnGen1: {fileID: 0}
+  btnGen2: {fileID: 0}
+  Delete1: 0
+  Delete2: 0
+  gen: 0
   lstScewImage: []
   objectContainer: {fileID: 0}
   gridContainer: {fileID: 1784024379}
@@ -5490,6 +5498,7 @@ MonoBehaviour:
   colNumber: 15
   rowNumber: 20
   indexColor: 0
+  objinstance: {fileID: 0}
   checkbulongorscrew: 1
 --- !u!4 &1384735642
 Transform:
