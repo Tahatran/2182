@@ -21,20 +21,27 @@ public class Level
 public class LVConfig : MonoBehaviour
 {
     public List<Level> levels = new List<Level>();
+    public List<Level> Imageslow = new List<Level>();
+    public List<Level> Imageshigh = new List<Level>();
+
     public List<Sprite> BulongBodyColor;
 
     public List<Sprite> BulongFaceColor;
     public List<Sprite> BulongFaceColor2;
 
+    public List<Sprite> BulongBodyColor1;
     public List<Sprite> BulongFaceColor11;
     public List<Sprite> BulongFaceColor12;
 
+    public List<Sprite> BulongBodyColor2;
     public List<Sprite> BulongFaceColor21;
     public List<Sprite> BulongFaceColor22;
 
+    public List<Sprite> BulongBodyColor3;
     public List<Sprite> BulongFaceColor31;
     public List<Sprite> BulongFaceColor32;
 
+    public List<List<Sprite>> BulongBody = new List<List<Sprite>>();
     public List<List<Sprite>> BulongColorFace = new List<List<Sprite>>();
     public List<List<Sprite>> BulongColorFace2 = new List<List<Sprite>>();
 
@@ -68,6 +75,11 @@ public class LVConfig : MonoBehaviour
     }
     public void list()
     {
+        BulongBody.Add(BulongBodyColor);
+        BulongBody.Add(BulongBodyColor1);
+        BulongBody.Add(BulongBodyColor2);
+        BulongBody.Add(BulongBodyColor3);
+
         BulongColorFace.Add(BulongFaceColor);
         BulongColorFace.Add(BulongFaceColor11);
         BulongColorFace.Add(BulongFaceColor21);
@@ -82,8 +94,7 @@ public class LVConfig : MonoBehaviour
 
     void Start()
     {
-
-
+        Image();
         levels = new List<Level>
         {
             new Level
@@ -2527,6 +2538,115 @@ new SubLevel {row= 0, col= 2, type= 1, color= 0},
                 },
 
             },
+        };
+    }
+    public void Image()
+    {
+        Imageslow = new List<Level>
+        {
+            new Level
+            {
+                lv = 1,
+                subLevelsLists = new List<List<SubLevel>>
+                {
+                    new List<SubLevel>
+                    {
+                        new SubLevel {row= 4, col= 3, type= 2, color= 6},
+                        new SubLevel {row= 5, col= 3, type= 1, color= 6},
+                        new SubLevel {row= 5, col= 3, type= 2, color= 2},
+                    },
+                },
+
+            },
+            new Level
+            {
+                lv = 2,
+                subLevelsLists = new List<List<SubLevel>>
+                {
+                     new List<SubLevel>
+                    {
+                        new SubLevel {row= 0, col= 6, type= 1, color= 7},
+                        new SubLevel {row= 0, col= 6, type= 2, color= 6},
+                        new SubLevel {row= 1, col= 2, type= 1, color= 6},
+                        new SubLevel {row= 1, col= 2, type= 2, color= 2},
+                        new SubLevel {row= 2, col= 3, type= 1, color= 4},
+                        new SubLevel {row= 2, col= 3, type= 2, color= 2},
+                        new SubLevel {row= 6, col= 2, type= 1, color= 2},
+                        new SubLevel {row= 6, col= 2, type= 2, color= 7},
+                        new SubLevel {row= 6, col= 3, type= 2, color= 4},
+                        new SubLevel {row= 9, col= 1, type= 1, color= 2},
+                        new SubLevel {row= 9, col= 1, type= 2, color= 6},
+
+                    },
+                },
+
+            },
+            new Level
+            {
+                lv = 3,
+                subLevelsLists = new List<List<SubLevel>>
+                {
+                     new List<SubLevel>
+                    {
+                        new SubLevel {row= 1, col= 4, type= 1, color= 1},
+                        new SubLevel {row= 1, col= 4, type= 2, color= 7},
+                        new SubLevel {row= 2, col= 1, type= 1, color= 3},
+                        new SubLevel {row= 2, col= 1, type= 2, color= 5},
+                        new SubLevel {row= 2, col= 3, type= 1, color= 7},
+                        new SubLevel {row= 2, col= 3, type= 2, color= 6},
+                        new SubLevel {row= 2, col= 4, type= 1, color= 4},
+                        new SubLevel {row= 2, col= 4, type= 2, color= 7},
+                        new SubLevel {row= 3, col= 4, type= 1, color= 3},
+                        new SubLevel {row= 3, col= 4, type= 2, color= 7},
+                        new SubLevel {row= 3, col= 5, type= 1, color= 5},
+                        new SubLevel {row= 3, col= 5, type= 2, color= 3},
+                        new SubLevel {row= 3, col= 6, type= 1, color= 6},
+                        new SubLevel {row= 3, col= 6, type= 2, color= 1},
+                        new SubLevel {row= 4, col= 2, type= 2, color= 4},
+                        new SubLevel {row= 6, col= 1, type= 1, color= 7},
+                        new SubLevel {row= 6, col= 1, type= 2, color= 3},
+
+                    },
+                },
+
+            },
+            new Level
+            {
+                lv = 4,
+                subLevelsLists = new List<List<SubLevel>>
+                {
+                     new List<SubLevel>
+                    {
+                        new SubLevel {row= 0, col= 0, type= 1, color= 7},
+                        new SubLevel {row= 0, col= 0, type= 2, color= 6},
+                        new SubLevel {row= 0, col= 2, type= 1, color= 4},
+                        new SubLevel {row= 0, col= 2, type= 2, color= 1},
+                        new SubLevel {row= 1, col= 1, type= 1, color= 6},
+                        new SubLevel {row= 1, col= 1, type= 2, color= 7},
+                        new SubLevel {row= 1, col= 4, type= 1, color= 6},
+                        new SubLevel {row= 1, col= 4, type= 2, color= 4},
+                        new SubLevel {row= 1, col= 6, type= 1, color= 1},
+                        new SubLevel {row= 1, col= 6, type= 2, color= 7},
+                        new SubLevel {row= 4, col= 0, type= 1, color= 3},
+                        new SubLevel {row= 4, col= 0, type= 2, color= 4},
+                        new SubLevel {row= 5, col= 3, type= 1, color= 2},
+                        new SubLevel {row= 5, col= 3, type= 2, color= 6},
+                        new SubLevel {row= 6, col= 1, type= 1, color= 6},
+                        new SubLevel {row= 6, col= 1, type= 2, color= 3},
+                        new SubLevel {row= 7, col= 0, type= 1, color= 7},
+                        new SubLevel {row= 7, col= 0, type= 2, color= 6},
+                        new SubLevel {row= 8, col= 3, type= 2, color= 1},
+                        new SubLevel {row= 8, col= 4, type= 1, color= 1},
+                        new SubLevel {row= 8, col= 4, type= 2, color= 6},
+                        new SubLevel {row= 9, col= 2, type= 1, color= 4},
+                        new SubLevel {row= 9, col= 2, type= 2, color= 2},
+
+                    },
+
+                },
+
+            },
+
         };
     }
 

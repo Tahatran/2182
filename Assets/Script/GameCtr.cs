@@ -96,7 +96,7 @@ public class GameCtr : MonoBehaviour
         // lv = 1;
         // PlayerPrefs.SetInt("lv", lv);
         SetLevelText(parentLevelText);
-        // loadgame();
+        loadgame();
         GameFirebase.SendEvent("start_level", "id_level", PlayerPrefs.GetInt("lv").ToString());
         // Debug.Log("log-event-start_level----id_level: " + PlayerPrefs.GetInt("lv"));
         // StartCoroutine(DelayedGenerateGrid());
@@ -104,6 +104,7 @@ public class GameCtr : MonoBehaviour
 
     public void loadgame()
     {
+
         UI.transform.DOMoveY(-0.1f, 0.3f).SetEase(Ease.OutQuad).OnUpdate(() =>
         {
             SoundandReplay.GetComponent<RectTransform>().DOAnchorPosY(-115, 0.3f).SetEase(Ease.OutQuad);
@@ -683,6 +684,10 @@ public class GameCtr : MonoBehaviour
 
     public void autonextlvwhenwin()
     {
+        foreach (Transform child in gridContainer.transform)
+        {
+            Destroy(child.gameObject);
+        }
         SceneManager.LoadScene(0);
     }
 
@@ -772,9 +777,14 @@ public class GameCtr : MonoBehaviour
                     {
                         instantiatedObject.GetComponent<BulongAction>().col = subLevel.col;
                         instantiatedObject.GetComponent<BulongAction>().row = subLevel.row;
-                        instantiatedObject.transform.localScale = new Vector3(0.8f, 0.8f, 0.8f);
+
                         //ty le scale
-                        // instantiatedObject.transform.localScale = new Vector3(0.3f, 0.3f, 0.3f);
+                        instantiatedObject.transform.localScale = new Vector3(0.8f, 0.8f, 0.8f);
+
+                        if (DataConfig.EffectIndex != 0)
+                        {
+                            instantiatedObject.transform.localScale = new Vector3(0.3f, 0.3f, 0.3f);
+                        }
 
                         lstBulong.Add(instantiatedObject);
                     }
@@ -823,28 +833,41 @@ public class GameCtr : MonoBehaviour
             var bulongFace = obj.transform.Find("Bulongface").GetComponent<SpriteRenderer>();
             var bulongFace2 = obj.transform.Find("Bulongface2").GetComponent<SpriteRenderer>();
 
-            bulongBody.sprite = LVConfig.Instance.BulongBodyColor[colorIndex];
-            if (colorIndex == 0 || colorIndex == 2 || colorIndex == 3 || colorIndex == 5)
-            {
-                // obj.transform.Find("Bulongbody").GetComponent<Transform>().rotation = Quaternion.Euler(0f, 0f, 90f);
-                bulongBody.transform.rotation = Quaternion.Euler(0f, 0f, 90f);
-            }
+            // bulongBody.sprite = LVConfig.Instance.BulongBodyColor[colorIndex];
+            bulongBody.sprite = LVConfig.Instance.BulongBody[DataConfig.EffectIndex][colorIndex];
+
             //chỉnh lại góc quay do hình bị lệch.
             bulongFace.sprite = LVConfig.Instance.BulongColorFace[DataConfig.EffectIndex][colorIndex];
+            bulongFace2.sprite = LVConfig.Instance.BulongColorFace2[DataConfig.EffectIndex][colorIndex];
             if (DataConfig.EffectIndex == 0)
             {
+                if (colorIndex == 0 || colorIndex == 2 || colorIndex == 3 || colorIndex == 5)
+                {
+                    // obj.transform.Find("Bulongbody").GetComponent<Transform>().rotation = Quaternion.Euler(0f, 0f, 90f);
+                    bulongBody.transform.rotation = Quaternion.Euler(0f, 0f, 90f);
+                }
                 if (colorIndex == 2 || colorIndex == 4 || colorIndex == 5)
                 {
                     // obj.transform.Find("Bulongface").GetComponent<Transform>().rotation = Quaternion.Euler(0f, 0f, 90f);
                     bulongFace.transform.rotation = Quaternion.Euler(0f, 0f, 90f);
                 }
 
-                bulongFace2.sprite = LVConfig.Instance.BulongColorFace2[DataConfig.EffectIndex][colorIndex];
+
                 if (colorIndex == 2 || colorIndex == 5)
                 {
                     // obj.transform.Find("Bulongface2").GetComponent<Transform>().rotation = Quaternion.Euler(0f, 0f, 90f);
                     bulongFace2.transform.rotation = Quaternion.Euler(0f, 0f, 90f);
                 }
+            }
+            if (DataConfig.EffectIndex != 0)
+            {
+                Vector3 newPosition = bulongBody.transform.position;
+
+                // Điều chỉnh giá trị y
+                newPosition.y += 0.075f;
+
+                // Gán lại vị trí mới
+                bulongBody.transform.position = newPosition;
             }
             //gắn tag
             obj.tag = colorIndex.ToString();

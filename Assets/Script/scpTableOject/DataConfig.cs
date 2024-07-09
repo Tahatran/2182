@@ -11,6 +11,7 @@ public class DataConfig
     // public static int BallSkinIndex = -1;
 
     public static int EffectIndex = 0;
+    public static int ImageIndex = 0;
 
     // public static bool IsStart = false;
 

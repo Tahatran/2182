@@ -27,8 +27,11 @@ public class ImageCtr : MonoBehaviour
     //danh sach cac hexa 
     public List<GameObject> lstBulong;
     public List<GridPrefab> lstGrid;
+    public List<GameObject> lstCrew;
     //prefab
     public GameObject HexagridPrefab;
+    public GameObject BulongPrefab;
+    public GameObject ScrewPrefab;
 
     //so hang, so cot
     public int colNumber;
@@ -60,14 +63,17 @@ public class ImageCtr : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        btnDelete.GetComponent<Button>().onClick.AddListener(Edit);
-        btnDelete2.GetComponent<Button>().onClick.AddListener(Edit2);
-        btnGen1.GetComponent<Button>().onClick.AddListener(GenMap1);
-        btnGen2.GetComponent<Button>().onClick.AddListener(GenMap2);
-        // onGenerateGrid();
+        // //tool thi bat len
+        // btnDelete.GetComponent<Button>().onClick.AddListener(Edit);
+        // btnDelete2.GetComponent<Button>().onClick.AddListener(Edit2);
+        // btnGen1.GetComponent<Button>().onClick.AddListener(GenMap1);
+        // btnGen2.GetComponent<Button>().onClick.AddListener(GenMap2);
+
+
+
     }
 
-    void onGenerateGrid()
+    public void onGenerateGrid()
     {
         for (int i = 0; i < rowNumber; i++)
         {
@@ -88,10 +94,11 @@ public class ImageCtr : MonoBehaviour
                 var gridRender = tempGrid.GetComponent<GridPrefab>();
                 gridRender.col = j;
                 gridRender.row = i;
+                tempGrid.GetComponent<SpriteRenderer>().sortingOrder = 8;
                 lstGrid.Add(gridRender);
             }
         }
-        // onGenerateObject();
+        onGenerateObject();
     }
 
 
@@ -166,6 +173,46 @@ public class ImageCtr : MonoBehaviour
                 }
             }
         }
+    }
+
+    public void onGenerateObject()
+    {
+
+        // Lấy level hiện tại từ danh sách levels dựa trên giá trị lv lưu trong PlayerPrefs
+        // var currentLevel = LVConfig.Instance.levels[0];
+        var currentLevel = LVConfig.Instance.Imageslow[DataConfig.ImageIndex];
+
+        //dễ nhất lv2
+        // var currentLevel = LVConfig.Instance.levels[0];
+        // Chọn ngẫu nhiên một sub-level từ danh sách sub-levels của level hiện tại
+        // int randomSubLevelIndex = Random.Range(0, currentLevel.subLevelsLists.Count);
+        int randomSubLevelIndex = 0;
+        var subLevels = currentLevel.subLevelsLists[randomSubLevelIndex];
+
+        // Cập nhật text của Map với chỉ số sub-level được chọn
+        // Map.text = "Map: " + randomSubLevelIndex.ToString();
+        // Debug.Log("Map: " + randomSubLevelIndex);
+
+        // Duyệt qua từng phần tử trong subLevels
+        foreach (var subLevel in subLevels)
+        {
+            // Tìm grid tương ứng với vị trí của subLevel (dựa trên row và col)
+            var targetGrid = lstGrid.Find(grid => grid.row == subLevel.row && grid.col == subLevel.col);
+
+            // Nếu tìm thấy targetGrid
+            if (targetGrid)
+            {
+                SpriteRenderer spriteRenderer = targetGrid.GetComponent<SpriteRenderer>();
+                Color color = spriteRenderer.color;
+
+                // Thiết lập giá trị alpha về 1 (không trong suốt)
+                color.a = 255f;
+                // Gán lại màu cho SpriteRenderer
+                spriteRenderer.color = color;
+            }
+        }
+
+        // ReadTags();
     }
     public void Edit()
     {

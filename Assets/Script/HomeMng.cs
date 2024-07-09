@@ -26,11 +26,15 @@ public class HomeMng : MonoBehaviour
     {
 
     }
+    public void btncometoHome()
+    {
+        gameObject.SetActive(true);
+    }
 
     public void btnLoadGame()
     {
         gameObject.SetActive(false);
-        GameCtr.instance.loadgame();
+        GameCtr.instance.autonextlvwhenwin();
     }
 
     public void btnHome()

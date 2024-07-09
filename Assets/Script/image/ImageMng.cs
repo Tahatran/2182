@@ -3,34 +3,28 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ShopMng : MonoBehaviour
+public class ImageMng : MonoBehaviour
 {
     [Space(10)]
     [Header("Data")]
-    public ShopItemSO SkinItemData;
-
+    public ShopItemSO ImageItemData;
+    public GameObject Home;
     public GameObject ShopContent;
     public GameObject ShopContent2;
     public GameObject ItemPrefab;
     public GameObject btnAds;
     private int id;
-
     // Start is called before the first frame update
     void Start()
     {
         LoadShop();
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
     public void Get()
     {
-        DataConfig.EffectIndex = id;
-        Debug.Log(DataConfig.EffectIndex);
+        DataConfig.ImageIndex = id;
+        Debug.Log(DataConfig.ImageIndex);
+        ImageCtr.instance.onGenerateGrid();
+        Home.SetActive(false);
     }
 
     public void Ads()
@@ -48,9 +42,9 @@ public class ShopMng : MonoBehaviour
         ClearShopContent(ShopContent2);
 
         // Loop through SkinItemData.Items and distribute items between ShopContent and ShopContent2
-        for (int i = 0; i < SkinItemData.Items.Count; i++)
+        for (int i = 0; i < ImageItemData.Items.Count; i++)
         {
-            ItemData item = SkinItemData.Items[i];
+            ItemData item = ImageItemData.Items[i];
             GameObject Item = Instantiate(ItemPrefab);
 
             if (i < itemsPerPage)
@@ -94,5 +88,11 @@ public class ShopMng : MonoBehaviour
         {
             Destroy(child.gameObject);
         }
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+
     }
 }
