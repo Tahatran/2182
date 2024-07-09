@@ -39,7 +39,10 @@ public class gridComponent : MonoBehaviour
         }
         else
         {
-            if (ImageCtr.instance.checkbulongorscrew)
+            //tools
+            //   if (ImageCtr.instance.checkbulongorscrew && gameObject.tag != "Untagged")
+            //tắt cái dưới này
+            if (ImageCtr.instance.checkbulongorscrew && gameObject.tag != "Untagged")
             {
                 // if (bulong == null)
                 // {

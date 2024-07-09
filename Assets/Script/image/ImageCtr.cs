@@ -177,7 +177,7 @@ public class ImageCtr : MonoBehaviour
 
     public void onGenerateObject()
     {
-
+        gen = false;
         // Lấy level hiện tại từ danh sách levels dựa trên giá trị lv lưu trong PlayerPrefs
         // var currentLevel = LVConfig.Instance.levels[0];
         var currentLevel = LVConfig.Instance.Imageslow[DataConfig.ImageIndex];
@@ -209,6 +209,7 @@ public class ImageCtr : MonoBehaviour
                 color.a = 255f;
                 // Gán lại màu cho SpriteRenderer
                 spriteRenderer.color = color;
+                targetGrid.tag = subLevel.color.ToString();
             }
         }
 

@@ -5,9 +5,10 @@ using UnityEngine;
 public class HomeMng : MonoBehaviour
 {
 
-    // public GameObject Home;
+    public GameObject ImageGameObject;
     public GameObject Skin;
     public GameObject Image;
+    public GameObject btnBack;
 
     public static HomeMng instance;
     private void Awake()
@@ -26,13 +27,24 @@ public class HomeMng : MonoBehaviour
     {
 
     }
+    public void btnBacktoImage()
+    {
+        btnBack.SetActive(false);
+        gameObject.SetActive(true);
+        btnImage();
+    }
+
     public void btncometoHome()
     {
+        ImageGameObject.SetActive(true);
         gameObject.SetActive(true);
+
     }
+
 
     public void btnLoadGame()
     {
+        ImageGameObject.SetActive(false);
         gameObject.SetActive(false);
         GameCtr.instance.autonextlvwhenwin();
     }

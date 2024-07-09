@@ -24,6 +24,7 @@ public class ImageMng : MonoBehaviour
         DataConfig.ImageIndex = id;
         Debug.Log(DataConfig.ImageIndex);
         ImageCtr.instance.onGenerateGrid();
+        HomeMng.instance.btnBack.SetActive(true);
         Home.SetActive(false);
     }
 
