@@ -36,6 +36,13 @@ public class HomeMng : MonoBehaviour
 
     public void btncometoHome()
     {
+        // GameCtr.instance.DisableAllColliders();
+        foreach (Transform child in GameCtr.instance.objectContainer.transform)
+        {
+            Destroy(child.gameObject);
+        }
+        GameCtr.instance.lstBulong.Clear();
+        GameCtr.instance.lstCrew.Clear();
         ImageGameObject.SetActive(true);
         gameObject.SetActive(true);
 

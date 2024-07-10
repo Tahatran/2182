@@ -7,9 +7,20 @@ using UnityEngine.SceneManagement;
 using DG.Tweening;
 using System;
 
+[System.Serializable]
+public class Serialization<T>
+{
+    public List<T> target;
+
+    public Serialization(List<T> target)
+    {
+        this.target = target;
+    }
+}
 public class GameCtr : MonoBehaviour
 {
     // adb shell setprop debug.firebase.analytics.app nami.screw.tinkerer.puzzlegame
+    public List<int> LstReward;
     [SerializeField] private GameObject levelText;
     [SerializeField] private GameObject levelText2;
     [SerializeField] private GameObject parentLevelText;
@@ -19,6 +30,8 @@ public class GameCtr : MonoBehaviour
     [SerializeField] private GameObject bgblue;
     [SerializeField] private GameObject UI;
     [SerializeField] private GameObject Winpanel;
+    [SerializeField] private GameObject Winpanel2;
+    [SerializeField] private GameObject btnNextlvAds;
     [SerializeField] private GameObject ScrewWin;
     [SerializeField] private GameObject WINtext;
     [SerializeField] private GameObject PLAYtext;
@@ -89,7 +102,8 @@ public class GameCtr : MonoBehaviour
         //     PlayerPrefs.SetInt("Check3ads", check3ads);
         // }
 
-
+        SaveReward();
+        LoadReward();
         DOTween.KillAll();
         Input.multiTouchEnabled = false;
         setUpLv();
@@ -100,6 +114,28 @@ public class GameCtr : MonoBehaviour
         GameFirebase.SendEvent("start_level", "id_level", PlayerPrefs.GetInt("lv").ToString());
         // Debug.Log("log-event-start_level----id_level: " + PlayerPrefs.GetInt("lv"));
         // StartCoroutine(DelayedGenerateGrid());
+    }
+    public void DisableAllColliders()
+    {
+        foreach (GameObject obj in lstCrew)
+        {
+            Collider collider = obj.GetComponent<Collider>();
+            if (collider != null)
+            {
+                collider.enabled = false;
+            }
+        }
+    }
+    public void EnbleAllColliders()
+    {
+        foreach (GameObject obj in lstCrew)
+        {
+            Collider collider = obj.GetComponent<Collider>();
+            if (collider != null)
+            {
+                collider.enabled = true;
+            }
+        }
     }
 
     public void loadgame()
@@ -679,7 +715,15 @@ public class GameCtr : MonoBehaviour
     private IEnumerator DelayedNextLevel(float delay)
     {
         yield return new WaitForSeconds(delay);
-        autonextlvwhenwin();
+        // autonextlvwhenwin();
+        Winpanel.SetActive(false);
+        Winpanel2.SetActive(true);
+        StartCoroutine(DelayedbtnNext(2f));
+    }
+    private IEnumerator DelayedbtnNext(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        btnNextlvAds.transform.DOLocalMoveY(-300f, 0.2f).SetEase(Ease.OutQuad);
     }
 
     public void autonextlvwhenwin()
@@ -689,6 +733,46 @@ public class GameCtr : MonoBehaviour
             Destroy(child.gameObject);
         }
         SceneManager.LoadScene(0);
+    }
+
+    public void autonextlvwhenwinAds()
+    {
+        // GameAds.Get.ShowRewardAd();
+        foreach (Transform child in gridContainer.transform)
+        {
+            Destroy(child.gameObject);
+        }
+        SceneManager.LoadScene(0);
+    }
+
+    //reward
+    public void SaveReward()
+    {
+        string json = JsonUtility.ToJson(new Serialization<int>(LstReward));
+        PlayerPrefs.SetString("Reward", json);
+        PlayerPrefs.Save();
+        Debug.Log("Rewards saved: " + json);
+    }
+    public void LoadReward()
+    {
+        // Đọc chuỗi JSON từ PlayerPrefs với key là "Reward"
+        string json = PlayerPrefs.GetString("Reward", "");
+
+        // Kiểm tra nếu chuỗi JSON không rỗng
+        if (!string.IsNullOrEmpty(json))
+        {
+            // Chuyển đổi chuỗi JSON thành đối tượng Serialization<int>
+            Serialization<int> serializedReward = JsonUtility.FromJson<Serialization<int>>(json);
+
+            // Lưu danh sách từ serializedReward.target vào LstReward
+            LstReward = serializedReward.target;
+
+            Debug.Log("Rewards loaded: " + json);
+        }
+        else
+        {
+            Debug.LogWarning("No rewards found in PlayerPrefs.");
+        }
     }
 
     // Coroutine to handle the delay and call the action
