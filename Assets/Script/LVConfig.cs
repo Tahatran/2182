@@ -2648,6 +2648,125 @@ new SubLevel {row= 0, col= 2, type= 1, color= 0},
             },
 
         };
-    }
 
+        Imageshigh = new List<Level>
+        {
+            new Level
+            {
+                lv = 1,
+                subLevelsLists = new List<List<SubLevel>>
+                {
+                    new List<SubLevel>
+                    {
+                        new SubLevel {row= 4, col= 3, type= 2, color= 6},
+                        new SubLevel {row= 5, col= 3, type= 1, color= 6},
+                        new SubLevel {row= 5, col= 3, type= 2, color= 2},
+                    },
+                },
+
+            },
+            new Level
+            {
+                lv = 2,
+                subLevelsLists = new List<List<SubLevel>>
+                {
+                     new List<SubLevel>
+                    {
+                        new SubLevel {row= 0, col= 6, type= 1, color= 7},
+                        new SubLevel {row= 0, col= 6, type= 2, color= 6},
+                        new SubLevel {row= 1, col= 2, type= 1, color= 6},
+                        new SubLevel {row= 1, col= 2, type= 2, color= 2},
+                        new SubLevel {row= 2, col= 3, type= 1, color= 4},
+                        new SubLevel {row= 2, col= 3, type= 2, color= 2},
+                        new SubLevel {row= 6, col= 2, type= 1, color= 2},
+                        new SubLevel {row= 6, col= 2, type= 2, color= 7},
+                        new SubLevel {row= 6, col= 3, type= 2, color= 4},
+                        new SubLevel {row= 9, col= 1, type= 1, color= 2},
+                        new SubLevel {row= 9, col= 1, type= 2, color= 6},
+
+                    },
+                },
+
+            },
+            new Level
+            {
+                lv = 3,
+                subLevelsLists = new List<List<SubLevel>>
+                {
+                     new List<SubLevel>
+                    {
+                        new SubLevel {row= 1, col= 4, type= 1, color= 1},
+                        new SubLevel {row= 1, col= 4, type= 2, color= 7},
+                        new SubLevel {row= 2, col= 1, type= 1, color= 3},
+                        new SubLevel {row= 2, col= 1, type= 2, color= 5},
+                        new SubLevel {row= 2, col= 3, type= 1, color= 7},
+                        new SubLevel {row= 2, col= 3, type= 2, color= 6},
+                        new SubLevel {row= 2, col= 4, type= 1, color= 4},
+                        new SubLevel {row= 2, col= 4, type= 2, color= 7},
+                        new SubLevel {row= 3, col= 4, type= 1, color= 3},
+                        new SubLevel {row= 3, col= 4, type= 2, color= 7},
+                        new SubLevel {row= 3, col= 5, type= 1, color= 5},
+                        new SubLevel {row= 3, col= 5, type= 2, color= 3},
+                        new SubLevel {row= 3, col= 6, type= 1, color= 6},
+                        new SubLevel {row= 3, col= 6, type= 2, color= 1},
+                        new SubLevel {row= 4, col= 2, type= 2, color= 4},
+                        new SubLevel {row= 6, col= 1, type= 1, color= 7},
+                        new SubLevel {row= 6, col= 1, type= 2, color= 3},
+
+                    },
+                },
+
+            },
+            new Level
+            {
+                lv = 4,
+                subLevelsLists = new List<List<SubLevel>>
+                {
+                     new List<SubLevel>
+                    {
+                        new SubLevel {row= 0, col= 0, type= 1, color= 7},
+                        new SubLevel {row= 0, col= 0, type= 2, color= 6},
+                        new SubLevel {row= 0, col= 2, type= 1, color= 4},
+                        new SubLevel {row= 0, col= 2, type= 2, color= 1},
+                        new SubLevel {row= 1, col= 1, type= 1, color= 6},
+                        new SubLevel {row= 1, col= 1, type= 2, color= 7},
+                        new SubLevel {row= 1, col= 4, type= 1, color= 6},
+                        new SubLevel {row= 1, col= 4, type= 2, color= 4},
+                        new SubLevel {row= 1, col= 6, type= 1, color= 1},
+                        new SubLevel {row= 1, col= 6, type= 2, color= 7},
+                        new SubLevel {row= 4, col= 0, type= 1, color= 3},
+                        new SubLevel {row= 4, col= 0, type= 2, color= 4},
+                        new SubLevel {row= 5, col= 3, type= 1, color= 2},
+                        new SubLevel {row= 5, col= 3, type= 2, color= 6},
+                        new SubLevel {row= 6, col= 1, type= 1, color= 6},
+                        new SubLevel {row= 6, col= 1, type= 2, color= 3},
+                        new SubLevel {row= 7, col= 0, type= 1, color= 7},
+                        new SubLevel {row= 7, col= 0, type= 2, color= 6},
+                        new SubLevel {row= 8, col= 3, type= 2, color= 1},
+                        new SubLevel {row= 8, col= 4, type= 1, color= 1},
+                        new SubLevel {row= 8, col= 4, type= 2, color= 6},
+                        new SubLevel {row= 9, col= 2, type= 1, color= 4},
+                        new SubLevel {row= 9, col= 2, type= 2, color= 2},
+
+                    },
+
+                },
+
+            },
+
+        };
+    }
+    public void ReplaceSubLevels(int levelIndex, List<SubLevel> newSubLevels)
+    {
+        foreach (Level level in Imageshigh)
+        {
+            if (level.lv == levelIndex)
+            {
+                level.subLevelsLists.Clear();
+                level.subLevelsLists.Add(newSubLevels);
+                Debug.Log("Replaced SubLevels for Level " + levelIndex);
+                break;
+            }
+        }
+    }
 }

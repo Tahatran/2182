@@ -5,6 +5,8 @@ using TMPro.Examples;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Text.RegularExpressions;
+
 
 public class ImageCtr : MonoBehaviour
 {
@@ -19,6 +21,7 @@ public class ImageCtr : MonoBehaviour
     public bool gen;
     private string textLevelstring = "";
     //list cac oc de chon
+    public List<Sprite> ScrewColor;
     public List<GameObject> lstScewImage;
 
     //not cha
@@ -140,6 +143,7 @@ public class ImageCtr : MonoBehaviour
                     TextLevel.GetComponent<TextMeshProUGUI>().text = textLevelstring;
                 }
             }
+
         }
         else
         {
@@ -149,50 +153,123 @@ public class ImageCtr : MonoBehaviour
                 gridComponent grid = lstGrid[i].GetComponent<gridComponent>();
                 if (grid.bulong != null)
                 {
-                    Debug.Log(lstGrid[i].GetComponent<GridPrefab>().row);
-                    Debug.Log(lstGrid[i].GetComponent<GridPrefab>().col);
-                    Debug.Log(grid.bulong.tag);
+                    // Debug.Log(lstGrid[i].GetComponent<GridPrefab>().row);
+                    // Debug.Log(lstGrid[i].GetComponent<GridPrefab>().col);
+                    // Debug.Log(grid.bulong.tag);
 
                     string text = "new SubLevel {row= " + lstGrid[i].GetComponent<GridPrefab>().row + ", col=" + lstGrid[i].GetComponent<GridPrefab>().col + ", type= 2, color= " + grid.bulong.tag + "},\n";
                     textLevelstring += text;
-                    Debug.Log(textLevelstring);
+                    // Debug.Log(textLevelstring);
                     TextLevel.GetComponent<TextMeshProUGUI>().text = textLevelstring;
                     // Debug.Log(TextLevel);
                     // Debug.Log(TextLevel.text);
                 }
                 if (grid.screw != null)
                 {
-                    Debug.Log(lstGrid[i].GetComponent<GridPrefab>().row);
-                    Debug.Log(lstGrid[i].GetComponent<GridPrefab>().col);
-                    Debug.Log(grid.screw.tag);
+                    // Debug.Log(lstGrid[i].GetComponent<GridPrefab>().row);
+                    // Debug.Log(lstGrid[i].GetComponent<GridPrefab>().col);
+                    // Debug.Log(grid.screw.tag);
 
                     string text = "new SubLevel {row= " + lstGrid[i].GetComponent<GridPrefab>().row + ", col=" + lstGrid[i].GetComponent<GridPrefab>().col + ", type= 1, color= " + grid.screw.tag + "},\n";
                     textLevelstring += text;
-                    Debug.Log(textLevelstring);
+                    // Debug.Log(textLevelstring);
                     TextLevel.GetComponent<TextMeshProUGUI>().text = textLevelstring;
                 }
             }
+            if (DataConfig.ImageIndex == 0)
+            {
+                PlayerPrefs.SetString("0", textLevelstring);
+            }
+            else if (DataConfig.ImageIndex == 1)
+            {
+                PlayerPrefs.SetString("1", textLevelstring);
+            }
+            else if (DataConfig.ImageIndex == 2)
+            {
+                PlayerPrefs.SetString("2", textLevelstring);
+            }
+            else if (DataConfig.ImageIndex == 3)
+            {
+                PlayerPrefs.SetString("3", textLevelstring);
+            }
+            PlayerPrefs.Save();
+            // Debug để kiểm tra
+            // Debug.Log("Saved Level Data: " + textLevelstring);
+            //goi luc an get image
+            // LoadLevelData(DataConfig.ImageIndex);
         }
+    }
+
+    public void LoadLevelData(int a)
+    {
+        // Tải textLevelstring từ PlayerPrefs
+        string loadedTextLevelstring = PlayerPrefs.GetString(a.ToString(), "");
+        // Debug.Log("Loaded Level Data: " + loadedTextLevelstring);
+
+        // Chuyển đổi dữ liệu đã tải về thành danh sách SubLevel
+        List<SubLevel> newSubLevels = ParseSubLevelsFromString(loadedTextLevelstring);
+        // Debug.Log(newSubLevels.Count);
+        // foreach (SubLevel subLevel in newSubLevels)
+        // {
+        //     // Debug.Log("aa");
+        //     Debug.Log($"SubLevel: row={subLevel.row}, col={subLevel.col}, type={subLevel.type}, color={subLevel.color}");
+        // }
+
+
+        // Thay thế các SubLevel hiện có trong Imageshigh
+        if (a < LVConfig.instance.Imageshigh.Count)
+        {
+            LVConfig.instance.Imageshigh[a].subLevelsLists.Clear();
+            LVConfig.instance.Imageshigh[a].subLevelsLists.Add(newSubLevels); // Thêm danh sách mới vào
+            foreach (List<SubLevel> subLevels in LVConfig.instance.Imageshigh[a].subLevelsLists)
+            {
+                foreach (SubLevel subLevel in subLevels)
+                {
+                    Debug.Log($"SubLevel: row={subLevel.row}, col={subLevel.col}, type={subLevel.type}, color={subLevel.color}");
+                }
+            }
+        }
+        else
+        {
+            Debug.LogWarning($"Level index {a} is out of range for Imageshigh.");
+        }
+    }
+
+    // Hàm này chuyển đổi một chuỗi đầu vào chứa dữ liệu SubLevel thành một danh sách các đối tượng SubLevel
+    List<SubLevel> ParseSubLevelsFromString(string subLevelsString)
+    {
+        List<SubLevel> subLevels = new List<SubLevel>();
+
+        // Adjusted pattern to handle spaces around '=' and '{}'
+        string pattern = @"new SubLevel\s*{\s*row\s*=\s*(\d+)\s*,\s*col\s*=\s*(\d+)\s*,\s*type\s*=\s*(\d+)\s*,\s*color\s*=\s*(\d+)\s*}";
+
+        MatchCollection matches = Regex.Matches(subLevelsString, pattern);
+
+        // Debug log to check the number of matches found
+        // Debug.Log($"Number of matches found: {matches.Count}");
+
+        foreach (Match match in matches)
+        {
+            SubLevel subLevel = new SubLevel
+            {
+                row = int.Parse(match.Groups[1].Value),
+                col = int.Parse(match.Groups[2].Value),
+                type = int.Parse(match.Groups[3].Value),
+                color = int.Parse(match.Groups[4].Value)
+            };
+
+            subLevels.Add(subLevel);
+        }
+
+        return subLevels;
     }
 
     public void onGenerateObject()
     {
         gen = false;
-        // Lấy level hiện tại từ danh sách levels dựa trên giá trị lv lưu trong PlayerPrefs
-        // var currentLevel = LVConfig.Instance.levels[0];
         var currentLevel = LVConfig.Instance.Imageslow[DataConfig.ImageIndex];
-
-        //dễ nhất lv2
-        // var currentLevel = LVConfig.Instance.levels[0];
-        // Chọn ngẫu nhiên một sub-level từ danh sách sub-levels của level hiện tại
-        // int randomSubLevelIndex = Random.Range(0, currentLevel.subLevelsLists.Count);
         int randomSubLevelIndex = 0;
         var subLevels = currentLevel.subLevelsLists[randomSubLevelIndex];
-
-        // Cập nhật text của Map với chỉ số sub-level được chọn
-        // Map.text = "Map: " + randomSubLevelIndex.ToString();
-        // Debug.Log("Map: " + randomSubLevelIndex);
-
         // Duyệt qua từng phần tử trong subLevels
         foreach (var subLevel in subLevels)
         {
@@ -212,8 +289,37 @@ public class ImageCtr : MonoBehaviour
                 targetGrid.tag = subLevel.color.ToString();
             }
         }
+        onGenerateObjectSave();
+    }
 
-        // ReadTags();
+    public void onGenerateObjectSave()
+    {
+        gen = false;
+        var currentLevel = LVConfig.Instance.Imageshigh[DataConfig.ImageIndex];
+        int randomSubLevelIndex = 0;
+        var subLevels = currentLevel.subLevelsLists[randomSubLevelIndex];
+        // Duyệt qua từng phần tử trong subLevels
+        foreach (var subLevel in subLevels)
+        {
+            // Tìm grid tương ứng với vị trí của subLevel (dựa trên row và col)
+            var targetGrid = lstGrid.Find(grid => grid.row == subLevel.row && grid.col == subLevel.col);
+
+            // Nếu tìm thấy targetGrid
+            if (targetGrid)
+            {
+                targetGrid.GetComponent<SpriteRenderer>().sprite = ScrewColor[subLevel.color];
+                targetGrid.GetComponent<SpriteRenderer>().color = Color.white;
+                targetGrid.GetComponent<Transform>().rotation = Quaternion.Euler(0f, 0f, 0f);
+                targetGrid.transform.localScale = new Vector3(0.25f, 0.25f, 0.25f);
+                targetGrid.tag = subLevel.color.ToString();
+                targetGrid.GetComponent<gridComponent>().bulong = targetGrid.gameObject;
+                foreach (Transform child in targetGrid.transform)
+                {
+                    child.gameObject.transform.rotation = Quaternion.Euler(0f, 0f, 0f);
+                }
+            }
+        }
+
     }
     public void Edit()
     {

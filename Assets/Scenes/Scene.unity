@@ -6153,6 +6153,15 @@ MonoBehaviour:
   Delete1: 0
   Delete2: 0
   gen: 0
+  ScrewColor:
+  - {fileID: 21300000, guid: 231173c525638c240a323af208ac5aee, type: 3}
+  - {fileID: 21300000, guid: 231173c525638c240a323af208ac5aee, type: 3}
+  - {fileID: 21300000, guid: 231173c525638c240a323af208ac5aee, type: 3}
+  - {fileID: 21300000, guid: 231173c525638c240a323af208ac5aee, type: 3}
+  - {fileID: 21300000, guid: 231173c525638c240a323af208ac5aee, type: 3}
+  - {fileID: 21300000, guid: 231173c525638c240a323af208ac5aee, type: 3}
+  - {fileID: 21300000, guid: 231173c525638c240a323af208ac5aee, type: 3}
+  - {fileID: 21300000, guid: 231173c525638c240a323af208ac5aee, type: 3}
   lstScewImage: []
   objectContainer: {fileID: 2138127864}
   gridContainer: {fileID: 1784024379}
