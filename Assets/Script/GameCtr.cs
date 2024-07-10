@@ -961,11 +961,20 @@ public class GameCtr : MonoBehaviour
         {
             // Tìm và cập nhật sprite của Screw
             var scew = obj.transform.Find("Screw").GetComponent<SpriteRenderer>();
-            scew.sprite = LVConfig.Instance.ScewColor[colorIndex];
-            if (colorIndex == 7)
+            if (DataConfig.EffectIndex == 0)
             {
-                obj.transform.Find("Screw").GetComponent<Transform>().rotation = Quaternion.Euler(0f, 0f, 0f);
+                scew.sprite = LVConfig.Instance.ScewColor[colorIndex];
+                if (colorIndex == 7)
+                {
+                    obj.transform.Find("Screw").GetComponent<Transform>().rotation = Quaternion.Euler(0f, 0f, 0f);
+                }
             }
+            else
+            {
+                scew.sprite = LVConfig.Instance.ScewColorNew[colorIndex];
+            }
+
+
             obj.tag = colorIndex.ToString();
         }
     }

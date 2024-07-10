@@ -46,6 +46,7 @@ public class LVConfig : MonoBehaviour
     public List<List<Sprite>> BulongColorFace2 = new List<List<Sprite>>();
 
     public List<Sprite> ScewColor;
+    public List<Sprite> ScewColorNew;
     public static LVConfig instance;
     public static LVConfig Instance
     {
