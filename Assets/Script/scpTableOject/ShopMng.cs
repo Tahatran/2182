@@ -13,7 +13,9 @@ public class ShopMng : MonoBehaviour
     public GameObject ShopContent2;
     public GameObject ItemPrefab;
     public GameObject btnAds;
-    private int id;
+    public List<GameObject> lstSkin;
+    public int id;
+    public int idSelecSkinLock;
 
     // Start is called before the first frame update
     void Start()
@@ -36,6 +38,9 @@ public class ShopMng : MonoBehaviour
     public void Ads()
     {
         // Show ads logic here
+        lstSkin[idSelecSkinLock].transform.GetChild(0).gameObject.SetActive(false);
+        SkinItemData.Items[idSelecSkinLock].IsBuy = true;
+        LoadShop();
         btnAds.SetActive(false);
     }
 
@@ -46,13 +51,13 @@ public class ShopMng : MonoBehaviour
         // Clear existing items in both ShopContent and ShopContent2
         ClearShopContent(ShopContent);
         ClearShopContent(ShopContent2);
-
+        lstSkin.Clear();
         // Loop through SkinItemData.Items and distribute items between ShopContent and ShopContent2
         for (int i = 0; i < SkinItemData.Items.Count; i++)
         {
             ItemData item = SkinItemData.Items[i];
             GameObject Item = Instantiate(ItemPrefab);
-
+            lstSkin.Add(Item);
             if (i < itemsPerPage)
             {
                 // Add item to ShopContent
@@ -72,15 +77,23 @@ public class ShopMng : MonoBehaviour
 
                     id = item.Id; // Set the ID for purchasing
                     Debug.Log("aa" + id);
-                    Item.transform.GetChild(0).gameObject.SetActive(true); // Activate some UI element
+                    btnAds.SetActive(false);
+                    // Item.transform.GetChild(0).gameObject.SetActive(true); // Activate some UI element
                 });
             }
             else
             {
-                Debug.Log("bb");
-                // Handle non-buyable items
-                btnAds.SetActive(true); // Example: activate an ad button
-                Item.transform.GetChild(0).gameObject.SetActive(true); // Activate some UI element
+                Item.GetComponent<Image>().sprite = item.ItemImg;
+                Item.transform.GetChild(0).gameObject.SetActive(true);
+                Item.GetComponent<Button>().onClick.AddListener(() =>
+               {
+                   idSelecSkinLock = item.Id;
+                   Debug.Log("bb" + idSelecSkinLock);
+                   // Handle non-buyable items
+                   btnAds.SetActive(true); // Example: activate an ad button
+                                           //    Item.transform.GetChild(0).gameObject.SetActive(true); // Activate some UI element
+               });
+
             }
         }
 

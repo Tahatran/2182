@@ -88,7 +88,8 @@ public class GameCtr : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        // GameAds.Get.ShowBanner();
+        //tools tắt
+        GameAds.Get.ShowBanner();
         // if (checkads == true)
         // {
         //     GameAds.Get.ShowInterstitialAd();
@@ -877,6 +878,13 @@ public class GameCtr : MonoBehaviour
                         instantiatedObject.GetComponent<Screw>().col = subLevel.col;
                         instantiatedObject.GetComponent<Screw>().row = subLevel.row;
                         lstCrew.Add(instantiatedObject);
+
+                        //can thiet thi scale o day
+                        // if (DataConfig.EffectIndex != 0)
+                        // {
+                        //     instantiatedObject.transform.localScale = new Vector3(0.3f, 0.3f, 0.3f);
+                        // }
+
                     }
                 }
             }
@@ -971,6 +979,7 @@ public class GameCtr : MonoBehaviour
             }
             else
             {
+                obj.transform.rotation = Quaternion.Euler(0f, 0f, -90f);
                 scew.sprite = LVConfig.Instance.ScewColorNew[colorIndex];
             }
 

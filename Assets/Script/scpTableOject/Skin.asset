@@ -22,35 +22,35 @@ MonoBehaviour:
     ItemImg: {fileID: 869841301, guid: b2b95517eaeb97b47a4fc02aefb05bed, type: 3}
     ItemPrefab: {fileID: 4105357760606371290, guid: b00899c6bb3390449b2faf555a454768, type: 3}
   - Id: 2
-    IsBuy: 0
+    IsBuy: 1
     ItemImg: {fileID: -729212431, guid: b2b95517eaeb97b47a4fc02aefb05bed, type: 3}
     ItemPrefab: {fileID: 4105357760606371290, guid: b00899c6bb3390449b2faf555a454768, type: 3}
   - Id: 3
     IsBuy: 1
     ItemImg: {fileID: 665304196, guid: b2b95517eaeb97b47a4fc02aefb05bed, type: 3}
     ItemPrefab: {fileID: 4105357760606371290, guid: b00899c6bb3390449b2faf555a454768, type: 3}
-  - Id: 3
-    IsBuy: 1
+  - Id: 4
+    IsBuy: 0
     ItemImg: {fileID: 665304196, guid: b2b95517eaeb97b47a4fc02aefb05bed, type: 3}
     ItemPrefab: {fileID: 4105357760606371290, guid: b00899c6bb3390449b2faf555a454768, type: 3}
-  - Id: 3
-    IsBuy: 1
+  - Id: 5
+    IsBuy: 0
     ItemImg: {fileID: 665304196, guid: b2b95517eaeb97b47a4fc02aefb05bed, type: 3}
     ItemPrefab: {fileID: 4105357760606371290, guid: b00899c6bb3390449b2faf555a454768, type: 3}
-  - Id: 3
-    IsBuy: 1
+  - Id: 6
+    IsBuy: 0
     ItemImg: {fileID: 665304196, guid: b2b95517eaeb97b47a4fc02aefb05bed, type: 3}
     ItemPrefab: {fileID: 4105357760606371290, guid: b00899c6bb3390449b2faf555a454768, type: 3}
-  - Id: 3
-    IsBuy: 1
+  - Id: 7
+    IsBuy: 0
     ItemImg: {fileID: 665304196, guid: b2b95517eaeb97b47a4fc02aefb05bed, type: 3}
     ItemPrefab: {fileID: 4105357760606371290, guid: b00899c6bb3390449b2faf555a454768, type: 3}
-  - Id: 3
-    IsBuy: 1
+  - Id: 8
+    IsBuy: 0
     ItemImg: {fileID: 665304196, guid: b2b95517eaeb97b47a4fc02aefb05bed, type: 3}
     ItemPrefab: {fileID: 4105357760606371290, guid: b00899c6bb3390449b2faf555a454768, type: 3}
-  - Id: 3
-    IsBuy: 1
+  - Id: 9
+    IsBuy: 0
     ItemImg: {fileID: 665304196, guid: b2b95517eaeb97b47a4fc02aefb05bed, type: 3}
     ItemPrefab: {fileID: 4105357760606371290, guid: b00899c6bb3390449b2faf555a454768, type: 3}
-  lockImg: {fileID: 21300000, guid: 7da4c3e9c2103da4fb3d1c7716d09066, type: 3}
+  lockImg: {fileID: 21300000, guid: 3de0150a48e65974c8a2a9afa78bf8ee, type: 3}
