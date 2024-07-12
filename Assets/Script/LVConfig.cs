@@ -41,6 +41,10 @@ public class LVConfig : MonoBehaviour
     public List<Sprite> BulongFaceColor31;
     public List<Sprite> BulongFaceColor32;
 
+    public List<Sprite> BulongBodyColor4;
+    public List<Sprite> BulongFaceColor41;
+    public List<Sprite> BulongFaceColor42;
+
     public List<List<Sprite>> BulongBody = new List<List<Sprite>>();
     public List<List<Sprite>> BulongColorFace = new List<List<Sprite>>();
     public List<List<Sprite>> BulongColorFace2 = new List<List<Sprite>>();
@@ -80,16 +84,20 @@ public class LVConfig : MonoBehaviour
         BulongBody.Add(BulongBodyColor1);
         BulongBody.Add(BulongBodyColor2);
         BulongBody.Add(BulongBodyColor3);
+        BulongBody.Add(BulongBodyColor4);
+
 
         BulongColorFace.Add(BulongFaceColor);
         BulongColorFace.Add(BulongFaceColor11);
         BulongColorFace.Add(BulongFaceColor21);
         BulongColorFace.Add(BulongFaceColor31);
+        BulongColorFace.Add(BulongFaceColor41);
 
         BulongColorFace2.Add(BulongFaceColor2);
         BulongColorFace2.Add(BulongFaceColor12);
         BulongColorFace2.Add(BulongFaceColor22);
         BulongColorFace2.Add(BulongFaceColor32);
+        BulongColorFace2.Add(BulongFaceColor42);
 
     }
 
@@ -2757,17 +2765,17 @@ new SubLevel {row= 0, col= 2, type= 1, color= 0},
 
         };
     }
-    public void ReplaceSubLevels(int levelIndex, List<SubLevel> newSubLevels)
-    {
-        foreach (Level level in Imageshigh)
-        {
-            if (level.lv == levelIndex)
-            {
-                level.subLevelsLists.Clear();
-                level.subLevelsLists.Add(newSubLevels);
-                Debug.Log("Replaced SubLevels for Level " + levelIndex);
-                break;
-            }
-        }
-    }
+    // public void ReplaceSubLevels(int levelIndex, List<SubLevel> newSubLevels)
+    // {
+    //     foreach (Level level in Imageshigh)
+    //     {
+    //         if (level.lv == levelIndex)
+    //         {
+    //             level.subLevelsLists.Clear();
+    //             level.subLevelsLists.Add(newSubLevels);
+    //             Debug.Log("Replaced SubLevels for Level " + levelIndex);
+    //             break;
+    //         }
+    //     }
+    // }
 }

@@ -30,7 +30,7 @@ public class gridComponent : MonoBehaviour
             gameObject.GetComponent<SpriteRenderer>().sprite = ImageCtr.instance.HexagridPrefab.GetComponentInChildren<SpriteRenderer>().sprite;
             gameObject.GetComponent<SpriteRenderer>().color = ImageCtr.instance.HexagridPrefab.GetComponentInChildren<SpriteRenderer>().color;
             gameObject.GetComponent<Transform>().rotation = Quaternion.Euler(0f, 0f, 90f);
-            gameObject.transform.localScale = new Vector3(0.2f, 0.2f, 0.2f);
+            gameObject.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
             foreach (Transform child in gameObject.transform)
             {
                 child.gameObject.transform.rotation = Quaternion.Euler(0f, 0f, 0f);
@@ -40,9 +40,9 @@ public class gridComponent : MonoBehaviour
         else
         {
             //tools
-            //   if (ImageCtr.instance.checkbulongorscrew && gameObject.tag != "Untagged")
-            //tắt cái dưới này
             if (ImageCtr.instance.checkbulongorscrew && gameObject.tag != "Untagged")
+            //tools xóa điều kiện và đi
+            // if (ImageCtr.instance.checkbulongorscrew)
             {
                 // if (bulong == null)
                 // {
@@ -59,7 +59,7 @@ public class gridComponent : MonoBehaviour
                 gameObject.GetComponent<SpriteRenderer>().sprite = ImageCtr.instance.objinstance.GetComponentInChildren<SpriteRenderer>().sprite;
                 gameObject.GetComponent<SpriteRenderer>().color = ImageCtr.instance.objinstance.GetComponentInChildren<SpriteRenderer>().color;
                 gameObject.GetComponent<Transform>().rotation = Quaternion.Euler(0f, 0f, 0f);
-                gameObject.transform.localScale = new Vector3(0.25f, 0.25f, 0.25f);
+                gameObject.transform.localScale = new Vector3(0.15f, 0.15f, 0.15f);
                 gameObject.tag = ImageCtr.instance.objinstance.tag;
                 bulong = gameObject;
                 foreach (Transform child in gameObject.transform)

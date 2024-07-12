@@ -111,6 +111,7 @@ public class GameCtr : MonoBehaviour
         // lv = 1;
         // PlayerPrefs.SetInt("lv", lv);
         SetLevelText(parentLevelText);
+        //tools thì tắt
         loadgame();
         GameFirebase.SendEvent("start_level", "id_level", PlayerPrefs.GetInt("lv").ToString());
         // Debug.Log("log-event-start_level----id_level: " + PlayerPrefs.GetInt("lv"));
@@ -144,7 +145,7 @@ public class GameCtr : MonoBehaviour
 
         UI.transform.DOMoveY(-0.1f, 0.3f).SetEase(Ease.OutQuad).OnUpdate(() =>
         {
-            SoundandReplay.GetComponent<RectTransform>().DOAnchorPosY(-115, 0.3f).SetEase(Ease.OutQuad);
+            SoundandReplay.GetComponent<RectTransform>().DOAnchorPosY(-105, 0.3f).SetEase(Ease.OutQuad);
         })
         .OnComplete(() =>
                   {

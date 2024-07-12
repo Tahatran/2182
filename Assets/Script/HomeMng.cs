@@ -6,8 +6,12 @@ public class HomeMng : MonoBehaviour
 {
 
     public GameObject ImageGameObject;
+    public GameObject Home;
+    public GameObject HomeSelect;
     public GameObject Skin;
+    public GameObject SkinSelect;
     public GameObject Image;
+    public GameObject ImgageSelect;
     public GameObject btnBack;
 
     public static HomeMng instance;
@@ -29,6 +33,7 @@ public class HomeMng : MonoBehaviour
     }
     public void btnBacktoImage()
     {
+        ImageCtr.instance.GenLevelfromGrid();
         btnBack.SetActive(false);
         gameObject.SetActive(true);
         btnImage();
@@ -37,6 +42,7 @@ public class HomeMng : MonoBehaviour
     public void btncometoHome()
     {
         // GameCtr.instance.DisableAllColliders();
+
         foreach (Transform child in GameCtr.instance.objectContainer.transform)
         {
             Destroy(child.gameObject);
@@ -58,20 +64,30 @@ public class HomeMng : MonoBehaviour
 
     public void btnHome()
     {
+        // Home.SetActive(true);
+        HomeSelect.SetActive(true);
         Skin.SetActive(false);
+        SkinSelect.SetActive(false);
+        ImgageSelect.SetActive(false);
         Image.SetActive(false);
     }
 
     public void btnSkin()
     {
+        SkinSelect.SetActive(true);
         Skin.SetActive(true);
         Image.SetActive(false);
+        HomeSelect.SetActive(false);
+        ImgageSelect.SetActive(false);
     }
 
     public void btnImage()
     {
+        ImgageSelect.SetActive(true);
         Skin.SetActive(false);
         Image.SetActive(true);
+        HomeSelect.SetActive(false);
+        SkinSelect.SetActive(false);
     }
 
     // Update is called once per frame

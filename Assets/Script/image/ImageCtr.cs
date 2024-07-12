@@ -11,6 +11,7 @@ using System.Text.RegularExpressions;
 public class ImageCtr : MonoBehaviour
 {
     //
+    public Texture2D image;
     public GameObject TextLevel;
     public GameObject btnDelete;
     public GameObject btnDelete2;
@@ -72,9 +73,82 @@ public class ImageCtr : MonoBehaviour
         // btnGen1.GetComponent<Button>().onClick.AddListener(GenMap1);
         // btnGen2.GetComponent<Button>().onClick.AddListener(GenMap2);
 
+        // if (image != null)
+        // {
+        //     Debug.Log("Image assigned, generating grid...");
+        //     onGenerateGrid(image);
+        // }
+        // else
+        // {
+        //     Debug.LogError("Image not assigned in the Inspector");
+        // }
 
 
     }
+    public Sprite[] SliceImage(Texture2D image, int rows, int cols)
+    {
+        int width = image.width / cols;
+        int height = image.height / rows;
+        Sprite[] sprites = new Sprite[rows * cols];
+
+        for (int i = 0; i < rows; i++)
+        {
+            for (int j = 0; j < cols; j++)
+            {
+                Rect rect = new Rect(j * width, i * height, width, height);
+                sprites[i * cols + j] = Sprite.Create(image, rect, new Vector2(0.5f, 0.5f));
+                Debug.Log($"Created sprite for cell ({i}, {j}) with rect: {rect}");
+            }
+        }
+
+        return sprites;
+    }
+    public void onGenerateGrid(Texture2D image)
+    {
+        Sprite[] hexagonSprites = SliceImage(image, rowNumber, colNumber);
+
+        for (int i = 0; i < rowNumber; i++)
+        {
+            for (int j = 0; j < colNumber; j++)
+            {
+                // Calculate the position of each hexagon
+                // float xPos = j * hexWidth * 0.21f;
+                // float yPos = i * hexHeight * 0.64f;
+                float xPos = j * hexWidth * 0.1f;
+                float yPos = i * hexHeight * 0.3f;
+
+                // Offset position for odd columns
+                // if (j % 2 == 1)
+                // {
+                //     yPos += hexHeight / 2.5f;
+                // }
+
+                var tempGrid = Instantiate(HexagridPrefab, gridContainer.transform);
+                tempGrid.transform.localScale = new Vector3(0.2f, 0.2f, 0.2f);
+                tempGrid.transform.localPosition = new Vector3(xPos, yPos, 10);
+
+                // Apply the corresponding sprite to the hexagon
+                var gridRender = tempGrid.GetComponent<GridPrefab>();
+                gridRender.col = j;
+                gridRender.row = i;
+
+                if (i * colNumber + j < hexagonSprites.Length)
+                {
+                    tempGrid.GetComponent<SpriteRenderer>().sprite = hexagonSprites[i * colNumber + j];
+                    Debug.Log($"Assigned sprite to hexagon at ({i}, {j})");
+                }
+                else
+                {
+                    Debug.LogWarning($"Sprite index out of range for hexagon at ({i}, {j})");
+                }
+
+                tempGrid.GetComponent<SpriteRenderer>().sortingOrder = 8;
+                lstGrid.Add(gridRender);
+            }
+        }
+    }
+
+
 
     public void onGenerateGrid()
     {
@@ -83,16 +157,17 @@ public class ImageCtr : MonoBehaviour
             for (int j = 0; j < colNumber; j++)
             {
                 // Tính toán vị trí của từng hexagon
-                float xPos = j * hexWidth * 0.25f;
-                float yPos = i * hexHeight;
+                float xPos = j * hexWidth * 0.152f;
+                float yPos = i * hexHeight * 0.62f;
 
                 // Nếu hàng là hàng lẻ thì dịch chuyển vị trí của hexagon
                 if (j % 2 == 1)
                 {
-                    yPos += hexHeight / 2;
+                    yPos += hexHeight / 3f;
                 }
 
                 var tempGrid = Instantiate(HexagridPrefab, gridContainer.transform);
+                tempGrid.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
                 tempGrid.transform.localPosition = new Vector3(xPos, yPos, 10);
                 var gridRender = tempGrid.GetComponent<GridPrefab>();
                 gridRender.col = j;
@@ -126,8 +201,9 @@ public class ImageCtr : MonoBehaviour
 
                     string text = "new SubLevel {row= " + GameCtr.instance.lstGrid[i].GetComponent<GridPrefab>().row + ", col=" + GameCtr.instance.lstGrid[i].GetComponent<GridPrefab>().col + ", type= 2, color= " + grid.bulong.tag + "},\n";
                     textLevelstring += text;
-                    Debug.Log(textLevelstring);
-                    TextLevel.GetComponent<TextMeshProUGUI>().text = textLevelstring;
+                    //tools
+                    // Debug.Log(textLevelstring);
+                    // TextLevel.GetComponent<TextMeshProUGUI>().text = textLevelstring;
                     // Debug.Log(TextLevel);
                     // Debug.Log(TextLevel.text);
                 }
@@ -139,8 +215,9 @@ public class ImageCtr : MonoBehaviour
 
                     string text = "new SubLevel {row= " + GameCtr.instance.lstGrid[i].GetComponent<GridPrefab>().row + ", col=" + GameCtr.instance.lstGrid[i].GetComponent<GridPrefab>().col + ", type= 1, color= " + grid.screw.tag + "},\n";
                     textLevelstring += text;
-                    Debug.Log(textLevelstring);
-                    TextLevel.GetComponent<TextMeshProUGUI>().text = textLevelstring;
+                    //tools
+                    // Debug.Log(textLevelstring);
+                    // TextLevel.GetComponent<TextMeshProUGUI>().text = textLevelstring;
                 }
             }
 
