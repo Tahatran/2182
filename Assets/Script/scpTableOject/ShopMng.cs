@@ -74,11 +74,12 @@ public class ShopMng : MonoBehaviour
                 Item.GetComponent<Image>().sprite = item.ItemImg;
                 Item.GetComponent<Button>().onClick.AddListener(() =>
                 {
-
+                    DeactivateAllItems();
                     id = item.Id; // Set the ID for purchasing
                     Debug.Log("aa" + id);
                     btnAds.SetActive(false);
-                    // Item.transform.GetChild(0).gameObject.SetActive(true); // Activate some UI element
+                    Item.transform.GetChild(2).gameObject.SetActive(true); // Activate some UI element
+
                 });
             }
             else
@@ -98,6 +99,13 @@ public class ShopMng : MonoBehaviour
         }
 
         ShopContent.SetActive(true); // Ensure ShopContent is active after loading
+    }
+    private void DeactivateAllItems()
+    {
+        foreach (GameObject skin in lstSkin)
+        {
+            skin.transform.GetChild(2).gameObject.SetActive(false);
+        }
     }
 
     private void ClearShopContent(GameObject content)
