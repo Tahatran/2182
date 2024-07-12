@@ -51,6 +51,7 @@ public class HomeMng : MonoBehaviour
         GameCtr.instance.lstCrew.Clear();
         ImageGameObject.SetActive(true);
         gameObject.SetActive(true);
+        Audio.instance.AudioLoad();
 
     }
 

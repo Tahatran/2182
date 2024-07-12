@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using DanielLochner.Assets.SimpleScrollSnap;
+using GoogleMobileAds.Api.Mediation.LiftoffMonetize;
 using UnityEngine;
 
 public class Audio : MonoBehaviour
@@ -19,6 +21,7 @@ public class Audio : MonoBehaviour
     public GameObject On;
     public GameObject Off;
     public bool isPanelStartOpen = false;
+    public GameObject AudioPanel;
 
     // [HideInInspector]
     public int musicState, soundState;
@@ -66,6 +69,51 @@ public class Audio : MonoBehaviour
 
         if (soundState == 1)
         {
+            // On.SetActive(true);
+            // Off.SetActive(false);
+            for (int i = 0; i < soundList.Length; i++)
+            {
+                soundList[i].volume = 1.0f;
+            }
+            // gameCtrInstance.audioToggle.isOn = false;
+            // ToogleSound();
+        }
+        else
+        {
+            // On.SetActive(false);
+            // Off.SetActive(true);
+            for (int i = 0; i < soundList.Length; i++)
+                soundList[i].volume = 0.0f;
+            soundState = 0;
+            // gameCtrInstance.audioToggle.isOn = true;
+            // ToogleSound();
+        }
+        if (FindObjectsOfType(typeof(Audio)).Length > 1)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        instance = this;
+        Application.targetFrameRate = 60;
+
+
+        isStart = true;
+        isPanelStartOpen = true;
+    }
+
+    public void AudioLoad()
+    {
+        GameObject foundObject = GameObject.Find("On");
+        On = foundObject;
+        GameObject foundObject2 = GameObject.Find("Off");
+        Off = foundObject2;
+        if (PlayerPrefs.GetInt("Sound") == 1)
+            soundState = 1;
+        else soundState = 0;
+
+        if (soundState == 1)
+        {
             On.SetActive(true);
             Off.SetActive(false);
             for (int i = 0; i < soundList.Length; i++)
@@ -85,18 +133,6 @@ public class Audio : MonoBehaviour
             // gameCtrInstance.audioToggle.isOn = true;
             // ToogleSound();
         }
-        if (FindObjectsOfType(typeof(Audio)).Length > 1)
-        {
-            Destroy(gameObject);
-            return;
-        }
-
-        instance = this;
-        Application.targetFrameRate = 60;
-
-
-        isStart = true;
-        isPanelStartOpen = true;
     }
     public void ToogleMusic(bool toogle)
     {
@@ -120,7 +156,7 @@ public class Audio : MonoBehaviour
     {
         GameCtr gameCtrInstance = GameObject.FindObjectOfType<GameCtr>();
         // toogle = !gameCtrInstance.audioToggle.isOn;
-        // Debug.Log("audio bool : " + toogle);
+        // Debug.Log("audio bool : ");
         if (Off.activeSelf == true || On.activeSelf == false)
         {
             On.SetActive(true);

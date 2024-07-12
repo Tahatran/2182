@@ -6,11 +6,14 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Text.RegularExpressions;
+using GoogleMobileAds.Api.Mediation.LiftoffMonetize;
 
 
 public class ImageCtr : MonoBehaviour
 {
     //
+    public Camera mainCamera;
+    public GameObject hexa;
     public Texture2D image;
     public GameObject TextLevel;
     public GameObject btnDelete;
@@ -28,6 +31,7 @@ public class ImageCtr : MonoBehaviour
     //not cha
     public GameObject objectContainer;
     public GameObject gridContainer;
+    public GameObject gridContainer2;
     //danh sach cac hexa 
     public List<GameObject> lstBulong;
     public List<GridPrefab> lstGrid;
@@ -72,6 +76,10 @@ public class ImageCtr : MonoBehaviour
         // btnDelete2.GetComponent<Button>().onClick.AddListener(Edit2);
         // btnGen1.GetComponent<Button>().onClick.AddListener(GenMap1);
         // btnGen2.GetComponent<Button>().onClick.AddListener(GenMap2);
+        // if (mainCamera == null)
+        // {
+        //     mainCamera = Camera.main; // Nếu chưa gán, sử dụng camera chính
+        // }
 
         // if (image != null)
         // {
@@ -152,31 +160,54 @@ public class ImageCtr : MonoBehaviour
 
     public void onGenerateGrid()
     {
-        for (int i = 0; i < rowNumber; i++)
+        gen = false;
+        var currentLevel = LVConfig.Instance.Imageslow[DataConfig.ImageIndex];
+        int randomSubLevelIndex = 0;
+        var subLevels = currentLevel.subLevelsLists[randomSubLevelIndex];
+        // Duyệt qua từng phần tử trong subLevels
+        foreach (var subLevel in subLevels)
         {
-            for (int j = 0; j < colNumber; j++)
-            {
-                // Tính toán vị trí của từng hexagon
-                float xPos = j * hexWidth * 0.152f;
-                float yPos = i * hexHeight * 0.62f;
+            Vector3 spawnPosition = new Vector3(subLevel.row, subLevel.col, 0f);
+            GameObject hexagon = Instantiate(HexagridPrefab, spawnPosition, Quaternion.identity, gridContainer.transform); // Tạo prefab tại vị trí chạm và thiết lập parent
+            hexagon.GetComponent<Transform>().rotation = Quaternion.Euler(0f, 0f, -90f);
+            hexagon.transform.localScale = new Vector3(0.2f, 0.2f, 0.2f);
+            SpriteRenderer spriteRenderer = hexagon.GetComponent<SpriteRenderer>();
+            Color color = spriteRenderer.color;
 
-                // Nếu hàng là hàng lẻ thì dịch chuyển vị trí của hexagon
-                if (j % 2 == 1)
-                {
-                    yPos += hexHeight / 3f;
-                }
-
-                var tempGrid = Instantiate(HexagridPrefab, gridContainer.transform);
-                tempGrid.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
-                tempGrid.transform.localPosition = new Vector3(xPos, yPos, 10);
-                var gridRender = tempGrid.GetComponent<GridPrefab>();
-                gridRender.col = j;
-                gridRender.row = i;
-                tempGrid.GetComponent<SpriteRenderer>().sortingOrder = 8;
-                lstGrid.Add(gridRender);
-            }
+            // Thiết lập giá trị alpha về 1 (không trong suốt)
+            color.a = 255f;
+            // Gán lại màu cho SpriteRenderer
+            spriteRenderer.color = color;
+            hexagon.tag = subLevel.color.ToString();
         }
-        onGenerateObject();
+        // onGenerateObjectSave();
+
+        // lstGrid.Clear();
+        // for (int i = 0; i < rowNumber; i++)
+        // {
+        //     for (int j = 0; j < colNumber; j++)
+        //     {
+        //         // Tính toán vị trí của từng hexagon
+        //         float xPos = j * hexWidth * 0.152f;
+        //         float yPos = i * hexHeight * 0.62f;
+
+        //         // Nếu hàng là hàng lẻ thì dịch chuyển vị trí của hexagon
+        //         if (j % 2 == 1)
+        //         {
+        //             yPos += hexHeight / 3f;
+        //         }
+
+        //         var tempGrid = Instantiate(HexagridPrefab, gridContainer.transform);
+        //         tempGrid.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
+        //         tempGrid.transform.localPosition = new Vector3(xPos, yPos, 10);
+        //         var gridRender = tempGrid.GetComponent<GridPrefab>();
+        //         gridRender.col = j;
+        //         gridRender.row = i;
+        //         tempGrid.GetComponent<SpriteRenderer>().sortingOrder = 8;
+        //         lstGrid.Add(gridRender);
+        //     }
+        // }
+        // onGenerateObject();
     }
 
 
@@ -222,36 +253,78 @@ public class ImageCtr : MonoBehaviour
             }
 
         }
+        //tools luu colum row
+        // else
+        // {
+        //     textLevelstring = "";
+        //     for (int i = 0; i < lstGrid.Count; i++)
+        //     {
+        //         gridComponent grid = lstGrid[i].GetComponent<gridComponent>();
+        //         if (grid.bulong != null)
+        //         {
+        //             // Debug.Log(lstGrid[i].GetComponent<GridPrefab>().row);
+        //             // Debug.Log(lstGrid[i].GetComponent<GridPrefab>().col);
+        //             // Debug.Log(grid.bulong.tag);
+
+        //             string text = "new SubLevel {row= " + lstGrid[i].GetComponent<GridPrefab>().row + ", col=" + lstGrid[i].GetComponent<GridPrefab>().col + ", type= 2, color= " + grid.bulong.tag + "},\n";
+        //             textLevelstring += text;
+        //             // Debug.Log(textLevelstring);
+        //             TextLevel.GetComponent<TextMeshProUGUI>().text = textLevelstring;
+        //             // Debug.Log(TextLevel);
+        //             // Debug.Log(TextLevel.text);
+        //         }
+        //         if (grid.screw != null)
+        //         {
+        //             // Debug.Log(lstGrid[i].GetComponent<GridPrefab>().row);
+        //             // Debug.Log(lstGrid[i].GetComponent<GridPrefab>().col);
+        //             // Debug.Log(grid.screw.tag);
+
+        //             string text = "new SubLevel {row= " + lstGrid[i].GetComponent<GridPrefab>().row + ", col=" + lstGrid[i].GetComponent<GridPrefab>().col + ", type= 1, color= " + grid.screw.tag + "},\n";
+        //             textLevelstring += text;
+        //             // Debug.Log(textLevelstring);
+        //             TextLevel.GetComponent<TextMeshProUGUI>().text = textLevelstring;
+        //         }
+        //     }
+        //     if (DataConfig.ImageIndex == 0)
+        //     {
+        //         PlayerPrefs.SetString("0", textLevelstring);
+        //     }
+        //     else if (DataConfig.ImageIndex == 1)
+        //     {
+        //         PlayerPrefs.SetString("1", textLevelstring);
+        //     }
+        //     else if (DataConfig.ImageIndex == 2)
+        //     {
+        //         PlayerPrefs.SetString("2", textLevelstring);
+        //     }
+        //     else if (DataConfig.ImageIndex == 3)
+        //     {
+        //         PlayerPrefs.SetString("3", textLevelstring);
+        //     }
+        //     PlayerPrefs.Save();
+        //     // Debug để kiểm tra
+        //     // Debug.Log("Saved Level Data: " + textLevelstring);
+        //     //goi luc an get image
+        //     // LoadLevelData(DataConfig.ImageIndex);
+        // }
         else
         {
             textLevelstring = "";
-            for (int i = 0; i < lstGrid.Count; i++)
+            for (int i = 0; i < lstCrew.Count; i++)
             {
-                gridComponent grid = lstGrid[i].GetComponent<gridComponent>();
-                if (grid.bulong != null)
-                {
-                    // Debug.Log(lstGrid[i].GetComponent<GridPrefab>().row);
-                    // Debug.Log(lstGrid[i].GetComponent<GridPrefab>().col);
-                    // Debug.Log(grid.bulong.tag);
+                // gridComponent grid = lstGrid[i].GetComponent<gridComponent>();
 
-                    string text = "new SubLevel {row= " + lstGrid[i].GetComponent<GridPrefab>().row + ", col=" + lstGrid[i].GetComponent<GridPrefab>().col + ", type= 2, color= " + grid.bulong.tag + "},\n";
-                    textLevelstring += text;
-                    // Debug.Log(textLevelstring);
-                    TextLevel.GetComponent<TextMeshProUGUI>().text = textLevelstring;
-                    // Debug.Log(TextLevel);
-                    // Debug.Log(TextLevel.text);
-                }
-                if (grid.screw != null)
-                {
-                    // Debug.Log(lstGrid[i].GetComponent<GridPrefab>().row);
-                    // Debug.Log(lstGrid[i].GetComponent<GridPrefab>().col);
-                    // Debug.Log(grid.screw.tag);
+                // Debug.Log(lstGrid[i].GetComponent<GridPrefab>().row);
+                // Debug.Log(lstGrid[i].GetComponent<GridPrefab>().col);
+                // Debug.Log(grid.bulong.tag);
 
-                    string text = "new SubLevel {row= " + lstGrid[i].GetComponent<GridPrefab>().row + ", col=" + lstGrid[i].GetComponent<GridPrefab>().col + ", type= 1, color= " + grid.screw.tag + "},\n";
-                    textLevelstring += text;
-                    // Debug.Log(textLevelstring);
-                    TextLevel.GetComponent<TextMeshProUGUI>().text = textLevelstring;
-                }
+                string text = "new SubLevel {row= " + lstCrew[i].GetComponent<Transform>().localPosition.x + ", col=" + lstCrew[i].GetComponent<Transform>().localPosition.y + ", type= 2, color= " + lstCrew[i].tag + "},\n";
+                textLevelstring += text;
+                // Debug.Log(textLevelstring);
+                TextLevel.GetComponent<TextMeshProUGUI>().text = textLevelstring;
+                // Debug.Log(TextLevel);
+                // Debug.Log(TextLevel.text);
+
             }
             if (DataConfig.ImageIndex == 0)
             {
@@ -387,7 +460,7 @@ public class ImageCtr : MonoBehaviour
                 targetGrid.GetComponent<SpriteRenderer>().sprite = ScrewColor[subLevel.color];
                 targetGrid.GetComponent<SpriteRenderer>().color = Color.white;
                 targetGrid.GetComponent<Transform>().rotation = Quaternion.Euler(0f, 0f, 0f);
-                targetGrid.transform.localScale = new Vector3(0.25f, 0.25f, 0.25f);
+                targetGrid.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
                 targetGrid.tag = subLevel.color.ToString();
                 targetGrid.GetComponent<gridComponent>().bulong = targetGrid.gameObject;
                 foreach (Transform child in targetGrid.transform)
@@ -411,6 +484,26 @@ public class ImageCtr : MonoBehaviour
         btnDelete.GetComponent<Image>().color = Color.white;
         Delete2 = true;
         Delete1 = false;
+    }
+    public void Clear()
+    {
+        lstGrid.Clear();
+        lstCrew.Clear();
+        GameCtr.instance.lstGrid.Clear();
+        GameCtr.instance.lstBulong.Clear();
+        GameCtr.instance.lstCrew.Clear();
+        foreach (Transform child in gridContainer2.transform)
+        {
+            Destroy(child.gameObject);
+        }
+        foreach (Transform child in gridContainer.transform)
+        {
+            Destroy(child.gameObject);
+        }
+        foreach (Transform child in GameCtr.instance.gridContainer.transform)
+        {
+            Destroy(child.gameObject);
+        }
     }
 
     public void GenMap1()
@@ -512,6 +605,25 @@ public class ImageCtr : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //tool
+        // if (Input.GetMouseButtonDown(0)) // Kiểm tra nếu người dùng click chuột trái
+        // {
+        //     Debug.Log("â");
+        //     SpawnHexagon();
+        // }
+    }
+
+    void SpawnHexagon()
+    {
+        Vector3 mousePosition = Input.mousePosition; // Lấy vị trí chuột
+        mousePosition.z = 10f; // Đặt khoảng cách Z từ camera, tùy chỉnh theo cảnh của bạn
+
+        Vector3 spawnPosition = mainCamera.ScreenToWorldPoint(mousePosition); // Chuyển đổi 
+        GameObject hexagon = Instantiate(hexa, spawnPosition, Quaternion.identity, gridContainer2.transform); // Tạo prefab tại vị trí chạm và thiết lập parent
+        hexagon.GetComponent<Transform>().rotation = Quaternion.Euler(0f, 0f, -90f);
+        hexagon.transform.localScale = new Vector3(0.2f, 0.2f, 0.2f);
+        // var gridRender = hexagon.GetComponent<GridPrefab>();
+        lstCrew.Add(hexagon);
 
     }
 }
