@@ -73,14 +73,14 @@ public class ImageCtr : MonoBehaviour
     void Start()
     {
         // //tool thi bat len
-        btnDelete.GetComponent<Button>().onClick.AddListener(Edit);
-        btnDelete2.GetComponent<Button>().onClick.AddListener(Edit2);
-        btnGen1.GetComponent<Button>().onClick.AddListener(GenMap1);
-        btnGen2.GetComponent<Button>().onClick.AddListener(GenMap2);
-        if (mainCamera == null)
-        {
-            mainCamera = Camera.main; // Nếu chưa gán, sử dụng camera chính
-        }
+        // btnDelete.GetComponent<Button>().onClick.AddListener(Edit);
+        // btnDelete2.GetComponent<Button>().onClick.AddListener(Edit2);
+        // btnGen1.GetComponent<Button>().onClick.AddListener(GenMap1);
+        // btnGen2.GetComponent<Button>().onClick.AddListener(GenMap2);
+        // if (mainCamera == null)
+        // {
+        //     mainCamera = Camera.main; // Nếu chưa gán, sử dụng camera chính
+        // }
 
         // if (image != null)
         // {
@@ -179,15 +179,16 @@ public class ImageCtr : MonoBehaviour
             // SpriteRenderer spriteRenderer = hexagon.GetComponent<SpriteRenderer>();
             // Color color = spriteRenderer.color;
             // hexagon.GetComponent<SpriteRenderer>().sortingOrder = 8;
-            // Thiết lập giá trị alpha về 1 (không trong suốt)
+            // // Thiết lập giá trị alpha về 1 (không trong suốt)
             // color.a = 255f;
             // // Gán lại màu cho SpriteRenderer
             // spriteRenderer.color = color;
             hexagon.SetActive(true);
-            hexagon.tag = subLevel.color.ToString();
+            // hexagon.tag = subLevel.color.ToString();
 
         }
         // onGenerateObjectSave();
+        //nếu gen thì sẽ tạo ra rồi xóa những cái cùng vị trí trong 2 node cha. 
 
         // lstGrid.Clear();
         // for (int i = 0; i < rowNumber; i++)
@@ -241,7 +242,7 @@ public class ImageCtr : MonoBehaviour
                     textLevelstring += text;
                     //tools
                     // Debug.Log(textLevelstring);
-                    TextLevel.GetComponent<TextMeshProUGUI>().text = textLevelstring;
+                    // TextLevel.GetComponent<TextMeshProUGUI>().text = textLevelstring;
                     // Debug.Log(TextLevel);
                     // Debug.Log(TextLevel.text);
                 }
@@ -254,7 +255,7 @@ public class ImageCtr : MonoBehaviour
                     textLevelstring += text;
                     //tools
                     // Debug.Log(textLevelstring);
-                    TextLevel.GetComponent<TextMeshProUGUI>().text = textLevelstring;
+                    // TextLevel.GetComponent<TextMeshProUGUI>().text = textLevelstring;
                 }
             }
 
@@ -626,11 +627,11 @@ public class ImageCtr : MonoBehaviour
     void Update()
     {
         //tool
-        if (Input.GetMouseButtonDown(0)) // Kiểm tra nếu người dùng click chuột trái
-        {
-            Debug.Log("â");
-            SpawnHexagon();
-        }
+        // if (Input.GetMouseButtonDown(0)) // Kiểm tra nếu người dùng click chuột trái
+        // {
+        //     Debug.Log("â");
+        //     SpawnHexagon();
+        // }
     }
 
     void SpawnHexagon()

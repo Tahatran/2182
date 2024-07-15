@@ -84,10 +84,12 @@ public class ShopMng : MonoBehaviour
             }
             else
             {
+
                 Item.GetComponent<Image>().sprite = item.ItemImg;
                 Item.transform.GetChild(0).gameObject.SetActive(true);
                 Item.GetComponent<Button>().onClick.AddListener(() =>
                {
+                   DeactivateAllItems();
                    idSelecSkinLock = item.Id;
                    Debug.Log("bb" + idSelecSkinLock);
                    // Handle non-buyable items
