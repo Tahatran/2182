@@ -89,7 +89,7 @@ public class GameCtr : MonoBehaviour
     void Start()
     {
         //tools tắt
-        GameAds.Get.ShowBanner();
+        // GameAds.Get.ShowBanner();
         // if (checkads == true)
         // {
         //     GameAds.Get.ShowInterstitialAd();
@@ -112,7 +112,7 @@ public class GameCtr : MonoBehaviour
         // PlayerPrefs.SetInt("lv", lv);
         SetLevelText(parentLevelText);
         //tools thì tắt
-        loadgame();
+        // loadgame();
         GameFirebase.SendEvent("start_level", "id_level", PlayerPrefs.GetInt("lv").ToString());
         // Debug.Log("log-event-start_level----id_level: " + PlayerPrefs.GetInt("lv"));
         // StartCoroutine(DelayedGenerateGrid());
@@ -861,8 +861,8 @@ public class GameCtr : MonoBehaviour
                     // Thêm đối tượng vào danh sách tương ứng (lstBulong hoặc lstCrew) dựa trên loại của subLevel
                     if (subLevel.type == 1)
                     {
-                        instantiatedObject.GetComponent<BulongAction>().col = subLevel.col;
-                        instantiatedObject.GetComponent<BulongAction>().row = subLevel.row;
+                        instantiatedObject.GetComponent<BulongAction>().col = (int)subLevel.col;
+                        instantiatedObject.GetComponent<BulongAction>().row = (int)subLevel.row;
 
                         //ty le scale
                         instantiatedObject.transform.localScale = new Vector3(0.8f, 0.8f, 0.8f);
@@ -876,8 +876,8 @@ public class GameCtr : MonoBehaviour
                     }
                     else if (subLevel.type == 2)
                     {
-                        instantiatedObject.GetComponent<Screw>().col = subLevel.col;
-                        instantiatedObject.GetComponent<Screw>().row = subLevel.row;
+                        instantiatedObject.GetComponent<Screw>().col = (int)subLevel.col;
+                        instantiatedObject.GetComponent<Screw>().row = (int)subLevel.row;
                         lstCrew.Add(instantiatedObject);
 
                         //can thiet thi scale o day

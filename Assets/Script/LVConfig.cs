@@ -5,8 +5,8 @@ using UnityEngine;
 
 public class SubLevel
 {
-    public int col { get; set; }
-    public int row { get; set; }
+    public float col { get; set; }
+    public float row { get; set; }
     public int type { get; set; } // 1 cho Bulong, 2 cho Scew
     public int color { get; set; }
 
@@ -2560,9 +2560,25 @@ new SubLevel {row= 0, col= 2, type= 1, color= 0},
                 {
                     new List<SubLevel>
                     {
-                        new SubLevel {row= 4, col= 3, type= 2, color= 6},
-                        new SubLevel {row= 5, col= 3, type= 1, color= 6},
-                        new SubLevel {row= 5, col= 3, type= 2, color= 2},
+                      new SubLevel {row= 0.890274f, col=5.005793f, type= 2, color= 1},
+new SubLevel {row= 0.7399223f, col=4.508476f, type= 2, color= 1},
+new SubLevel {row= 1.02906f, col=4.115248f, type= 2, color= 1},
+new SubLevel {row= 1.376025f, col=4.83231f, type= 2, color= 1},
+new SubLevel {row= 1.93117f, col=4.450648f, type= 2, color= 1},
+new SubLevel {row= 1.699859f, col=4.022724f, type= 2, color= 1},
+new SubLevel {row= 1.352894f, col=4.323427f, type= 2, color= 1},
+new SubLevel {row= 1.202543f, col=4.450648f, type= 2, color= 1},
+new SubLevel {row= 1.075322f, col=3.432883f, type= 2, color= 1},
+new SubLevel {row= 1.052191f, col=1.605532f, type= 2, color= 1},
+new SubLevel {row= 1.318197f, col=-0.03676909f, type= 2, color= 1},
+new SubLevel {row= 1.618901f, col=-0.08303088f, type= 2, color= 1},
+new SubLevel {row= 2.012128f, col=-0.106162f, type= 2, color= 1},
+new SubLevel {row= 2.382224f, col=-0.09459704f, type= 2, color= 1},
+new SubLevel {row= 0.6473984f, col=6.254867f, type= 2, color= 1},
+new SubLevel {row= 1.098453f, col=6.22017f, type= 2, color= 1},
+new SubLevel {row= 1.711425f, col=6.19704f, type= 2, color= 1},
+new SubLevel {row= 2.278135f, col=6.277998f, type= 2, color= 1},
+
                     },
                 },
 
@@ -2667,9 +2683,9 @@ new SubLevel {row= 0, col= 2, type= 1, color= 0},
                 {
                     new List<SubLevel>
                     {
-                        new SubLevel {row= 4, col= 3, type= 2, color= 6},
-                        new SubLevel {row= 5, col= 3, type= 1, color= 6},
-                        new SubLevel {row= 5, col= 3, type= 2, color= 2},
+                        new SubLevel {row= 4.5f, col= 3.1f, type= 2, color= 6},
+                        new SubLevel {row= 5.2f, col= 3.2f, type= 1, color= 6},
+                        new SubLevel {row= 5.1f, col= 3.1f, type= 2, color= 2},
                     },
                 },
 

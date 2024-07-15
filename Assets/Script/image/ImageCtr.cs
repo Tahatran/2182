@@ -7,6 +7,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Text.RegularExpressions;
 using GoogleMobileAds.Api.Mediation.LiftoffMonetize;
+using System.Globalization;
 
 
 public class ImageCtr : MonoBehaviour
@@ -72,14 +73,14 @@ public class ImageCtr : MonoBehaviour
     void Start()
     {
         // //tool thi bat len
-        // btnDelete.GetComponent<Button>().onClick.AddListener(Edit);
-        // btnDelete2.GetComponent<Button>().onClick.AddListener(Edit2);
-        // btnGen1.GetComponent<Button>().onClick.AddListener(GenMap1);
-        // btnGen2.GetComponent<Button>().onClick.AddListener(GenMap2);
-        // if (mainCamera == null)
-        // {
-        //     mainCamera = Camera.main; // Nếu chưa gán, sử dụng camera chính
-        // }
+        btnDelete.GetComponent<Button>().onClick.AddListener(Edit);
+        btnDelete2.GetComponent<Button>().onClick.AddListener(Edit2);
+        btnGen1.GetComponent<Button>().onClick.AddListener(GenMap1);
+        btnGen2.GetComponent<Button>().onClick.AddListener(GenMap2);
+        if (mainCamera == null)
+        {
+            mainCamera = Camera.main; // Nếu chưa gán, sử dụng camera chính
+        }
 
         // if (image != null)
         // {
@@ -164,21 +165,27 @@ public class ImageCtr : MonoBehaviour
         var currentLevel = LVConfig.Instance.Imageslow[DataConfig.ImageIndex];
         int randomSubLevelIndex = 0;
         var subLevels = currentLevel.subLevelsLists[randomSubLevelIndex];
+        Debug.Log(DataConfig.ImageIndex);
+        Debug.Log(subLevels.Count);
         // Duyệt qua từng phần tử trong subLevels
         foreach (var subLevel in subLevels)
         {
             Vector3 spawnPosition = new Vector3(subLevel.row, subLevel.col, 0f);
-            GameObject hexagon = Instantiate(HexagridPrefab, spawnPosition, Quaternion.identity, gridContainer.transform); // Tạo prefab tại vị trí chạm và thiết lập parent
+            Debug.Log(spawnPosition);
+            GameObject hexagon = Instantiate(hexa, spawnPosition, Quaternion.identity, gridContainer.transform); // Tạo prefab tại vị trí chạm và thiết lập parent
+            hexagon.transform.localPosition = spawnPosition;
             hexagon.GetComponent<Transform>().rotation = Quaternion.Euler(0f, 0f, -90f);
             hexagon.transform.localScale = new Vector3(0.2f, 0.2f, 0.2f);
-            SpriteRenderer spriteRenderer = hexagon.GetComponent<SpriteRenderer>();
-            Color color = spriteRenderer.color;
-
+            // SpriteRenderer spriteRenderer = hexagon.GetComponent<SpriteRenderer>();
+            // Color color = spriteRenderer.color;
+            // hexagon.GetComponent<SpriteRenderer>().sortingOrder = 8;
             // Thiết lập giá trị alpha về 1 (không trong suốt)
-            color.a = 255f;
-            // Gán lại màu cho SpriteRenderer
-            spriteRenderer.color = color;
+            // color.a = 255f;
+            // // Gán lại màu cho SpriteRenderer
+            // spriteRenderer.color = color;
+            hexagon.SetActive(true);
             hexagon.tag = subLevel.color.ToString();
+
         }
         // onGenerateObjectSave();
 
@@ -203,7 +210,7 @@ public class ImageCtr : MonoBehaviour
         //         var gridRender = tempGrid.GetComponent<GridPrefab>();
         //         gridRender.col = j;
         //         gridRender.row = i;
-        //         tempGrid.GetComponent<SpriteRenderer>().sortingOrder = 8;
+        //         
         //         lstGrid.Add(gridRender);
         //     }
         // }
@@ -234,7 +241,7 @@ public class ImageCtr : MonoBehaviour
                     textLevelstring += text;
                     //tools
                     // Debug.Log(textLevelstring);
-                    // TextLevel.GetComponent<TextMeshProUGUI>().text = textLevelstring;
+                    TextLevel.GetComponent<TextMeshProUGUI>().text = textLevelstring;
                     // Debug.Log(TextLevel);
                     // Debug.Log(TextLevel.text);
                 }
@@ -243,12 +250,11 @@ public class ImageCtr : MonoBehaviour
                     Debug.Log(GameCtr.instance.lstGrid[i].GetComponent<GridPrefab>().row);
                     Debug.Log(GameCtr.instance.lstGrid[i].GetComponent<GridPrefab>().col);
                     Debug.Log(grid.screw.tag);
-
                     string text = "new SubLevel {row= " + GameCtr.instance.lstGrid[i].GetComponent<GridPrefab>().row + ", col=" + GameCtr.instance.lstGrid[i].GetComponent<GridPrefab>().col + ", type= 1, color= " + grid.screw.tag + "},\n";
                     textLevelstring += text;
                     //tools
                     // Debug.Log(textLevelstring);
-                    // TextLevel.GetComponent<TextMeshProUGUI>().text = textLevelstring;
+                    TextLevel.GetComponent<TextMeshProUGUI>().text = textLevelstring;
                 }
             }
 
@@ -309,16 +315,19 @@ public class ImageCtr : MonoBehaviour
         // }
         else
         {
+            RemoveMissingOrNullElements();
             textLevelstring = "";
             for (int i = 0; i < lstCrew.Count; i++)
             {
+                string rowStr = lstCrew[i].GetComponent<Transform>().localPosition.x.ToString(CultureInfo.InvariantCulture);
+                string colStr = lstCrew[i].GetComponent<Transform>().localPosition.y.ToString(CultureInfo.InvariantCulture);
                 // gridComponent grid = lstGrid[i].GetComponent<gridComponent>();
 
                 // Debug.Log(lstGrid[i].GetComponent<GridPrefab>().row);
                 // Debug.Log(lstGrid[i].GetComponent<GridPrefab>().col);
                 // Debug.Log(grid.bulong.tag);
 
-                string text = "new SubLevel {row= " + lstCrew[i].GetComponent<Transform>().localPosition.x + ", col=" + lstCrew[i].GetComponent<Transform>().localPosition.y + ", type= 2, color= " + lstCrew[i].tag + "},\n";
+                string text = "new SubLevel {row= " + rowStr + "f, col=" + colStr + "f, type= 2, color= " + lstCrew[i].tag + "},\n";
                 textLevelstring += text;
                 // Debug.Log(textLevelstring);
                 TextLevel.GetComponent<TextMeshProUGUI>().text = textLevelstring;
@@ -349,6 +358,17 @@ public class ImageCtr : MonoBehaviour
             // LoadLevelData(DataConfig.ImageIndex);
         }
     }
+    public void RemoveMissingOrNullElements()
+    {
+        for (int i = lstCrew.Count - 1; i >= 0; i--) // Duyệt ngược từ cuối danh sách về đầu
+        {
+            if (lstCrew[i] == null) // Kiểm tra nếu phần tử bị null
+            {
+                lstCrew.RemoveAt(i); // Xóa phần tử khỏi danh sách
+            }
+        }
+    }
+
 
     public void LoadLevelData(int a)
     {
@@ -606,11 +626,11 @@ public class ImageCtr : MonoBehaviour
     void Update()
     {
         //tool
-        // if (Input.GetMouseButtonDown(0)) // Kiểm tra nếu người dùng click chuột trái
-        // {
-        //     Debug.Log("â");
-        //     SpawnHexagon();
-        // }
+        if (Input.GetMouseButtonDown(0)) // Kiểm tra nếu người dùng click chuột trái
+        {
+            Debug.Log("â");
+            SpawnHexagon();
+        }
     }
 
     void SpawnHexagon()
@@ -618,12 +638,20 @@ public class ImageCtr : MonoBehaviour
         Vector3 mousePosition = Input.mousePosition; // Lấy vị trí chuột
         mousePosition.z = 10f; // Đặt khoảng cách Z từ camera, tùy chỉnh theo cảnh của bạn
 
-        Vector3 spawnPosition = mainCamera.ScreenToWorldPoint(mousePosition); // Chuyển đổi 
-        GameObject hexagon = Instantiate(hexa, spawnPosition, Quaternion.identity, gridContainer2.transform); // Tạo prefab tại vị trí chạm và thiết lập parent
-        hexagon.GetComponent<Transform>().rotation = Quaternion.Euler(0f, 0f, -90f);
-        hexagon.transform.localScale = new Vector3(0.2f, 0.2f, 0.2f);
-        // var gridRender = hexagon.GetComponent<GridPrefab>();
-        lstCrew.Add(hexagon);
+        Vector3 spawnPosition = mainCamera.ScreenToWorldPoint(mousePosition); // Chuyển đổi vị trí chuột sang tọa độ thế giới
 
+        // Giới hạn spawnPosition.y trong khoảng từ -0.1 đến 6.2 và spawnPosition.x trong khoảng từ -0.2 đến 3.72
+        if (spawnPosition.y >= -3.6f && spawnPosition.y <= 2.9f)
+        {
+            GameObject hexagon = Instantiate(hexa, spawnPosition, Quaternion.identity, gridContainer2.transform); // Tạo prefab tại vị trí chạm và thiết lập parent
+            hexagon.GetComponent<Transform>().rotation = Quaternion.Euler(0f, 0f, -90f);
+            hexagon.transform.localScale = new Vector3(0.2f, 0.2f, 0.2f);
+            lstCrew.Add(hexagon);
+        }
+        else
+        {
+            Debug.Log("Spawn position out of bounds: " + spawnPosition);
+        }
     }
+
 }
