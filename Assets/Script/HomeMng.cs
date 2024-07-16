@@ -43,12 +43,7 @@ public class HomeMng : MonoBehaviour
     {
         // GameCtr.instance.DisableAllColliders();
 
-        foreach (Transform child in GameCtr.instance.objectContainer.transform)
-        {
-            Destroy(child.gameObject);
-        }
-        GameCtr.instance.lstBulong.Clear();
-        GameCtr.instance.lstCrew.Clear();
+        GameCtr.instance.GameClear();
         ImageGameObject.SetActive(true);
         gameObject.SetActive(true);
         Audio.instance.AudioLoad();

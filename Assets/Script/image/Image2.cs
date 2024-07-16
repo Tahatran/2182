@@ -15,6 +15,13 @@ public class Image2 : MonoBehaviour
     public List<GameObject> Img2;
     public List<GameObject> Img3;
     public List<GameObject> Img4;
+
+    //
+    public List<GameObject> Imgbg;
+    public List<GameObject> Img1bg;
+    public List<GameObject> Img2bg;
+    public List<GameObject> Img3bg;
+    public List<GameObject> Img4bg;
     public static Image2 instance;
 
     private void Awake()
@@ -34,7 +41,8 @@ public class Image2 : MonoBehaviour
     {
         SetupFirst();
         //cái dưới nên gọi lúc selcet image
-        LoadAllImages();
+
+        gameObject.SetActive(false);
     }
 
     void SetupFirst()
@@ -55,7 +63,7 @@ public class Image2 : MonoBehaviour
         }
     }
 
-    void LoadAllImages()
+    public void LoadAllImages()
     {
         for (int i = 1; i <= 4; i++)
         {
@@ -63,23 +71,23 @@ public class Image2 : MonoBehaviour
         }
     }
 
-    void LoadImage(int imageIndex)
+    public void LoadImage(int imageIndex)
     {
         List<GameObject> selectedImageList = null;
         string key = imageIndex.ToString();
 
         switch (imageIndex)
         {
-            case 1:
+            case 0:
                 selectedImageList = Img1;
                 break;
-            case 2:
+            case 1:
                 selectedImageList = Img2;
                 break;
-            case 3:
+            case 2:
                 selectedImageList = Img3;
                 break;
-            case 4:
+            case 3:
                 selectedImageList = Img4;
                 break;
             default:
@@ -100,23 +108,23 @@ public class Image2 : MonoBehaviour
         Debug.Log($"Loaded {activeCount} pieces for image {imageIndex}");
     }
 
-    public void Fill(int imageIndex)
+    public void Fill()
     {
         List<GameObject> selectedImageList = null;
-        string key = imageIndex.ToString();
+        string key = DataConfig.ImageIndex.ToString();
 
-        switch (imageIndex)
+        switch (DataConfig.ImageIndex)
         {
-            case 1:
+            case 0:
                 selectedImageList = Img1;
                 break;
-            case 2:
+            case 1:
                 selectedImageList = Img2;
                 break;
-            case 3:
+            case 2:
                 selectedImageList = Img3;
                 break;
-            case 4:
+            case 3:
                 selectedImageList = Img4;
                 break;
             default:
@@ -125,7 +133,7 @@ public class Image2 : MonoBehaviour
         }
 
         int activeCount = PlayerPrefs.GetInt(key, 0);
-        Debug.Log($"Active count for image {imageIndex}: {activeCount}");
+        Debug.Log($"Active count for image {DataConfig.ImageIndex}: {activeCount}");
 
         for (int i = activeCount; i < selectedImageList.Count && DataConfig.ScoreImage > 0; i++)
         {

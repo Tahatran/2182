@@ -153,6 +153,23 @@ public class GameCtr : MonoBehaviour
                       StartCoroutine(DelayedGenerateGrid());
                   });
     }
+    public void GameClear()
+    {
+        UI.transform.DOMoveY(1f, 0.3f).SetEase(Ease.OutQuad);
+        lstGrid.Clear();
+        lstBulong.Clear();
+        lstCrew.Clear();
+        btnReset.SetActive(false);
+        audioToggle.SetActive(false);
+        foreach (Transform child in gridContainer.transform)
+        {
+            Destroy(child.gameObject);
+        }
+        foreach (Transform child in objectContainer.transform)
+        {
+            Destroy(child.gameObject);
+        }
+    }
 
     IEnumerator DelayedGenerateGrid()
     {
@@ -688,6 +705,7 @@ public class GameCtr : MonoBehaviour
                                             // NextLV();
                                             // Dontdestroyonload.instance.ads();
                                             GameAds.Get.ShowInterstitialAd();
+
                                             StartCoroutine(DelayedNextLevel(1f));
                                         }
                                     });
@@ -734,12 +752,21 @@ public class GameCtr : MonoBehaviour
         {
             Destroy(child.gameObject);
         }
+
+        int scoreImage = PlayerPrefs.GetInt("ScoreImage", 0);
+        PlayerPrefs.SetInt("ScoreImage", scoreImage + 1);
+        PlayerPrefs.Save();
+
         SceneManager.LoadScene(0);
     }
 
     public void autonextlvwhenwinAds()
     {
-        // GameAds.Get.ShowRewardAd();
+        // GameAds.Get.LoadRewardedAd();
+        int scoreImage = PlayerPrefs.GetInt("ScoreImage", 0);
+        PlayerPrefs.SetInt("ScoreImage", scoreImage + 2);
+        PlayerPrefs.Save();
+
         foreach (Transform child in gridContainer.transform)
         {
             Destroy(child.gameObject);

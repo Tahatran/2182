@@ -13,7 +13,10 @@ public class ImageMng : MonoBehaviour
     public GameObject ShopContent2;
     public GameObject ItemPrefab;
     public GameObject btnAds;
-    private int id;
+    public GameObject btnGet;
+    public List<GameObject> lstImage;
+    public int id;
+    public int idSelecSkinLock;
     // Start is called before the first frame update
     void Start()
     {
@@ -25,6 +28,7 @@ public class ImageMng : MonoBehaviour
         Debug.Log("1");
         // ImageCtr.instance.LoadLevelData(DataConfig.ImageIndex);
         // ImageCtr.instance.onGenerateGrid();
+        Image2.instance.LoadImage(DataConfig.ImageIndex);
         Image2.instance.Img[id].SetActive(true);
         HomeMng.instance.btnBack.SetActive(true);
         Home.SetActive(false);
@@ -33,6 +37,9 @@ public class ImageMng : MonoBehaviour
     public void Ads()
     {
         // Show ads logic here
+        lstImage[idSelecSkinLock].transform.GetChild(0).gameObject.SetActive(false);
+        ImageItemData.Items[idSelecSkinLock].IsBuy = true;
+        LoadShop();
         btnAds.SetActive(false);
     }
 
@@ -43,13 +50,13 @@ public class ImageMng : MonoBehaviour
         // Clear existing items in both ShopContent and ShopContent2
         ClearShopContent(ShopContent);
         ClearShopContent(ShopContent2);
-
+        lstImage.Clear();
         // Loop through SkinItemData.Items and distribute items between ShopContent and ShopContent2
         for (int i = 0; i < ImageItemData.Items.Count; i++)
         {
             ItemData item = ImageItemData.Items[i];
             GameObject Item = Instantiate(ItemPrefab);
-
+            lstImage.Add(Item);
             if (i < itemsPerPage)
             {
                 // Add item to ShopContent
@@ -66,22 +73,50 @@ public class ImageMng : MonoBehaviour
                 Item.GetComponent<Image>().sprite = item.ItemImg;
                 Item.GetComponent<Button>().onClick.AddListener(() =>
                 {
-
+                    DeactivateAllItems();
                     id = item.Id; // Set the ID for purchasing
-                    Debug.Log("aa" + id);
-                    Item.transform.GetChild(0).gameObject.SetActive(true); // Activate some UI element
+                    // Debug.Log("aa" + id);
+                    btnAds.SetActive(false);
+                    Item.transform.GetChild(2).gameObject.SetActive(true); // Activate some UI element
+
                 });
             }
             else
             {
-                Debug.Log("bb");
-                // Handle non-buyable items
-                btnAds.SetActive(true); // Example: activate an ad button
-                Item.transform.GetChild(0).gameObject.SetActive(true); // Activate some UI element
+                Item.GetComponent<Image>().sprite = item.ItemImg;
+                Item.transform.GetChild(0).gameObject.SetActive(true);
+                Item.GetComponent<Button>().onClick.AddListener(() =>
+               {
+                   DeactivateAllItems();
+                   idSelecSkinLock = item.Id;
+
+                   //    Debug.Log("bb" + idSelecSkinLock);
+                   // Handle non-buyable items
+                   if (idSelecSkinLock > 0 && !ImageItemData.Items[idSelecSkinLock - 1].IsBuy)
+                   {
+                       // Call your custom method here
+                       btnAds.SetActive(false);
+                       btnGet.SetActive(false);
+                   }
+                   else
+                   {
+                       btnAds.SetActive(true);
+                   }
+                   //    btnAds.SetActive(true); // Example: activate an ad button
+                   //    Item.transform.GetChild(0).gameObject.SetActive(true); // Activate some UI element
+               });
             }
         }
 
         ShopContent.SetActive(true); // Ensure ShopContent is active after loading
+    }
+
+    private void DeactivateAllItems()
+    {
+        foreach (GameObject skin in lstImage)
+        {
+            skin.transform.GetChild(2).gameObject.SetActive(false);
+        }
     }
 
     private void ClearShopContent(GameObject content)

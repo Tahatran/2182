@@ -33,7 +33,7 @@ public class ShopMng : MonoBehaviour
     public void Get()
     {
         DataConfig.EffectIndex = id;
-        Debug.Log(DataConfig.EffectIndex);
+        // Debug.Log(DataConfig.EffectIndex);
     }
 
     public void Ads()
