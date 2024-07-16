@@ -1703,7 +1703,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &335476211
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6184,6 +6184,18 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1031868972050452536, guid: 67d1b978094b2c24b8ae0789ca35601e, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1031868972050452536, guid: 67d1b978094b2c24b8ae0789ca35601e, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1031868972050452536, guid: 67d1b978094b2c24b8ae0789ca35601e, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1031868972050452536, guid: 67d1b978094b2c24b8ae0789ca35601e, type: 3}
       propertyPath: m_SortingOrder
       value: 8
       objectReference: {fileID: 0}
@@ -6193,6 +6205,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1721916082773330434, guid: 67d1b978094b2c24b8ae0789ca35601e, type: 3}
       propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1721916082773330434, guid: 67d1b978094b2c24b8ae0789ca35601e, type: 3}
+      propertyPath: m_TagString
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5877940475838911780, guid: 67d1b978094b2c24b8ae0789ca35601e, type: 3}
@@ -6235,16 +6251,45 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -90
       objectReference: {fileID: 0}
+    - target: {fileID: 7753154616112449190, guid: 67d1b978094b2c24b8ae0789ca35601e, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7842078911663875903, guid: 67d1b978094b2c24b8ae0789ca35601e, type: 3}
+      propertyPath: isBulong
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7842078911663875903, guid: 67d1b978094b2c24b8ae0789ca35601e, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1721916082773330434, guid: 67d1b978094b2c24b8ae0789ca35601e, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1182815187}
   m_SourcePrefab: {fileID: 100100000, guid: 67d1b978094b2c24b8ae0789ca35601e, type: 3}
 --- !u!1 &1182815182 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1721916082773330434, guid: 67d1b978094b2c24b8ae0789ca35601e, type: 3}
   m_PrefabInstance: {fileID: 1182815181}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1182815187
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1182815182}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fac9799166fbe8b49a8bb8bcb3978b1e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bulong: {fileID: 0}
+  screw: {fileID: 1571865543}
 --- !u!1 &1185249317
 GameObject:
   m_ObjectHideFlags: 0
@@ -8255,6 +8300,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1544617502}
   m_CullTransparentMesh: 1
+--- !u!1 &1571865543 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7336898777854741682, guid: 67d1b978094b2c24b8ae0789ca35601e, type: 3}
+  m_PrefabInstance: {fileID: 1182815181}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1577411543
 GameObject:
   m_ObjectHideFlags: 0
@@ -9320,7 +9370,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1800923566
 RectTransform:
   m_ObjectHideFlags: 0
@@ -9387,7 +9437,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1384735641}
         m_TargetAssemblyTypeName: ImageCtr, Assembly-CSharp
-        m_MethodName: btnOutput
+        m_MethodName: Fill
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

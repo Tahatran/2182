@@ -22,7 +22,7 @@ public class ImageMng : MonoBehaviour
     public void Get()
     {
         DataConfig.ImageIndex = id;
-        Debug.Log(DataConfig.ImageIndex);
+        Debug.Log("1");
         // ImageCtr.instance.LoadLevelData(DataConfig.ImageIndex);
         ImageCtr.instance.onGenerateGrid();
         HomeMng.instance.btnBack.SetActive(true);

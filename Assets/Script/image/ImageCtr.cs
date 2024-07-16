@@ -8,6 +8,7 @@ using UnityEngine.UI;
 using System.Text.RegularExpressions;
 using GoogleMobileAds.Api.Mediation.LiftoffMonetize;
 using System.Globalization;
+using System.Data.Common;
 
 
 public class ImageCtr : MonoBehaviour
@@ -82,147 +83,169 @@ public class ImageCtr : MonoBehaviour
         //     mainCamera = Camera.main; // Nếu chưa gán, sử dụng camera chính
         // }
 
-        // if (image != null)
-        // {
-        //     Debug.Log("Image assigned, generating grid...");
-        //     onGenerateGrid(image);
-        // }
-        // else
-        // {
-        //     Debug.LogError("Image not assigned in the Inspector");
-        // }
-
-
     }
-    public Sprite[] SliceImage(Texture2D image, int rows, int cols)
-    {
-        int width = image.width / cols;
-        int height = image.height / rows;
-        Sprite[] sprites = new Sprite[rows * cols];
 
-        for (int i = 0; i < rows; i++)
-        {
-            for (int j = 0; j < cols; j++)
-            {
-                Rect rect = new Rect(j * width, i * height, width, height);
-                sprites[i * cols + j] = Sprite.Create(image, rect, new Vector2(0.5f, 0.5f));
-                Debug.Log($"Created sprite for cell ({i}, {j}) with rect: {rect}");
-            }
-        }
-
-        return sprites;
-    }
-    public void onGenerateGrid(Texture2D image)
-    {
-        Sprite[] hexagonSprites = SliceImage(image, rowNumber, colNumber);
-
-        for (int i = 0; i < rowNumber; i++)
-        {
-            for (int j = 0; j < colNumber; j++)
-            {
-                // Calculate the position of each hexagon
-                // float xPos = j * hexWidth * 0.21f;
-                // float yPos = i * hexHeight * 0.64f;
-                float xPos = j * hexWidth * 0.1f;
-                float yPos = i * hexHeight * 0.3f;
-
-                // Offset position for odd columns
-                // if (j % 2 == 1)
-                // {
-                //     yPos += hexHeight / 2.5f;
-                // }
-
-                var tempGrid = Instantiate(HexagridPrefab, gridContainer.transform);
-                tempGrid.transform.localScale = new Vector3(0.2f, 0.2f, 0.2f);
-                tempGrid.transform.localPosition = new Vector3(xPos, yPos, 10);
-
-                // Apply the corresponding sprite to the hexagon
-                var gridRender = tempGrid.GetComponent<GridPrefab>();
-                gridRender.col = j;
-                gridRender.row = i;
-
-                if (i * colNumber + j < hexagonSprites.Length)
-                {
-                    tempGrid.GetComponent<SpriteRenderer>().sprite = hexagonSprites[i * colNumber + j];
-                    Debug.Log($"Assigned sprite to hexagon at ({i}, {j})");
-                }
-                else
-                {
-                    Debug.LogWarning($"Sprite index out of range for hexagon at ({i}, {j})");
-                }
-
-                tempGrid.GetComponent<SpriteRenderer>().sortingOrder = 8;
-                lstGrid.Add(gridRender);
-            }
-        }
-    }
 
 
 
     public void onGenerateGrid()
     {
+        Debug.Log("2");
         gen = false;
         var currentLevel = LVConfig.Instance.Imageslow[DataConfig.ImageIndex];
         int randomSubLevelIndex = 0;
         var subLevels = currentLevel.subLevelsLists[randomSubLevelIndex];
-        Debug.Log(DataConfig.ImageIndex);
-        Debug.Log(subLevels.Count);
-        // Duyệt qua từng phần tử trong subLevels
         foreach (var subLevel in subLevels)
         {
             Vector3 spawnPosition = new Vector3(subLevel.row, subLevel.col, 0f);
-            Debug.Log(spawnPosition);
             GameObject hexagon = Instantiate(hexa, spawnPosition, Quaternion.identity, gridContainer.transform); // Tạo prefab tại vị trí chạm và thiết lập parent
             hexagon.transform.localPosition = spawnPosition;
             hexagon.GetComponent<Transform>().rotation = Quaternion.Euler(0f, 0f, -90f);
             hexagon.transform.localScale = new Vector3(0.2f, 0.2f, 0.2f);
-            // SpriteRenderer spriteRenderer = hexagon.GetComponent<SpriteRenderer>();
-            // Color color = spriteRenderer.color;
-            // hexagon.GetComponent<SpriteRenderer>().sortingOrder = 8;
-            // // Thiết lập giá trị alpha về 1 (không trong suốt)
-            // color.a = 255f;
-            // // Gán lại màu cho SpriteRenderer
-            // spriteRenderer.color = color;
             hexagon.SetActive(true);
-            // hexagon.tag = subLevel.color.ToString();
-
+            lstCrew.Add(hexagon);
+            // Debug.Log("spawn" + spawnPosition);
+            // Debug.Log("pos" + hexagon.transform.position);
+            // Debug.Log("local" + hexagon.transform.localPosition);
         }
-        // onGenerateObjectSave();
-        //nếu gen thì sẽ tạo ra rồi xóa những cái cùng vị trí trong 2 node cha. 
-
-        // lstGrid.Clear();
-        // for (int i = 0; i < rowNumber; i++)
-        // {
-        //     for (int j = 0; j < colNumber; j++)
-        //     {
-        //         // Tính toán vị trí của từng hexagon
-        //         float xPos = j * hexWidth * 0.152f;
-        //         float yPos = i * hexHeight * 0.62f;
-
-        //         // Nếu hàng là hàng lẻ thì dịch chuyển vị trí của hexagon
-        //         if (j % 2 == 1)
-        //         {
-        //             yPos += hexHeight / 3f;
-        //         }
-
-        //         var tempGrid = Instantiate(HexagridPrefab, gridContainer.transform);
-        //         tempGrid.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
-        //         tempGrid.transform.localPosition = new Vector3(xPos, yPos, 10);
-        //         var gridRender = tempGrid.GetComponent<GridPrefab>();
-        //         gridRender.col = j;
-        //         gridRender.row = i;
-        //         
-        //         lstGrid.Add(gridRender);
-        //     }
-        // }
-        // onGenerateObject();
+        onGenerateObjectSave();
+    }
+    public void onGenerateObjectSave()
+    {
+        // int a =
+        for (int i = 0; i < lstCrew.Count; i++)
+        {
+            GameObject hexagon = lstCrew[i];
+            // if (i < )
+        }
+        Debug.Log("5");
+        gen = false;
+        var currentLevel = LVConfig.Instance.Imageshigh[DataConfig.ImageIndex];
+        int randomSubLevelIndex = 0;
+        var subLevels = currentLevel.subLevelsLists[randomSubLevelIndex];
+        Debug.Log(subLevels.Count);
+        // Duyệt qua từng phần tử trong subLevels
+        foreach (var subLevel in subLevels)
+        {
+            Debug.Log("6");
+            // Tìm grid tương ứng với vị trí của subLevel (dựa trên row và col)
+            var targetGrid = lstCrew.Find(grid =>
+            Mathf.Approximately(grid.GetComponent<Transform>().localPosition.x, subLevel.row) &&
+            Mathf.Approximately(grid.GetComponent<Transform>().localPosition.y, subLevel.col));
+            // Nếu tìm thấy targetGrid
+            if (targetGrid)
+            {
+                Debug.Log("find");
+                targetGrid.GetComponentInChildren<SpriteRenderer>().color = Color.red;
+                targetGrid.GetComponent<Screw2>().isBulong = true;
+            }
+            else
+            {
+                Debug.Log("Target grid not found for this SubLevel.");
+            }
+        }
     }
 
 
     public void btnOutput()
     {
-        GenLevelfromGrid();
+        // GenLevelfromGrid();
     }
+
+    public void Fill()
+    {
+        Debug.Log("3");
+        if (DataConfig.ScoreImage > 0)
+        {
+            for (int i = 0; i < lstCrew.Count; i++) // Duyệt qua tất cả các phần tử trong lstCrew
+            {
+                GameObject a = lstCrew[i];
+                if (a.GetComponent<Screw2>().isBulong == false)
+                {
+                    a.GetComponentInChildren<SpriteRenderer>().color = Color.red;
+                    a.GetComponent<Screw2>().isBulong = true;
+                    DataConfig.ScoreImage--; // Giảm giá trị của DataConfig.ScoreImage mỗi khi một phần tử được xử lý
+                    if (DataConfig.ScoreImage == 0)
+                    {
+                        break; // Ngắt vòng lặp nếu DataConfig.ScoreImage đạt giá trị 10
+                    }
+                }
+            }
+        }
+        GenRed();
+    }
+    public void GenRed()
+    {
+        Debug.Log("4");
+        int dem = 0;
+        for (int i = 0; i < lstCrew.Count; i++)
+        {
+            dem++;
+            GameObject a = lstCrew[i];
+            if (a.GetComponent<Screw2>().isBulong == true)
+            {
+                // string rowStr = a.GetComponent<Transform>().localPosition.x.ToString(CultureInfo.InvariantCulture);
+                // string colStr = a.GetComponent<Transform>().localPosition.y.ToString(CultureInfo.InvariantCulture);
+                // string text = $"new SubLevel {{row= {rowStr}f, col= {colStr}f, type= 2, color= {a.tag}}},\n";
+                // textLevelstring += text;
+                textLevelstring += dem;
+            }
+        }
+        PlayerPrefs.SetString(DataConfig.ImageIndex.ToString(), textLevelstring);
+        PlayerPrefs.Save();
+    }
+
+    public void LoadLevelData(int a)
+    {
+        Debug.Log("7");
+        // Tải textLevelstring từ PlayerPrefs
+        string loadedTextLevelstring = PlayerPrefs.GetString(a.ToString(), "");
+
+        // Chuyển đổi dữ liệu đã tải về thành danh sách SubLevel
+        List<SubLevel> newSubLevels = ParseSubLevelsFromString(loadedTextLevelstring);
+
+        // Thay thế các SubLevel hiện có trong Imageshigh
+        if (a < LVConfig.instance.Imageshigh.Count)
+        {
+            LVConfig.instance.Imageshigh[a].subLevelsLists.Clear();
+            LVConfig.instance.Imageshigh[a].subLevelsLists.Add(newSubLevels); // Thêm danh sách mới vào
+            foreach (List<SubLevel> subLevels in LVConfig.instance.Imageshigh[a].subLevelsLists)
+            {
+                foreach (SubLevel subLevel in subLevels)
+                {
+                    Debug.Log($"SubLevel: row={subLevel.row}, col={subLevel.col}, type={subLevel.type}, color={subLevel.color}");
+                }
+            }
+        }
+        else
+        {
+            Debug.LogWarning($"Level index {a} is out of range for Imageshigh.");
+        }
+    }
+
+    // Hàm này chuyển đổi một chuỗi đầu vào chứa dữ liệu SubLevel thành một danh sách các đối tượng SubLevel
+    List<SubLevel> ParseSubLevelsFromString(string subLevelsString)
+    {
+        List<SubLevel> subLevels = new List<SubLevel>();
+        // Biểu thức chính quy để khớp với dữ liệu SubLevel
+        string pattern = @"new SubLevel\s*{\s*row\s*=\s*(-?\d+(\.\d+)?)\s*,\s*col\s*=\s*(-?\d+(\.\d+)?)\s*,\s*type\s*=\s*(\d+)\s*,\s*color\s*=\s*(\d+)\s*}";
+        MatchCollection matches = Regex.Matches(subLevelsString, pattern);
+        foreach (Match match in matches)
+        {
+            SubLevel subLevel = new SubLevel
+            {
+                row = float.Parse(match.Groups[1].Value, CultureInfo.InvariantCulture),
+                col = float.Parse(match.Groups[3].Value, CultureInfo.InvariantCulture),
+                type = int.Parse(match.Groups[5].Value),
+                color = int.Parse(match.Groups[6].Value)
+            };
+            Debug.Log($"Parsed SubLevel: row={subLevel.row}, col={subLevel.col}, type={subLevel.type}, color={subLevel.color}");
+            subLevels.Add(subLevel);
+        }
+        return subLevels;
+    }
+
+
 
     public void GenLevelfromGrid()
     {
@@ -371,69 +394,8 @@ public class ImageCtr : MonoBehaviour
     }
 
 
-    public void LoadLevelData(int a)
-    {
-        // Tải textLevelstring từ PlayerPrefs
-        string loadedTextLevelstring = PlayerPrefs.GetString(a.ToString(), "");
-        // Debug.Log("Loaded Level Data: " + loadedTextLevelstring);
-
-        // Chuyển đổi dữ liệu đã tải về thành danh sách SubLevel
-        List<SubLevel> newSubLevels = ParseSubLevelsFromString(loadedTextLevelstring);
-        // Debug.Log(newSubLevels.Count);
-        // foreach (SubLevel subLevel in newSubLevels)
-        // {
-        //     // Debug.Log("aa");
-        //     Debug.Log($"SubLevel: row={subLevel.row}, col={subLevel.col}, type={subLevel.type}, color={subLevel.color}");
-        // }
 
 
-        // Thay thế các SubLevel hiện có trong Imageshigh
-        if (a < LVConfig.instance.Imageshigh.Count)
-        {
-            LVConfig.instance.Imageshigh[a].subLevelsLists.Clear();
-            LVConfig.instance.Imageshigh[a].subLevelsLists.Add(newSubLevels); // Thêm danh sách mới vào
-            foreach (List<SubLevel> subLevels in LVConfig.instance.Imageshigh[a].subLevelsLists)
-            {
-                foreach (SubLevel subLevel in subLevels)
-                {
-                    Debug.Log($"SubLevel: row={subLevel.row}, col={subLevel.col}, type={subLevel.type}, color={subLevel.color}");
-                }
-            }
-        }
-        else
-        {
-            Debug.LogWarning($"Level index {a} is out of range for Imageshigh.");
-        }
-    }
-
-    // Hàm này chuyển đổi một chuỗi đầu vào chứa dữ liệu SubLevel thành một danh sách các đối tượng SubLevel
-    List<SubLevel> ParseSubLevelsFromString(string subLevelsString)
-    {
-        List<SubLevel> subLevels = new List<SubLevel>();
-
-        // Adjusted pattern to handle spaces around '=' and '{}'
-        string pattern = @"new SubLevel\s*{\s*row\s*=\s*(\d+)\s*,\s*col\s*=\s*(\d+)\s*,\s*type\s*=\s*(\d+)\s*,\s*color\s*=\s*(\d+)\s*}";
-
-        MatchCollection matches = Regex.Matches(subLevelsString, pattern);
-
-        // Debug log to check the number of matches found
-        // Debug.Log($"Number of matches found: {matches.Count}");
-
-        foreach (Match match in matches)
-        {
-            SubLevel subLevel = new SubLevel
-            {
-                row = int.Parse(match.Groups[1].Value),
-                col = int.Parse(match.Groups[2].Value),
-                type = int.Parse(match.Groups[3].Value),
-                color = int.Parse(match.Groups[4].Value)
-            };
-
-            subLevels.Add(subLevel);
-        }
-
-        return subLevels;
-    }
 
     public void onGenerateObject()
     {
@@ -463,35 +425,7 @@ public class ImageCtr : MonoBehaviour
         onGenerateObjectSave();
     }
 
-    public void onGenerateObjectSave()
-    {
-        gen = false;
-        var currentLevel = LVConfig.Instance.Imageshigh[DataConfig.ImageIndex];
-        int randomSubLevelIndex = 0;
-        var subLevels = currentLevel.subLevelsLists[randomSubLevelIndex];
-        // Duyệt qua từng phần tử trong subLevels
-        foreach (var subLevel in subLevels)
-        {
-            // Tìm grid tương ứng với vị trí của subLevel (dựa trên row và col)
-            var targetGrid = lstGrid.Find(grid => grid.row == subLevel.row && grid.col == subLevel.col);
 
-            // Nếu tìm thấy targetGrid
-            if (targetGrid)
-            {
-                targetGrid.GetComponent<SpriteRenderer>().sprite = ScrewColor[subLevel.color];
-                targetGrid.GetComponent<SpriteRenderer>().color = Color.white;
-                targetGrid.GetComponent<Transform>().rotation = Quaternion.Euler(0f, 0f, 0f);
-                targetGrid.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
-                targetGrid.tag = subLevel.color.ToString();
-                targetGrid.GetComponent<gridComponent>().bulong = targetGrid.gameObject;
-                foreach (Transform child in targetGrid.transform)
-                {
-                    child.gameObject.transform.rotation = Quaternion.Euler(0f, 0f, 0f);
-                }
-            }
-        }
-
-    }
     public void Edit()
     {
         btnDelete.GetComponent<Image>().color = Color.red;

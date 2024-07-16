@@ -14,18 +14,19 @@ public class Screw2 : MonoBehaviour
     }
     void MoveBulong()
     {
-        ImageCtr.instance.indexColor = int.Parse(gameObject.tag);
-        if (isBulong)
-        {
-            ImageCtr.instance.checkbulongorscrew = true;
-        }
-        else
-        {
-            ImageCtr.instance.checkbulongorscrew = false;
-        }
-        ImageCtr.instance.objinstance = gameObject;
-        Debug.Log(ImageCtr.instance.checkbulongorscrew);
-        Debug.Log(ImageCtr.instance.indexColor);
+        //tools
+        // ImageCtr.instance.indexColor = int.Parse(gameObject.tag);
+        // if (isBulong)
+        // {
+        //     ImageCtr.instance.checkbulongorscrew = true;
+        // }
+        // else
+        // {
+        //     ImageCtr.instance.checkbulongorscrew = false;
+        // }
+        // ImageCtr.instance.objinstance = gameObject;
+        // Debug.Log(ImageCtr.instance.checkbulongorscrew);
+        // Debug.Log(ImageCtr.instance.indexColor);
     }
 
     void OnMouseDown()

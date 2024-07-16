@@ -56,10 +56,10 @@ public class gridComponent : MonoBehaviour
                 // instantiatedObject.transform.SetParent(gameObject.transform);
                 // bulong = instantiatedObject;
                 // instantiatedObject.GetComponent<CircleCollider2D>().enabled = false;
-                gameObject.GetComponent<SpriteRenderer>().sprite = ImageCtr.instance.objinstance.GetComponentInChildren<SpriteRenderer>().sprite;
-                gameObject.GetComponent<SpriteRenderer>().color = ImageCtr.instance.objinstance.GetComponentInChildren<SpriteRenderer>().color;
-                gameObject.GetComponent<Transform>().rotation = Quaternion.Euler(0f, 0f, 0f);
-                gameObject.transform.localScale = new Vector3(0.15f, 0.15f, 0.15f);
+                gameObject.GetComponentInChildren<SpriteRenderer>().sprite = ImageCtr.instance.objinstance.GetComponentInChildren<SpriteRenderer>().sprite;
+                gameObject.GetComponentInChildren<SpriteRenderer>().color = ImageCtr.instance.objinstance.GetComponentInChildren<SpriteRenderer>().color;
+                gameObject.GetComponentInChildren<Transform>().rotation = Quaternion.Euler(0f, 0f, 0f);
+                // gameObject.transform.localScale = new Vector3(0.15f, 0.15f, 0.15f);
                 gameObject.tag = ImageCtr.instance.objinstance.tag;
                 bulong = gameObject;
                 foreach (Transform child in gameObject.transform)

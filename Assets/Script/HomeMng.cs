@@ -33,7 +33,7 @@ public class HomeMng : MonoBehaviour
     }
     public void btnBacktoImage()
     {
-        ImageCtr.instance.GenLevelfromGrid();
+        // ImageCtr.instance.GenLevelfromGrid();
         btnBack.SetActive(false);
         gameObject.SetActive(true);
         btnImage();
