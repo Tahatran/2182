@@ -22,6 +22,10 @@ public class ShopMng : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        int Skin = PlayerPrefs.GetInt("Skin", 0);
+        PlayerPrefs.SetInt("Skin", Skin);
+        DataConfig.EffectIndex = PlayerPrefs.GetInt("Skin", 0);
+        PlayerPrefs.Save();
         LoadShop();
     }
 
@@ -35,6 +39,7 @@ public class ShopMng : MonoBehaviour
     {
         DataConfig.EffectIndex = id;
         // Debug.Log(DataConfig.EffectIndex);
+        PlayerPrefs.SetInt("Skin", DataConfig.EffectIndex);
     }
 
     public void Ads()
@@ -47,6 +52,9 @@ public class ShopMng : MonoBehaviour
                 lstSkin[idSelecSkinLock].transform.GetChild(0).gameObject.SetActive(false);
                 SkinItemData.Items[idSelecSkinLock].IsBuy = true;
                 LoadShop();
+                DeactivateAllItems();
+                lstSkin[idSelecSkinLock].transform.GetChild(2).gameObject.SetActive(true);
+                DataConfig.EffectIndex = idSelecSkinLock;
                 btnAds.SetActive(false);
             }
             else
@@ -123,7 +131,7 @@ public class ShopMng : MonoBehaviour
 
             }
         }
-
+        lstSkin[DataConfig.EffectIndex].transform.GetChild(2).gameObject.SetActive(true);
         ShopContent.SetActive(true); // Ensure ShopContent is active after loading
     }
     private void DeactivateAllItems()

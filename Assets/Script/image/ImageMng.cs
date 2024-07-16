@@ -46,6 +46,8 @@ public class ImageMng : MonoBehaviour
                 lstImage[idSelecSkinLock].transform.GetChild(0).gameObject.SetActive(false);
                 ImageItemData.Items[idSelecSkinLock].IsBuy = true;
                 LoadShop();
+                DeactivateAllItems();
+                lstImage[idSelecSkinLock].transform.GetChild(2).gameObject.SetActive(true);
                 btnAds.SetActive(false);
             }
             else
@@ -120,7 +122,7 @@ public class ImageMng : MonoBehaviour
                });
             }
         }
-
+        // lstImage[DataConfig.EffectIndex].transform.GetChild(2).gameObject.SetActive(true);
         ShopContent.SetActive(true); // Ensure ShopContent is active after loading
     }
 
