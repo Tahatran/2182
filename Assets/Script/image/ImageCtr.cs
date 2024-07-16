@@ -13,7 +13,6 @@ using System.Data.Common;
 
 public class ImageCtr : MonoBehaviour
 {
-    //
     public Camera mainCamera;
     public GameObject hexa;
     public Texture2D image;
@@ -90,6 +89,7 @@ public class ImageCtr : MonoBehaviour
 
     public void onGenerateGrid()
     {
+        lstCrew.Clear();
         Debug.Log("2");
         gen = false;
         var currentLevel = LVConfig.Instance.Imageslow[DataConfig.ImageIndex];

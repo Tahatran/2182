@@ -13,6 +13,7 @@ public class ShopMng : MonoBehaviour
     public GameObject ShopContent2;
     public GameObject ItemPrefab;
     public GameObject btnAds;
+    public GameObject btnGet;
     public List<GameObject> lstSkin;
     public int id;
     public int idSelecSkinLock;
@@ -76,7 +77,7 @@ public class ShopMng : MonoBehaviour
                 {
                     DeactivateAllItems();
                     id = item.Id; // Set the ID for purchasing
-                    Debug.Log("aa" + id);
+                    // Debug.Log("aa" + id);
                     btnAds.SetActive(false);
                     Item.transform.GetChild(2).gameObject.SetActive(true); // Activate some UI element
 
@@ -91,10 +92,21 @@ public class ShopMng : MonoBehaviour
                {
                    DeactivateAllItems();
                    idSelecSkinLock = item.Id;
-                   Debug.Log("bb" + idSelecSkinLock);
+
+                   //    Debug.Log("bb" + idSelecSkinLock);
                    // Handle non-buyable items
-                   btnAds.SetActive(true); // Example: activate an ad button
-                                           //    Item.transform.GetChild(0).gameObject.SetActive(true); // Activate some UI element
+                   if (idSelecSkinLock > 0 && !SkinItemData.Items[idSelecSkinLock - 1].IsBuy)
+                   {
+                       // Call your custom method here
+                       btnAds.SetActive(false);
+                       btnGet.SetActive(false);
+                   }
+                   else
+                   {
+                       btnAds.SetActive(true);
+                   }
+                   //    btnAds.SetActive(true); // Example: activate an ad button
+                   //    Item.transform.GetChild(0).gameObject.SetActive(true); // Activate some UI element
                });
 
             }

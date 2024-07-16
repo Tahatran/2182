@@ -18,15 +18,15 @@ MonoBehaviour:
     ItemImg: {fileID: 21300000, guid: c01191c9649ed5349b62f59cdffa361c, type: 3}
     ItemPrefab: {fileID: 4105357760606371290, guid: b00899c6bb3390449b2faf555a454768, type: 3}
   - Id: 1
-    IsBuy: 1
+    IsBuy: 0
     ItemImg: {fileID: 21300000, guid: dccf94bfabde5da41bde7a137ac01e94, type: 3}
     ItemPrefab: {fileID: 4105357760606371290, guid: b00899c6bb3390449b2faf555a454768, type: 3}
   - Id: 2
-    IsBuy: 1
+    IsBuy: 0
     ItemImg: {fileID: 21300000, guid: 03f0b27d0aea1934eae33e2588c5a4f7, type: 3}
     ItemPrefab: {fileID: 4105357760606371290, guid: b00899c6bb3390449b2faf555a454768, type: 3}
   - Id: 3
-    IsBuy: 1
+    IsBuy: 0
     ItemImg: {fileID: 21300000, guid: faacdafeebd76464fb8e79a4c7a58baa, type: 3}
     ItemPrefab: {fileID: 4105357760606371290, guid: b00899c6bb3390449b2faf555a454768, type: 3}
   - Id: 4
