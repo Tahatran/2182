@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Nami.Controller;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -38,11 +39,22 @@ public class ShopMng : MonoBehaviour
 
     public void Ads()
     {
-        // Show ads logic here
-        lstSkin[idSelecSkinLock].transform.GetChild(0).gameObject.SetActive(false);
-        SkinItemData.Items[idSelecSkinLock].IsBuy = true;
-        LoadShop();
-        btnAds.SetActive(false);
+        //adsssssssssssssss
+        GameAds.Get.LoadAndShowRewardAd((onComplete) =>
+        {
+            if (onComplete)
+            {
+                lstSkin[idSelecSkinLock].transform.GetChild(0).gameObject.SetActive(false);
+                SkinItemData.Items[idSelecSkinLock].IsBuy = true;
+                LoadShop();
+                btnAds.SetActive(false);
+            }
+            else
+            {
+                Debug.Log("Reward skin failed");
+            }
+        });
+
     }
 
     public void LoadShop()

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class HomeMng : MonoBehaviour
 {
@@ -55,7 +56,11 @@ public class HomeMng : MonoBehaviour
     {
         ImageGameObject.SetActive(false);
         gameObject.SetActive(false);
-        GameCtr.instance.autonextlvwhenwin();
+        foreach (Transform child in GameCtr.instance.gridContainer.transform)
+        {
+            Destroy(child.gameObject);
+        }
+        SceneManager.LoadScene(0);
     }
 
     public void btnHome()

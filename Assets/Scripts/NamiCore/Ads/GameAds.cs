@@ -113,7 +113,7 @@ namespace Nami.Controller
             {
                 ShowAppOpenAd();
             });
-            // LoadRewardAd();
+            //LoadRewardAd();
             //LoadInterstitialAd();
             LoadBanner();
         }
@@ -684,6 +684,8 @@ namespace Nami.Controller
                     {
                         Debug.LogWarning("reward ad failed to load an ad " +
                                        "with error : " + error);
+                        _rewardImpression = false;
+                        _rewardAdComplete?.Invoke(_rewardImpression);
                         return;
                     }
 
@@ -693,6 +695,15 @@ namespace Nami.Controller
                     _rewardAd = ad;
 
                     Reward_RegisterReloadHandler(ad);
+
+                    if (_rewardAdComplete != null)
+                    {
+                        _justShowInterAd = true;
+                        _rewardAd.Show((reward) =>
+                        {
+                            Debug.Log("Rewarded ad granted a reward");
+                        });
+                    }
                 });
         }
 
@@ -723,6 +734,14 @@ namespace Nami.Controller
             }
         }
 
+        public void LoadAndShowRewardAd(System.Action<bool> onComplete)
+        {
+            _rewardImpression = false;
+            _rewardAdComplete = onComplete;
+
+            LoadRewardAd();
+        }
+
         private void Reward_RegisterReloadHandler(RewardedAd rewardAd)
         {
             // Raised when an impression is recorded for an ad.
@@ -739,7 +758,7 @@ namespace Nami.Controller
 
                 _rewardAdComplete?.Invoke(_rewardImpression);
                 // Reload the ad so that we can show another as soon as possible.
-                LoadRewardAd();
+                //LoadRewardAd();
 
                 ResetTimeInterAd();
             };
@@ -751,10 +770,9 @@ namespace Nami.Controller
 
                 _rewardAdComplete?.Invoke(_rewardImpression);
                 // Reload the ad so that we can show another as soon as possible.
-                LoadRewardAd();
+                //LoadRewardAd();
 
                 ResetTimeInterAd();
-
             };
         }
 

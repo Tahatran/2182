@@ -104,7 +104,6 @@ public class GameCtr : MonoBehaviour
         //     PlayerPrefs.SetInt("Check3ads", check3ads);
         // }
         DataConfig.ScoreImage = PlayerPrefs.GetInt("ScoreImage", 0);
-        // DataConfig.ScoreImage = 10;
         // SaveReward();
         // LoadReward();
         DOTween.KillAll();
@@ -765,48 +764,60 @@ public class GameCtr : MonoBehaviour
 
     public void autonextlvwhenwinAds()
     {
-        // GameAds.Get.LoadRewardedAd();
-        int scoreImage = PlayerPrefs.GetInt("ScoreImage", 0);
-        PlayerPrefs.SetInt("ScoreImage", scoreImage + 2);
-        DataConfig.ScoreImage = PlayerPrefs.GetInt("ScoreImage", 0);
-        PlayerPrefs.Save();
-
-        foreach (Transform child in gridContainer.transform)
+        //obj load o day
+        //adssssssssssssssss
+        GameAds.Get.LoadAndShowRewardAd((onComplete) =>
         {
-            Destroy(child.gameObject);
-        }
-        SceneManager.LoadScene(0);
+            if (onComplete)
+            {
+                int scoreImage = PlayerPrefs.GetInt("ScoreImage", 0);
+                PlayerPrefs.SetInt("ScoreImage", scoreImage + 2);
+                DataConfig.ScoreImage = PlayerPrefs.GetInt("ScoreImage", 0);
+                PlayerPrefs.Save();
+
+                foreach (Transform child in gridContainer.transform)
+                {
+                    Destroy(child.gameObject);
+                }
+                SceneManager.LoadScene(0);
+            }
+            else
+            {
+                Debug.Log("Reward win failed");
+            }
+        });
+
     }
 
     //reward
-    public void SaveReward()
-    {
-        string json = JsonUtility.ToJson(new Serialization<int>(LstReward));
-        PlayerPrefs.SetString("Reward", json);
-        PlayerPrefs.Save();
-        Debug.Log("Rewards saved: " + json);
-    }
-    public void LoadReward()
-    {
-        // Đọc chuỗi JSON từ PlayerPrefs với key là "Reward"
-        string json = PlayerPrefs.GetString("Reward", "");
+    // public void SaveReward()
+    // {
+    //     string json = JsonUtility.ToJson(new Serialization<int>(LstReward));
+    //     PlayerPrefs.SetString("Reward", json);
+    //     PlayerPrefs.Save();
+    //     Debug.Log("Rewards saved: " + json);
+    // }
+    // public void LoadReward()
+    // {
+    //     // Đọc chuỗi JSON từ PlayerPrefs với key là "Reward"
+    //     string json = PlayerPrefs.GetString("Reward", "");
 
-        // Kiểm tra nếu chuỗi JSON không rỗng
-        if (!string.IsNullOrEmpty(json))
-        {
-            // Chuyển đổi chuỗi JSON thành đối tượng Serialization<int>
-            Serialization<int> serializedReward = JsonUtility.FromJson<Serialization<int>>(json);
+    //     // Kiểm tra nếu chuỗi JSON không rỗng
+    //     if (!string.IsNullOrEmpty(json))
+    //     {
+    //         // Chuyển đổi chuỗi JSON thành đối tượng Serialization<int>
+    //         Serialization<int> serializedReward = JsonUtility.FromJson<Serialization<int>>(json);
 
-            // Lưu danh sách từ serializedReward.target vào LstReward
-            LstReward = serializedReward.target;
+    //         // Lưu danh sách từ serializedReward.target vào LstReward
+    //         LstReward = serializedReward.target;
 
-            Debug.Log("Rewards loaded: " + json);
-        }
-        else
-        {
-            Debug.LogWarning("No rewards found in PlayerPrefs.");
-        }
-    }
+    //         Debug.Log("Rewards loaded: " + json);
+    //     }
+    //     else
+    //     {
+    //         Debug.LogWarning("No rewards found in PlayerPrefs.");
+    //     }
+    // }
 
     // Coroutine to handle the delay and call the action
     private IEnumerator DelayCoroutine(float delay, System.Action action)

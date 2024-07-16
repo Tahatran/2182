@@ -54,8 +54,8 @@ public class ImageCtr : MonoBehaviour
     //2 cai nay goi sinh o canvas, khong dung nua, haha
     // private float hexWidth = 100f; // chiều rộng của một hexagon
     // private float hexHeight = Mathf.Sqrt(0.8f) / 2 * 10f;
-    private float hexWidth = 1.0f; // chiều rộng của một hexagon
-    private float hexHeight = Mathf.Sqrt(0.8f) / 2 * 0.7f;
+    // private float hexWidth = 1.0f; // chiều rộng của một hexagon
+    // private float hexHeight = Mathf.Sqrt(0.8f) / 2 * 0.7f;
     public static ImageCtr instance;
 
     private void Awake()

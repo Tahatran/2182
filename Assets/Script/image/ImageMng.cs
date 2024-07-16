@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Nami.Controller;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -25,7 +26,7 @@ public class ImageMng : MonoBehaviour
     public void Get()
     {
         DataConfig.ImageIndex = id;
-        Debug.Log("1");
+        // Debug.Log("1");
         // ImageCtr.instance.LoadLevelData(DataConfig.ImageIndex);
         // ImageCtr.instance.onGenerateGrid();
         Image2.instance.ShowScore();
@@ -37,11 +38,22 @@ public class ImageMng : MonoBehaviour
 
     public void Ads()
     {
-        // Show ads logic here
-        lstImage[idSelecSkinLock].transform.GetChild(0).gameObject.SetActive(false);
-        ImageItemData.Items[idSelecSkinLock].IsBuy = true;
-        LoadShop();
-        btnAds.SetActive(false);
+        //adsssssssssss
+        GameAds.Get.LoadAndShowRewardAd((onComplete) =>
+        {
+            if (onComplete)
+            {
+                lstImage[idSelecSkinLock].transform.GetChild(0).gameObject.SetActive(false);
+                ImageItemData.Items[idSelecSkinLock].IsBuy = true;
+                LoadShop();
+                btnAds.SetActive(false);
+            }
+            else
+            {
+                Debug.Log("Reward image failed");
+            }
+        });
+
     }
 
     public void LoadShop()

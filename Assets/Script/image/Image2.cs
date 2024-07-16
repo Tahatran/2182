@@ -157,6 +157,7 @@ public class Image2 : MonoBehaviour
                 selectedImageList[i].SetActive(true);
                 selectedBgList[i].SetActive(false); // Tắt corresponding background
                 DataConfig.ScoreImage--;
+                PlayerPrefs.SetInt("ScoreImage", DataConfig.ScoreImage);
                 activeCount++;
             }
         }

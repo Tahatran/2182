@@ -81,7 +81,7 @@ public class ShowLogFireBase : MonoBehaviour
     public void ShowCompleteLevel()
     {
         GameFirebase.SendEvent("complete_level", "id_level", PlayerPrefs.GetInt("lv").ToString(), "time_play", Mathf.Round(GetTimePlay()).ToString(), "number_tries", GetNumberTriesLevel().ToString());
-        Debug.Log("win" + GetNumberTriesLevel());
+        // Debug.Log("win" + GetNumberTriesLevel());
         ResetValue();
 
     }
