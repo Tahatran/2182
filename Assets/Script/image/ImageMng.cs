@@ -28,6 +28,7 @@ public class ImageMng : MonoBehaviour
         Debug.Log("1");
         // ImageCtr.instance.LoadLevelData(DataConfig.ImageIndex);
         // ImageCtr.instance.onGenerateGrid();
+        Image2.instance.ShowScore();
         Image2.instance.LoadImage(DataConfig.ImageIndex);
         Image2.instance.Img[id].SetActive(true);
         HomeMng.instance.btnBack.SetActive(true);

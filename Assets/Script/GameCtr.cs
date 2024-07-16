@@ -20,6 +20,7 @@ public class Serialization<T>
 public class GameCtr : MonoBehaviour
 {
     // adb shell setprop debug.firebase.analytics.app nami.screw.tinkerer.puzzlegame
+    public List<Texture> lstTexture;
     public List<int> LstReward;
     [SerializeField] private GameObject levelText;
     [SerializeField] private GameObject levelText2;
@@ -102,9 +103,10 @@ public class GameCtr : MonoBehaviour
         //     checktime = 0;
         //     PlayerPrefs.SetInt("Check3ads", check3ads);
         // }
-
-        SaveReward();
-        LoadReward();
+        DataConfig.ScoreImage = PlayerPrefs.GetInt("ScoreImage", 0);
+        // DataConfig.ScoreImage = 10;
+        // SaveReward();
+        // LoadReward();
         DOTween.KillAll();
         Input.multiTouchEnabled = false;
         setUpLv();
@@ -755,6 +757,7 @@ public class GameCtr : MonoBehaviour
 
         int scoreImage = PlayerPrefs.GetInt("ScoreImage", 0);
         PlayerPrefs.SetInt("ScoreImage", scoreImage + 1);
+        DataConfig.ScoreImage = PlayerPrefs.GetInt("ScoreImage", 0);
         PlayerPrefs.Save();
 
         SceneManager.LoadScene(0);
@@ -765,6 +768,7 @@ public class GameCtr : MonoBehaviour
         // GameAds.Get.LoadRewardedAd();
         int scoreImage = PlayerPrefs.GetInt("ScoreImage", 0);
         PlayerPrefs.SetInt("ScoreImage", scoreImage + 2);
+        DataConfig.ScoreImage = PlayerPrefs.GetInt("ScoreImage", 0);
         PlayerPrefs.Save();
 
         foreach (Transform child in gridContainer.transform)
