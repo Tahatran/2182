@@ -12,6 +12,8 @@ public class Image2 : MonoBehaviour
     public GameObject Image12;
     public GameObject Image13;
     public GameObject Image14;
+    public GameObject Image15;
+    public GameObject Image16;
     // Add list
     public List<GameObject> lstImgFinal;
     public List<GameObject> Img;
@@ -19,6 +21,8 @@ public class Image2 : MonoBehaviour
     public List<GameObject> Img2;
     public List<GameObject> Img3;
     public List<GameObject> Img4;
+    public List<GameObject> Img5;
+    public List<GameObject> Img6;
 
     //
     public List<GameObject> Imgbg;
@@ -26,6 +30,8 @@ public class Image2 : MonoBehaviour
     public List<GameObject> Img2bg;
     public List<GameObject> Img3bg;
     public List<GameObject> Img4bg;
+    public List<GameObject> Img5bg;
+    public List<GameObject> Img6bg;
     public static Image2 instance;
 
     private void Awake()
@@ -55,6 +61,8 @@ public class Image2 : MonoBehaviour
         Img.Add(Image12);
         Img.Add(Image13);
         Img.Add(Image14);
+        Img.Add(Image15);
+        Img.Add(Image16);
 
         int lv = 0;
         // Loop through image indices
@@ -100,6 +108,14 @@ public class Image2 : MonoBehaviour
                 selectedImageList = Img4;
                 selectedBgList = Img4bg;
                 break;
+            case 4:
+                selectedImageList = Img5;
+                selectedBgList = Img5bg;
+                break;
+            case 5:
+                selectedImageList = Img6;
+                selectedBgList = Img6bg;
+                break;
             default:
                 Debug.LogError("Invalid image index");
                 return;
@@ -142,6 +158,14 @@ public class Image2 : MonoBehaviour
             case 3:
                 selectedImageList = Img4;
                 selectedBgList = Img4bg;
+                break;
+            case 4:
+                selectedImageList = Img5;
+                selectedBgList = Img5bg;
+                break;
+            case 5:
+                selectedImageList = Img6;
+                selectedBgList = Img6bg;
                 break;
             default:
                 Debug.LogError("Invalid image index");
@@ -200,6 +224,14 @@ public class Image2 : MonoBehaviour
             case 3:
                 selectedImageList = Img4;
                 selectedBgList = Img4bg;
+                break;
+            case 4:
+                selectedImageList = Img5;
+                selectedBgList = Img5bg;
+                break;
+            case 5:
+                selectedImageList = Img6;
+                selectedBgList = Img6bg;
                 break;
             default:
                 Debug.LogError("Invalid image index");
