@@ -47,6 +47,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   firework: {fileID: 6438742290687698623, guid: dc69765f438959a43a4a15d58afc1cfd, type: 3}
+  lstfireWork:
+  - {fileID: 6438742290687698623, guid: dc69765f438959a43a4a15d58afc1cfd, type: 3}
+  - {fileID: 6438742290687698623, guid: dc69765f438959a43a4a15d58afc1cfd, type: 3}
+  - {fileID: 6438742290687698623, guid: dc69765f438959a43a4a15d58afc1cfd, type: 3}
+  - {fileID: 6438742290687698623, guid: dc69765f438959a43a4a15d58afc1cfd, type: 3}
+  - {fileID: 6438742290687698623, guid: dc69765f438959a43a4a15d58afc1cfd, type: 3}
   HasBulong: 0
   Bulong: {fileID: 0}
   col: 0

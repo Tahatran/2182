@@ -10,6 +10,7 @@ public class Screw : MonoBehaviour
     private Coroutine toggleCoroutine;
     private Coroutine toggleCoroutine2;
     public GameObject firework;
+    public List<GameObject> lstfireWork;
     public bool HasBulong;
     public GameObject Bulong;
     public int col;
@@ -173,7 +174,7 @@ public class Screw : MonoBehaviour
 
         DOVirtual.DelayedCall(0.05f, () =>
          {
-             var fireworkInstance = Instantiate(firework, bulongbodyUp.transform.position, Quaternion.identity, gameObject.transform);
+             var fireworkInstance = Instantiate(lstfireWork[DataConfig.EffectIndex], bulongbodyUp.transform.position, Quaternion.identity, gameObject.transform);
              ParticleSystemRenderer psRenderer = fireworkInstance.GetComponent<ParticleSystemRenderer>();
              psRenderer.sortingOrder = 100;
              Material particleMaterial = psRenderer.material;
