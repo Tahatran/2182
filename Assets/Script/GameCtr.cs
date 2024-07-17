@@ -20,7 +20,7 @@ public class Serialization<T>
 public class GameCtr : MonoBehaviour
 {
     // adb shell setprop debug.firebase.analytics.app nami.screw.tinkerer.puzzlegame
-    public List<Texture> lstTexture;
+    // public List<Texture> lstTexture;
     public List<int> LstReward;
     [SerializeField] private GameObject levelText;
     [SerializeField] private GameObject levelText2;
