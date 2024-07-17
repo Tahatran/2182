@@ -13,6 +13,7 @@ public class Image2 : MonoBehaviour
     public GameObject Image13;
     public GameObject Image14;
     // Add list
+    public List<GameObject> lstImgFinal;
     public List<GameObject> Img;
     public List<GameObject> Img1;
     public List<GameObject> Img2;
@@ -114,7 +115,7 @@ public class Image2 : MonoBehaviour
                 selectedBgList[i].SetActive(false); // Tắt corresponding background
             }
         }
-
+        ShowImageFinal();
         Debug.Log($"Loaded {activeCount} pieces for image {imageIndex}");
     }
 
@@ -162,11 +163,61 @@ public class Image2 : MonoBehaviour
             }
         }
 
+
+
         PlayerPrefs.SetInt(key, activeCount);
         PlayerPrefs.Save();
+        // ShowImageFinal();
+        StartCoroutine(DelayeShowFinal());
 
         Debug.Log($"Remaining ScoreImage: {DataConfig.ScoreImage}");
         ShowScore();
+    }
+    IEnumerator DelayeShowFinal()
+    {
+        yield return new WaitForSeconds(0.5f); // Change the delay time as needed
+        ShowImageFinal();
+    }
+
+    public void ShowImageFinal()
+    {
+        List<GameObject> selectedImageList = null;
+        List<GameObject> selectedBgList = null;
+        string key = DataConfig.ImageIndex.ToString();
+
+        switch (DataConfig.ImageIndex)
+        {
+            case 0:
+                selectedImageList = Img1;
+                selectedBgList = Img1bg;
+                break;
+            case 1:
+                selectedImageList = Img2;
+                selectedBgList = Img2bg;
+                break;
+            case 2:
+                selectedImageList = Img3;
+                selectedBgList = Img3bg;
+                break;
+            case 3:
+                selectedImageList = Img4;
+                selectedBgList = Img4bg;
+                break;
+            default:
+                Debug.LogError("Invalid image index");
+                return;
+        }
+        int activeCount = PlayerPrefs.GetInt(key, 0);
+        if (activeCount == selectedImageList.Count)
+        {
+            for (int i = 0; i < selectedImageList.Count; i++)
+            {
+                selectedImageList[i].SetActive(false);
+                selectedBgList[i].SetActive(false);
+            }
+            lstImgFinal[DataConfig.ImageIndex].SetActive(true);
+        }
+
     }
 
     public void ShowScore()
@@ -176,6 +227,8 @@ public class Image2 : MonoBehaviour
 
     void SetLevelText(GameObject parentLevelText)
     {
+        //tools
+        DataConfig.ScoreImage = 10;
         // Lấy giá trị level từ PlayerPrefs
         // var level = PlayerPrefs.GetInt("lv");
         // string levelString = level.ToString();
@@ -209,7 +262,7 @@ public class Image2 : MonoBehaviour
             }
             else
             {
-                imageLevelClone.transform.localPosition = new Vector3(xPos, 0, 0);
+                imageLevelClone.transform.localPosition = new Vector3(xPos + 0.2f, 0, 0);
             }
 
             imageLevelClone.transform.localScale = new Vector3(0.8f, 0.8f, 0.8f);
@@ -221,6 +274,15 @@ public class Image2 : MonoBehaviour
         }
     }
     // Update is called once per frame
+
+    public void ActivefalseAll()
+    {
+
+        for (int i = 0; i < Img.Count; i++)
+        {
+            Img[i].SetActive(false);
+        }
+    }
     void Update()
     {
 
