@@ -744,7 +744,7 @@ public class GameCtr : MonoBehaviour
     private IEnumerator DelayedbtnNext(float delay)
     {
         yield return new WaitForSeconds(delay);
-        btnNextlvAds.transform.DOLocalMoveY(-500f, 0.2f).SetEase(Ease.OutQuad);
+        // btnNextlvAds.transform.DOLocalMoveY(-500f, 0.2f).SetEase(Ease.OutQuad);
     }
 
     public void autonextlvwhenwin()

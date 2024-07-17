@@ -306,6 +306,7 @@ public class Image2 : MonoBehaviour
 
             // Gắn sprite tương ứng với chữ số
             imageLevel.sprite = sprites[digitValue];
+            imageLevel.color = new Color(51 / 255f, 208 / 255f, 248 / 255f, 255 / 255f);
         }
     }
     // Update is called once per frame
