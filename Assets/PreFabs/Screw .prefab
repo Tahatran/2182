@@ -49,10 +49,10 @@ MonoBehaviour:
   firework: {fileID: 6438742290687698623, guid: dc69765f438959a43a4a15d58afc1cfd, type: 3}
   lstfireWork:
   - {fileID: 6438742290687698623, guid: dc69765f438959a43a4a15d58afc1cfd, type: 3}
-  - {fileID: 6438742290687698623, guid: dc69765f438959a43a4a15d58afc1cfd, type: 3}
-  - {fileID: 6438742290687698623, guid: dc69765f438959a43a4a15d58afc1cfd, type: 3}
-  - {fileID: 6438742290687698623, guid: dc69765f438959a43a4a15d58afc1cfd, type: 3}
-  - {fileID: 6438742290687698623, guid: dc69765f438959a43a4a15d58afc1cfd, type: 3}
+  - {fileID: 8350939876196568239, guid: 75a2e38308205ae4995dd1f0797823c4, type: 3}
+  - {fileID: 8490912078505969732, guid: 499a8679e87f9a2488c4fcfde370683a, type: 3}
+  - {fileID: 3130857492896258924, guid: b8f2d60b3c2d82049aacb0d17734de63, type: 3}
+  - {fileID: 7217357060598921580, guid: cbcd41b849ba6c34ebc9fac91b1153cb, type: 3}
   HasBulong: 0
   Bulong: {fileID: 0}
   col: 0

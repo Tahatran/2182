@@ -174,11 +174,14 @@ public class Screw : MonoBehaviour
 
         DOVirtual.DelayedCall(0.05f, () =>
          {
+             //  Vector2 x = new Vector2(bulongbodyUp.transform.position.x, bulongbodyUp.transform.position.y + 0.2f);
              var fireworkInstance = Instantiate(lstfireWork[DataConfig.EffectIndex], bulongbodyUp.transform.position, Quaternion.identity, gameObject.transform);
              ParticleSystemRenderer psRenderer = fireworkInstance.GetComponent<ParticleSystemRenderer>();
              psRenderer.sortingOrder = 100;
              Material particleMaterial = psRenderer.material;
-             particleMaterial.mainTexture = GameCtr.instance.lstTexture[DataConfig.EffectIndex];
+             bulongfaceUp.GetComponent<SpriteRenderer>().sortingOrder = 101;
+             bulongface2.GetComponent<SpriteRenderer>().sortingOrder = 101;
+             //  particleMaterial.mainTexture = GameCtr.instance.lstTexture[DataConfig.EffectIndex];
              Destroy(fireworkInstance, 3f);
          });
         sequence.Append(Bulong.transform.DOMoveY(targetY, 0.2f).SetEase(Ease.OutQuad)).OnUpdate(() =>
@@ -195,6 +198,8 @@ public class Screw : MonoBehaviour
                 StopCoroutine(toggleCoroutine2);
                 bulongfaceUp.SetActive(true);
                 bulongface2.SetActive(false);
+                // bulongfaceUp.GetComponent<SpriteRenderer>().sortingOrder = 5;
+                // bulongface2.GetComponent<SpriteRenderer>().sortingOrder = 5;
             }
 
             // HasBulong = false;
@@ -280,6 +285,8 @@ public class Screw : MonoBehaviour
                                         }
                                         bulongFaceDown.SetActive(true);
                                         bulongFace2Down.SetActive(false);
+                                        bulongFaceDown.GetComponent<SpriteRenderer>().sortingOrder = 5;
+                                        bulongFace2Down.GetComponent<SpriteRenderer>().sortingOrder = 5;
                                     });
 
         // HasBulong = true;
