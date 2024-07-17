@@ -18,11 +18,13 @@ public class ImageMng : MonoBehaviour
     public List<GameObject> lstImage;
     public int id;
     public int idSelecSkinLock;
+
     // Start is called before the first frame update
     void Start()
     {
         LoadShop();
     }
+
     public void Get()
     {
         DataConfig.ImageIndex = id;
@@ -39,16 +41,19 @@ public class ImageMng : MonoBehaviour
     public void Ads()
     {
         //adsssssssssss
+        GameCtr.instance.Loading.GetComponent<TweenLoading>().ShowLoading();
         GameAds.Get.LoadAndShowRewardAd((onComplete) =>
         {
             if (onComplete)
             {
-                lstImage[idSelecSkinLock].transform.GetChild(0).gameObject.SetActive(false);
+                UnlockImage(idSelecSkinLock);
                 ImageItemData.Items[idSelecSkinLock].IsBuy = true;
+                PlayerPrefs.SetInt("ImageUnlocked_" + idSelecSkinLock, 1); // Save the unlock status
                 LoadShop();
                 DeactivateAllItems();
                 lstImage[idSelecSkinLock].transform.GetChild(2).gameObject.SetActive(true);
                 btnAds.SetActive(false);
+                GameCtr.instance.Loading.GetComponent<TweenLoading>().HideLoading();
             }
             else
             {
@@ -56,6 +61,11 @@ public class ImageMng : MonoBehaviour
             }
         });
 
+    }
+
+    private void UnlockImage(int imageId)
+    {
+        lstImage[imageId].transform.GetChild(0).gameObject.SetActive(false);
     }
 
     public void LoadShop()
@@ -66,7 +76,7 @@ public class ImageMng : MonoBehaviour
         ClearShopContent(ShopContent);
         ClearShopContent(ShopContent2);
         lstImage.Clear();
-        // Loop through SkinItemData.Items and distribute items between ShopContent and ShopContent2
+        // Loop through ImageItemData.Items and distribute items between ShopContent and ShopContent2
         for (int i = 0; i < ImageItemData.Items.Count; i++)
         {
             ItemData item = ImageItemData.Items[i];
@@ -83,17 +93,19 @@ public class ImageMng : MonoBehaviour
                 Item.transform.SetParent(ShopContent2.transform, false);
             }
 
-            if (item.IsBuy)
+            // Check if the item has been purchased or unlocked
+            bool isUnlocked = item.IsBuy || PlayerPrefs.GetInt("ImageUnlocked_" + i, 0) == 1;
+
+            if (isUnlocked)
             {
+                item.IsBuy = true; // Ensure item state is updated
                 Item.GetComponent<Image>().sprite = item.ItemImg;
                 Item.GetComponent<Button>().onClick.AddListener(() =>
                 {
                     DeactivateAllItems();
                     id = item.Id; // Set the ID for purchasing
-                    // Debug.Log("aa" + id);
                     btnAds.SetActive(false);
                     Item.transform.GetChild(2).gameObject.SetActive(true); // Activate some UI element
-
                 });
             }
             else
@@ -101,25 +113,21 @@ public class ImageMng : MonoBehaviour
                 Item.GetComponent<Image>().sprite = item.ItemImg;
                 Item.transform.GetChild(0).gameObject.SetActive(true);
                 Item.GetComponent<Button>().onClick.AddListener(() =>
-               {
-                   DeactivateAllItems();
-                   idSelecSkinLock = item.Id;
+                {
+                    DeactivateAllItems();
+                    idSelecSkinLock = item.Id;
 
-                   //    Debug.Log("bb" + idSelecSkinLock);
-                   // Handle non-buyable items
-                   if (idSelecSkinLock > 0 && !ImageItemData.Items[idSelecSkinLock - 1].IsBuy)
-                   {
-                       // Call your custom method here
-                       btnAds.SetActive(false);
-                       btnGet.SetActive(false);
-                   }
-                   else
-                   {
-                       btnAds.SetActive(true);
-                   }
-                   //    btnAds.SetActive(true); // Example: activate an ad button
-                   //    Item.transform.GetChild(0).gameObject.SetActive(true); // Activate some UI element
-               });
+                    // Handle non-buyable items
+                    if (idSelecSkinLock > 0 && !ImageItemData.Items[idSelecSkinLock - 1].IsBuy)
+                    {
+                        btnAds.SetActive(false);
+                        btnGet.SetActive(false);
+                    }
+                    else
+                    {
+                        btnAds.SetActive(true);
+                    }
+                });
             }
         }
         // lstImage[DataConfig.EffectIndex].transform.GetChild(2).gameObject.SetActive(true);
@@ -128,9 +136,9 @@ public class ImageMng : MonoBehaviour
 
     private void DeactivateAllItems()
     {
-        foreach (GameObject skin in lstImage)
+        foreach (GameObject image in lstImage)
         {
-            skin.transform.GetChild(2).gameObject.SetActive(false);
+            image.transform.GetChild(2).gameObject.SetActive(false);
         }
     }
 

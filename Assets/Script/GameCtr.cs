@@ -21,7 +21,8 @@ public class GameCtr : MonoBehaviour
 {
     // adb shell setprop debug.firebase.analytics.app nami.screw.tinkerer.puzzlegame
     // public List<Texture> lstTexture;
-    public List<int> LstReward;
+    // public List<int> LstReward;
+    public GameObject Loading;
     [SerializeField] private GameObject levelText;
     [SerializeField] private GameObject levelText2;
     [SerializeField] private GameObject parentLevelText;
@@ -768,6 +769,7 @@ public class GameCtr : MonoBehaviour
         //adssssssssssssssss
         GameAds.Get.LoadAndShowRewardAd((onComplete) =>
         {
+            GameCtr.instance.Loading.GetComponent<TweenLoading>().ShowLoading();
             if (onComplete)
             {
                 int scoreImage = PlayerPrefs.GetInt("ScoreImage", 0);
@@ -780,6 +782,7 @@ public class GameCtr : MonoBehaviour
                     Destroy(child.gameObject);
                 }
                 SceneManager.LoadScene(0);
+                GameCtr.instance.Loading.GetComponent<TweenLoading>().HideLoading();
             }
             else
             {

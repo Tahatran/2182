@@ -16,6 +16,7 @@ public class ShopMng : MonoBehaviour
     public GameObject btnAds;
     public GameObject btnGet;
     public List<GameObject> lstSkin;
+    public List<int> lstSave;
     public int id;
     public int idSelecSkinLock;
 
@@ -38,24 +39,26 @@ public class ShopMng : MonoBehaviour
     public void Get()
     {
         DataConfig.EffectIndex = id;
-        // Debug.Log(DataConfig.EffectIndex);
         PlayerPrefs.SetInt("Skin", DataConfig.EffectIndex);
     }
 
     public void Ads()
     {
         //adsssssssssssssss
+        GameCtr.instance.Loading.GetComponent<TweenLoading>().ShowLoading();
         GameAds.Get.LoadAndShowRewardAd((onComplete) =>
         {
             if (onComplete)
             {
-                lstSkin[idSelecSkinLock].transform.GetChild(0).gameObject.SetActive(false);
+                UnlockSkin(idSelecSkinLock);
                 SkinItemData.Items[idSelecSkinLock].IsBuy = true;
+                PlayerPrefs.SetInt("SkinUnlocked_" + idSelecSkinLock, 1); // Save the unlock status
                 LoadShop();
                 DeactivateAllItems();
                 lstSkin[idSelecSkinLock].transform.GetChild(2).gameObject.SetActive(true);
                 DataConfig.EffectIndex = idSelecSkinLock;
                 btnAds.SetActive(false);
+                GameCtr.instance.Loading.GetComponent<TweenLoading>().HideLoading();
             }
             else
             {
@@ -63,6 +66,11 @@ public class ShopMng : MonoBehaviour
             }
         });
 
+    }
+
+    private void UnlockSkin(int skinId)
+    {
+        lstSkin[skinId].transform.GetChild(0).gameObject.SetActive(false);
     }
 
     public void LoadShop()
@@ -90,50 +98,47 @@ public class ShopMng : MonoBehaviour
                 Item.transform.SetParent(ShopContent2.transform, false);
             }
 
-            if (item.IsBuy)
+            // Check if the item has been purchased or unlocked
+            bool isUnlocked = item.IsBuy || PlayerPrefs.GetInt("SkinUnlocked_" + i, 0) == 1;
+
+            if (isUnlocked)
             {
+                item.IsBuy = true; // Ensure item state is updated
                 Item.GetComponent<Image>().sprite = item.ItemImg;
                 Item.GetComponent<Button>().onClick.AddListener(() =>
                 {
                     DeactivateAllItems();
                     id = item.Id; // Set the ID for purchasing
-                    // Debug.Log("aa" + id);
                     btnAds.SetActive(false);
                     Item.transform.GetChild(2).gameObject.SetActive(true); // Activate some UI element
-
                 });
             }
             else
             {
-
                 Item.GetComponent<Image>().sprite = item.ItemImg;
                 Item.transform.GetChild(0).gameObject.SetActive(true);
                 Item.GetComponent<Button>().onClick.AddListener(() =>
-               {
-                   DeactivateAllItems();
-                   idSelecSkinLock = item.Id;
+                {
+                    DeactivateAllItems();
+                    idSelecSkinLock = item.Id;
 
-                   //    Debug.Log("bb" + idSelecSkinLock);
-                   // Handle non-buyable items
-                   if (idSelecSkinLock > 0 && !SkinItemData.Items[idSelecSkinLock - 1].IsBuy)
-                   {
-                       // Call your custom method here
-                       btnAds.SetActive(false);
-                       btnGet.SetActive(false);
-                   }
-                   else
-                   {
-                       btnAds.SetActive(true);
-                   }
-                   //    btnAds.SetActive(true); // Example: activate an ad button
-                   //    Item.transform.GetChild(0).gameObject.SetActive(true); // Activate some UI element
-               });
-
+                    // Handle non-buyable items
+                    if (idSelecSkinLock > 0 && !SkinItemData.Items[idSelecSkinLock - 1].IsBuy)
+                    {
+                        btnAds.SetActive(false);
+                        btnGet.SetActive(false);
+                    }
+                    else
+                    {
+                        btnAds.SetActive(true);
+                    }
+                });
             }
         }
         lstSkin[DataConfig.EffectIndex].transform.GetChild(2).gameObject.SetActive(true);
         ShopContent.SetActive(true); // Ensure ShopContent is active after loading
     }
+
     private void DeactivateAllItems()
     {
         foreach (GameObject skin in lstSkin)
