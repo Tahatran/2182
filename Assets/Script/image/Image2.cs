@@ -163,8 +163,6 @@ public class Image2 : MonoBehaviour
             }
         }
 
-
-
         PlayerPrefs.SetInt(key, activeCount);
         PlayerPrefs.Save();
         // ShowImageFinal();
@@ -228,7 +226,7 @@ public class Image2 : MonoBehaviour
     void SetLevelText(GameObject parentLevelText)
     {
         //tools
-        DataConfig.ScoreImage = 10;
+        // DataConfig.ScoreImage = 10;
         // Lấy giá trị level từ PlayerPrefs
         // var level = PlayerPrefs.GetInt("lv");
         // string levelString = level.ToString();
@@ -260,9 +258,14 @@ public class Image2 : MonoBehaviour
             {
                 imageLevelClone.transform.localPosition = new Vector3(xPos + 0.3f, 0, 0);
             }
-            else
+            else if (int.Parse(levelString) > 10 && int.Parse(levelString) < 100)
             {
                 imageLevelClone.transform.localPosition = new Vector3(xPos + 0.2f, 0, 0);
+            }
+            else
+            {
+                imageLevelClone.transform.localPosition = new Vector3(xPos + 0.1f, 0, 0);
+                imageLevelClone.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
             }
 
             imageLevelClone.transform.localScale = new Vector3(0.8f, 0.8f, 0.8f);
