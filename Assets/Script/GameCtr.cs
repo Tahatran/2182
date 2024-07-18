@@ -383,7 +383,7 @@ public class GameCtr : MonoBehaviour
         // Debug.Log("check-log-complete-level----time_play: " + CheckLogFirebase.Instance.TotalTime.ToString());
         // CheckLogFirebase.Instance.TotalNumberTries = 1;
         int lv = PlayerPrefs.GetInt("lv") + 1;
-        if (lv > 15)
+        if (lv > 25)
         {
             lv = 1;
         }
