@@ -53,7 +53,7 @@ public class TweenLoading : MonoBehaviour
     {
         while (true)
         {
-            loading.transform.Rotate(new Vector3(0, 0, -90) * Time.deltaTime);
+            loading.GetComponent<RectTransform>().Rotate(new Vector3(0, 0, -90) * Time.deltaTime);
             yield return null;
         }
     }

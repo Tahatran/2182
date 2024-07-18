@@ -58,12 +58,12 @@ public class ShopMng : MonoBehaviour
                 lstSkin[idSelecSkinLock].transform.GetChild(2).gameObject.SetActive(true);
                 DataConfig.EffectIndex = idSelecSkinLock;
                 btnAds.SetActive(false);
-                GameCtr.instance.Loading.GetComponent<TweenLoading>().HideLoading();
             }
             else
             {
                 Debug.Log("Reward skin failed");
             }
+            GameCtr.instance.Loading.GetComponent<TweenLoading>().HideLoading();
         });
 
     }

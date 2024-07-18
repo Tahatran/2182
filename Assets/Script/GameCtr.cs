@@ -767,9 +767,9 @@ public class GameCtr : MonoBehaviour
     {
         //obj load o day
         //adssssssssssssssss
+        GameCtr.instance.Loading.GetComponent<TweenLoading>().ShowLoading();
         GameAds.Get.LoadAndShowRewardAd((onComplete) =>
         {
-            GameCtr.instance.Loading.GetComponent<TweenLoading>().ShowLoading();
             if (onComplete)
             {
                 int scoreImage = PlayerPrefs.GetInt("ScoreImage", 0);
@@ -782,12 +782,12 @@ public class GameCtr : MonoBehaviour
                     Destroy(child.gameObject);
                 }
                 SceneManager.LoadScene(0);
-                GameCtr.instance.Loading.GetComponent<TweenLoading>().HideLoading();
             }
             else
             {
                 Debug.Log("Reward win failed");
             }
+            GameCtr.instance.Loading.GetComponent<TweenLoading>().HideLoading();
         });
 
     }

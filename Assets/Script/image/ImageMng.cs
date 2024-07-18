@@ -53,12 +53,13 @@ public class ImageMng : MonoBehaviour
                 DeactivateAllItems();
                 lstImage[idSelecSkinLock].transform.GetChild(2).gameObject.SetActive(true);
                 btnAds.SetActive(false);
-                GameCtr.instance.Loading.GetComponent<TweenLoading>().HideLoading();
+
             }
             else
             {
                 Debug.Log("Reward image failed");
             }
+            GameCtr.instance.Loading.GetComponent<TweenLoading>().HideLoading();
         });
 
     }
