@@ -367,47 +367,47 @@ public class Screw : MonoBehaviour
         // DOTween.Kill(bulongGameObject);
     }
 
-    void UpdateRemainingTags()
-    {
-        GameCtr gameCtrInstance = GameObject.FindObjectOfType<GameCtr>();
-        gameCtrInstance.bulongTags.Clear();
-        gameCtrInstance.crewTags.Clear();
+    // void UpdateRemainingTags()
+    // {
+    //     GameCtr gameCtrInstance = GameObject.FindObjectOfType<GameCtr>();
+    //     gameCtrInstance.bulongTags.Clear();
+    //     gameCtrInstance.crewTags.Clear();
 
-        // Cập nhật tag từ danh sách lstCrew
-        foreach (var screwObject in gameCtrInstance.lstCrew)
-        {
-            var screw = screwObject.GetComponent<Screw>();
-            var tag = screwObject.tag;
-            if (!gameCtrInstance.crewTags.Contains(tag))
-            {
-                gameCtrInstance.crewTags.Add(tag);
-            }
-        }
+    //     // Cập nhật tag từ danh sách lstCrew
+    //     foreach (var screwObject in gameCtrInstance.lstCrew)
+    //     {
+    //         var screw = screwObject.GetComponent<Screw>();
+    //         var tag = screwObject.tag;
+    //         if (!gameCtrInstance.crewTags.Contains(tag))
+    //         {
+    //             gameCtrInstance.crewTags.Add(tag);
+    //         }
+    //     }
 
-        //  foreach (var screwObject in gameCtrInstance.lstCrew)
-        // {
-        //     var screw = screwObject.GetComponent<Screw>();
-        //     var tag = screwObject.tag;
-        //     if (!gameCtrInstance.crewTags.Contains(tag))
-        //     {
-        //         if (screw.HasBulong == false)
-        //         {
-        //             gameCtrInstance.crewTags.Add(screw.tag);
-        //         }
-        //         gameCtrInstance.crewTags.Add(tag);
-        //     }
+    //     //  foreach (var screwObject in gameCtrInstance.lstCrew)
+    //     // {
+    //     //     var screw = screwObject.GetComponent<Screw>();
+    //     //     var tag = screwObject.tag;
+    //     //     if (!gameCtrInstance.crewTags.Contains(tag))
+    //     //     {
+    //     //         if (screw.HasBulong == false)
+    //     //         {
+    //     //             gameCtrInstance.crewTags.Add(screw.tag);
+    //     //         }
+    //     //         gameCtrInstance.crewTags.Add(tag);
+    //     //     }
 
-        // Cập nhật tag từ danh sách lstBulong
-        foreach (var bulongObject in gameCtrInstance.lstBulong)
-        {
-            var bulongAction = bulongObject.GetComponent<BulongAction>();
-            var tag = bulongObject.tag;
-            if (!gameCtrInstance.bulongTags.Contains(tag))
-            {
-                gameCtrInstance.bulongTags.Add(tag);
-            }
-        }
-    }
+    //     // Cập nhật tag từ danh sách lstBulong
+    //     foreach (var bulongObject in gameCtrInstance.lstBulong)
+    //     {
+    //         var bulongAction = bulongObject.GetComponent<BulongAction>();
+    //         var tag = bulongObject.tag;
+    //         if (!gameCtrInstance.bulongTags.Contains(tag))
+    //         {
+    //             gameCtrInstance.bulongTags.Add(tag);
+    //         }
+    //     }
+    // }
 
 
     void OnMouseDown()

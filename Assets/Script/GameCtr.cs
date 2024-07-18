@@ -56,16 +56,16 @@ public class GameCtr : MonoBehaviour
     public int colNumber;
     public int rowNumber;
 
-    public List<Sprite> BulongfacespriteList;
-    public List<Sprite> BulongbodyspriteList;
-    public List<Sprite> ScrewspriteList;
+    // public List<Sprite> BulongfacespriteList;
+    // public List<Sprite> BulongbodyspriteList;
+    // public List<Sprite> ScrewspriteList;
     public List<GridPrefab> lstGrid;
 
     public List<GameObject> lstBulong;
     public List<GameObject> lstCrew;
 
-    public List<string> bulongTags = new List<string>(); // List chứa các tag của Bulong
-    public List<string> crewTags = new List<string>(); // List chứa các tag của Screw
+    // public List<string> bulongTags = new List<string>(); // List chứa các tag của Bulong
+    // public List<string> crewTags = new List<string>(); // List chứa các tag của Screw
     public int lv = 1;
     // public int check3ads = 0;
     // public float checktime = 0;
@@ -217,7 +217,7 @@ public class GameCtr : MonoBehaviour
         }
 
         // Đặt khoảng cách giữa các chữ số
-        float spacing = 0.5f; // điều chỉnh khoảng cách giữa các chữ số tùy thuộc vào yêu cầu của bạn
+        float spacing = 0.15f; // điều chỉnh khoảng cách giữa các chữ số tùy thuộc vào yêu cầu của bạn
 
         // Duyệt qua từng chữ số trong chuỗi levelString
         for (int i = 0; i < levelString.Length; i++)
@@ -234,7 +234,7 @@ public class GameCtr : MonoBehaviour
             // Đặt vị trí của imageLevelClone
             if (int.Parse(levelString) < 10)
             {
-                imageLevelClone.transform.localPosition = new Vector3(xPos + 0.3f, 0, 0);
+                imageLevelClone.transform.localPosition = new Vector3(xPos + 0.05f, 0, 0);
             }
             else
             {
@@ -268,7 +268,7 @@ public class GameCtr : MonoBehaviour
         }
 
         // Đặt khoảng cách giữa các chữ số
-        float spacing = 100f; // điều chỉnh khoảng cách giữa các chữ số tùy thuộc vào yêu cầu của bạn
+        float spacing = 68f; // điều chỉnh khoảng cách giữa các chữ số tùy thuộc vào yêu cầu của bạn
 
         // Duyệt qua từng chữ số trong chuỗi levelString
         for (int i = 0; i < levelString.Length; i++)
@@ -537,24 +537,24 @@ public class GameCtr : MonoBehaviour
 
     }
 
-    void ReadTags()
-    {
-        bulongTags.Clear();
-        crewTags.Clear();
+    // void ReadTags()
+    // {
+    //     bulongTags.Clear();
+    //     crewTags.Clear();
 
-        foreach (GameObject bulong in lstBulong)
-        {
-            bulongTags.Add(bulong.tag);
-        }
+    //     foreach (GameObject bulong in lstBulong)
+    //     {
+    //         bulongTags.Add(bulong.tag);
+    //     }
 
-        foreach (GameObject crew in lstCrew)
-        {
-            if (crew.GetComponent<Screw>().HasBulong == false)
-            {
-                crewTags.Add(crew.tag);
-            }
-        }
-    }
+    //     foreach (GameObject crew in lstCrew)
+    //     {
+    //         if (crew.GetComponent<Screw>().HasBulong == false)
+    //         {
+    //             crewTags.Add(crew.tag);
+    //         }
+    //     }
+    // }
 
     void CheckTags()
     {

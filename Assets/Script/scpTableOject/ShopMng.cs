@@ -40,6 +40,7 @@ public class ShopMng : MonoBehaviour
     {
         DataConfig.EffectIndex = id;
         PlayerPrefs.SetInt("Skin", DataConfig.EffectIndex);
+        btnGet.SetActive(false);
     }
 
     public void Ads()
@@ -109,6 +110,7 @@ public class ShopMng : MonoBehaviour
                 {
                     DeactivateAllItems();
                     id = item.Id; // Set the ID for purchasing
+                    btnGet.SetActive(true);
                     btnAds.SetActive(false);
                     Item.transform.GetChild(2).gameObject.SetActive(true); // Activate some UI element
                 });
@@ -130,6 +132,7 @@ public class ShopMng : MonoBehaviour
                     }
                     else
                     {
+                        btnGet.SetActive(true);
                         btnAds.SetActive(true);
                     }
                 });

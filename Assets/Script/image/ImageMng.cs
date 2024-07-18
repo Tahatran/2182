@@ -105,6 +105,7 @@ public class ImageMng : MonoBehaviour
                 {
                     DeactivateAllItems();
                     id = item.Id; // Set the ID for purchasing
+                    btnGet.SetActive(true);
                     btnAds.SetActive(false);
                     Item.transform.GetChild(2).gameObject.SetActive(true); // Activate some UI element
                 });
