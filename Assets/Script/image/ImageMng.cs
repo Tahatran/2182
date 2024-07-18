@@ -36,6 +36,7 @@ public class ImageMng : MonoBehaviour
         Image2.instance.Img[id].SetActive(true);
         HomeMng.instance.btnBack.SetActive(true);
         Home.SetActive(false);
+        GameCtr.instance.GameClear();
     }
 
     public void Ads()
@@ -51,6 +52,7 @@ public class ImageMng : MonoBehaviour
                 PlayerPrefs.SetInt("ImageUnlocked_" + idSelecSkinLock, 1); // Save the unlock status
                 LoadShop();
                 DeactivateAllItems();
+                id = idSelecSkinLock;
                 lstImage[idSelecSkinLock].transform.GetChild(2).gameObject.SetActive(true);
                 btnAds.SetActive(false);
 
