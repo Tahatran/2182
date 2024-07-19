@@ -10,6 +10,7 @@ public class ShopMng : MonoBehaviour
     [Header("Data")]
     public ShopItemSO SkinItemData;
 
+    public GameObject pnlTutorial;
     public GameObject ShopContent;
     public GameObject ShopContent2;
     public GameObject ItemPrefab;
@@ -57,7 +58,8 @@ public class ShopMng : MonoBehaviour
                 LoadShop();
                 DeactivateAllItems();
                 lstSkin[idSelecSkinLock].transform.GetChild(2).gameObject.SetActive(true);
-                DataConfig.EffectIndex = idSelecSkinLock;
+                // DataConfig.EffectIndex = idSelecSkinLock;
+                id = idSelecSkinLock;
                 btnAds.SetActive(false);
             }
             else
@@ -139,6 +141,7 @@ public class ShopMng : MonoBehaviour
             }
         }
         lstSkin[DataConfig.EffectIndex].transform.GetChild(2).gameObject.SetActive(true);
+        id = DataConfig.EffectIndex;
         ShopContent.SetActive(true); // Ensure ShopContent is active after loading
     }
 

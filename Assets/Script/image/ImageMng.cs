@@ -55,7 +55,7 @@ public class ImageMng : MonoBehaviour
                 id = idSelecSkinLock;
                 lstImage[idSelecSkinLock].transform.GetChild(2).gameObject.SetActive(true);
                 btnAds.SetActive(false);
-
+                btnGet.SetActive(true);
             }
             else
             {
