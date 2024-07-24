@@ -22,6 +22,7 @@ public class GameCtr : MonoBehaviour
     // adb shell setprop debug.firebase.analytics.app nami.screw.tinkerer.puzzlegame
     // public List<Texture> lstTexture;
     // public List<int> LstReward;
+    public GameObject TutorLv2;
     public GameObject Loading;
     [SerializeField] private GameObject levelText;
     [SerializeField] private GameObject levelText2;
@@ -115,9 +116,17 @@ public class GameCtr : MonoBehaviour
         SetLevelText(parentLevelText);
         //tools thì tắt
         loadgame();
+        if (PlayerPrefs.GetInt("lv") == 2)
+        {
+            TutorLv2.SetActive(true);
+        }
         GameFirebase.SendEvent("start_level", "id_level", PlayerPrefs.GetInt("lv").ToString());
         // Debug.Log("log-event-start_level----id_level: " + PlayerPrefs.GetInt("lv"));
         // StartCoroutine(DelayedGenerateGrid());
+    }
+    public void TurnOffTurtorialLv2()
+    {
+        TutorLv2.SetActive(false);
     }
     public void DisableAllColliders()
     {
@@ -740,7 +749,7 @@ public class GameCtr : MonoBehaviour
         // autonextlvwhenwin();
         Winpanel.SetActive(false);
         Winpanel2.SetActive(true);
-        StartCoroutine(DelayedbtnNext(2f));
+        // StartCoroutine(DelayedbtnNext(2f));
     }
     private IEnumerator DelayedbtnNext(float delay)
     {
@@ -750,10 +759,10 @@ public class GameCtr : MonoBehaviour
 
     public void autonextlvwhenwin()
     {
-        foreach (Transform child in gridContainer.transform)
-        {
-            Destroy(child.gameObject);
-        }
+        // foreach (Transform child in gridContainer.transform)
+        // {
+        //     Destroy(child.gameObject);
+        // }
 
         int scoreImage = PlayerPrefs.GetInt("ScoreImage", 0);
         PlayerPrefs.SetInt("ScoreImage", scoreImage + 1);
@@ -765,9 +774,8 @@ public class GameCtr : MonoBehaviour
 
     public void autonextlvwhenwinAds()
     {
-        //obj load o day
         //adssssssssssssssss
-        GameCtr.instance.Loading.GetComponent<TweenLoading>().ShowLoading();
+        Loading.GetComponent<TweenLoading>().ShowLoading();
         GameAds.Get.LoadAndShowRewardAd((onComplete) =>
         {
             if (onComplete)
@@ -777,10 +785,10 @@ public class GameCtr : MonoBehaviour
                 DataConfig.ScoreImage = PlayerPrefs.GetInt("ScoreImage", 0);
                 PlayerPrefs.Save();
 
-                foreach (Transform child in gridContainer.transform)
-                {
-                    Destroy(child.gameObject);
-                }
+                // foreach (Transform child in gridContainer.transform)
+                // {
+                //     Destroy(child.gameObject);
+                // }
                 SceneManager.LoadScene(0);
             }
             else
@@ -823,14 +831,14 @@ public class GameCtr : MonoBehaviour
     // }
 
     // Coroutine to handle the delay and call the action
-    private IEnumerator DelayCoroutine(float delay, System.Action action)
-    {
-        // Wait for the specified amount of time
-        yield return new WaitForSeconds(delay);
+    // private IEnumerator DelayCoroutine(float delay, System.Action action)
+    // {
+    //     // Wait for the specified amount of time
+    //     yield return new WaitForSeconds(delay);
 
-        // Execute the action
-        action.Invoke();
-    }
+    //     // Execute the action
+    //     action.Invoke();
+    // }
 
 
     IEnumerator ToggleGameObjectsContinuously(float toggleInterval)
@@ -849,7 +857,7 @@ public class GameCtr : MonoBehaviour
 
 
     //dongf nafy de chay lai lan nua
-    [ContextMenu("onGenerateObject")]
+    // [ContextMenu("onGenerateObject")]
     void onGenerateObject()
     {
 
