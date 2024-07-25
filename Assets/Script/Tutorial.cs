@@ -6,7 +6,8 @@ using UnityEngine.UI;
 public class Tutorial : MonoBehaviour
 {
     public List<GameObject> uiElements;
-    public List<GameObject> lstTutorial;
+    public List<GameObject> lstTutorialSkins;
+    public List<GameObject> lstTutorialImages;
     public static Tutorial instance;
     private void Awake()
     {
@@ -23,6 +24,7 @@ public class Tutorial : MonoBehaviour
     void Start()
     {
         TutorialSkin();
+        TutorialImage();
     }
     public void TutorialSkin()
     {
@@ -33,7 +35,22 @@ public class Tutorial : MonoBehaviour
         }
         if (PlayerPrefs.GetInt("lv") == 2 && PlayerPrefs.GetInt("CheckTutorialSkin") == 0)
         {
-            lstTutorial[0].SetActive(true);
+            lstTutorialSkins[0].SetActive(true);
+            // DisableAllRaycasts();
+            EnableRaycast(uiElements[1]);
+        }
+    }
+
+    public void TutorialImage()
+    {
+        if (!PlayerPrefs.HasKey("CheckTutorialImage"))
+        {
+            int CheckTutorialImage = 0;
+            PlayerPrefs.SetInt("CheckTutorialImage", CheckTutorialImage);
+        }
+        if (PlayerPrefs.GetInt("lv") == 4 && PlayerPrefs.GetInt("CheckTutorialImage") == 0)
+        {
+            lstTutorialImages[0].SetActive(true);
             // DisableAllRaycasts();
             EnableRaycast(uiElements[1]);
         }
@@ -43,6 +60,14 @@ public class Tutorial : MonoBehaviour
         foreach (GameObject uiElement in uiElements)
         {
             SetRaycastTarget(uiElement, false);
+        }
+    }
+
+    public void EnbleAllRaycasts()
+    {
+        foreach (GameObject uiElement in uiElements)
+        {
+            SetRaycastTarget(uiElement, true);
         }
     }
     private void SetRaycastTarget(GameObject element, bool enabled)

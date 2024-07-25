@@ -194,6 +194,12 @@ public class Image2 : MonoBehaviour
 
         Debug.Log($"Remaining ScoreImage: {DataConfig.ScoreImage}");
         ShowScore();
+        if (Tutorial.instance.lstTutorialImages[4].activeSelf)
+        {
+            Tutorial.instance.lstTutorialImages[4].SetActive(false);
+            Tutorial.instance.lstTutorialImages[5].SetActive(true);
+            Tutorial.instance.EnableRaycast(Tutorial.instance.uiElements[2]);
+        }
     }
     IEnumerator DelayeShowFinal()
     {

@@ -37,6 +37,12 @@ public class ImageMng : MonoBehaviour
         HomeMng.instance.btnBack.SetActive(true);
         Home.SetActive(false);
         GameCtr.instance.GameClear();
+        if (Tutorial.instance.lstTutorialImages[3].activeSelf)
+        {
+            Tutorial.instance.lstTutorialImages[3].SetActive(false);
+            Tutorial.instance.lstTutorialImages[4].SetActive(true);
+            Tutorial.instance.EnableRaycast(Tutorial.instance.uiElements[3]);
+        }
     }
 
     public void Ads()
@@ -110,6 +116,12 @@ public class ImageMng : MonoBehaviour
                     btnGet.SetActive(true);
                     btnAds.SetActive(false);
                     Item.transform.GetChild(2).gameObject.SetActive(true); // Activate some UI element
+                    if (Tutorial.instance.lstTutorialImages[2].activeSelf)
+                    {
+                        Tutorial.instance.lstTutorialImages[2].SetActive(false);
+                        Tutorial.instance.lstTutorialImages[3].SetActive(true);
+                        Tutorial.instance.EnableRaycast(Tutorial.instance.uiElements[7]);
+                    }
                 });
             }
             else
