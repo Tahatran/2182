@@ -22,6 +22,8 @@ public class GameCtr : MonoBehaviour
     // adb shell setprop debug.firebase.analytics.app nami.screw.tinkerer.puzzlegame
     // public List<Texture> lstTexture;
     // public List<int> LstReward;
+
+    public GameObject bglose;
     public GameObject TutorLv2;
     public GameObject Loading;
     [SerializeField] private GameObject levelText;
@@ -116,10 +118,10 @@ public class GameCtr : MonoBehaviour
         SetLevelText(parentLevelText);
         //tools thì tắt
         loadgame();
-        if (PlayerPrefs.GetInt("lv") == 2)
-        {
-            TutorLv2.SetActive(true);
-        }
+        // if (PlayerPrefs.GetInt("lv") == 2)
+        // {
+        //     TutorLv2.SetActive(true);
+        // }
         GameFirebase.SendEvent("start_level", "id_level", PlayerPrefs.GetInt("lv").ToString());
         // Debug.Log("log-event-start_level----id_level: " + PlayerPrefs.GetInt("lv"));
         // StartCoroutine(DelayedGenerateGrid());
@@ -128,6 +130,7 @@ public class GameCtr : MonoBehaviour
     {
         TutorLv2.SetActive(false);
     }
+
     public void DisableAllColliders()
     {
         foreach (GameObject obj in lstCrew)
@@ -154,9 +157,9 @@ public class GameCtr : MonoBehaviour
     public void loadgame()
     {
 
-        UI.transform.DOMoveY(-0.1f, 0.3f).SetEase(Ease.OutQuad).OnUpdate(() =>
+        UI.transform.DOMoveY(-0.2f, 0.3f).SetEase(Ease.OutQuad).OnUpdate(() =>
         {
-            SoundandReplay.GetComponent<RectTransform>().DOAnchorPosY(-105, 0.3f).SetEase(Ease.OutQuad);
+            SoundandReplay.GetComponent<RectTransform>().DOAnchorPosY(-120, 0.3f).SetEase(Ease.OutQuad);
         })
         .OnComplete(() =>
                   {
@@ -226,7 +229,7 @@ public class GameCtr : MonoBehaviour
         }
 
         // Đặt khoảng cách giữa các chữ số
-        float spacing = 0.15f; // điều chỉnh khoảng cách giữa các chữ số tùy thuộc vào yêu cầu của bạn
+        float spacing = 0.24f; // điều chỉnh khoảng cách giữa các chữ số tùy thuộc vào yêu cầu của bạn
 
         // Duyệt qua từng chữ số trong chuỗi levelString
         for (int i = 0; i < levelString.Length; i++)
@@ -243,11 +246,11 @@ public class GameCtr : MonoBehaviour
             // Đặt vị trí của imageLevelClone
             if (int.Parse(levelString) < 10)
             {
-                imageLevelClone.transform.localPosition = new Vector3(xPos + 0.05f, 0, 0);
+                imageLevelClone.transform.localPosition = new Vector3(xPos - 0.03f, 0, 0);
             }
             else
             {
-                imageLevelClone.transform.localPosition = new Vector3(xPos, 0, 0);
+                imageLevelClone.transform.localPosition = new Vector3(xPos - 0.1f, 0, 0);
             }
 
             imageLevelClone.transform.localScale = new Vector3(0.8f, 0.8f, 0.8f);
@@ -365,11 +368,11 @@ public class GameCtr : MonoBehaviour
         //     int number = 0;
         //     PlayerPrefs.SetInt("number_tries", number);
         // }
-        if (!PlayerPrefs.HasKey("time_play"))
-        {
-            int time = 0;
-            PlayerPrefs.SetFloat("time_play", time);
-        }
+        // if (!PlayerPrefs.HasKey("time_play"))
+        // {
+        //     int time = 0;
+        //     PlayerPrefs.SetFloat("time_play", time);
+        // }
 
 
     }
@@ -623,6 +626,7 @@ public class GameCtr : MonoBehaviour
                              TweenScrews();
                              bgblue.transform.DOMoveY(-0.5f, 0.3f).SetEase(Ease.OutQuad).OnComplete(() =>
                                 {
+                                    bglose.SetActive(true);
                                     LosePanel.SetActive(true);
                                     SetLevelTextEnd(parentLevelTextLose);
                                     // Dontdestroyonload.instance.ads();

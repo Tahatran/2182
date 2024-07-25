@@ -49,6 +49,13 @@ public class HomeMng : MonoBehaviour
         ImageGameObject.SetActive(true);
         gameObject.SetActive(true);
         Audio.instance.AudioLoad();
+        if (Tutorial.instance.lstTutorial[0].activeSelf)
+        {
+            Tutorial.instance.lstTutorial[0].SetActive(false);
+            Tutorial.instance.lstTutorial[1].SetActive(true);
+            Tutorial.instance.EnableRaycast(Tutorial.instance.uiElements[9]);
+            Debug.Log("Tutorial");
+        }
 
     }
 
@@ -72,10 +79,24 @@ public class HomeMng : MonoBehaviour
         SkinSelect.SetActive(false);
         ImgageSelect.SetActive(false);
         Image.SetActive(false);
+        if (Tutorial.instance.lstTutorial[4].activeSelf)
+        {
+            Tutorial.instance.lstTutorial[4].SetActive(false);
+            Tutorial.instance.lstTutorial[5].SetActive(true);
+            Tutorial.instance.EnableRaycast(Tutorial.instance.uiElements[11]);
+            int CheckTutorialSkin = 1;
+            PlayerPrefs.SetInt("CheckTutorialSkin", CheckTutorialSkin);
+        }
     }
 
     public void btnSkin()
     {
+        if (Tutorial.instance.lstTutorial[1].activeSelf)
+        {
+            Tutorial.instance.lstTutorial[1].SetActive(false);
+            Tutorial.instance.lstTutorial[2].SetActive(true);
+
+        }
         SkinSelect.SetActive(true);
         Skin.SetActive(true);
         Image.SetActive(false);
