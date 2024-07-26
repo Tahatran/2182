@@ -79,6 +79,7 @@ public class ImageMng : MonoBehaviour
 
     public void LoadShop()
     {
+        Debug.LogError("aaaaa");
         int itemsPerPage = 8; // Number of items per page
 
         // Clear existing items in both ShopContent and ShopContent2
@@ -120,7 +121,7 @@ public class ImageMng : MonoBehaviour
                     {
                         Tutorial.instance.lstTutorialImages[2].SetActive(false);
                         Tutorial.instance.lstTutorialImages[3].SetActive(true);
-                        Tutorial.instance.EnableRaycast(Tutorial.instance.uiElements[7]);
+                        Tutorial.instance.EnableRaycast(Tutorial.instance.uiElements[5]);
                     }
                 });
             }
@@ -128,22 +129,29 @@ public class ImageMng : MonoBehaviour
             {
                 Item.GetComponent<Image>().sprite = item.ItemImg;
                 Item.transform.GetChild(0).gameObject.SetActive(true);
-                Item.GetComponent<Button>().onClick.AddListener(() =>
+                if (PlayerPrefs.GetInt("CheckTutorialImage") != 0)
                 {
-                    DeactivateAllItems();
-                    idSelecSkinLock = item.Id;
+                    Item.GetComponent<Button>().onClick.AddListener(() =>
+                                   {
+                                       DeactivateAllItems();
+                                       idSelecSkinLock = item.Id;
 
-                    // Handle non-buyable items
-                    if (idSelecSkinLock > 0 && !ImageItemData.Items[idSelecSkinLock - 1].IsBuy)
-                    {
-                        btnAds.SetActive(false);
-                        btnGet.SetActive(false);
-                    }
-                    else
-                    {
-                        btnAds.SetActive(true);
-                    }
-                });
+                                       // Handle non-buyable items
+                                       if (idSelecSkinLock > 0 && !ImageItemData.Items[idSelecSkinLock - 1].IsBuy)
+                                       {
+                                           btnAds.SetActive(false);
+                                           btnGet.SetActive(false);
+                                       }
+                                       else
+                                       {
+                                           btnAds.SetActive(true);
+                                       }
+                                   });
+                }
+                // if (PlayerPrefs.GetInt("CheckTutorialImage") != 0){
+                //     Item.GetComponent<Button>().enabled = false;
+                // }
+
             }
         }
         // lstImage[DataConfig.EffectIndex].transform.GetChild(2).gameObject.SetActive(true);

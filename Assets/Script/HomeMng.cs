@@ -7,6 +7,8 @@ public class HomeMng : MonoBehaviour
 {
 
     public GameObject ImageGameObject;
+
+    public GameObject ImageMng;
     public GameObject Home;
     public GameObject HomeSelect;
     public GameObject Skin;
@@ -38,7 +40,9 @@ public class HomeMng : MonoBehaviour
         Image2.instance.ActivefalseAll();
         btnBack.SetActive(false);
         gameObject.SetActive(true);
+
         btnImage();
+
         if (Tutorial.instance.lstTutorialImages[5].activeSelf)
         {
             Tutorial.instance.lstTutorialImages[5].SetActive(false);
@@ -46,7 +50,9 @@ public class HomeMng : MonoBehaviour
             int CheckTutorialImage = 1;
             PlayerPrefs.SetInt("CheckTutorialImage", CheckTutorialImage);
             Tutorial.instance.EnbleAllRaycasts();
+            ImageMng.GetComponent<ImageMng>().LoadShop();
         }
+
     }
 
     public void btncometoHome()
@@ -61,13 +67,13 @@ public class HomeMng : MonoBehaviour
         {
             Tutorial.instance.lstTutorialSkins[0].SetActive(false);
             Tutorial.instance.lstTutorialSkins[1].SetActive(true);
-            Tutorial.instance.EnableRaycast(Tutorial.instance.uiElements[9]);
+            Tutorial.instance.EnableRaycast(Tutorial.instance.uiElements[7]);
         }
         if (Tutorial.instance.lstTutorialImages[0].activeSelf)
         {
             Tutorial.instance.lstTutorialImages[0].SetActive(false);
             Tutorial.instance.lstTutorialImages[1].SetActive(true);
-            Tutorial.instance.EnableRaycast(Tutorial.instance.uiElements[10]);
+            Tutorial.instance.EnableRaycast(Tutorial.instance.uiElements[8]);
         }
     }
 
@@ -95,7 +101,7 @@ public class HomeMng : MonoBehaviour
         {
             Tutorial.instance.lstTutorialSkins[4].SetActive(false);
             Tutorial.instance.lstTutorialSkins[5].SetActive(true);
-            Tutorial.instance.EnableRaycast(Tutorial.instance.uiElements[11]);
+            Tutorial.instance.EnableRaycast(Tutorial.instance.uiElements[9]);
             int CheckTutorialSkin = 1;
             PlayerPrefs.SetInt("CheckTutorialSkin", CheckTutorialSkin);
         }
@@ -129,6 +135,7 @@ public class HomeMng : MonoBehaviour
         Image.SetActive(true);
         HomeSelect.SetActive(false);
         SkinSelect.SetActive(false);
+
     }
 
     // Update is called once per frame

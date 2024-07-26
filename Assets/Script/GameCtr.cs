@@ -118,10 +118,7 @@ public class GameCtr : MonoBehaviour
         SetLevelText(parentLevelText);
         //tools thì tắt
         loadgame();
-        // if (PlayerPrefs.GetInt("lv") == 2)
-        // {
-        //     TutorLv2.SetActive(true);
-        // }
+
         GameFirebase.SendEvent("start_level", "id_level", PlayerPrefs.GetInt("lv").ToString());
         // Debug.Log("log-event-start_level----id_level: " + PlayerPrefs.GetInt("lv"));
         // StartCoroutine(DelayedGenerateGrid());
@@ -135,10 +132,15 @@ public class GameCtr : MonoBehaviour
     {
         foreach (GameObject obj in lstCrew)
         {
-            Collider collider = obj.GetComponent<Collider>();
+            Screw collider = obj.GetComponent<Screw>();
             if (collider != null)
             {
                 collider.enabled = false;
+            }
+            CircleCollider2D collider2 = obj.GetComponent<CircleCollider2D>();
+            if (collider != null)
+            {
+                collider2.enabled = false;
             }
         }
     }
@@ -969,6 +971,10 @@ public class GameCtr : MonoBehaviour
         }
 
         // ReadTags();
+        if (PlayerPrefs.GetInt("lv") == 2 && PlayerPrefs.GetInt("CheckTutorialSkin") == 0 || PlayerPrefs.GetInt("lv") == 5 && PlayerPrefs.GetInt("CheckTutorialImage") == 0)
+        {
+            DisableAllColliders();
+        }
     }
 
     void UpdateSprite(GameObject obj, SubLevel subLevel, int colorIndex)

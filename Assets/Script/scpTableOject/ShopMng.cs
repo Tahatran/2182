@@ -46,7 +46,7 @@ public class ShopMng : MonoBehaviour
         {
             Tutorial.instance.lstTutorialSkins[3].SetActive(false);
             Tutorial.instance.lstTutorialSkins[4].SetActive(true);
-            Tutorial.instance.EnableRaycast(Tutorial.instance.uiElements[8]);
+            Tutorial.instance.EnableRaycast(Tutorial.instance.uiElements[6]);
         }
     }
 
@@ -125,7 +125,7 @@ public class ShopMng : MonoBehaviour
                     {
                         Tutorial.instance.lstTutorialSkins[2].SetActive(false);
                         Tutorial.instance.lstTutorialSkins[3].SetActive(true);
-                        Tutorial.instance.EnableRaycast(Tutorial.instance.uiElements[6]);
+                        Tutorial.instance.EnableRaycast(Tutorial.instance.uiElements[4]);
                     }
                 });
             }
@@ -133,23 +133,27 @@ public class ShopMng : MonoBehaviour
             {
                 Item.GetComponent<Image>().sprite = item.ItemImg;
                 Item.transform.GetChild(0).gameObject.SetActive(true);
-                Item.GetComponent<Button>().onClick.AddListener(() =>
+                if (PlayerPrefs.GetInt("CheckTutorialSkin") != 0)
                 {
-                    DeactivateAllItems();
-                    idSelecSkinLock = item.Id;
+                    Item.GetComponent<Button>().onClick.AddListener(() =>
+                  {
+                      DeactivateAllItems();
+                      idSelecSkinLock = item.Id;
 
-                    // Handle non-buyable items
-                    if (idSelecSkinLock > 0 && !SkinItemData.Items[idSelecSkinLock - 1].IsBuy)
-                    {
-                        btnAds.SetActive(false);
-                        btnGet.SetActive(false);
-                    }
-                    else
-                    {
-                        btnGet.SetActive(true);
-                        btnAds.SetActive(true);
-                    }
-                });
+                      // Handle non-buyable items
+                      if (idSelecSkinLock > 0 && !SkinItemData.Items[idSelecSkinLock - 1].IsBuy)
+                      {
+                          btnAds.SetActive(false);
+                          btnGet.SetActive(false);
+                      }
+                      else
+                      {
+                          btnGet.SetActive(true);
+                          btnAds.SetActive(true);
+                      }
+                  });
+                }
+
             }
         }
         lstSkin[DataConfig.EffectIndex].transform.GetChild(2).gameObject.SetActive(true);

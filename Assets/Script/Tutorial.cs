@@ -48,7 +48,7 @@ public class Tutorial : MonoBehaviour
             int CheckTutorialImage = 0;
             PlayerPrefs.SetInt("CheckTutorialImage", CheckTutorialImage);
         }
-        if (PlayerPrefs.GetInt("lv") == 4 && PlayerPrefs.GetInt("CheckTutorialImage") == 0)
+        if (PlayerPrefs.GetInt("lv") == 5 && PlayerPrefs.GetInt("CheckTutorialImage") == 0)
         {
             lstTutorialImages[0].SetActive(true);
             // DisableAllRaycasts();
