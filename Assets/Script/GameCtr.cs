@@ -161,7 +161,7 @@ public class GameCtr : MonoBehaviour
 
         UI.transform.DOMoveY(-0.2f, 0.3f).SetEase(Ease.OutQuad).OnUpdate(() =>
         {
-            SoundandReplay.GetComponent<RectTransform>().DOAnchorPosY(-120, 0.3f).SetEase(Ease.OutQuad);
+            SoundandReplay.GetComponent<RectTransform>().DOAnchorPosY(-140, 0.3f).SetEase(Ease.OutQuad);
         })
         .OnComplete(() =>
                   {
