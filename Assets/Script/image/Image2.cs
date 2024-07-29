@@ -193,7 +193,7 @@ public class Image2 : MonoBehaviour
         // StartCoroutine(DelayeShowFinal());
 
         Debug.Log($"Remaining ScoreImage: {DataConfig.ScoreImage}");
-        ShowScore();
+
         if (Tutorial.instance.lstTutorialImages[4].activeSelf)
         {
             Tutorial.instance.lstTutorialImages[4].SetActive(false);
@@ -213,7 +213,7 @@ public class Image2 : MonoBehaviour
                 DataConfig.ScoreImage--;
                 PlayerPrefs.SetInt("ScoreImage", DataConfig.ScoreImage);
                 activeCount++;
-
+                ShowScore();
                 yield return new WaitForSeconds(0.35f); // Adjust delay duration here
             }
         }
