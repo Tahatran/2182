@@ -5,7 +5,7 @@ using UnityEngine;
 public class Image2 : MonoBehaviour
 {
     [SerializeField] private GameObject levelText;
-    [SerializeField] private List<Sprite> sprites;
+    // [SerializeField] private List<Sprite> sprites;
     [SerializeField] private GameObject parentScore;
     // Image
     public GameObject Image11;
@@ -277,7 +277,7 @@ public class Image2 : MonoBehaviour
         }
 
         // Đặt khoảng cách giữa các chữ số
-        float spacing = 0.2f; // điều chỉnh khoảng cách giữa các chữ số tùy thuộc vào yêu cầu của bạn
+        float spacing = 0.8f; // điều chỉnh khoảng cách giữa các chữ số tùy thuộc vào yêu cầu của bạn
 
         // Duyệt qua từng chữ số trong chuỗi levelString
         for (int i = 0; i < levelString.Length; i++)
@@ -295,23 +295,26 @@ public class Image2 : MonoBehaviour
             if (int.Parse(levelString) < 10)
             {
                 imageLevelClone.transform.localPosition = new Vector3(xPos + 0.3f, 0, 0);
+                imageLevelClone.transform.localScale = new Vector3(0.9f, 0.9f, 0.9f);
             }
-            else if (int.Parse(levelString) > 10 && int.Parse(levelString) < 100)
+            else if (int.Parse(levelString) > 9 && int.Parse(levelString) < 100)
             {
-                imageLevelClone.transform.localPosition = new Vector3(xPos + 0.2f, 0, 0);
+                imageLevelClone.transform.localPosition = new Vector3(xPos - 0.1f, 0, 0);
+                imageLevelClone.transform.localScale = new Vector3(0.7f, 0.7f, 0.7f);
             }
             else
             {
-                imageLevelClone.transform.localPosition = new Vector3(xPos + 0.1f, 0, 0);
+                xPos = i * (spacing - 0.15f);
+                imageLevelClone.transform.localPosition = new Vector3(xPos - 0.3f, 0, 0);
                 imageLevelClone.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
             }
 
-            imageLevelClone.transform.localScale = new Vector3(0.8f, 0.8f, 0.8f);
+            // imageLevelClone.transform.localScale = new Vector3(0.8f, 0.8f, 0.8f);
 
             var imageLevel = imageLevelClone.GetComponent<SpriteRenderer>();
 
             // Gắn sprite tương ứng với chữ số
-            imageLevel.sprite = sprites[digitValue];
+            imageLevel.sprite = GameCtr.instance.sprites[digitValue];
             // imageLevel.color = new Color(51 / 255f, 208 / 255f, 248 / 255f, 255 / 255f);
         }
     }

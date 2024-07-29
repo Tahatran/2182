@@ -31,7 +31,7 @@ public class GameCtr : MonoBehaviour
     [SerializeField] private GameObject parentLevelText;
     [SerializeField] private GameObject LevelPannel;
     [SerializeField] private GameObject parentLevelTextLose;
-    [SerializeField] private List<Sprite> sprites;
+    [SerializeField] public List<Sprite> sprites;
     [SerializeField] private GameObject bgblue;
     [SerializeField] private GameObject UI;
     [SerializeField] private GameObject Winpanel;
