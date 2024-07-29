@@ -125,11 +125,11 @@ public class HomeMng : MonoBehaviour
         toggleCoroutine = StartCoroutine(ToggleFacesWhileTweening(bulongFaceDown, bulongFace2Down));
 
         // Tween Bulong xuống vị trí mới
-        bulong.transform.DOLocalMove(downPosition, 0.2f).SetEase(Ease.OutQuad).OnUpdate(() =>
+        bulong.transform.DOLocalMove(downPosition, 0.3f).SetEase(Ease.OutQuad).OnUpdate(() =>
                     {
                         DOVirtual.DelayedCall(0.05f, () =>
                         {
-                            bulongscale.transform.DOScale(0f, 0.12f).SetEase(Ease.OutQuad);
+                            bulongscale.transform.DOScale(0f, 0.15f).SetEase(Ease.OutQuad);
                         });
                     })
                     .OnComplete(() =>
