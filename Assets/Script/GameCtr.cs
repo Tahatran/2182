@@ -272,7 +272,7 @@ public class GameCtr : MonoBehaviour
         // Chuyển giá trị level thành chuỗi
         // string levelString = level.ToString();
         string levelString = level.ToString();
-        // string levelString = "2";
+        // string levelString = "10";
         // Debug.Log("level" + levelString);
 
         // Xóa tất cả các hình ảnh con trước đó (nếu có)
@@ -282,7 +282,7 @@ public class GameCtr : MonoBehaviour
         }
 
         // Đặt khoảng cách giữa các chữ số
-        float spacing = 68f; // điều chỉnh khoảng cách giữa các chữ số tùy thuộc vào yêu cầu của bạn
+        float spacing = 108f; // điều chỉnh khoảng cách giữa các chữ số tùy thuộc vào yêu cầu của bạn
 
         // Duyệt qua từng chữ số trong chuỗi levelString
         for (int i = 0; i < levelString.Length; i++)
