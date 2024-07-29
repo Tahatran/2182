@@ -175,22 +175,22 @@ public class Image2 : MonoBehaviour
         int activeCount = PlayerPrefs.GetInt(key, 0);
         Debug.Log($"Active count for image {DataConfig.ImageIndex}: {activeCount}");
 
-        for (int i = activeCount; i < selectedImageList.Count && DataConfig.ScoreImage > 0; i++)
-        {
-            if (!selectedImageList[i].activeSelf)
-            {
-                selectedImageList[i].SetActive(true);
-                selectedBgList[i].SetActive(false); // Tắt corresponding background
-                DataConfig.ScoreImage--;
-                PlayerPrefs.SetInt("ScoreImage", DataConfig.ScoreImage);
-                activeCount++;
-            }
-        }
+        // for (int i = activeCount; i < selectedImageList.Count && DataConfig.ScoreImage > 0; i++)
+        // {
+        //     if (!selectedImageList[i].activeSelf)
+        //     {
+        //         selectedImageList[i].SetActive(true);
+        //         selectedBgList[i].SetActive(false); // Tắt corresponding background
+        //         DataConfig.ScoreImage--;
+        //         PlayerPrefs.SetInt("ScoreImage", DataConfig.ScoreImage);
+        //         activeCount++;
+        //     }
+        // }
 
-        PlayerPrefs.SetInt(key, activeCount);
-        PlayerPrefs.Save();
+        StartCoroutine(ActivateImagesWithDelay(selectedImageList, selectedBgList, activeCount, key));
+
         // ShowImageFinal();
-        StartCoroutine(DelayeShowFinal());
+        // StartCoroutine(DelayeShowFinal());
 
         Debug.Log($"Remaining ScoreImage: {DataConfig.ScoreImage}");
         ShowScore();
@@ -200,6 +200,27 @@ public class Image2 : MonoBehaviour
             Tutorial.instance.lstTutorialImages[5].SetActive(true);
             Tutorial.instance.EnableRaycast(Tutorial.instance.uiElements[2]);
         }
+    }
+
+    private IEnumerator ActivateImagesWithDelay(List<GameObject> selectedImageList, List<GameObject> selectedBgList, int activeCount, string key)
+    {
+        for (int i = activeCount; i < selectedImageList.Count && DataConfig.ScoreImage > 0; i++)
+        {
+            if (!selectedImageList[i].activeSelf)
+            {
+                selectedImageList[i].SetActive(true);
+                selectedBgList[i].SetActive(false); // Tắt corresponding background
+                DataConfig.ScoreImage--;
+                PlayerPrefs.SetInt("ScoreImage", DataConfig.ScoreImage);
+                activeCount++;
+
+                yield return new WaitForSeconds(0.35f); // Adjust delay duration here
+            }
+        }
+
+        PlayerPrefs.SetInt(key, activeCount);
+        PlayerPrefs.Save();
+        StartCoroutine(DelayeShowFinal());
     }
     IEnumerator DelayeShowFinal()
     {
