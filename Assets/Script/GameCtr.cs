@@ -159,9 +159,9 @@ public class GameCtr : MonoBehaviour
     public void loadgame()
     {
 
-        UI.transform.DOMoveY(-0.2f, 0.3f).SetEase(Ease.OutQuad).OnUpdate(() =>
+        UI.transform.DOMoveY(-0.4f, 0.3f).SetEase(Ease.OutQuad).OnUpdate(() =>
         {
-            SoundandReplay.GetComponent<RectTransform>().DOAnchorPosY(-140, 0.3f).SetEase(Ease.OutQuad);
+            SoundandReplay.GetComponent<RectTransform>().DOAnchorPosY(-185, 0.3f).SetEase(Ease.OutQuad);
         })
         .OnComplete(() =>
                   {
@@ -231,7 +231,7 @@ public class GameCtr : MonoBehaviour
         }
 
         // Đặt khoảng cách giữa các chữ số
-        float spacing = 0.24f; // điều chỉnh khoảng cách giữa các chữ số tùy thuộc vào yêu cầu của bạn
+        float spacing = 0.89f; // điều chỉnh khoảng cách giữa các chữ số tùy thuộc vào yêu cầu của bạn
 
         // Duyệt qua từng chữ số trong chuỗi levelString
         for (int i = 0; i < levelString.Length; i++)
@@ -252,7 +252,7 @@ public class GameCtr : MonoBehaviour
             }
             else
             {
-                imageLevelClone.transform.localPosition = new Vector3(xPos - 0.1f, 0, 0);
+                imageLevelClone.transform.localPosition = new Vector3(xPos - 0.48f, 0, 0);
             }
 
             imageLevelClone.transform.localScale = new Vector3(0.8f, 0.8f, 0.8f);
@@ -626,7 +626,7 @@ public class GameCtr : MonoBehaviour
                          {
                              LevelPannel.SetActive(false);
                              TweenScrews();
-                             bgblue.transform.DOMoveY(-0.5f, 0.3f).SetEase(Ease.OutQuad).OnComplete(() =>
+                             bgblue.transform.DOMoveY(-0.65f, 0.3f).SetEase(Ease.OutQuad).OnComplete(() =>
                                 {
                                     bglose.SetActive(true);
                                     LosePanel.SetActive(true);

@@ -1,11 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class HomeMng : MonoBehaviour
 {
 
+    public GameObject face1;
+    public GameObject face2;
+    public GameObject bulong;
+    public GameObject bulongscale;
+    private Coroutine toggleCoroutine;
     public GameObject ImageGameObject;
 
     public GameObject ImageMng;
@@ -76,17 +82,81 @@ public class HomeMng : MonoBehaviour
             Tutorial.instance.EnableRaycast(Tutorial.instance.uiElements[8]);
         }
     }
-
+    IEnumerator ToggleFacesWhileTweening(GameObject BuLongface, GameObject Bulongface2)
+    {
+        while (true)
+        {
+            ToggleBulongFaces(BuLongface, Bulongface2);
+            // BuLongface.SetActive(true);
+            // Bulongface2.SetActive(false);
+            yield return new WaitForSeconds(0.02f); // Điều chỉnh thời gian chờ theo ý muốn
+        }
+    }
+    void ToggleBulongFaces(GameObject BuLongface, GameObject Bulongface2)
+    {
+        // Bật tắt xen kẽ giữa Bulongface và Bulongface2
+        if (BuLongface.activeSelf)
+        {
+            BuLongface.SetActive(false);
+            Bulongface2.SetActive(true);
+        }
+        else
+        {
+            BuLongface.SetActive(true);
+            Bulongface2.SetActive(false);
+        }
+    }
 
     public void btnLoadGame()
     {
-        ImageGameObject.SetActive(false);
-        gameObject.SetActive(false);
-        foreach (Transform child in GameCtr.instance.gridContainer.transform)
+        Tutorial.instance.DisableAllRaycasts();
+        var bulongFaceDown = face1;
+        var bulongFace2Down = face2;
+
+
+        // Tạo vị trí mới cho Bulong để di chuyển xuống dưới
+        Vector3 downPosition = new Vector3(0, -319, 0);
+        if (toggleCoroutine != null)
         {
-            Destroy(child.gameObject);
+            StopCoroutine(toggleCoroutine);
+            bulongFaceDown.SetActive(true);
+            bulongFace2Down.SetActive(false);
         }
-        SceneManager.LoadScene(0);
+        toggleCoroutine = StartCoroutine(ToggleFacesWhileTweening(bulongFaceDown, bulongFace2Down));
+
+        // Tween Bulong xuống vị trí mới
+        bulong.transform.DOLocalMove(downPosition, 0.2f).SetEase(Ease.OutQuad).OnUpdate(() =>
+                    {
+                        DOVirtual.DelayedCall(0.05f, () =>
+                        {
+                            bulongscale.transform.DOScale(0f, 0.12f).SetEase(Ease.OutQuad);
+                        });
+                    })
+                    .OnComplete(() =>
+                                    {
+                                        if (toggleCoroutine != null)
+                                        {
+                                            StopCoroutine(toggleCoroutine);
+                                        }
+                                        bulongFaceDown.SetActive(true);
+                                        bulongFace2Down.SetActive(false);
+                                        ImageGameObject.SetActive(false);
+                                        gameObject.SetActive(false);
+                                        foreach (Transform child in GameCtr.instance.gridContainer.transform)
+                                        {
+                                            Destroy(child.gameObject);
+                                        }
+                                        SceneManager.LoadScene(0);
+                                    });
+
+
+        // ImageGameObject.SetActive(false);
+        // gameObject.SetActive(false);
+        // foreach (Transform child in GameCtr.instance.gridContainer.transform)
+        // {
+        //     Destroy(child.gameObject);
+        // }
+        // SceneManager.LoadScene(0);
     }
 
     public void btnHome()
