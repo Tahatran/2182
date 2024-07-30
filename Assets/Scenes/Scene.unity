@@ -9603,6 +9603,22 @@ PrefabInstance:
       propertyPath: Shader
       value: 
       objectReference: {fileID: 662614833}
+    - target: {fileID: 8706483116117877116, guid: 6767707d7f853be4fa9f260529cfc76e, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8706483116117877116, guid: 6767707d7f853be4fa9f260529cfc76e, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8706483116117877116, guid: 6767707d7f853be4fa9f260529cfc76e, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8706483116117877116, guid: 6767707d7f853be4fa9f260529cfc76e, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 9206213884085320645, guid: 6767707d7f853be4fa9f260529cfc76e, type: 3}
       propertyPath: m_SortingOrder
       value: 15
