@@ -134,7 +134,7 @@ public class ImageMng : MonoBehaviour
             {
                 Item.GetComponent<Image>().sprite = item.ItemImg;
                 Item.transform.GetChild(0).gameObject.SetActive(true);
-                if (PlayerPrefs.GetInt("lv") != 5)
+                if (PlayerPrefs.GetInt("CheckTutorialImage") != 0)
                 {
                     Item.GetComponent<Button>().onClick.AddListener(() =>
                                    {
