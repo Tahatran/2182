@@ -39,6 +39,8 @@ public class ImageMng : MonoBehaviour
         GameCtr.instance.GameClear();
         if (Tutorial.instance.lstTutorialImages[3].activeSelf)
         {
+            Tutorial.instance.ImageBlur[3].SetActive(false);
+            Tutorial.instance.ImageBlur[4].SetActive(true);
             Tutorial.instance.lstTutorialImages[3].SetActive(false);
             Tutorial.instance.lstTutorialImages[4].SetActive(true);
             Tutorial.instance.EnableRaycast(Tutorial.instance.uiElements[3]);
@@ -79,7 +81,7 @@ public class ImageMng : MonoBehaviour
 
     public void LoadShop()
     {
-        Debug.LogError("aaaaa");
+        // Debug.LogError("aaaaa");
         int itemsPerPage = 8; // Number of items per page
 
         // Clear existing items in both ShopContent and ShopContent2
@@ -108,6 +110,7 @@ public class ImageMng : MonoBehaviour
 
             if (isUnlocked)
             {
+
                 item.IsBuy = true; // Ensure item state is updated
                 Item.GetComponent<Image>().sprite = item.ItemImg;
                 Item.GetComponent<Button>().onClick.AddListener(() =>
@@ -119,6 +122,8 @@ public class ImageMng : MonoBehaviour
                     Item.transform.GetChild(2).gameObject.SetActive(true); // Activate some UI element
                     if (Tutorial.instance.lstTutorialImages[2].activeSelf)
                     {
+                        Tutorial.instance.ImageBlur[2].SetActive(false);
+                        Tutorial.instance.ImageBlur[3].SetActive(true);
                         Tutorial.instance.lstTutorialImages[2].SetActive(false);
                         Tutorial.instance.lstTutorialImages[3].SetActive(true);
                         Tutorial.instance.EnableRaycast(Tutorial.instance.uiElements[5]);
@@ -129,7 +134,7 @@ public class ImageMng : MonoBehaviour
             {
                 Item.GetComponent<Image>().sprite = item.ItemImg;
                 Item.transform.GetChild(0).gameObject.SetActive(true);
-                if (PlayerPrefs.GetInt("CheckTutorialImage") != 0)
+                if (PlayerPrefs.GetInt("lv") != 5)
                 {
                     Item.GetComponent<Button>().onClick.AddListener(() =>
                                    {

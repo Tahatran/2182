@@ -1,9 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using Microsoft.Unity.VisualStudio.Editor;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Image2 : MonoBehaviour
 {
+    public GameObject Shader;
+    public GameObject btnFill;
     [SerializeField] private GameObject levelText;
     // [SerializeField] private List<Sprite> sprites;
     [SerializeField] private GameObject parentScore;
@@ -92,6 +96,7 @@ public class Image2 : MonoBehaviour
 
         switch (imageIndex)
         {
+
             case 0:
                 selectedImageList = Img1;
                 selectedBgList = Img1bg;
@@ -127,16 +132,37 @@ public class Image2 : MonoBehaviour
         {
             if (i < selectedImageList.Count)
             {
+
                 selectedImageList[i].SetActive(true);
                 selectedBgList[i].SetActive(false); // Tắt corresponding background
             }
         }
-        ShowImageFinal();
+        ShowImageFinal2();
         Debug.Log($"Loaded {activeCount} pieces for image {imageIndex}");
+    }
+
+    IEnumerator ShowShader()
+    {
+        if (btnFill.activeSelf)
+        {
+            btnFill.SetActive(false);
+            var imageLevelClone = Instantiate(Shader, Vector2.zero, Quaternion.identity, gameObject.transform);
+            imageLevelClone.transform.localPosition = Shader.transform.localPosition;
+            imageLevelClone.SetActive(true);
+            yield return new WaitForSeconds(2.8f); // Change the delay time as needed
+            lstImgFinal[DataConfig.ImageIndex].SetActive(true);
+
+        }
+
     }
 
     public void Fill()
     {
+        Graphic[] graphics = btnFill.GetComponentsInChildren<Graphic>();
+        foreach (Graphic graphic in graphics)
+        {
+            graphic.raycastTarget = false;
+        }
         List<GameObject> selectedImageList = null;
         List<GameObject> selectedBgList = null;
         string key = DataConfig.ImageIndex.ToString();
@@ -196,6 +222,8 @@ public class Image2 : MonoBehaviour
 
         if (Tutorial.instance.lstTutorialImages[4].activeSelf)
         {
+            Tutorial.instance.ImageBlur[4].SetActive(false);
+            Tutorial.instance.ImageBlur[5].SetActive(true);
             Tutorial.instance.lstTutorialImages[4].SetActive(false);
             Tutorial.instance.lstTutorialImages[5].SetActive(true);
             Tutorial.instance.EnableRaycast(Tutorial.instance.uiElements[2]);
@@ -225,6 +253,11 @@ public class Image2 : MonoBehaviour
     IEnumerator DelayeShowFinal()
     {
         yield return new WaitForSeconds(0.5f); // Change the delay time as needed
+        Graphic[] graphics = btnFill.GetComponentsInChildren<Graphic>();
+        foreach (Graphic graphic in graphics)
+        {
+            graphic.raycastTarget = true;
+        }
         ShowImageFinal();
     }
 
@@ -272,8 +305,65 @@ public class Image2 : MonoBehaviour
                 selectedImageList[i].SetActive(false);
                 selectedBgList[i].SetActive(false);
             }
-            lstImgFinal[DataConfig.ImageIndex].SetActive(true);
+            StartCoroutine(ShowShader());
+
         }
+
+    }
+    public void ShowImageFinal2()
+    {
+        List<GameObject> selectedImageList = null;
+        List<GameObject> selectedBgList = null;
+        string key = DataConfig.ImageIndex.ToString();
+
+        switch (DataConfig.ImageIndex)
+        {
+            case 0:
+                selectedImageList = Img1;
+                selectedBgList = Img1bg;
+                break;
+            case 1:
+                selectedImageList = Img2;
+                selectedBgList = Img2bg;
+                break;
+            case 2:
+                selectedImageList = Img3;
+                selectedBgList = Img3bg;
+                break;
+            case 3:
+                selectedImageList = Img4;
+                selectedBgList = Img4bg;
+                break;
+            case 4:
+                selectedImageList = Img5;
+                selectedBgList = Img5bg;
+                break;
+            case 5:
+                selectedImageList = Img6;
+                selectedBgList = Img6bg;
+                break;
+            default:
+                Debug.LogError("Invalid image index");
+                return;
+        }
+        int activeCount = PlayerPrefs.GetInt(key, 0);
+        if (activeCount == selectedImageList.Count)
+        {
+            for (int i = 0; i < selectedImageList.Count; i++)
+            {
+                selectedImageList[i].SetActive(false);
+                selectedBgList[i].SetActive(false);
+            }
+            // StartCoroutine(ShowShader());
+            lstImgFinal[DataConfig.ImageIndex].SetActive(true);
+            btnFill.SetActive(false);
+
+        }
+        else
+        {
+            btnFill.SetActive(true);
+        }
+
 
     }
 

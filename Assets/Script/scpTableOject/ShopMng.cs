@@ -44,6 +44,8 @@ public class ShopMng : MonoBehaviour
         btnGet.SetActive(false);
         if (Tutorial.instance.lstTutorialSkins[3].activeSelf)
         {
+            Tutorial.instance.SKinBlur[3].SetActive(false);
+            Tutorial.instance.SKinBlur[4].SetActive(true);
             Tutorial.instance.lstTutorialSkins[3].SetActive(false);
             Tutorial.instance.lstTutorialSkins[4].SetActive(true);
             Tutorial.instance.EnableRaycast(Tutorial.instance.uiElements[6]);
@@ -112,8 +114,13 @@ public class ShopMng : MonoBehaviour
 
             if (isUnlocked)
             {
+                if (PlayerPrefs.GetInt("lv") == 2)
+                {
+                    lstSkin[0].GetComponent<Button>().enabled = false;
+                }
                 item.IsBuy = true; // Ensure item state is updated
                 Item.GetComponent<Image>().sprite = item.ItemImg;
+
                 Item.GetComponent<Button>().onClick.AddListener(() =>
                 {
                     DeactivateAllItems();
@@ -123,6 +130,12 @@ public class ShopMng : MonoBehaviour
                     Item.transform.GetChild(2).gameObject.SetActive(true); // Activate some UI element
                     if (Tutorial.instance.lstTutorialSkins[2].activeSelf)
                     {
+                        id = 0;
+                        Item.GetComponent<Button>().enabled = false;
+                        id = 1;
+                        Item.transform.GetChild(2).gameObject.SetActive(true);
+                        Tutorial.instance.SKinBlur[2].SetActive(false);
+                        Tutorial.instance.SKinBlur[3].SetActive(true);
                         Tutorial.instance.lstTutorialSkins[2].SetActive(false);
                         Tutorial.instance.lstTutorialSkins[3].SetActive(true);
                         Tutorial.instance.EnableRaycast(Tutorial.instance.uiElements[4]);
@@ -133,7 +146,7 @@ public class ShopMng : MonoBehaviour
             {
                 Item.GetComponent<Image>().sprite = item.ItemImg;
                 Item.transform.GetChild(0).gameObject.SetActive(true);
-                if (PlayerPrefs.GetInt("CheckTutorialSkin") != 0)
+                if (PlayerPrefs.GetInt("lv") != 2)
                 {
                     Item.GetComponent<Button>().onClick.AddListener(() =>
                   {
@@ -153,7 +166,6 @@ public class ShopMng : MonoBehaviour
                       }
                   });
                 }
-
             }
         }
         lstSkin[DataConfig.EffectIndex].transform.GetChild(2).gameObject.SetActive(true);

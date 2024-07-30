@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class Tutorial : MonoBehaviour
 {
+    public List<GameObject> ImageBlur;
+    public List<GameObject> SKinBlur;
     public List<GameObject> uiElements;
     public List<GameObject> lstTutorialSkins;
     public List<GameObject> lstTutorialImages;
@@ -38,6 +40,7 @@ public class Tutorial : MonoBehaviour
             lstTutorialSkins[0].SetActive(true);
             // DisableAllRaycasts();
             EnableRaycast(uiElements[1]);
+            SKinBlur[0].SetActive(true);
         }
     }
 
@@ -53,6 +56,7 @@ public class Tutorial : MonoBehaviour
             lstTutorialImages[0].SetActive(true);
             // DisableAllRaycasts();
             EnableRaycast(uiElements[1]);
+            ImageBlur[0].SetActive(true);
         }
     }
     public void DisableAllRaycasts()

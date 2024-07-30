@@ -619,21 +619,35 @@ public class GameCtr : MonoBehaviour
                     if (spriteRenderer != null)
                     {
                         Color originalColor = spriteRenderer.color;
-                        spriteRenderer.DOColor(Color.red, 0.1f).SetLoops(5, LoopType.Yoyo).OnKill(() =>
+                        spriteRenderer.DOColor(Color.red, 0.1f).SetLoops(8, LoopType.Yoyo).OnKill(() =>
                         {
-                            spriteRenderer.color = originalColor;
+                            // spriteRenderer.color = originalColor;
+                            spriteRenderer.color = Color.red;
                         }).OnComplete(() =>
                          {
-                             LevelPannel.SetActive(false);
-                             TweenScrews();
-                             bgblue.transform.DOMoveY(-0.65f, 0.3f).SetEase(Ease.OutQuad).OnComplete(() =>
-                                {
-                                    bglose.SetActive(true);
-                                    LosePanel.SetActive(true);
-                                    SetLevelTextEnd(parentLevelTextLose);
-                                    // Dontdestroyonload.instance.ads();
-                                    GameAds.Get.ShowInterstitialAd();
-                                });
+                             DOVirtual.DelayedCall(0.65f, () =>
+                                      {
+                                          LevelPannel.SetActive(false);
+                                          TweenScrews();
+                                          bgblue.transform.DOMoveY(-0.65f, 0.3f).SetEase(Ease.OutQuad).OnComplete(() =>
+                                             {
+                                                 bglose.SetActive(true);
+                                                 LosePanel.SetActive(true);
+                                                 SetLevelTextEnd(parentLevelTextLose);
+                                                 // Dontdestroyonload.instance.ads();
+                                                 GameAds.Get.ShowInterstitialAd();
+                                             });
+                                      });
+                             //  LevelPannel.SetActive(false);
+                             //  TweenScrews();
+                             //  bgblue.transform.DOMoveY(-0.65f, 0.3f).SetEase(Ease.OutQuad).OnComplete(() =>
+                             //     {
+                             //         bglose.SetActive(true);
+                             //         LosePanel.SetActive(true);
+                             //         SetLevelTextEnd(parentLevelTextLose);
+                             //         // Dontdestroyonload.instance.ads();
+                             //         GameAds.Get.ShowInterstitialAd();
+                             //     });
                          });
                     }
 

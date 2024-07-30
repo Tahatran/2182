@@ -51,7 +51,9 @@ public class HomeMng : MonoBehaviour
 
         if (Tutorial.instance.lstTutorialImages[5].activeSelf)
         {
+            Tutorial.instance.ImageBlur[5].SetActive(false);
             Tutorial.instance.lstTutorialImages[5].SetActive(false);
+
             // Tutorial.instance.lstTutorialImages[5].SetActive(true);
             int CheckTutorialImage = 1;
             PlayerPrefs.SetInt("CheckTutorialImage", CheckTutorialImage);
@@ -71,12 +73,16 @@ public class HomeMng : MonoBehaviour
         Audio.instance.AudioLoad();
         if (Tutorial.instance.lstTutorialSkins[0].activeSelf)
         {
+            Tutorial.instance.SKinBlur[0].SetActive(false);
+            Tutorial.instance.SKinBlur[1].SetActive(true);
             Tutorial.instance.lstTutorialSkins[0].SetActive(false);
             Tutorial.instance.lstTutorialSkins[1].SetActive(true);
             Tutorial.instance.EnableRaycast(Tutorial.instance.uiElements[7]);
         }
         if (Tutorial.instance.lstTutorialImages[0].activeSelf)
         {
+            Tutorial.instance.ImageBlur[0].SetActive(false);
+            Tutorial.instance.ImageBlur[1].SetActive(true);
             Tutorial.instance.lstTutorialImages[0].SetActive(false);
             Tutorial.instance.lstTutorialImages[1].SetActive(true);
             Tutorial.instance.EnableRaycast(Tutorial.instance.uiElements[8]);
@@ -109,6 +115,8 @@ public class HomeMng : MonoBehaviour
 
     public void btnLoadGame()
     {
+        Tutorial.instance.lstTutorialSkins[5].SetActive(false);
+        Tutorial.instance.lstTutorialImages[5].SetActive(false);
         Tutorial.instance.DisableAllRaycasts();
         var bulongFaceDown = face1;
         var bulongFace2Down = face2;
@@ -123,30 +131,37 @@ public class HomeMng : MonoBehaviour
             bulongFace2Down.SetActive(false);
         }
         toggleCoroutine = StartCoroutine(ToggleFacesWhileTweening(bulongFaceDown, bulongFace2Down));
-
+        Tutorial.instance.SKinBlur[5].SetActive(false);
         // Tween Bulong xuống vị trí mới
-        bulong.transform.DOLocalMove(downPosition, 0.3f).SetEase(Ease.OutQuad).OnUpdate(() =>
+        bulong.transform.DOLocalMove(downPosition, 0.5f).SetEase(Ease.OutQuad).OnUpdate(() =>
                     {
                         DOVirtual.DelayedCall(0.05f, () =>
                         {
-                            bulongscale.transform.DOScale(0f, 0.15f).SetEase(Ease.OutQuad);
+                            bulongscale.transform.DOScale(0f, 0.2f).SetEase(Ease.OutQuad);
                         });
                     })
                     .OnComplete(() =>
                                     {
+
                                         if (toggleCoroutine != null)
                                         {
                                             StopCoroutine(toggleCoroutine);
                                         }
-                                        bulongFaceDown.SetActive(true);
-                                        bulongFace2Down.SetActive(false);
-                                        ImageGameObject.SetActive(false);
-                                        gameObject.SetActive(false);
-                                        foreach (Transform child in GameCtr.instance.gridContainer.transform)
+                                        bulongFace2Down.SetActive(true);
+                                        bulongFaceDown.SetActive(false);
+
+                                        DOVirtual.DelayedCall(0.12f, () =>
                                         {
-                                            Destroy(child.gameObject);
-                                        }
-                                        SceneManager.LoadScene(0);
+
+                                            ImageGameObject.SetActive(false);
+                                            gameObject.SetActive(false);
+                                            foreach (Transform child in GameCtr.instance.gridContainer.transform)
+                                            {
+                                                Destroy(child.gameObject);
+                                            }
+                                            SceneManager.LoadScene(0);
+                                        });
+
                                     });
 
 
@@ -169,6 +184,8 @@ public class HomeMng : MonoBehaviour
         Image.SetActive(false);
         if (Tutorial.instance.lstTutorialSkins[4].activeSelf)
         {
+            Tutorial.instance.SKinBlur[4].SetActive(false);
+            Tutorial.instance.SKinBlur[5].SetActive(true);
             Tutorial.instance.lstTutorialSkins[4].SetActive(false);
             Tutorial.instance.lstTutorialSkins[5].SetActive(true);
             Tutorial.instance.EnableRaycast(Tutorial.instance.uiElements[9]);
@@ -183,6 +200,8 @@ public class HomeMng : MonoBehaviour
         {
             Tutorial.instance.lstTutorialSkins[1].SetActive(false);
             Tutorial.instance.lstTutorialSkins[2].SetActive(true);
+            Tutorial.instance.SKinBlur[1].SetActive(false);
+            Tutorial.instance.SKinBlur[2].SetActive(true);
 
         }
         SkinSelect.SetActive(true);
@@ -198,7 +217,8 @@ public class HomeMng : MonoBehaviour
         {
             Tutorial.instance.lstTutorialImages[1].SetActive(false);
             Tutorial.instance.lstTutorialImages[2].SetActive(true);
-
+            Tutorial.instance.ImageBlur[1].SetActive(false);
+            Tutorial.instance.ImageBlur[2].SetActive(true);
         }
         ImgageSelect.SetActive(true);
         Skin.SetActive(false);
