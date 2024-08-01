@@ -354,7 +354,7 @@ public class GameCtr : MonoBehaviour
     {
         if (!PlayerPrefs.HasKey("lv"))
         {
-            lv = 1;
+            lv = 16;
             PlayerPrefs.SetInt("lv", lv);
         }
 
