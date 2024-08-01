@@ -232,19 +232,30 @@ public class Image2 : MonoBehaviour
 
     private IEnumerator ActivateImagesWithDelay(List<GameObject> selectedImageList, List<GameObject> selectedBgList, int activeCount, string key)
     {
-        for (int i = activeCount; i < selectedImageList.Count && DataConfig.ScoreImage > 0; i++)
+
+        if (!selectedImageList[activeCount].activeSelf)
         {
-            if (!selectedImageList[i].activeSelf)
-            {
-                selectedImageList[i].SetActive(true);
-                selectedBgList[i].SetActive(false); // Tắt corresponding background
-                DataConfig.ScoreImage--;
-                PlayerPrefs.SetInt("ScoreImage", DataConfig.ScoreImage);
-                activeCount++;
-                ShowScore();
-                yield return new WaitForSeconds(0.35f); // Adjust delay duration here
-            }
+            selectedImageList[activeCount].SetActive(true);
+            selectedBgList[activeCount].SetActive(false); // Tắt corresponding background
+            DataConfig.ScoreImage--;
+            PlayerPrefs.SetInt("ScoreImage", DataConfig.ScoreImage);
+            activeCount++;
+            ShowScore();
+            yield return new WaitForSeconds(0.01f); // Adjust delay duration here
         }
+        // for (int i = activeCount; i < selectedImageList.Count && DataConfig.ScoreImage > 0; i++)
+        // {
+        //     if (!selectedImageList[i].activeSelf)
+        //     {
+        //         selectedImageList[i].SetActive(true);
+        //         selectedBgList[i].SetActive(false); // Tắt corresponding background
+        //         DataConfig.ScoreImage--;
+        //         PlayerPrefs.SetInt("ScoreImage", DataConfig.ScoreImage);
+        //         activeCount++;
+        //         ShowScore();
+        //         yield return new WaitForSeconds(0.35f); // Adjust delay duration here
+        //     }
+        // }
 
         PlayerPrefs.SetInt(key, activeCount);
         PlayerPrefs.Save();
