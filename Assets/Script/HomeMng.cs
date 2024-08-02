@@ -126,7 +126,8 @@ public class HomeMng : MonoBehaviour
 
     public void btnLoadGame()
     {
-        Audio.instance.sfxClick.Play();
+        Audio.instance.sfxScrew.Play();
+        Audio.instance.sfxScrew2.Play();
         Tutorial.instance.lstTutorialSkins[5].SetActive(false);
         Tutorial.instance.lstTutorialImages[5].SetActive(false);
         Tutorial.instance.DisableAllRaycasts();

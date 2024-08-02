@@ -37,6 +37,8 @@ public class Image2 : MonoBehaviour
     public List<GameObject> Img4bg;
     public List<GameObject> Img5bg;
     public List<GameObject> Img6bg;
+    public int Dem = 0;
+
     public static Image2 instance;
 
     private void Awake()
@@ -151,23 +153,31 @@ public class Image2 : MonoBehaviour
             // imageLevelClone.transform.localPosition = Shader.transform.localPosition;
             // imageLevelClone.SetActive(true);
             lstEnimFinal[DataConfig.ImageIndex].SetActive(true);
-            yield return new WaitForSeconds(2.017f); // Change the delay time as needed
-                                                     // if (lstEnimFinal[DataConfig.ImageIndex].activeSelf)
-                                                     // {
-                                                     // lstEnimFinal[DataConfig.ImageIndex].GetComponent<Animator>().Rebind();
-                                                     // lstEnimFinal[DataConfig.ImageIndex].GetComponent<Animation>().Play();
-                                                     // }
-                                                     // lstEnimFinal[DataConfig.ImageIndex].SetActive(false);
-                                                     // yield return new WaitForSeconds(0.2f);
+            yield return new WaitForSeconds(2.8f); // Change the delay time as needed
+                                                   // if (lstEnimFinal[DataConfig.ImageIndex].activeSelf)
+                                                   // {
+                                                   // lstEnimFinal[DataConfig.ImageIndex].GetComponent<Animator>().Rebind();
+                                                   // lstEnimFinal[DataConfig.ImageIndex].GetComponent<Animation>().Play();
+                                                   // }
+                                                   // lstEnimFinal[DataConfig.ImageIndex].SetActive(false);
+                                                   // yield return new WaitForSeconds(0.2f);
 
             Audio.instance.blink.Play();
             lstEnimFinal[DataConfig.ImageIndex].SetActive(false);
             var imageLevelClone = Instantiate(Shader, Vector2.zero, Quaternion.identity, gameObject.transform);
             imageLevelClone.transform.localPosition = Shader.transform.localPosition;
             imageLevelClone.SetActive(true);
-            yield return new WaitForSeconds(2.2f);
+            yield return new WaitForSeconds(0.2f);
             lstImgFinal[DataConfig.ImageIndex].SetActive(true);
-
+            yield return new WaitForSeconds(1.5f);
+            if (!Tutorial.instance.lstTutorialImages[4].activeSelf && Dem == 4)
+            {
+                Tutorial.instance.ImageBlur[4].SetActive(false);
+                Tutorial.instance.ImageBlur[5].SetActive(true);
+                Tutorial.instance.lstTutorialImages[4].SetActive(false);
+                Tutorial.instance.lstTutorialImages[5].SetActive(true);
+                Tutorial.instance.EnableRaycast(Tutorial.instance.uiElements[2]);
+            }
 
         }
 
@@ -236,27 +246,31 @@ public class Image2 : MonoBehaviour
         // StartCoroutine(DelayeShowFinal());
 
         Debug.Log($"Remaining ScoreImage: {DataConfig.ScoreImage}");
-
-        if (Tutorial.instance.lstTutorialImages[4].activeSelf)
+        Dem += 1;
+        if (Tutorial.instance.lstTutorialImages[4].activeSelf && Dem == 4)
         {
             Tutorial.instance.ImageBlur[4].SetActive(false);
-            Tutorial.instance.ImageBlur[5].SetActive(true);
+            // Tutorial.instance.ImageBlur[5].SetActive(true);
             Tutorial.instance.lstTutorialImages[4].SetActive(false);
-            Tutorial.instance.lstTutorialImages[5].SetActive(true);
-            Tutorial.instance.EnableRaycast(Tutorial.instance.uiElements[2]);
+            // Tutorial.instance.lstTutorialImages[5].SetActive(true);
+            // Tutorial.instance.EnableRaycast(Tutorial.instance.uiElements[2]);
         }
     }
 
     private IEnumerator ActivateImagesWithDelay(List<GameObject> selectedImageList, List<GameObject> selectedBgList, int activeCount, string key)
     {
 
-        if (!selectedImageList[activeCount].activeSelf)
+        if (!selectedImageList[activeCount].activeSelf && DataConfig.ScoreImage > 0)
         {
-            // Audio.instance.sfxClick.Play();
             Audio.instance.fill.Play();
             selectedImageList[activeCount].SetActive(true);
             selectedBgList[activeCount].SetActive(false); // Tắt corresponding background
             DataConfig.ScoreImage--;
+            if (DataConfig.ScoreImage <= 0)
+            {
+                DataConfig.ScoreImage = 0;
+            }
+
             PlayerPrefs.SetInt("ScoreImage", DataConfig.ScoreImage);
             activeCount++;
             ShowScore();
