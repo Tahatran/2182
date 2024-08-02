@@ -170,7 +170,7 @@ public class Image2 : MonoBehaviour
             yield return new WaitForSeconds(0.2f);
             lstImgFinal[DataConfig.ImageIndex].SetActive(true);
             yield return new WaitForSeconds(1.5f);
-            if (!Tutorial.instance.lstTutorialImages[4].activeSelf && Dem == 4)
+            if (!Tutorial.instance.lstTutorialImages[4].activeSelf && Dem == 4 || PlayerPrefs.GetInt("lv") == 5 && DataConfig.ScoreImage == 0)
             {
                 Tutorial.instance.ImageBlur[4].SetActive(false);
                 Tutorial.instance.ImageBlur[5].SetActive(true);
@@ -254,6 +254,14 @@ public class Image2 : MonoBehaviour
             Tutorial.instance.lstTutorialImages[4].SetActive(false);
             // Tutorial.instance.lstTutorialImages[5].SetActive(true);
             // Tutorial.instance.EnableRaycast(Tutorial.instance.uiElements[2]);
+        }
+        if (PlayerPrefs.GetInt("lv") == 5 && DataConfig.ScoreImage == 0)
+        {
+            Tutorial.instance.ImageBlur[4].SetActive(false);
+            Tutorial.instance.ImageBlur[5].SetActive(true);
+            Tutorial.instance.lstTutorialImages[4].SetActive(false);
+            Tutorial.instance.lstTutorialImages[5].SetActive(true);
+            Tutorial.instance.EnableRaycast(Tutorial.instance.uiElements[2]);
         }
     }
 
