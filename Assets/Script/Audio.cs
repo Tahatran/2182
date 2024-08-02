@@ -15,6 +15,8 @@ public class Audio : MonoBehaviour
     public AudioSource sfxScrew2;
     public AudioSource sfxLose;
     public AudioSource shak;
+    public AudioSource blink;
+    public AudioSource fill;
     public bool isStart = true;
     public AudioSource[] soundList;
     public GameObject panelStart;

@@ -15,37 +15,51 @@ public class Paint_Brust : MonoBehaviour
     void Start()
     {
         center = transform.position;
-        StartCoroutine(delay());
-        IEnumerator delay()
-        {
+        // StartCoroutine(delay());
+        // IEnumerator delay()
+        // {
 
-            trail.SetActive(true);
-            yield return new WaitForSeconds(2.8f);
-            burst.SetActive(true);
+        //     // trail.SetActive(true);
+        //     yield return new WaitForSeconds(2.8f);
+        burst.SetActive(true);
 
-        }
+        // }
     }
 
-    void Update()
-    {
-        angle += speed * Time.deltaTime;
-        radius -= speed * Time.deltaTime * 0.1f;
+    // void Start()
+    // {
+    //     center = transform.position;
+    //     StartCoroutine(delay());
+    //     IEnumerator delay()
+    //     {
 
-        float x = center.x + radius * Mathf.Cos(angle);
-        float y = center.y + radius * Mathf.Sin(angle);
+    //         // trail.SetActive(true);
+    //         yield return new WaitForSeconds(2.8f);
+    //         burst.SetActive(true);
 
-        transform.position = new Vector3(x, y, transform.position.z);
+    //     }
+    // }
 
-        if (radius <= 0)
-        {
-            trail.SetActive(false);
-            gameObject.GetComponent<SpriteRenderer>().enabled = false;
-            // gameObject.SetActive(false);
+    // void Update()
+    // {
+    //     angle += speed * Time.deltaTime;
+    //     radius -= speed * Time.deltaTime * 0.1f;
 
-            // if (burst != null)
-            // {
-            //     burst.SetActive(true);
-            // }
-        }
-    }
+    //     float x = center.x + radius * Mathf.Cos(angle);
+    //     float y = center.y + radius * Mathf.Sin(angle);
+
+    //     transform.position = new Vector3(x, y, transform.position.z);
+
+    //     if (radius <= 0)
+    //     {
+    //         trail.SetActive(false);
+    //         gameObject.GetComponent<SpriteRenderer>().enabled = false;
+    //         // gameObject.SetActive(false);
+
+    //         // if (burst != null)
+    //         // {
+    //         //     burst.SetActive(true);
+    //         // }
+    //     }
+    // }
 }

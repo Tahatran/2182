@@ -42,6 +42,7 @@ public class HomeMng : MonoBehaviour
     }
     public void btnBacktoImage()
     {
+        Audio.instance.sfxClick.Play();
         // ImageCtr.instance.GenLevelfromGrid();
         Image2.instance.ActivefalseAll();
         btnBack.SetActive(false);
@@ -65,9 +66,12 @@ public class HomeMng : MonoBehaviour
 
     public void btncometoHome()
     {
+        Audio.instance.sfxClick.Play();
         // GameCtr.instance.DisableAllColliders();
 
         GameCtr.instance.GameClear();
+        // GameCtr.instance.audioToggle.SetActive(true);
+        // StartCoroutine(delay());
         ImageGameObject.SetActive(true);
         gameObject.SetActive(true);
         Audio.instance.AudioLoad();
@@ -88,6 +92,13 @@ public class HomeMng : MonoBehaviour
             Tutorial.instance.EnableRaycast(Tutorial.instance.uiElements[8]);
         }
     }
+    // IEnumerator delay()
+    // {
+    //     yield return new WaitForSeconds(1f);
+    //     Debug.Log("delay");
+    //     GameCtr.instance.GameClear();
+
+    // }
     IEnumerator ToggleFacesWhileTweening(GameObject BuLongface, GameObject Bulongface2)
     {
         while (true)
@@ -115,6 +126,7 @@ public class HomeMng : MonoBehaviour
 
     public void btnLoadGame()
     {
+        Audio.instance.sfxClick.Play();
         Tutorial.instance.lstTutorialSkins[5].SetActive(false);
         Tutorial.instance.lstTutorialImages[5].SetActive(false);
         Tutorial.instance.DisableAllRaycasts();
@@ -176,6 +188,7 @@ public class HomeMng : MonoBehaviour
 
     public void btnHome()
     {
+        Audio.instance.sfxClick.Play();
         // Home.SetActive(true);
         HomeSelect.SetActive(true);
         Skin.SetActive(false);
@@ -196,6 +209,7 @@ public class HomeMng : MonoBehaviour
 
     public void btnSkin()
     {
+        Audio.instance.sfxClick.Play();
         if (Tutorial.instance.lstTutorialSkins[1].activeSelf)
         {
             Tutorial.instance.lstTutorialSkins[1].SetActive(false);
@@ -213,6 +227,7 @@ public class HomeMng : MonoBehaviour
 
     public void btnImage()
     {
+        Audio.instance.sfxClick.Play();
         if (Tutorial.instance.lstTutorialImages[1].activeSelf)
         {
             Tutorial.instance.lstTutorialImages[1].SetActive(false);

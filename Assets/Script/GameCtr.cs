@@ -109,7 +109,7 @@ public class GameCtr : MonoBehaviour
         // }
         DataConfig.ScoreImage = PlayerPrefs.GetInt("ScoreImage", 0);
         //BuildTurnoff
-        DataConfig.ScoreImage = 100;
+        // DataConfig.ScoreImage = 100;
         // SaveReward();
         // LoadReward();
         DOTween.KillAll();
@@ -177,8 +177,10 @@ public class GameCtr : MonoBehaviour
         lstGrid.Clear();
         lstBulong.Clear();
         lstCrew.Clear();
+        // DisableAllColliders();
         btnReset.SetActive(false);
         audioToggle.SetActive(false);
+
         foreach (Transform child in gridContainer.transform)
         {
             Destroy(child.gameObject);
@@ -356,7 +358,7 @@ public class GameCtr : MonoBehaviour
     {
         if (!PlayerPrefs.HasKey("lv"))
         {
-            lv = 16;
+            lv = 1;
             PlayerPrefs.SetInt("lv", lv);
         }
 
@@ -991,6 +993,17 @@ public class GameCtr : MonoBehaviour
         {
             DisableAllColliders();
         }
+        // try
+        // {
+        if (!btnReset.activeSelf)
+        {
+            GameClear();
+        }
+        // }
+        // catch
+        // {
+        //     Debug.LogError("error");
+        // }
     }
 
     void UpdateSprite(GameObject obj, SubLevel subLevel, int colorIndex)

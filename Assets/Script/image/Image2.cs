@@ -151,17 +151,22 @@ public class Image2 : MonoBehaviour
             // imageLevelClone.transform.localPosition = Shader.transform.localPosition;
             // imageLevelClone.SetActive(true);
             lstEnimFinal[DataConfig.ImageIndex].SetActive(true);
-            yield return new WaitForSeconds(2.5f); // Change the delay time as needed
-                                                   // if (lstEnimFinal[DataConfig.ImageIndex].activeSelf)
-                                                   // {
-                                                   // lstEnimFinal[DataConfig.ImageIndex].GetComponent<Animator>().Rebind();
-                                                   // lstEnimFinal[DataConfig.ImageIndex].GetComponent<Animation>().Play();
-                                                   // }
-                                                   // lstEnimFinal[DataConfig.ImageIndex].SetActive(false);
-                                                   // yield return new WaitForSeconds(0.2f);
+            yield return new WaitForSeconds(2.017f); // Change the delay time as needed
+                                                     // if (lstEnimFinal[DataConfig.ImageIndex].activeSelf)
+                                                     // {
+                                                     // lstEnimFinal[DataConfig.ImageIndex].GetComponent<Animator>().Rebind();
+                                                     // lstEnimFinal[DataConfig.ImageIndex].GetComponent<Animation>().Play();
+                                                     // }
+                                                     // lstEnimFinal[DataConfig.ImageIndex].SetActive(false);
+                                                     // yield return new WaitForSeconds(0.2f);
 
-            lstImgFinal[DataConfig.ImageIndex].SetActive(true);
+            Audio.instance.blink.Play();
             lstEnimFinal[DataConfig.ImageIndex].SetActive(false);
+            var imageLevelClone = Instantiate(Shader, Vector2.zero, Quaternion.identity, gameObject.transform);
+            imageLevelClone.transform.localPosition = Shader.transform.localPosition;
+            imageLevelClone.SetActive(true);
+            yield return new WaitForSeconds(2.2f);
+            lstImgFinal[DataConfig.ImageIndex].SetActive(true);
 
 
         }
@@ -247,6 +252,8 @@ public class Image2 : MonoBehaviour
 
         if (!selectedImageList[activeCount].activeSelf)
         {
+            // Audio.instance.sfxClick.Play();
+            Audio.instance.fill.Play();
             selectedImageList[activeCount].SetActive(true);
             selectedBgList[activeCount].SetActive(false); // Tắt corresponding background
             DataConfig.ScoreImage--;
