@@ -151,9 +151,18 @@ public class Image2 : MonoBehaviour
             // imageLevelClone.transform.localPosition = Shader.transform.localPosition;
             // imageLevelClone.SetActive(true);
             lstEnimFinal[DataConfig.ImageIndex].SetActive(true);
-            yield return new WaitForSeconds(0.99f); // Change the delay time as needed
-            lstEnimFinal[DataConfig.ImageIndex].SetActive(false);
+            yield return new WaitForSeconds(2.5f); // Change the delay time as needed
+                                                   // if (lstEnimFinal[DataConfig.ImageIndex].activeSelf)
+                                                   // {
+                                                   // lstEnimFinal[DataConfig.ImageIndex].GetComponent<Animator>().Rebind();
+                                                   // lstEnimFinal[DataConfig.ImageIndex].GetComponent<Animation>().Play();
+                                                   // }
+                                                   // lstEnimFinal[DataConfig.ImageIndex].SetActive(false);
+                                                   // yield return new WaitForSeconds(0.2f);
+
             lstImgFinal[DataConfig.ImageIndex].SetActive(true);
+            lstEnimFinal[DataConfig.ImageIndex].SetActive(false);
+
 
         }
 
@@ -236,29 +245,29 @@ public class Image2 : MonoBehaviour
     private IEnumerator ActivateImagesWithDelay(List<GameObject> selectedImageList, List<GameObject> selectedBgList, int activeCount, string key)
     {
 
-        // if (!selectedImageList[activeCount].activeSelf)
-        // {
-        //     selectedImageList[activeCount].SetActive(true);
-        //     selectedBgList[activeCount].SetActive(false); // Tắt corresponding background
-        //     DataConfig.ScoreImage--;
-        //     PlayerPrefs.SetInt("ScoreImage", DataConfig.ScoreImage);
-        //     activeCount++;
-        //     ShowScore();
-        //     yield return new WaitForSeconds(0.01f); // Adjust delay duration here
-        // }
-        for (int i = activeCount; i < selectedImageList.Count && DataConfig.ScoreImage > 0; i++)
+        if (!selectedImageList[activeCount].activeSelf)
         {
-            if (!selectedImageList[i].activeSelf)
-            {
-                selectedImageList[i].SetActive(true);
-                selectedBgList[i].SetActive(false); // Tắt corresponding background
-                DataConfig.ScoreImage--;
-                PlayerPrefs.SetInt("ScoreImage", DataConfig.ScoreImage);
-                activeCount++;
-                ShowScore();
-                yield return new WaitForSeconds(0.35f); // Adjust delay duration here
-            }
+            selectedImageList[activeCount].SetActive(true);
+            selectedBgList[activeCount].SetActive(false); // Tắt corresponding background
+            DataConfig.ScoreImage--;
+            PlayerPrefs.SetInt("ScoreImage", DataConfig.ScoreImage);
+            activeCount++;
+            ShowScore();
+            yield return new WaitForSeconds(0.01f); // Adjust delay duration here
         }
+        // for (int i = activeCount; i < selectedImageList.Count && DataConfig.ScoreImage > 0; i++)
+        // {
+        //     if (!selectedImageList[i].activeSelf)
+        //     {
+        //         selectedImageList[i].SetActive(true);
+        //         selectedBgList[i].SetActive(false); // Tắt corresponding background
+        //         DataConfig.ScoreImage--;
+        //         PlayerPrefs.SetInt("ScoreImage", DataConfig.ScoreImage);
+        //         activeCount++;
+        //         ShowScore();
+        //         yield return new WaitForSeconds(0.35f); // Adjust delay duration here
+        //     }
+        // }
 
         PlayerPrefs.SetInt(key, activeCount);
         PlayerPrefs.Save();
