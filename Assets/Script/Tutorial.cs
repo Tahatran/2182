@@ -51,13 +51,20 @@ public class Tutorial : MonoBehaviour
             int CheckTutorialImage = 0;
             PlayerPrefs.SetInt("CheckTutorialImage", CheckTutorialImage);
         }
-        if (PlayerPrefs.GetInt("lv") == 5 && PlayerPrefs.GetInt("CheckTutorialImage") == 0)
+
+        int activeCount = PlayerPrefs.GetInt("0");
+        if (activeCount != 4)
         {
-            lstTutorialImages[0].SetActive(true);
-            // DisableAllRaycasts();
-            EnableRaycast(uiElements[1]);
-            ImageBlur[0].SetActive(true);
+            if (PlayerPrefs.GetInt("lv") == 5 && PlayerPrefs.GetInt("CheckTutorialImage") == 0)
+            {
+                lstTutorialImages[0].SetActive(true);
+                // DisableAllRaycasts();
+                EnableRaycast(uiElements[1]);
+                ImageBlur[0].SetActive(true);
+            }
         }
+
+
     }
     public void DisableAllRaycasts()
     {

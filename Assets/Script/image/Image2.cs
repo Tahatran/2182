@@ -153,6 +153,8 @@ public class Image2 : MonoBehaviour
             // imageLevelClone.transform.localPosition = Shader.transform.localPosition;
             // imageLevelClone.SetActive(true);
             lstEnimFinal[DataConfig.ImageIndex].SetActive(true);
+            int CheckTutorialImage = 1;
+            PlayerPrefs.SetInt("CheckTutorialImage", CheckTutorialImage);
             yield return new WaitForSeconds(2.8f); // Change the delay time as needed
                                                    // if (lstEnimFinal[DataConfig.ImageIndex].activeSelf)
                                                    // {
@@ -170,7 +172,7 @@ public class Image2 : MonoBehaviour
             yield return new WaitForSeconds(0.2f);
             lstImgFinal[DataConfig.ImageIndex].SetActive(true);
             yield return new WaitForSeconds(1.5f);
-            if (!Tutorial.instance.lstTutorialImages[4].activeSelf && Dem == 4 || PlayerPrefs.GetInt("lv") == 5 && DataConfig.ScoreImage == 0)
+            if (Dem == 4 && PlayerPrefs.GetInt("lv") == 5 && DataConfig.ScoreImage == 0)
             {
                 Tutorial.instance.ImageBlur[4].SetActive(false);
                 Tutorial.instance.ImageBlur[5].SetActive(true);
@@ -247,7 +249,7 @@ public class Image2 : MonoBehaviour
 
         Debug.Log($"Remaining ScoreImage: {DataConfig.ScoreImage}");
         Dem += 1;
-        if (Tutorial.instance.lstTutorialImages[4].activeSelf && Dem == 4)
+        if (Tutorial.instance.lstTutorialImages[4].activeSelf && Dem == 4 && PlayerPrefs.GetInt("lv") == 5)
         {
             Tutorial.instance.ImageBlur[4].SetActive(false);
             // Tutorial.instance.ImageBlur[5].SetActive(true);
@@ -255,7 +257,7 @@ public class Image2 : MonoBehaviour
             // Tutorial.instance.lstTutorialImages[5].SetActive(true);
             // Tutorial.instance.EnableRaycast(Tutorial.instance.uiElements[2]);
         }
-        if (PlayerPrefs.GetInt("lv") == 5 && DataConfig.ScoreImage == 0)
+        if (Dem < 4 && DataConfig.ScoreImage == 0 && PlayerPrefs.GetInt("lv") == 5)
         {
             Tutorial.instance.ImageBlur[4].SetActive(false);
             Tutorial.instance.ImageBlur[5].SetActive(true);
