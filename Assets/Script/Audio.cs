@@ -17,13 +17,13 @@ public class Audio : MonoBehaviour
     public AudioSource shak;
     public AudioSource blink;
     public AudioSource fill;
-    public bool isStart = true;
+    // public bool isStart = true;
     public AudioSource[] soundList;
-    public GameObject panelStart;
+    // public GameObject panelStart;
     public GameObject On;
     public GameObject Off;
-    public bool isPanelStartOpen = false;
-    public GameObject AudioPanel;
+    // public bool isPanelStartOpen = false;
+    // public GameObject AudioPanel;
 
     // [HideInInspector]
     public int musicState, soundState;
@@ -97,11 +97,11 @@ public class Audio : MonoBehaviour
         }
 
         instance = this;
-        Application.targetFrameRate = 60;
+        // Application.targetFrameRate = 60;
 
 
-        isStart = true;
-        isPanelStartOpen = true;
+        // isStart = true;
+        // isPanelStartOpen = true;
     }
 
     public void AudioLoad()

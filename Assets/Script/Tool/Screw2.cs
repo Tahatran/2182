@@ -31,7 +31,7 @@ public class Screw2 : MonoBehaviour
 
     void OnMouseDown()
     {
-        MoveBulong();
+        // MoveBulong();
         //tools bat
         //  MoveBulong();
         // ImageCtr.instance.Delete1 = false;
