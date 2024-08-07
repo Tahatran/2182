@@ -23,7 +23,7 @@ public class ImageMng : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        LoadShop();
+        // LoadShop();
     }
 
     public void Get()

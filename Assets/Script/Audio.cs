@@ -97,7 +97,7 @@ public class Audio : MonoBehaviour
         }
 
         instance = this;
-        // Application.targetFrameRate = 60;
+        Application.targetFrameRate = 120;
 
 
         // isStart = true;

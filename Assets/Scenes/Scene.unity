@@ -3318,6 +3318,7 @@ MonoBehaviour:
   bulongscale: {fileID: 1923261062}
   ImageGameObject: {fileID: 1142750335}
   ImageMng: {fileID: 90149321}
+  ShopMng: {fileID: 290517228}
   Home: {fileID: 1173626793}
   HomeSelect: {fileID: 1792881084}
   Skin: {fileID: 79483320}

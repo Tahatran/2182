@@ -15,6 +15,7 @@ public class HomeMng : MonoBehaviour
     public GameObject ImageGameObject;
 
     public GameObject ImageMng;
+    public GameObject ShopMng;
     public GameObject Home;
     public GameObject HomeSelect;
     public GameObject Skin;
@@ -211,6 +212,8 @@ public class HomeMng : MonoBehaviour
 
     public void btnSkin()
     {
+        //thay vi start o shopmng thi goi o day 
+        ShopMng.GetComponent<ShopMng>().LoadShop();
         Audio.instance.sfxClick.Play();
         if (Tutorial.instance.lstTutorialSkins[1].activeSelf)
         {
@@ -229,6 +232,7 @@ public class HomeMng : MonoBehaviour
 
     public void btnImage()
     {
+        ImageMng.GetComponent<ImageMng>().LoadShop();
         Audio.instance.sfxClick.Play();
         if (Tutorial.instance.lstTutorialImages[1].activeSelf)
         {

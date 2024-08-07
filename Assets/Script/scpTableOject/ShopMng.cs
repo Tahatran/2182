@@ -24,11 +24,11 @@ public class ShopMng : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        int Skin = PlayerPrefs.GetInt("Skin", 0);
-        PlayerPrefs.SetInt("Skin", Skin);
-        DataConfig.EffectIndex = PlayerPrefs.GetInt("Skin", 0);
-        PlayerPrefs.Save();
-        LoadShop();
+        // int Skin = PlayerPrefs.GetInt("Skin", 0);
+        // PlayerPrefs.SetInt("Skin", Skin);
+        // DataConfig.EffectIndex = PlayerPrefs.GetInt("Skin", 0);
+        // PlayerPrefs.Save();
+        // LoadShop();
     }
 
     // Update is called once per frame
