@@ -16,6 +16,7 @@ public class ImageMng : MonoBehaviour
     public GameObject btnAds;
     public GameObject btnGet;
     public List<GameObject> lstImage;
+    public List<Sprite> lstImage2;
     public int id;
     public int idSelecSkinLock;
 
@@ -79,6 +80,7 @@ public class ImageMng : MonoBehaviour
         lstImage[imageId].transform.GetChild(0).gameObject.SetActive(false);
     }
 
+
     public void LoadShop()
     {
         // Debug.LogError("aaaaa");
@@ -93,6 +95,22 @@ public class ImageMng : MonoBehaviour
         {
             ItemData item = ImageItemData.Items[i];
             GameObject Item = Instantiate(ItemPrefab);
+            // Lấy giá trị đã lưu trong PlayerPrefs
+            int value = PlayerPrefs.GetInt((i).ToString());
+
+            // Kiểm tra và gán hình ảnh dựa trên giá trị
+            if (value == 0)
+            {
+                Item.GetComponent<Image>().sprite = lstImage2[0];
+            }
+            else if (value == 4)
+            {
+                Item.GetComponent<Image>().sprite = item.ItemImg;
+            }
+            else if (value > 1 && value < 4)
+            {
+                Item.GetComponent<Image>().sprite = lstImage2[1];
+            }
             lstImage.Add(Item);
             if (i < itemsPerPage)
             {
@@ -112,13 +130,15 @@ public class ImageMng : MonoBehaviour
             {
 
                 item.IsBuy = true; // Ensure item state is updated
-                Item.GetComponent<Image>().sprite = item.ItemImg;
+                // Item.GetComponent<Image>().sprite = item.ItemImg;
                 Item.GetComponent<Button>().onClick.AddListener(() =>
                 {
                     DeactivateAllItems();
                     id = item.Id; // Set the ID for purchasing
-                    btnGet.SetActive(true);
-                    btnAds.SetActive(false);
+                    //adsssssss
+                    // btnGet.SetActive(true);
+                    // btnAds.SetActive(false);
+                    Get();
                     Item.transform.GetChild(2).gameObject.SetActive(true); // Activate some UI element
                     if (Tutorial.instance.lstTutorialImages[2].activeSelf)
                     {
@@ -132,7 +152,7 @@ public class ImageMng : MonoBehaviour
             }
             else
             {
-                Item.GetComponent<Image>().sprite = item.ItemImg;
+                // Item.GetComponent<Image>().sprite = item.ItemImg;
                 Item.transform.GetChild(0).gameObject.SetActive(true);
                 if (PlayerPrefs.GetInt("CheckTutorialImage") != 0)
                 {

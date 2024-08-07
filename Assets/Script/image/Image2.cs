@@ -73,7 +73,7 @@ public class Image2 : MonoBehaviour
 
         int lv = 0;
         // Loop through image indices
-        for (int i = 1; i <= 4; i++)
+        for (int i = 1; i <= 5; i++)
         {
             string key = i.ToString();
             if (!PlayerPrefs.HasKey(key))
@@ -85,7 +85,7 @@ public class Image2 : MonoBehaviour
 
     public void LoadAllImages()
     {
-        for (int i = 1; i <= 4; i++)
+        for (int i = 1; i <= 5; i++)
         {
             LoadImage(i);
         }
