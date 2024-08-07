@@ -255,7 +255,7 @@ public class Image2 : MonoBehaviour
             // Tutorial.instance.ImageBlur[5].SetActive(true);
             Tutorial.instance.lstTutorialImages[4].SetActive(false);
             // Tutorial.instance.lstTutorialImages[5].SetActive(true);
-            // Tutorial.instance.EnableRaycast(Tutorial.instance.uiElements[2]);
+            Tutorial.instance.EnableRaycast(Tutorial.instance.uiElements[2]);
         }
         if (Dem < 4 && DataConfig.ScoreImage == 0 && PlayerPrefs.GetInt("lv") == 5)
         {

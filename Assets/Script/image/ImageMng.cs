@@ -38,14 +38,15 @@ public class ImageMng : MonoBehaviour
         HomeMng.instance.btnBack.SetActive(true);
         Home.SetActive(false);
         GameCtr.instance.GameClear();
-        if (Tutorial.instance.lstTutorialImages[3].activeSelf)
-        {
-            Tutorial.instance.ImageBlur[3].SetActive(false);
-            Tutorial.instance.ImageBlur[4].SetActive(true);
-            Tutorial.instance.lstTutorialImages[3].SetActive(false);
-            Tutorial.instance.lstTutorialImages[4].SetActive(true);
-            Tutorial.instance.EnableRaycast(Tutorial.instance.uiElements[3]);
-        }
+        //tang len 1 nen bo luong nut Get
+        // if (Tutorial.instance.lstTutorialImages[3].activeSelf)
+        // {
+        //     Tutorial.instance.ImageBlur[3].SetActive(false);
+        //     Tutorial.instance.ImageBlur[4].SetActive(true);
+        //     Tutorial.instance.lstTutorialImages[3].SetActive(false);
+        //     Tutorial.instance.lstTutorialImages[4].SetActive(true);
+        //     Tutorial.instance.EnableRaycast(Tutorial.instance.uiElements[3]);
+        // }
     }
 
     public void Ads()
@@ -142,11 +143,15 @@ public class ImageMng : MonoBehaviour
                     Item.transform.GetChild(2).gameObject.SetActive(true); // Activate some UI element
                     if (Tutorial.instance.lstTutorialImages[2].activeSelf)
                     {
+                        //tang len 1 do sua luong, bo select
                         Tutorial.instance.ImageBlur[2].SetActive(false);
-                        Tutorial.instance.ImageBlur[3].SetActive(true);
+                        // Tutorial.instance.ImageBlur[3].SetActive(true);
+                        Tutorial.instance.ImageBlur[4].SetActive(true);
                         Tutorial.instance.lstTutorialImages[2].SetActive(false);
-                        Tutorial.instance.lstTutorialImages[3].SetActive(true);
-                        Tutorial.instance.EnableRaycast(Tutorial.instance.uiElements[5]);
+                        // Tutorial.instance.lstTutorialImages[3].SetActive(true);
+                        Tutorial.instance.lstTutorialImages[4].SetActive(true);
+                        // Tutorial.instance.EnableRaycast(Tutorial.instance.uiElements[5]);
+                        Tutorial.instance.EnableRaycast(Tutorial.instance.uiElements[3]);
                     }
                 });
             }
