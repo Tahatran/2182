@@ -42,6 +42,7 @@ public class HomeMng : MonoBehaviour
     }
     public void btnBacktoImage()
     {
+        ImageMng.GetComponent<ImageMng>().LoadShop();
         Audio.instance.sfxClick.Play();
         // ImageCtr.instance.GenLevelfromGrid();
         Image2.instance.ActivefalseAll();
