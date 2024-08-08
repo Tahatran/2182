@@ -9,8 +9,10 @@ public class Image2 : MonoBehaviour
     public GameObject Shader;
     public GameObject btnFill;
     [SerializeField] private GameObject levelText;
+    [SerializeField] private GameObject levelTextImage;
     // [SerializeField] private List<Sprite> sprites;
     [SerializeField] private GameObject parentScore;
+    [SerializeField] private GameObject parentScoreImage;
     // Image
     public GameObject Image11;
     public GameObject Image12;
@@ -37,7 +39,7 @@ public class Image2 : MonoBehaviour
     public List<GameObject> Img4bg;
     public List<GameObject> Img5bg;
     public List<GameObject> Img6bg;
-    public int Dem = 0;
+    // public int Dem = 0;
 
     public static Image2 instance;
 
@@ -256,23 +258,23 @@ public class Image2 : MonoBehaviour
         // StartCoroutine(DelayeShowFinal());
 
         Debug.Log($"Remaining ScoreImage: {DataConfig.ScoreImage}");
-        Dem += 1;
-        if (Tutorial.instance.lstTutorialImages[4].activeSelf && Dem == 4 && PlayerPrefs.GetInt("lv") == 5)
-        {
-            Tutorial.instance.ImageBlur[4].SetActive(false);
-            // Tutorial.instance.ImageBlur[5].SetActive(true);
-            Tutorial.instance.lstTutorialImages[4].SetActive(false);
-            // Tutorial.instance.lstTutorialImages[5].SetActive(true);
-            // Tutorial.instance.EnableRaycast(Tutorial.instance.uiElements[2]);
-        }
-        if (Dem < 4 && DataConfig.ScoreImage == 0 && PlayerPrefs.GetInt("lv") == 5)
-        {
-            Tutorial.instance.ImageBlur[4].SetActive(false);
-            Tutorial.instance.ImageBlur[5].SetActive(true);
-            Tutorial.instance.lstTutorialImages[4].SetActive(false);
-            Tutorial.instance.lstTutorialImages[5].SetActive(true);
-            Tutorial.instance.EnableRaycast(Tutorial.instance.uiElements[2]);
-        }
+        // Dem += 1;
+        // if (Tutorial.instance.lstTutorialImages[4].activeSelf && Dem == 4 && PlayerPrefs.GetInt("lv") == 5)
+        // {
+        //     Tutorial.instance.ImageBlur[4].SetActive(false);
+        //     // Tutorial.instance.ImageBlur[5].SetActive(true);
+        //     Tutorial.instance.lstTutorialImages[4].SetActive(false);
+        //     // Tutorial.instance.lstTutorialImages[5].SetActive(true);
+        //     // Tutorial.instance.EnableRaycast(Tutorial.instance.uiElements[2]);
+        // }
+        // if (Dem < 4 && DataConfig.ScoreImage == 0 && PlayerPrefs.GetInt("lv") == 5)
+        // {
+        //     Tutorial.instance.ImageBlur[4].SetActive(false);
+        //     Tutorial.instance.ImageBlur[5].SetActive(true);
+        //     Tutorial.instance.lstTutorialImages[4].SetActive(false);
+        //     Tutorial.instance.lstTutorialImages[5].SetActive(true);
+        //     Tutorial.instance.EnableRaycast(Tutorial.instance.uiElements[2]);
+        // }
     }
 
     private IEnumerator ActivateImagesWithDelay(List<GameObject> selectedImageList, List<GameObject> selectedBgList, int activeCount, string key)
@@ -431,7 +433,57 @@ public class Image2 : MonoBehaviour
 
     public void ShowScore()
     {
-        SetLevelText(parentScore);
+        // SetLevelText(parentScore);
+        SetLevelTextEnd(parentScoreImage);
+    }
+    public void SetLevelTextEnd(GameObject parentLevelText)
+    {
+        string levelString = DataConfig.ScoreImage.ToString();
+
+        // Xóa tất cả các hình ảnh con trước đó (nếu có)
+        foreach (Transform child in parentLevelText.transform)
+        {
+            Destroy(child.gameObject);
+        }
+
+        // Xóa tất cả các hình ảnh con trước đó (nếu có)
+        foreach (Transform child in parentLevelText.transform)
+        {
+            Destroy(child.gameObject);
+        }
+
+        // Đặt khoảng cách giữa các chữ số
+        float spacing = 108f; // điều chỉnh khoảng cách giữa các chữ số tùy thuộc vào yêu cầu của bạn
+
+        // Duyệt qua từng chữ số trong chuỗi levelString
+        for (int i = 0; i < levelString.Length; i++)
+        {
+            // Chuyển chữ số thành giá trị số nguyên
+            int digitValue = (int)char.GetNumericValue(levelString[i]);
+
+            // Instantiate một bản sao của levelText và đặt nó làm con của parentLevelText
+            var imageLevelClone = Instantiate(levelTextImage, Vector2.zero, Quaternion.identity, parentLevelText.transform);
+
+            // Tính toán vị trí x của hình ảnh chữ số
+            float xPos = i * spacing;
+            // Đặt vị trí của imageLevelClone
+            RectTransform rectTransform = imageLevelClone.GetComponent<RectTransform>();
+            if (int.Parse(levelString) < 10)
+            {
+                rectTransform.localPosition = new Vector3(-115f, 0, 0);
+            }
+            else
+            {
+                rectTransform.localPosition = new Vector3(xPos - 125f, 0, 0);
+            }
+            imageLevelClone.GetComponent<Image>().SetNativeSize();
+            // imageLevelClone.transform.localScale = new Vector3(0.8f, 0.8f, 0.8f);
+
+            var imageLevel = imageLevelClone.GetComponent<Image>();
+
+            // Gắn sprite tương ứng với chữ số
+            imageLevel.sprite = GameCtr.instance.sprites[digitValue];
+        }
     }
 
     void SetLevelText(GameObject parentLevelText)

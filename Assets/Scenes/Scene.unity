@@ -1160,8 +1160,8 @@ MonoBehaviour:
   btnGet: {fileID: 639508849}
   lstImage: []
   lstImage2:
-  - {fileID: 21300000, guid: c01191c9649ed5349b62f59cdffa361c, type: 3}
-  - {fileID: 21300000, guid: 828253b6bede38340bc1e6e63665670e, type: 3}
+  - {fileID: 21300000, guid: 69a22991924fc1f41a613942094a22fc, type: 3}
+  - {fileID: 21300000, guid: 5f91ccf532b05c34d8223791f24b6b35, type: 3}
   id: 0
   idSelecSkinLock: 0
 --- !u!4 &90149323
@@ -9222,7 +9222,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 11ca543d705b4fc47bbd4dfeaa09b9f1, type: 3}
+  m_Sprite: {fileID: 21300000, guid: bd597d0c5179b0c47bc3a4bf7e579a6a, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -10046,7 +10046,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 24.262161, y: 6.0299997}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -11228,7 +11228,9 @@ MonoBehaviour:
   Shader: {fileID: 662614833}
   btnFill: {fileID: 1800923565}
   levelText: {fileID: 4972227146446991408, guid: 9e2dc182a39160c49803048173b04abc, type: 3}
-  parentScore: {fileID: 1333218947}
+  levelTextImage: {fileID: 3452021314540916479, guid: f9655a71047579840b645e1edfc133e4, type: 3}
+  parentScore: {fileID: 3452021314540916479, guid: f9655a71047579840b645e1edfc133e4, type: 3}
+  parentScoreImage: {fileID: 2041990835}
   Image11: {fileID: 76326266}
   Image12: {fileID: 1368097379}
   Image13: {fileID: 262491254}
@@ -13405,7 +13407,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1333218948
 Transform:
   m_ObjectHideFlags: 0
@@ -13415,7 +13417,7 @@ Transform:
   m_GameObject: {fileID: 1333218947}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.092, y: 3.72, z: 0}
+  m_LocalPosition: {x: -0.092, y: -5.04, z: 0}
   m_LocalScale: {x: 0.25, y: 0.25, z: 0.25}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -17815,9 +17817,10 @@ RectTransform:
   m_GameObject: {fileID: 1800923565}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 1
-  m_Children: []
+  m_Children:
+  - {fileID: 2041990836}
   m_Father: {fileID: 1606209556}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -17901,7 +17904,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 657dcf04a3802a1419ed7b10f4ac9b05, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 73ad149848b00d44a8b7fe90c57403a8, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -20138,6 +20141,41 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &2041990835
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2041990836}
+  m_Layer: 5
+  m_Name: Score
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &2041990836
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2041990835}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.42, y: 0.42, z: 0.42}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 1800923566}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 153, y: 17}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &2047611175
 GameObject:
   m_ObjectHideFlags: 0

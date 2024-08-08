@@ -108,7 +108,7 @@ public class ImageMng : MonoBehaviour
             {
                 Item.GetComponent<Image>().sprite = item.ItemImg;
             }
-            else if (value > 1 && value < 4)
+            else if (value >= 1 && value < 4)
             {
                 Item.GetComponent<Image>().sprite = lstImage2[1];
             }
