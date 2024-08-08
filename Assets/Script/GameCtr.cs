@@ -773,6 +773,18 @@ public class GameCtr : MonoBehaviour
         // autonextlvwhenwin();
         Winpanel.SetActive(false);
         Winpanel2.SetActive(true);
+        Winpanel2.transform.GetChild(2).DOScale(0.5f, 1f).SetEase(Ease.OutQuad)
+        .OnComplete(() =>
+                  {
+                      DOVirtual.DelayedCall(0.2f, () =>
+                         {
+                             //   yield return new WaitForSeconds(0.3f);
+                             Winpanel2.transform.GetChild(3).gameObject.SetActive(true);
+                             Winpanel2.transform.GetChild(4).gameObject.SetActive(true);
+                         });
+
+                  });
+
         // StartCoroutine(DelayedbtnNext(2f));
     }
     private IEnumerator DelayedbtnNext(float delay)

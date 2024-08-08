@@ -232,21 +232,23 @@ public class HomeMng : MonoBehaviour
 
     public void btnImage()
     {
-        ImageMng.GetComponent<ImageMng>().LoadShop();
-        Audio.instance.sfxClick.Play();
-        if (Tutorial.instance.lstTutorialImages[1].activeSelf)
+        if (PlayerPrefs.GetInt("lv") >= 5)
         {
-            Tutorial.instance.lstTutorialImages[1].SetActive(false);
-            Tutorial.instance.lstTutorialImages[2].SetActive(true);
-            Tutorial.instance.ImageBlur[1].SetActive(false);
-            Tutorial.instance.ImageBlur[2].SetActive(true);
+            ImageMng.GetComponent<ImageMng>().LoadShop();
+            Audio.instance.sfxClick.Play();
+            if (Tutorial.instance.lstTutorialImages[1].activeSelf)
+            {
+                Tutorial.instance.lstTutorialImages[1].SetActive(false);
+                Tutorial.instance.lstTutorialImages[2].SetActive(true);
+                Tutorial.instance.ImageBlur[1].SetActive(false);
+                Tutorial.instance.ImageBlur[2].SetActive(true);
+            }
+            ImgageSelect.SetActive(true);
+            Skin.SetActive(false);
+            Image.SetActive(true);
+            HomeSelect.SetActive(false);
+            SkinSelect.SetActive(false);
         }
-        ImgageSelect.SetActive(true);
-        Skin.SetActive(false);
-        Image.SetActive(true);
-        HomeSelect.SetActive(false);
-        SkinSelect.SetActive(false);
-
     }
 
     // Update is called once per frame
