@@ -6,13 +6,16 @@ using UnityEngine.UI;
 
 public class Image2 : MonoBehaviour
 {
+    public List<GameObject> vfx;
     public GameObject Shader;
     public GameObject btnFill;
     [SerializeField] private GameObject levelText;
     [SerializeField] private GameObject levelTextImage;
+
     // [SerializeField] private List<Sprite> sprites;
     [SerializeField] private GameObject parentScore;
     [SerializeField] private GameObject parentScoreImage;
+    [SerializeField] private GameObject parentScoreImage2;
     // Image
     public GameObject Image11;
     public GameObject Image12;
@@ -59,6 +62,7 @@ public class Image2 : MonoBehaviour
     void Start()
     {
         SetupFirst();
+        vfxOff();
         //cái dưới nên gọi lúc selcet image
 
         gameObject.SetActive(false);
@@ -92,9 +96,26 @@ public class Image2 : MonoBehaviour
             LoadImage(i);
         }
     }
+    void vfxOff()
+    {
+        for (int i = 0; i < vfx.Count; i++)
+        {
+            vfx[i].SetActive(false);
+        }
+    }
 
     public void LoadImage(int imageIndex)
     {
+
+        if (DataConfig.ScoreImage <= 0)
+        {
+            DataConfig.ScoreImage = 0;
+            HomeMng.instance.btnBack.transform.GetChild(1).gameObject.SetActive(true);
+        }
+        else
+        {
+            HomeMng.instance.btnBack.transform.GetChild(1).gameObject.SetActive(false);
+        }
         List<GameObject> selectedImageList = null;
         List<GameObject> selectedBgList = null;
         string key = imageIndex.ToString();
@@ -180,6 +201,7 @@ public class Image2 : MonoBehaviour
             imageLevelClone.transform.localPosition = Shader.transform.localPosition;
             imageLevelClone.SetActive(true);
             yield return new WaitForSeconds(0.2f);
+            vfxOff();
             lstImgFinal[DataConfig.ImageIndex].SetActive(true);
             yield return new WaitForSeconds(1.5f);
             if (PlayerPrefs.GetInt("lv") == 5)
@@ -267,14 +289,14 @@ public class Image2 : MonoBehaviour
         //     // Tutorial.instance.lstTutorialImages[5].SetActive(true);
         //     // Tutorial.instance.EnableRaycast(Tutorial.instance.uiElements[2]);
         // }
-        // if (Dem < 4 && DataConfig.ScoreImage == 0 && PlayerPrefs.GetInt("lv") == 5)
-        // {
-        //     Tutorial.instance.ImageBlur[4].SetActive(false);
-        //     Tutorial.instance.ImageBlur[5].SetActive(true);
-        //     Tutorial.instance.lstTutorialImages[4].SetActive(false);
-        //     Tutorial.instance.lstTutorialImages[5].SetActive(true);
-        //     Tutorial.instance.EnableRaycast(Tutorial.instance.uiElements[2]);
-        // }
+        if (DataConfig.ScoreImage == 0 && PlayerPrefs.GetInt("lv") == 5)
+        {
+            Tutorial.instance.ImageBlur[4].SetActive(false);
+            Tutorial.instance.ImageBlur[5].SetActive(true);
+            Tutorial.instance.lstTutorialImages[4].SetActive(false);
+            Tutorial.instance.lstTutorialImages[5].SetActive(true);
+            Tutorial.instance.EnableRaycast(Tutorial.instance.uiElements[2]);
+        }
     }
 
     private IEnumerator ActivateImagesWithDelay(List<GameObject> selectedImageList, List<GameObject> selectedBgList, int activeCount, string key)
@@ -285,16 +307,23 @@ public class Image2 : MonoBehaviour
             Audio.instance.fill.Play();
             selectedImageList[activeCount].SetActive(true);
             selectedBgList[activeCount].SetActive(false); // Tắt corresponding background
+            vfx[activeCount].SetActive(true);
             DataConfig.ScoreImage--;
             if (DataConfig.ScoreImage <= 0)
             {
                 DataConfig.ScoreImage = 0;
+                HomeMng.instance.btnBack.transform.GetChild(1).gameObject.SetActive(true);
+            }
+            else
+            {
+                HomeMng.instance.btnBack.transform.GetChild(1).gameObject.SetActive(false);
             }
 
             PlayerPrefs.SetInt("ScoreImage", DataConfig.ScoreImage);
             activeCount++;
             ShowScore();
             yield return new WaitForSeconds(0.01f); // Adjust delay duration here
+            // vfxOff();
         }
         // for (int i = activeCount; i < selectedImageList.Count && DataConfig.ScoreImage > 0; i++)
         // {
@@ -421,6 +450,7 @@ public class Image2 : MonoBehaviour
             // StartCoroutine(ShowShader());
             lstImgFinal[DataConfig.ImageIndex].SetActive(true);
             btnFill.SetActive(false);
+            HomeMng.instance.btnBack.transform.GetChild(1).gameObject.SetActive(false);
 
         }
         else
@@ -435,6 +465,7 @@ public class Image2 : MonoBehaviour
     {
         // SetLevelText(parentScore);
         SetLevelTextEnd(parentScoreImage);
+        SetLevelTextEnd(parentScoreImage2);
     }
     public void SetLevelTextEnd(GameObject parentLevelText)
     {
@@ -453,7 +484,7 @@ public class Image2 : MonoBehaviour
         }
 
         // Đặt khoảng cách giữa các chữ số
-        float spacing = 108f; // điều chỉnh khoảng cách giữa các chữ số tùy thuộc vào yêu cầu của bạn
+        float spacing = 115f; // điều chỉnh khoảng cách giữa các chữ số tùy thuộc vào yêu cầu của bạn
 
         // Duyệt qua từng chữ số trong chuỗi levelString
         for (int i = 0; i < levelString.Length; i++)
