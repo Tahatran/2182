@@ -95,6 +95,7 @@ public class GameCtr : MonoBehaviour
     {
         //tools tắt
         GameAds.Get.ShowBanner();
+        GameAds.Get.ShowInterstitialAd();
         // if (checkads == true)
         // {
         //     GameAds.Get.ShowInterstitialAd();
@@ -639,7 +640,7 @@ public class GameCtr : MonoBehaviour
                                                  LosePanel.SetActive(true);
                                                  SetLevelTextEnd(parentLevelTextLose);
                                                  // Dontdestroyonload.instance.ads();
-                                                 GameAds.Get.ShowInterstitialAd();
+                                                 //  GameAds.Get.ShowInterstitialAd();
                                              });
                                       });
                              //  LevelPannel.SetActive(false);
@@ -739,7 +740,7 @@ public class GameCtr : MonoBehaviour
                                             StartCoroutine(ToggleGameObjectsContinuously(0.05f));
                                             // NextLV();
                                             // Dontdestroyonload.instance.ads();
-                                            GameAds.Get.ShowInterstitialAd();
+                                            // GameAds.Get.ShowInterstitialAd();
 
                                             StartCoroutine(DelayedNextLevel(1f));
                                         }
@@ -773,7 +774,7 @@ public class GameCtr : MonoBehaviour
         // autonextlvwhenwin();
         Winpanel.SetActive(false);
         Winpanel2.SetActive(true);
-        Winpanel2.transform.GetChild(2).DOScale(0.5f, 1f).SetEase(Ease.OutQuad)
+        Winpanel2.transform.GetChild(2).DOScale(0.5f, 0.8f).SetEase(Ease.OutQuad)
         .OnComplete(() =>
                   {
                       DOVirtual.DelayedCall(0.2f, () =>
