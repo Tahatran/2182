@@ -149,6 +149,14 @@ public class Image2 : MonoBehaviour
         if (btnFill.activeSelf)
         {
             btnFill.SetActive(false);
+            if (PlayerPrefs.GetInt("lv") == 5)
+            {
+                Tutorial.instance.ImageBlur[4].SetActive(false);
+                // Tutorial.instance.ImageBlur[5].SetActive(true);
+                Tutorial.instance.lstTutorialImages[4].SetActive(false);
+                // Tutorial.instance.lstTutorialImages[5].SetActive(true);
+                // Tutorial.instance.EnableRaycast(Tutorial.instance.uiElements[2]);
+            }
             // var imageLevelClone = Instantiate(Shader, Vector2.zero, Quaternion.identity, gameObject.transform);
             // imageLevelClone.transform.localPosition = Shader.transform.localPosition;
             // imageLevelClone.SetActive(true);
@@ -172,11 +180,11 @@ public class Image2 : MonoBehaviour
             yield return new WaitForSeconds(0.2f);
             lstImgFinal[DataConfig.ImageIndex].SetActive(true);
             yield return new WaitForSeconds(1.5f);
-            if (Dem == 4 && PlayerPrefs.GetInt("lv") == 5 && DataConfig.ScoreImage == 0)
+            if (PlayerPrefs.GetInt("lv") == 5)
             {
-                Tutorial.instance.ImageBlur[4].SetActive(false);
+                // Tutorial.instance.ImageBlur[4].SetActive(false);
                 Tutorial.instance.ImageBlur[5].SetActive(true);
-                Tutorial.instance.lstTutorialImages[4].SetActive(false);
+                // Tutorial.instance.lstTutorialImages[4].SetActive(false);
                 Tutorial.instance.lstTutorialImages[5].SetActive(true);
                 Tutorial.instance.EnableRaycast(Tutorial.instance.uiElements[2]);
             }
@@ -255,7 +263,7 @@ public class Image2 : MonoBehaviour
             // Tutorial.instance.ImageBlur[5].SetActive(true);
             Tutorial.instance.lstTutorialImages[4].SetActive(false);
             // Tutorial.instance.lstTutorialImages[5].SetActive(true);
-            Tutorial.instance.EnableRaycast(Tutorial.instance.uiElements[2]);
+            // Tutorial.instance.EnableRaycast(Tutorial.instance.uiElements[2]);
         }
         if (Dem < 4 && DataConfig.ScoreImage == 0 && PlayerPrefs.GetInt("lv") == 5)
         {
