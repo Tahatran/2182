@@ -66,15 +66,46 @@ public class Image2 : MonoBehaviour
         SetupFirst();
         vfxOff();
         //cái dưới nên gọi lúc selcet image
-        playanimMenu();
+        // playanimMenu();
+        playanimMenu(menuObj, 1f, 0.06f, 0.1f);
         gameObject.SetActive(false);
     }
-    void playanimMenu()
+    // void playanimMenu()
+    // {
+    //     foreach (Transform child in menuObj.transform)
+    //     {
+    //         // Tween vị trí của đối tượng con lên xuống
+    //         child.DOMoveY(child.position.y + 0.06f, 1f).SetLoops(-1, LoopType.Yoyo).SetEase(Ease.InOutSine);
+    //     }
+    // }
+    void playanimMenu(GameObject menuObj, float tweenDuration, float tweenHeight, float delayBetweenTweens)
     {
-        foreach (Transform child in menuObj.transform)
+        Transform[] children = new Transform[menuObj.transform.childCount];
+        for (int i = 0; i < menuObj.transform.childCount; i++)
         {
-            // Tween vị trí của đối tượng con lên xuống
-            child.DOMoveY(child.position.y + 0.06f, 1f).SetLoops(-1, LoopType.Yoyo).SetEase(Ease.InOutSine);
+            children[i] = menuObj.transform.GetChild(i);
+        }
+
+        // Tween sóng từ trái sang phải
+        for (int i = 0; i < children.Length; i++)
+        {
+            Transform child = children[i];
+            float delay = i * delayBetweenTweens;
+            child.DOMoveY(child.position.y + tweenHeight, tweenDuration)
+                .SetDelay(delay)
+                .SetLoops(-1, LoopType.Yoyo)
+                .SetEase(Ease.InOutSine);
+        }
+
+        // Tween sóng từ phải sang trái
+        for (int i = children.Length - 1; i >= 0; i--)
+        {
+            Transform child = children[i];
+            float delay = (children.Length - 1 - i) * delayBetweenTweens;
+            child.DOMoveY(child.position.y + tweenHeight, tweenDuration)
+                .SetDelay(delay)
+                .SetLoops(-1, LoopType.Yoyo)
+                .SetEase(Ease.InOutSine);
         }
     }
 
