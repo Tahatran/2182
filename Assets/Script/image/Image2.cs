@@ -3,9 +3,11 @@ using System.Collections.Generic;
 // using Microsoft.Unity.VisualStudio.Editor;
 using UnityEngine;
 using UnityEngine.UI;
+using DG.Tweening;
 
 public class Image2 : MonoBehaviour
 {
+    public GameObject menuObj;
     public List<GameObject> vfx;
     public GameObject Shader;
     public GameObject btnFill;
@@ -64,8 +66,16 @@ public class Image2 : MonoBehaviour
         SetupFirst();
         vfxOff();
         //cái dưới nên gọi lúc selcet image
-
+        playanimMenu();
         gameObject.SetActive(false);
+    }
+    void playanimMenu()
+    {
+        foreach (Transform child in menuObj.transform)
+        {
+            // Tween vị trí của đối tượng con lên xuống
+            child.DOMoveY(child.position.y + 0.06f, 1f).SetLoops(-1, LoopType.Yoyo).SetEase(Ease.InOutSine);
+        }
     }
 
     void SetupFirst()
