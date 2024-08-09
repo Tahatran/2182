@@ -67,7 +67,7 @@ public class Image2 : MonoBehaviour
         vfxOff();
         //cái dưới nên gọi lúc selcet image
         // playanimMenu();
-        playanimMenu(menuObj, 1f, 0.06f, 0.1f);
+        playanimMenu(menuObj, 0.4f, 0.06f, 0.1f);
         gameObject.SetActive(false);
     }
     // void playanimMenu()

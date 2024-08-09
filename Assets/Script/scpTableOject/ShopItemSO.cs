@@ -26,7 +26,7 @@ public class ItemData
     public bool IsBuy = false;
     public Sprite ItemImg;
     public GameObject ItemPrefab;
-    // public Sprite PreviewImg;
+    public Sprite PreviewImg;
     // public int Price;
 }
 

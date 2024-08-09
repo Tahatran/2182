@@ -16,6 +16,8 @@ public class ShopMng : MonoBehaviour
     public GameObject ItemPrefab;
     public GameObject btnAds;
     public GameObject btnGet;
+    public List<Sprite> lstDemo;
+    public GameObject demoImage;
     public List<GameObject> lstSkin;
     public List<int> lstSave;
     public int id;
@@ -115,6 +117,7 @@ public class ShopMng : MonoBehaviour
 
             if (isUnlocked)
             {
+
                 if (PlayerPrefs.GetInt("lv") == 2)
                 {
                     lstSkin[0].GetComponent<Button>().enabled = false;
@@ -126,6 +129,7 @@ public class ShopMng : MonoBehaviour
                 {
                     DeactivateAllItems();
                     id = item.Id; // Set the ID for purchasing
+                    demoImage.GetComponent<Image>().sprite = item.PreviewImg;
                     btnGet.SetActive(true);
                     btnAds.SetActive(false);
                     Item.transform.GetChild(2).gameObject.SetActive(true); // Activate some UI element
