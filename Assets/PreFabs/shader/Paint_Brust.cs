@@ -6,7 +6,7 @@ public class Paint_Brust : MonoBehaviour
 {
     public float radius = 5.0f;
     public float speed = 1.0f;
-    private float angle = 0.0f;
+    // private float angle = 0.0f;
     private Vector3 center;
     public GameObject burst;
     public GameObject trail;

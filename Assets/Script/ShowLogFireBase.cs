@@ -22,20 +22,20 @@ public class ShowLogFireBase : MonoBehaviour
     float timeStart = 0;
     float timeStartLevel = 0;
     float total_playtime = 0;
-    float time_win = 0;
+    public float time_win = 0;
     public int numberTrise = 0;
     public int totalImage = 0;
-    public int totalSkin = 2;
+    public int totalSkin = 0;
 
     private void Start()
     {
         ResetValue();
         numberTrise += (PlayerPrefs.GetInt("numbertries") > 0 ? PlayerPrefs.GetInt("numbertries") : 0);
-        totalImage = (PlayerPrefs.GetInt("totalImage") > 0 ? PlayerPrefs.GetInt("totalImage") : 0);
-        totalSkin = (PlayerPrefs.GetInt("totalSkin") > 0 ? PlayerPrefs.GetInt("totalSkin") : 0);
+        totalImage += (PlayerPrefs.GetInt("totalImage") > 0 ? PlayerPrefs.GetInt("totalImage") : 0);
+        totalSkin += (PlayerPrefs.GetInt("totalSkin") > 0 ? PlayerPrefs.GetInt("totalSkin") : 2);
         timeStartLevel -= (PlayerPrefs.GetFloat("timeplaylevel") > 0 ? PlayerPrefs.GetFloat("timeplaylevel") : 0);
         total_playtime += (PlayerPrefs.GetFloat("totalplaytime") > 0 ? PlayerPrefs.GetFloat("totalplaytime") : 0);
-        Debug.Log("Stat---------------: " + total_playtime);
+        // Debug.Log("Stat---------------: " + total_playtime);
         time_win = Time.time;
         timeStart = Time.time;
     }
@@ -56,21 +56,28 @@ public class ShowLogFireBase : MonoBehaviour
     }
     void SaveDataPlayLevel()
     {
+        // PlayerPrefs.SetFloat("totalplaytime", totalPlayTime());
         PlayerPrefs.SetFloat("totalplaytime", totalPlayTime());
         PlayerPrefs.SetFloat("timeplaylevel", GetTimePlay());
         PlayerPrefs.SetInt("numbertries", GetNumberTriesLevel());
     }
     void ShowLogPauseQuit()
     {
-        Debug.Log("set" + totalPlayTime().ToString());
         PlayerPrefs.SetFloat("totalplaytime", totalPlayTime());
-        Debug.Log("Get" + PlayerPrefs.GetFloat("totalplaytime"));
-        GameFirebase.SendEvent("pause_game", "id_level", PlayerPrefs.GetInt("lv").ToString(), "time_play", Mathf.Round(GetTimePlay()).ToString(), "number_tries", GetNumberTriesLevel().ToString(),
+        GameFirebase.SendEvent("pause_game", "id_level", PlayerPrefs.GetInt("lv").ToString(),
+         "time_play", Mathf.Round(GetTimePlay()).ToString(),
+          "number_tries", GetNumberTriesLevel().ToString(),
         "totalplaytime", Mathf.Round(totalPlayTime()).ToString(),
         "total_image", totalImage.ToString(),
         "total_skin", totalSkin.ToString()
         );
-        // Debug.Log("alltime" + Mathf.Round(totalPlayTime()).ToString());
+        // Debug.LogError("------------------------------lv=: " + PlayerPrefs.GetInt("lv").ToString());
+        // Debug.LogError("------------------------------number tries:  " + GetNumberTriesLevel().ToString());
+        // Debug.LogError("------------------------------timepplay: " + Mathf.Round(GetTimePlay()).ToString());
+        // Debug.LogError("------------------------------total play time: " + Mathf.Round(totalPlayTime()).ToString());
+        // Debug.LogError("------------------------------totalSkin" + totalSkin.ToString());
+        // Debug.LogError("------------------------------totalimage" + totalImage.ToString());
+
     }
     void StartTimingLevel()
     {
@@ -113,13 +120,16 @@ public class ShowLogFireBase : MonoBehaviour
     public void ShowCompleteLevel()
     {
         GameFirebase.SendEvent("complete_level", "id_level", PlayerPrefs.GetInt("lv").ToString(),
-        "time_play", Mathf.Round(GetTimePlay()).ToString(), "number_tries", GetNumberTriesLevel().ToString()
+        "time_play", Mathf.Round(GetTimePlay()).ToString(),
+         "number_tries", GetNumberTriesLevel().ToString()
         , "total_playtime", Mathf.Round(totalPlayTime()).ToString()
         , "time_win", Mathf.Round(Time.time - time_win).ToString()
         );
-        // Debug.Log("timewin" + Mathf.Round(Time.time - time_win).ToString());
-        // Debug.Log("totalplay" + Mathf.Round(totalPlayTime()).ToString());
-        // Debug.Log("win" + GetNumberTriesLevel());
+        // Debug.LogError("------------------------------lv=: " + PlayerPrefs.GetInt("lv").ToString());
+        // Debug.LogError("------------------------------number tries:  " + GetNumberTriesLevel().ToString());
+        // Debug.LogError("------------------------------timepplay: " + Mathf.Round(GetTimePlay()).ToString());
+        // Debug.LogError("------------------------------total play time: " + Mathf.Round(totalPlayTime()).ToString());
+        // Debug.LogError("------------------------------timnewin: " + Mathf.Round(Time.time - time_win).ToString());
         ResetValue();
 
     }
@@ -127,25 +137,26 @@ public class ShowLogFireBase : MonoBehaviour
     {
         GameFirebase.SendEvent("start_level", "id_level", PlayerPrefs.GetInt("lv").ToString(),
                                 "total_playtime", Mathf.Round(totalPlayTime()).ToString());
+        // Debug.LogError("-------------------------------lv:" + PlayerPrefs.GetInt("lv").ToString());
+        // Debug.LogError("------------------------------totalplaytime" + Mathf.Round(totalPlayTime()).ToString());
 
     }
 
     public void LogBuildDone()
     {
-        totalImage += 1;
-        PlayerPrefs.SetFloat("totalImage", totalImage);
+        PlayerPrefs.SetInt("totalImage", totalImage += 1);
         GameFirebase.SendEvent("image_done", "id_image", DataConfig.ImageIndex.ToString(),
                                 "total_image", totalImage.ToString());
-        // Debug.Log("builddone" + DataConfig.ImageIndex.ToString());
-        // Debug.Log("totalimage" + totalImage.ToString());
+        // Debug.LogError("------------------------------builddone id=: " + DataConfig.ImageIndex.ToString());
+        // Debug.LogError("------------------------------totalimage" + totalImage.ToString());
     }
     public void LogChangeSkin(int id)
     {
-        totalSkin += 1;
-        PlayerPrefs.SetFloat("totalSkin", totalSkin);
+        PlayerPrefs.SetInt("totalSkin", totalSkin += 1);
         GameFirebase.SendEvent("unlock_skin", "id_skin", id.ToString(),
                                 "total_skin", totalSkin.ToString());
-        // Debug.Log("Slkin" + id.ToString());
+        // Debug.LogError("------------------------------Skin id=: " + id.ToString());
+        // Debug.LogError("------------------------------totalSkin" + totalSkin.ToString());
     }
 
 }

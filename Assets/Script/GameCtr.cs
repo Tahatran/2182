@@ -122,7 +122,9 @@ public class GameCtr : MonoBehaviour
         //tools thì tắt
         loadgame();
 
-        GameFirebase.SendEvent("start_level", "id_level", PlayerPrefs.GetInt("lv").ToString());
+        // GameFirebase.SendEvent("start_level", "id_level", PlayerPrefs.GetInt("lv").ToString());
+        ShowLogFireBase.Instance.ShowStartLevel();
+        ShowLogFireBase.Instance.time_win = Time.time;
         // Debug.Log("log-event-start_level----id_level: " + PlayerPrefs.GetInt("lv"));
         // StartCoroutine(DelayedGenerateGrid());
     }
