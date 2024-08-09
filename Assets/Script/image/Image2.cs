@@ -225,8 +225,9 @@ public class Image2 : MonoBehaviour
             // imageLevelClone.transform.localPosition = Shader.transform.localPosition;
             // imageLevelClone.SetActive(true);
             lstEnimFinal[DataConfig.ImageIndex].SetActive(true);
-            int CheckTutorialImage = 1;
-            PlayerPrefs.SetInt("CheckTutorialImage", CheckTutorialImage);
+            ShowLogFireBase.Instance.LogBuildDone();
+            // int CheckTutorialImage = 1;
+            // PlayerPrefs.SetInt("CheckTutorialImage", CheckTutorialImage);
             yield return new WaitForSeconds(2.8f); // Change the delay time as needed
                                                    // if (lstEnimFinal[DataConfig.ImageIndex].activeSelf)
                                                    // {
@@ -330,14 +331,15 @@ public class Image2 : MonoBehaviour
         //     // Tutorial.instance.lstTutorialImages[5].SetActive(true);
         //     // Tutorial.instance.EnableRaycast(Tutorial.instance.uiElements[2]);
         // }
-        if (DataConfig.ScoreImage == 0 && PlayerPrefs.GetInt("lv") == 5)
-        {
-            Tutorial.instance.ImageBlur[4].SetActive(false);
-            Tutorial.instance.ImageBlur[5].SetActive(true);
-            Tutorial.instance.lstTutorialImages[4].SetActive(false);
-            Tutorial.instance.lstTutorialImages[5].SetActive(true);
-            Tutorial.instance.EnableRaycast(Tutorial.instance.uiElements[2]);
-        }
+        //lv5 voi mo nen tat di, khong dung toi, neu lam thi dat dieu kien scoreimage =0, activeACount <4 la dung.
+        // if (DataConfig.ScoreImage == 0 && activeCount < 4)
+        // {
+        //     Tutorial.instance.ImageBlur[4].SetActive(false);
+        //     Tutorial.instance.ImageBlur[5].SetActive(true);
+        //     Tutorial.instance.lstTutorialImages[4].SetActive(false);
+        //     Tutorial.instance.lstTutorialImages[5].SetActive(true);
+        //     Tutorial.instance.EnableRaycast(Tutorial.instance.uiElements[2]);
+        // }
     }
 
     private IEnumerator ActivateImagesWithDelay(List<GameObject> selectedImageList, List<GameObject> selectedBgList, int activeCount, string key)

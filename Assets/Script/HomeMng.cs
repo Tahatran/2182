@@ -22,6 +22,7 @@ public class HomeMng : MonoBehaviour
     public GameObject SkinSelect;
     public GameObject Image;
     public GameObject ImgageSelect;
+    public GameObject ImgageSelect2;
     public GameObject btnBack;
 
     public static HomeMng instance;
@@ -77,6 +78,12 @@ public class HomeMng : MonoBehaviour
         ImageGameObject.SetActive(true);
         gameObject.SetActive(true);
         Audio.instance.AudioLoad();
+        if (PlayerPrefs.GetInt("lv") < 5)
+        {
+            // ImgageSelect.SetActive(true);
+            // ImgageSelect.transform.GetChild(0).gameObject.SetActive(true);
+            ImgageSelect2.SetActive(true);
+        }
         if (Tutorial.instance.lstTutorialSkins[0].activeSelf)
         {
             Tutorial.instance.SKinBlur[0].SetActive(false);

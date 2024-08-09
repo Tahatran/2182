@@ -69,6 +69,7 @@ public class ShopMng : MonoBehaviour
                 // DataConfig.EffectIndex = idSelecSkinLock;
                 id = idSelecSkinLock;
                 btnAds.SetActive(false);
+                ShowLogFireBase.Instance.LogChangeSkin(id);
             }
             else
             {
@@ -153,17 +154,21 @@ public class ShopMng : MonoBehaviour
                       DeactivateAllItems();
                       idSelecSkinLock = item.Id;
 
-                      // Handle non-buyable items
-                      if (idSelecSkinLock > 0 && !SkinItemData.Items[idSelecSkinLock - 1].IsBuy)
-                      {
-                          btnAds.SetActive(false);
-                          btnGet.SetActive(false);
-                      }
-                      else
-                      {
-                          btnGet.SetActive(true);
-                          btnAds.SetActive(true);
-                      }
+                      // Handle non-buyable items, bat len de select lan luot skin
+                      //   if (idSelecSkinLock > 0 && !SkinItemData.Items[idSelecSkinLock - 1].IsBuy)
+                      //   {
+                      //       btnAds.SetActive(false);
+                      //       btnGet.SetActive(false);
+                      //   }
+                      //   else
+                      //   {
+                      //       btnGet.SetActive(true);
+                      //       btnAds.SetActive(true);
+                      //   }
+
+                      btnGet.SetActive(true);
+                      btnAds.SetActive(true);
+
                   });
                 }
             }
