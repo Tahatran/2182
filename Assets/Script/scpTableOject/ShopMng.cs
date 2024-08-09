@@ -44,6 +44,19 @@ public class ShopMng : MonoBehaviour
         DataConfig.EffectIndex = id;
         PlayerPrefs.SetInt("Skin", DataConfig.EffectIndex);
         btnGet.SetActive(false);
+        demoImage.GetComponent<Image>().sprite = SkinItemData.Items[id].PreviewImg;
+        if (id == 0)
+        {
+            demoImage.GetComponent<Image>().SetNativeSize();
+            demoImage.GetComponent<RectTransform>().localScale = new Vector3(1.4f, 1.4f, 1.4f);
+            demoImage.GetComponent<RectTransform>().eulerAngles = new Vector3(0, 0, 90f);
+        }
+        else
+        {
+            demoImage.GetComponent<Image>().SetNativeSize();
+            demoImage.GetComponent<RectTransform>().localScale = new Vector3(0.5f, 0.5f, 0.5f);
+            demoImage.GetComponent<RectTransform>().eulerAngles = new Vector3(0, 0, 0f);
+        }
         if (Tutorial.instance.lstTutorialSkins[3].activeSelf)
         {
             Tutorial.instance.SKinBlur[3].SetActive(false);
@@ -118,7 +131,7 @@ public class ShopMng : MonoBehaviour
             if (isUnlocked)
             {
 
-                if (PlayerPrefs.GetInt("lv") == 2)
+                if (PlayerPrefs.GetInt("lv") == 2 && PlayerPrefs.GetInt("CheckTutorialSkin") == 0)
                 {
                     lstSkin[0].GetComponent<Button>().enabled = false;
                 }
@@ -129,7 +142,6 @@ public class ShopMng : MonoBehaviour
                 {
                     DeactivateAllItems();
                     id = item.Id; // Set the ID for purchasing
-                    demoImage.GetComponent<Image>().sprite = item.PreviewImg;
                     btnGet.SetActive(true);
                     btnAds.SetActive(false);
                     Item.transform.GetChild(2).gameObject.SetActive(true); // Activate some UI element

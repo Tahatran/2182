@@ -344,9 +344,9 @@ public class GameCtr : MonoBehaviour
         })
         .OnComplete(() =>
                   {
-                      UI.transform.DOMoveY(-0.1f, 0.3f).SetEase(Ease.OutQuad).OnUpdate(() =>
+                      UI.transform.DOMoveY(-0.4f, 0.3f).SetEase(Ease.OutQuad).OnUpdate(() =>
                         {
-                            SoundandReplay.GetComponent<RectTransform>().DOAnchorPosY(-115, 0.3f).SetEase(Ease.OutQuad);
+                            SoundandReplay.GetComponent<RectTransform>().DOAnchorPosY(-185, 0.3f).SetEase(Ease.OutQuad);
                         })
                           .OnComplete(() =>
                                 {
