@@ -41,18 +41,19 @@ public class FpsScreen : MonoBehaviour
         else
         {
 #if UNITY_IOS
-                if(UnityEngine.iOS.Device.lowPowerModeEnabled)
-                {
-                    Application.targetFrameRate = (int)batterySaveFrameRate;
-                }
-                else
-                {
-                    Application.targetFrameRate = (int)defaultFrameRate;
-                }    
+                        if(UnityEngine.iOS.Device.lowPowerModeEnabled)
+                        {
+                            Application.targetFrameRate = (int)batterySaveFrameRate;
+                        }
+                        else
+                        {
+                            Application.targetFrameRate = (int)defaultFrameRate;
+                        }    
 #else
             Application.targetFrameRate = (int)defaultFrameRate;
 #endif
         }
+        // Application.targetFrameRate = 60;
     }
 
     private enum AllowedFrameRates

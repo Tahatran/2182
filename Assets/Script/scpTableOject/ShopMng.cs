@@ -44,6 +44,8 @@ public class ShopMng : MonoBehaviour
         DataConfig.EffectIndex = id;
         PlayerPrefs.SetInt("Skin", DataConfig.EffectIndex);
         btnGet.SetActive(false);
+        DeactivateAllItems2();
+        lstSkin[DataConfig.EffectIndex].transform.GetChild(3).gameObject.SetActive(true);
         demoImage.GetComponent<Image>().sprite = SkinItemData.Items[id].PreviewImg;
         if (id == 0)
         {
@@ -135,11 +137,24 @@ public class ShopMng : MonoBehaviour
                 {
                     lstSkin[0].GetComponent<Button>().enabled = false;
                 }
+
+
                 item.IsBuy = true; // Ensure item state is updated
                 Item.GetComponent<Image>().sprite = item.ItemImg;
 
                 Item.GetComponent<Button>().onClick.AddListener(() =>
                 {
+                    //tat khi ma select lai 
+                    if (lstSkin[DataConfig.EffectIndex].transform.GetChild(3).gameObject.activeSelf)
+                    {
+                        lstSkin[DataConfig.EffectIndex].transform.GetChild(3).gameObject.SetActive(false);
+                    }
+                    //neu select cai khac thi bat cai duoc select len
+                    if (Item != lstSkin[DataConfig.EffectIndex])
+                    {
+                        lstSkin[DataConfig.EffectIndex].transform.GetChild(3).gameObject.SetActive(true);
+                    }
+
                     DeactivateAllItems();
                     id = item.Id; // Set the ID for purchasing
                     btnGet.SetActive(true);
@@ -167,9 +182,10 @@ public class ShopMng : MonoBehaviour
                 {
                     Item.GetComponent<Button>().onClick.AddListener(() =>
                   {
+
                       DeactivateAllItems();
                       idSelecSkinLock = item.Id;
-
+                      Item.transform.GetChild(2).gameObject.SetActive(true);
                       // Handle non-buyable items, bat len de select lan luot skin
                       //   if (idSelecSkinLock > 0 && !SkinItemData.Items[idSelecSkinLock - 1].IsBuy)
                       //   {
@@ -190,6 +206,7 @@ public class ShopMng : MonoBehaviour
             }
         }
         lstSkin[DataConfig.EffectIndex].transform.GetChild(2).gameObject.SetActive(true);
+        lstSkin[DataConfig.EffectIndex].transform.GetChild(3).gameObject.SetActive(true);
         id = DataConfig.EffectIndex;
         ShopContent.SetActive(true); // Ensure ShopContent is active after loading
     }
@@ -199,6 +216,15 @@ public class ShopMng : MonoBehaviour
         foreach (GameObject skin in lstSkin)
         {
             skin.transform.GetChild(2).gameObject.SetActive(false);
+            // skin.transform.GetChild(3).gameObject.SetActive(false);
+        }
+    }
+    private void DeactivateAllItems2()
+    {
+        foreach (GameObject skin in lstSkin)
+        {
+            // skin.transform.GetChild(2).gameObject.SetActive(false);
+            skin.transform.GetChild(3).gameObject.SetActive(false);
         }
     }
 
