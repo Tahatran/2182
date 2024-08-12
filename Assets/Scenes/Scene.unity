@@ -4435,7 +4435,7 @@ MonoBehaviour:
   pnlTutorial: {fileID: 0}
   ShopContent: {fileID: 792778591}
   ShopContent2: {fileID: 870906499}
-  ItemPrefab: {fileID: 4105357760606371290, guid: b00899c6bb3390449b2faf555a454768, type: 3}
+  ItemPrefab: {fileID: 4105357760606371290, guid: 25ad42f9f642c184cabb8cc7b76f0c6d, type: 3}
   btnAds: {fileID: 140861216}
   btnGet: {fileID: 532540411}
   lstDemo: []
