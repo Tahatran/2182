@@ -12,6 +12,7 @@ public class Image1308 : MonoBehaviour
     // khoi tao list cac hinh 
     public List<GameObject> lstDown;
     public List<Sprite> lstSprites;
+    public List<GameObject> lstimgbg;
     public GameObject bulongObject;
     public GameObject menuPanel;
     public int idSelect = 0;
@@ -80,9 +81,55 @@ public class Image1308 : MonoBehaviour
 
         LoadSaveImage();
         gameObject.SetActive(true);
+        for (int i = 0; i < lstimgbg.Count; i++)
+        {
+            lstimgbg[i].gameObject.SetActive(false);
+        }
+        lstimgbg[DataConfig.ImageIndex].SetActive(true);
+        for (int i = 0; i < lstDown.Count; i++)
+        {
+            lstDown[i].gameObject.SetActive(false);
+        }
         lstDown[DataConfig.ImageIndex].SetActive(true);
+
         SetScore(parentScoreImage);
     }
+
+
+    //load owr imagemng
+    public int ImageShowPanel(int i)
+    {
+        int totalCheckfill = 0;
+        int totalChildren = 0;
+
+        // for (int i = 0; i < lstDown.Count; i++)
+        // {
+        for (int j = 0; j < lstDown[i].transform.childCount; j++)
+        {
+            var screw = lstDown[i].transform.GetChild(j).GetComponent<setScrew>();
+            totalChildren++;
+
+            if (screw.Checkfill)
+            {
+                totalCheckfill++;
+            }
+        }
+        // }
+
+        if (totalCheckfill == 0)
+        {
+            return 0; // No `Checkfill` set to true
+        }
+        else if (totalCheckfill == totalChildren)
+        {
+            return 1; // All `Checkfill` are true
+        }
+        else
+        {
+            return 2; // Some `Checkfill` are true, but not all
+        }
+    }
+
 
     public void SaveImage()
     {
@@ -138,6 +185,10 @@ public class Image1308 : MonoBehaviour
                             if (screw.Checkfill)
                             {
                                 screw.gameObject.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sprite = lstSprites[screw.idSprite];
+                                screw.gameObject.gameObject.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().color = new Color(255, 255, 255, 255);
+                                // Color semiTransparentRed = new Color(screw.gameObject.gameObject.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().color.r, screw.gameObject.gameObject.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().color.g, screw.gameObject.gameObject.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().color.b, 255);
+                                // spriteColor = semiTransparentRed; // 1f is the maximum value for alpha in Unity's Color, equivalent to 255
+
                                 // screw.gameObject.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().color = Color.red; // Change to your desired color
                             }
                         }

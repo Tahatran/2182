@@ -112,12 +112,13 @@ public class HomeMng : MonoBehaviour
         // ImageGameObject1308.SetActive(true);
         gameObject.SetActive(true);
         Audio.instance.AudioLoad();
-        if (PlayerPrefs.GetInt("lv") < 5)
-        {
-            // ImgageSelect.SetActive(true);
-            // ImgageSelect.transform.GetChild(0).gameObject.SetActive(true);
-            ImgageSelect2.SetActive(true);
-        }
+        //1308
+        // if (PlayerPrefs.GetInt("lv") < 5)
+        // {
+        //     // ImgageSelect.SetActive(true);
+        //     // ImgageSelect.transform.GetChild(0).gameObject.SetActive(true);
+        //     ImgageSelect2.SetActive(true);
+        // }
         if (Tutorial.instance.lstTutorialSkins[0].activeSelf)
         {
             Tutorial.instance.SKinBlur[0].SetActive(false);
@@ -273,23 +274,24 @@ public class HomeMng : MonoBehaviour
 
     public void btnImage()
     {
-        if (PlayerPrefs.GetInt("lv") >= 5)
+        // if (PlayerPrefs.GetInt("lv") >= 5)
+        // {
+        Image1308.instance.LoadImage();
+        ImageMng.GetComponent<ImageMng>().LoadShop();
+        Audio.instance.sfxClick.Play();
+        if (Tutorial.instance.lstTutorialImages[1].activeSelf)
         {
-            ImageMng.GetComponent<ImageMng>().LoadShop();
-            Audio.instance.sfxClick.Play();
-            if (Tutorial.instance.lstTutorialImages[1].activeSelf)
-            {
-                Tutorial.instance.lstTutorialImages[1].SetActive(false);
-                Tutorial.instance.lstTutorialImages[2].SetActive(true);
-                Tutorial.instance.ImageBlur[1].SetActive(false);
-                Tutorial.instance.ImageBlur[2].SetActive(true);
-            }
-            ImgageSelect.SetActive(true);
-            Skin.SetActive(false);
-            Image.SetActive(true);
-            HomeSelect.SetActive(false);
-            SkinSelect.SetActive(false);
+            Tutorial.instance.lstTutorialImages[1].SetActive(false);
+            Tutorial.instance.lstTutorialImages[2].SetActive(true);
+            Tutorial.instance.ImageBlur[1].SetActive(false);
+            Tutorial.instance.ImageBlur[2].SetActive(true);
         }
+        ImgageSelect.SetActive(true);
+        Skin.SetActive(false);
+        Image.SetActive(true);
+        HomeSelect.SetActive(false);
+        SkinSelect.SetActive(false);
+        // }
     }
 
     // Update is called once per frame

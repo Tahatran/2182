@@ -102,22 +102,39 @@ public class ImageMng : MonoBehaviour
         {
             ItemData item = ImageItemData.Items[i];
             GameObject Item = Instantiate(ItemPrefab);
-            // Lấy giá trị đã lưu trong PlayerPrefs
-            int value = PlayerPrefs.GetInt((i).ToString());
 
-            // Kiểm tra và gán hình ảnh dựa trên giá trị
-            if (value == 0)
+            //1308 nen se dong, code cu, dung thi bat len
+            // Lấy giá trị đã lưu trong PlayerPrefs
+            // int value = PlayerPrefs.GetInt((i).ToString());
+            // // Kiểm tra và gán hình ảnh dựa trên giá trị
+            // if (value == 0)
+            // {
+            //     Item.GetComponent<Image>().sprite = lstImage2[0];
+            // }
+            // else if (value == 4)
+            // {
+            //     Item.GetComponent<Image>().sprite = item.ItemImg;
+            // }
+            // else if (value >= 1 && value < 4)
+            // {
+            //     Item.GetComponent<Image>().sprite = lstImage2[1];
+            // }
+
+            //1308
+            var a = Image1308.instance.ImageShowPanel(i);
+            if (a == 0)
             {
                 Item.GetComponent<Image>().sprite = lstImage2[0];
             }
-            else if (value == 4)
+            else if (a == 1)
             {
                 Item.GetComponent<Image>().sprite = item.ItemImg;
             }
-            else if (value >= 1 && value < 4)
+            else if (a == 2)
             {
                 Item.GetComponent<Image>().sprite = lstImage2[1];
             }
+
             lstImage.Add(Item);
             if (i < itemsPerPage)
             {
