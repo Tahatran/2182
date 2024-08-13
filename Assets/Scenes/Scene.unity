@@ -10556,6 +10556,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 29127064aa4253c4eb237c47238218b4, type: 3}
+--- !u!1 &728106201 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1721916082773330434, guid: b262d210e1e2af94786bc5e3f2a3c799, type: 3}
+  m_PrefabInstance: {fileID: 1530212760}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &737136796
 GameObject:
   m_ObjectHideFlags: 0
@@ -11073,6 +11078,11 @@ Transform:
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3115041276531477861, guid: 8243a821f38bf224ab5db66fbadff662, type: 3}
   m_PrefabInstance: {fileID: 779292242}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &784941622 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1721916082773330434, guid: b262d210e1e2af94786bc5e3f2a3c799, type: 3}
+  m_PrefabInstance: {fileID: 113396785}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &792778591
 GameObject:
@@ -11792,6 +11802,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 830887919}
   m_CullTransparentMesh: 1
+--- !u!1 &839739604 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1721916082773330434, guid: b262d210e1e2af94786bc5e3f2a3c799, type: 3}
+  m_PrefabInstance: {fileID: 824206387}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &841443186
 GameObject:
   m_ObjectHideFlags: 0
@@ -23202,6 +23217,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5877940475838911780, guid: c76c7631f056931468a716dc7c6467e1, type: 3}
   m_PrefabInstance: {fileID: 1675491090}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1677507892 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1721916082773330434, guid: b262d210e1e2af94786bc5e3f2a3c799, type: 3}
+  m_PrefabInstance: {fileID: 879866150}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1685386232
 GameObject:
   m_ObjectHideFlags: 0
@@ -25668,6 +25688,11 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &1861787875 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1721916082773330434, guid: b262d210e1e2af94786bc5e3f2a3c799, type: 3}
+  m_PrefabInstance: {fileID: 1269795308}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1864446751
 GameObject:
   m_ObjectHideFlags: 0
@@ -25887,6 +25912,11 @@ MonoBehaviour:
   - {fileID: 2099876012}
   - {fileID: 2147191705}
   - {fileID: 2028070074}
+  - {fileID: 1677507892}
+  - {fileID: 784941622}
+  - {fileID: 728106201}
+  - {fileID: 1861787875}
+  - {fileID: 839739604}
   lstDown:
   - {fileID: 1747902981}
   - {fileID: 479340534}
