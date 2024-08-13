@@ -13,6 +13,7 @@ public class Image1308 : MonoBehaviour
     public List<GameObject> lstDown;
     public List<Sprite> lstSprites;
     public GameObject bulongObject;
+    public GameObject menuPanel;
     public int idSelect = 0;
     [SerializeField] private GameObject scoreImagePrefab;
     [SerializeField] private GameObject parentScoreImage;
@@ -54,11 +55,11 @@ public class Image1308 : MonoBehaviour
         if (DataConfig.ScoreImage <= 0)
         {
             DataConfig.ScoreImage = 0;
-            HomeMng.instance.btnBack.transform.GetChild(1).gameObject.SetActive(true);
+            menuPanel.transform.GetChild(0).gameObject.SetActive(true);
         }
         else
         {
-            HomeMng.instance.btnBack.transform.GetChild(1).gameObject.SetActive(false);
+            menuPanel.transform.GetChild(0).gameObject.SetActive(false);
         }
 
         PlayerPrefs.SetInt("ScoreImage", DataConfig.ScoreImage);
@@ -70,11 +71,11 @@ public class Image1308 : MonoBehaviour
         if (DataConfig.ScoreImage <= 0)
         {
             DataConfig.ScoreImage = 0;
-            HomeMng.instance.btnBack2.transform.GetChild(1).gameObject.SetActive(true);
+            menuPanel.transform.GetChild(0).gameObject.SetActive(true);
         }
         else
         {
-            HomeMng.instance.btnBack2.transform.GetChild(1).gameObject.SetActive(false);
+            menuPanel.transform.GetChild(0).gameObject.SetActive(false);
         }
 
         LoadSaveImage();
@@ -147,6 +148,16 @@ public class Image1308 : MonoBehaviour
         }
     }
 
+    public void ResetSelect()
+    {
+        for (int i = 0; i < lstUp.Count; i++)
+        {
+            for (int j = 0; j < lstUp[i].transform.childCount; j++)
+            {
+                lstUp[i].gameObject.transform.GetChild(1).gameObject.SetActive(false);
+            }
+        }
+    }
 
 
     public void SetScore(GameObject parentScoreImage)

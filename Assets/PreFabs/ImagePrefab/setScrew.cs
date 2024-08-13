@@ -19,10 +19,12 @@ public class setScrew : MonoBehaviour
     }
     void SetBulong()
     {
-        if (Checkfill == false)
-        {
-            Image1308.instance.FillandSaveScore();
-        }
+        //dieu kien de fill roi thi khong tru diem
+        // if (Checkfill == false)
+        // {
+        //     Image1308.instance.FillandSaveScore();
+        // }
+        Image1308.instance.FillandSaveScore();
         Color spriteColor = gameObject.gameObject.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().color;
         spriteColor.a = 1f; // 1f is the maximum value for alpha in Unity's Color, equivalent to 255
         gameObject.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sprite = Image1308.instance.lstSprites[Image1308.instance.idSelect];
