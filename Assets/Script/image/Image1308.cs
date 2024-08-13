@@ -45,67 +45,101 @@ public class Image1308 : MonoBehaviour
         // {
         //     Destroy(child.gameObject);
         // }
+        gameObject.SetActive(false);
+    }
+
+    public void FillandSaveScore()
+    {
+        DataConfig.ScoreImage--;
+        if (DataConfig.ScoreImage <= 0)
+        {
+            DataConfig.ScoreImage = 0;
+            HomeMng.instance.btnBack.transform.GetChild(1).gameObject.SetActive(true);
+        }
+        else
+        {
+            HomeMng.instance.btnBack.transform.GetChild(1).gameObject.SetActive(false);
+        }
+
+        PlayerPrefs.SetInt("ScoreImage", DataConfig.ScoreImage);
+        SetScore(parentScoreImage);
     }
 
     public void LoadImage()
     {
-        lstDown[DataConfig.ImageIndex].SetActive(true);
+        if (DataConfig.ScoreImage <= 0)
+        {
+            DataConfig.ScoreImage = 0;
+            HomeMng.instance.btnBack2.transform.GetChild(1).gameObject.SetActive(true);
+        }
+        else
+        {
+            HomeMng.instance.btnBack2.transform.GetChild(1).gameObject.SetActive(false);
+        }
 
+        LoadSaveImage();
+        gameObject.SetActive(true);
+        lstDown[DataConfig.ImageIndex].SetActive(true);
+        SetScore(parentScoreImage);
     }
 
     public void SaveImage()
     {
-        List<int> savedIdSprites = new List<int>();
+        List<string> savedData = new List<string>();
 
-        foreach (GameObject item in lstDown)
+        for (int i = 0; i < lstDown.Count; i++)
         {
-            setScrew[] screws = item.GetComponentsInChildren<setScrew>();
-            foreach (var screw in screws)
+            for (int j = 0; j < lstDown[i].transform.childCount; j++)
             {
-                savedIdSprites.Add(screw.idSprite);
+                var screw = lstDown[i].transform.GetChild(j).GetComponent<setScrew>();
+                if (screw != null)
+                {
+                    string data = $"{screw.idSprite},{screw.Checkfill}";
+                    savedData.Add(data);
+                }
             }
         }
 
-        // Convert the list of integers to a string
-        string serializedData = string.Join(",", savedIdSprites);
-
-        // Save the string to PlayerPrefs
+        string serializedData = string.Join(";", savedData);
         PlayerPrefs.SetString(SaveKey, serializedData);
         PlayerPrefs.Save();
     }
 
+
     public void LoadSaveImage()
     {
-        // Check if the key exists
         if (PlayerPrefs.HasKey(SaveKey))
         {
-            // Retrieve the string from PlayerPrefs
             string serializedData = PlayerPrefs.GetString(SaveKey);
+            string[] savedData = serializedData.Split(';');
 
-            // Convert the string back to a list of integers
-            string[] stringArray = serializedData.Split(',');
-            List<int> savedIdSprites = new List<int>();
-
-            foreach (string s in stringArray)
-            {
-                if (int.TryParse(s, out int id))
-                {
-                    savedIdSprites.Add(id);
-                }
-            }
-
-            // Apply the saved idSprites to the objects
             int index = 0;
-
-            foreach (GameObject item in lstDown)
+            for (int i = 0; i < lstDown.Count; i++)
             {
-                setScrew[] screws = item.GetComponentsInChildren<setScrew>();
-                foreach (var screw in screws)
+                for (int j = 0; j < lstDown[i].transform.childCount; j++)
                 {
-                    if (index < savedIdSprites.Count)
+                    if (index >= savedData.Length)
+                        return;
+
+                    var screw = lstDown[i].transform.GetChild(j).GetComponent<setScrew>();
+                    if (screw != null)
                     {
-                        screw.idSprite = savedIdSprites[index];
-                        screw.gameObject.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sprite = lstSprites[screw.idSprite];
+                        string[] data = savedData[index].Split(',');
+                        if (data.Length == 2)
+                        {
+                            screw.idSprite = int.Parse(data[0]);
+                            screw.Checkfill = bool.Parse(data[1]);
+
+                            // Set the sprite based on the idSprite
+
+
+                            // Change color if Checkfill is true
+                            if (screw.Checkfill)
+                            {
+                                screw.gameObject.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sprite = lstSprites[screw.idSprite];
+                                // screw.gameObject.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().color = Color.red; // Change to your desired color
+                            }
+                        }
                         index++;
                     }
                 }
@@ -114,8 +148,10 @@ public class Image1308 : MonoBehaviour
     }
 
 
+
     public void SetScore(GameObject parentScoreImage)
     {
+        Debug.LogError(DataConfig.ScoreImage);
         string levelString = DataConfig.ScoreImage.ToString();
 
         // Xóa tất cả các hình ảnh con trước đó (nếu có)
@@ -161,6 +197,15 @@ public class Image1308 : MonoBehaviour
 
             // Gắn sprite tương ứng với chữ số
             imageLevel.sprite = GameCtr.instance.sprites[digitValue];
+        }
+    }
+
+    public void ActivefalseAll()
+    {
+
+        for (int i = 0; i < lstDown.Count; i++)
+        {
+            lstDown[i].SetActive(false);
         }
     }
 

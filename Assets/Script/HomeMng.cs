@@ -13,6 +13,7 @@ public class HomeMng : MonoBehaviour
     public GameObject bulongscale;
     private Coroutine toggleCoroutine;
     public GameObject ImageGameObject;
+    public GameObject ImageGameObject1308;
 
     public GameObject ImageMng;
     public GameObject ShopMng;
@@ -24,6 +25,7 @@ public class HomeMng : MonoBehaviour
     public GameObject ImgageSelect;
     public GameObject ImgageSelect2;
     public GameObject btnBack;
+    public GameObject btnBack2;
 
     public static HomeMng instance;
     private void Awake()
@@ -40,6 +42,36 @@ public class HomeMng : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+
+    }
+    public void btnBacktoImage1308()
+    {
+        ImageMng.GetComponent<ImageMng>().LoadShop();
+        Audio.instance.sfxClick.Play();
+        // ImageCtr.instance.GenLevelfromGrid();
+        //1308 tat code cu
+        // Image2.instance.ActivefalseAll();
+        // btnBack.SetActive(false);
+
+        //1308 code moi
+        Image1308.instance.SaveImage();
+        Image1308.instance.ActivefalseAll();
+        btnBack2.SetActive(false);
+        //
+        gameObject.SetActive(true);
+        btnImage();
+
+        if (Tutorial.instance.lstTutorialImages[5].activeSelf)
+        {
+            Tutorial.instance.ImageBlur[5].SetActive(false);
+            Tutorial.instance.lstTutorialImages[5].SetActive(false);
+
+            // Tutorial.instance.lstTutorialImages[5].SetActive(true);
+            int CheckTutorialImage = 1;
+            PlayerPrefs.SetInt("CheckTutorialImage", CheckTutorialImage);
+            Tutorial.instance.EnbleAllRaycasts();
+            ImageMng.GetComponent<ImageMng>().LoadShop();
+        }
 
     }
     public void btnBacktoImage()
@@ -65,6 +97,7 @@ public class HomeMng : MonoBehaviour
             ImageMng.GetComponent<ImageMng>().LoadShop();
         }
 
+
     }
 
     public void btncometoHome()
@@ -75,7 +108,8 @@ public class HomeMng : MonoBehaviour
         GameCtr.instance.GameClear();
         // GameCtr.instance.audioToggle.SetActive(true);
         // StartCoroutine(delay());
-        ImageGameObject.SetActive(true);
+        // ImageGameObject.SetActive(true);
+        // ImageGameObject1308.SetActive(true);
         gameObject.SetActive(true);
         Audio.instance.AudioLoad();
         if (PlayerPrefs.GetInt("lv") < 5)

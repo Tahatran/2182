@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5877940475838911780}
-  - component: {fileID: 7753154616112449190}
   - component: {fileID: 5540501733999912704}
   - component: {fileID: 4433799165147356130}
   m_Layer: 0
@@ -29,36 +28,12 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 10}
-  m_LocalScale: {x: 0.8, y: 0.8, z: 0.8}
+  m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 1967082967287095345}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7753154616112449190
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1721916082773330434}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8e8cf867d73ff4c4aa60c261de6f6106, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  firework: {fileID: 6438742290687698623, guid: dc69765f438959a43a4a15d58afc1cfd, type: 3}
-  lstfireWork:
-  - {fileID: 6438742290687698623, guid: dc69765f438959a43a4a15d58afc1cfd, type: 3}
-  - {fileID: 8350939876196568239, guid: 75a2e38308205ae4995dd1f0797823c4, type: 3}
-  - {fileID: 8490912078505969732, guid: 499a8679e87f9a2488c4fcfde370683a, type: 3}
-  - {fileID: 3130857492896258924, guid: b8f2d60b3c2d82049aacb0d17734de63, type: 3}
-  - {fileID: 7217357060598921580, guid: cbcd41b849ba6c34ebc9fac91b1153cb, type: 3}
-  HasBulong: 0
-  Bulong: {fileID: 0}
-  col: 0
-  row: 0
-  pos: {x: 0, y: 0, z: 0}
 --- !u!58 &5540501733999912704
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -91,9 +66,9 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.1}
+  m_Offset: {x: 0.036015365, y: 0.007960201}
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 1.0602435
 --- !u!114 &4433799165147356130
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -133,7 +108,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.6, y: 0.6, z: 0.6}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 5877940475838911780}
@@ -179,7 +154,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 20
-  m_Sprite: {fileID: 21300000, guid: 231173c525638c240a323af208ac5aee, type: 3}
+  m_Sprite: {fileID: 21300000, guid: fb8894d235ec3b94291c108f14cad24c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

@@ -121,7 +121,7 @@ public class GameCtr : MonoBehaviour
         // PlayerPrefs.SetInt("lv", lv);
         SetLevelText(parentLevelText);
         //tools thì tắt
-        // loadgame();
+        loadgame();
 
         // GameFirebase.SendEvent("start_level", "id_level", PlayerPrefs.GetInt("lv").ToString());
         ShowLogFireBase.Instance.ShowStartLevel();

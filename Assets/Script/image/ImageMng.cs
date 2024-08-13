@@ -29,15 +29,21 @@ public class ImageMng : MonoBehaviour
     public void Get()
     {
         DataConfig.ImageIndex = id;
-        // Debug.Log("1");
-        // ImageCtr.instance.LoadLevelData(DataConfig.ImageIndex);
-        // ImageCtr.instance.onGenerateGrid();
-        Image2.instance.ShowScore();
-        Image2.instance.LoadImage(DataConfig.ImageIndex);
-        Image2.instance.Img[id].SetActive(true);
-        HomeMng.instance.btnBack.SetActive(true);
+        //1308, neu dung image cu thi bat len      
+        // Image2.instance.ShowScore();
+        // Image2.instance.LoadImage(DataConfig.ImageIndex);
+        // Image2.instance.Img[id].SetActive(true);
+        //  HomeMng.instance.btnBack.SetActive(true);
+        // Home.SetActive(false);
+        // GameCtr.instance.GameClear();
+
+        //1308
+        Image1308.instance.LoadImage();
+        HomeMng.instance.btnBack2.SetActive(true);
         Home.SetActive(false);
         GameCtr.instance.GameClear();
+
+
         //tang len 1 nen bo luong nut Get
         // if (Tutorial.instance.lstTutorialImages[3].activeSelf)
         // {
