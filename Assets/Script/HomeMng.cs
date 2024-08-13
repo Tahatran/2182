@@ -291,6 +291,7 @@ public class HomeMng : MonoBehaviour
         Image.SetActive(true);
         HomeSelect.SetActive(false);
         SkinSelect.SetActive(false);
+        Image1308.instance.ResetImage();
         // }
     }
 

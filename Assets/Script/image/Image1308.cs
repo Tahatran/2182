@@ -81,19 +81,14 @@ public class Image1308 : MonoBehaviour
 
         LoadSaveImage();
         gameObject.SetActive(true);
-        for (int i = 0; i < lstimgbg.Count; i++)
-        {
-            lstimgbg[i].gameObject.SetActive(false);
-        }
+        ResetImage();
         lstimgbg[DataConfig.ImageIndex].SetActive(true);
-        for (int i = 0; i < lstDown.Count; i++)
-        {
-            lstDown[i].gameObject.SetActive(false);
-        }
+
         lstDown[DataConfig.ImageIndex].SetActive(true);
 
         SetScore(parentScoreImage);
     }
+
 
 
     //load owr imagemng
@@ -207,6 +202,17 @@ public class Image1308 : MonoBehaviour
             {
                 lstUp[i].gameObject.transform.GetChild(1).gameObject.SetActive(false);
             }
+        }
+    }
+    public void ResetImage()
+    {
+        for (int i = 0; i < lstimgbg.Count; i++)
+        {
+            lstimgbg[i].gameObject.SetActive(false);
+        }
+        for (int i = 0; i < lstDown.Count; i++)
+        {
+            lstDown[i].gameObject.SetActive(false);
         }
     }
 
