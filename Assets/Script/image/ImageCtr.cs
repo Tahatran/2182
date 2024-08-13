@@ -149,6 +149,7 @@ public class ImageCtr : MonoBehaviour
 
     public void btnOutput()
     {
+        //tool 
         // GenLevelfromGrid();
     }
 
