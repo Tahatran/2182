@@ -31,6 +31,11 @@ public class setScrew : MonoBehaviour
             gameObject.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().color = new Color(255, 255, 255, 255); // 1f is the maximum value for alpha in Unity's Color, equivalent to 255
             idSprite = Image1308.instance.idSelect;
             Checkfill = true;
+            //neu ma fill kin roi thi tat bg nen
+            if (Image1308.instance.ImageShowPanel(DataConfig.ImageIndex) == 1)
+            {
+                Image1308.instance.lstimgbg[DataConfig.ImageIndex].SetActive(false);
+            }
         }
 
     }
