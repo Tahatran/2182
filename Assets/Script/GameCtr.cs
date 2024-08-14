@@ -109,14 +109,14 @@ public class GameCtr : MonoBehaviour
         //     checktime = 0;
         //     PlayerPrefs.SetInt("Check3ads", check3ads);
         // }
-        DataConfig.ScoreImage = PlayerPrefs.GetInt("ScoreImage", 0);
-        DataConfig.ScoreImage = PlayerPrefs.GetInt("ScoreImage", 99);
+        // DataConfig.ScoreImage = PlayerPrefs.GetInt("ScoreImage", 0);
+        DataConfig.ScoreImage = PlayerPrefs.GetInt("ScoreImage", 9999);
         //BuildTurnoff
         // DataConfig.ScoreImage = 100;
         // SaveReward();
         // LoadReward();
         DOTween.KillAll();
-        Input.multiTouchEnabled = false;
+        // Input.multiTouchEnabled = false;
         setUpLv();
         // lv = 1;
         // PlayerPrefs.SetInt("lv", lv);

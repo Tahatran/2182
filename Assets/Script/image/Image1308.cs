@@ -7,6 +7,7 @@ using DG.Tweening;
 public class Image1308 : MonoBehaviour
 {
     //khoi tao list chua phan tu select
+    public GameObject lstUpgameobject;
     public List<GameObject> lstUp;
 
     // khoi tao list cac hinh 
@@ -79,11 +80,12 @@ public class Image1308 : MonoBehaviour
             menuPanel.transform.GetChild(0).gameObject.SetActive(false);
         }
 
+        lstUpgameobject.SetActive(true);
         LoadSaveImage();
         gameObject.SetActive(true);
         ResetImage();
         ResetSelect();
-        lstUp[0].gameObject.transform.GetChild(1).gameObject.SetActive(true);
+        lstUp[0].gameObject.transform.GetChild(0).gameObject.SetActive(true);
         idSelect = 0;
         lstimgbg[DataConfig.ImageIndex].SetActive(true);
 
@@ -203,12 +205,13 @@ public class Image1308 : MonoBehaviour
         {
             for (int j = 0; j < lstUp[i].transform.childCount; j++)
             {
-                lstUp[i].gameObject.transform.GetChild(1).gameObject.SetActive(false);
+                lstUp[i].gameObject.transform.GetChild(0).gameObject.SetActive(false);
             }
         }
     }
     public void ResetImage()
     {
+        // lstUpgameobject.SetActive(false);
         for (int i = 0; i < lstimgbg.Count; i++)
         {
             lstimgbg[i].gameObject.SetActive(false);
@@ -217,6 +220,7 @@ public class Image1308 : MonoBehaviour
         {
             lstDown[i].gameObject.SetActive(false);
         }
+
     }
 
 

@@ -1,13 +1,24 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SelectScrew : MonoBehaviour
 {
     // Start is called before the first frame update
     void Start()
     {
-
+        //canvas
+        gameObject.GetComponent<Button>().onClick.AddListener(() =>
+                                          {
+                                              if (DataConfig.ScoreImage > 0)
+                                              {
+                                                  Image1308.instance.ResetSelect();
+                                                  gameObject.transform.GetChild(0).gameObject.SetActive(true);
+                                                  Image1308.instance.idSelect = int.Parse(gameObject.tag);
+                                                  Debug.Log("id" + Image1308.instance.idSelect);
+                                              }
+                                          });
     }
     void OnMouseDown()
     {

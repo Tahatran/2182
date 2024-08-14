@@ -47,6 +47,7 @@ public class HomeMng : MonoBehaviour
     public void btnBacktoImage1308()
     {
         ImageMng.GetComponent<ImageMng>().LoadShop();
+        Image1308.instance.lstUpgameobject.SetActive(false);
         Audio.instance.sfxClick.Play();
         // ImageCtr.instance.GenLevelfromGrid();
         //1308 tat code cu
@@ -276,8 +277,10 @@ public class HomeMng : MonoBehaviour
     {
         // if (PlayerPrefs.GetInt("lv") >= 5)
         // {
-        Image1308.instance.LoadImage();
+        // Image1308.instance.LoadImage();
+        Image1308.instance.LoadSaveImage();
         ImageMng.GetComponent<ImageMng>().LoadShop();
+        Image1308.instance.ResetImage();
         Audio.instance.sfxClick.Play();
         if (Tutorial.instance.lstTutorialImages[1].activeSelf)
         {
@@ -291,7 +294,7 @@ public class HomeMng : MonoBehaviour
         Image.SetActive(true);
         HomeSelect.SetActive(false);
         SkinSelect.SetActive(false);
-        Image1308.instance.ResetImage();
+
         // }
     }
 
