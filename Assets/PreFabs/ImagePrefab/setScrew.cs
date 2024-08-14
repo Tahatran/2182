@@ -35,6 +35,7 @@ public class setScrew : MonoBehaviour
             if (Image1308.instance.ImageShowPanel(DataConfig.ImageIndex) == 1)
             {
                 Image1308.instance.lstimgbg[DataConfig.ImageIndex].SetActive(false);
+                ShowLogFireBase.Instance.LogBuildDone();
             }
         }
 

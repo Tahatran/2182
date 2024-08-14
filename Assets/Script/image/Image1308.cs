@@ -82,7 +82,9 @@ public class Image1308 : MonoBehaviour
         LoadSaveImage();
         gameObject.SetActive(true);
         ResetImage();
+        ResetSelect();
         lstUp[0].gameObject.transform.GetChild(1).gameObject.SetActive(true);
+        idSelect = 0;
         lstimgbg[DataConfig.ImageIndex].SetActive(true);
 
         lstDown[DataConfig.ImageIndex].SetActive(true);
