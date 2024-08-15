@@ -5,6 +5,8 @@ using UnityEngine;
 public class PanZoom : MonoBehaviour
 {
     Vector3 touchStart;
+
+    //de 1.6 cho khoi giat
     public float zoomOutMin = 1;
     public float zoomOutMax = 8;
 
@@ -20,6 +22,18 @@ public class PanZoom : MonoBehaviour
     public float clampedMaxX;
     public float clampedMinY;
     public float clampedMaxY;
+    public static PanZoom instance;
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
 
     void Update()
     {
@@ -95,6 +109,33 @@ public class PanZoom : MonoBehaviour
         }
         // Giữ camera trong giới hạn tọa độ x và y
         ClampCameraPosition();
+    }
+
+    public void Resetcamera()
+    {
+        // Vector3 beforeZoom = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        // Camera.main.orthographicSize = Mathf.Clamp(Camera.main.orthographicSize - increment, zoomOutMin, zoomOutMax);
+
+        // Vector3 afterZoom = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        // Vector3 difference = beforeZoom - afterZoom;
+
+        // Camera.main.transform.position += difference;
+        // if (Camera.main.orthographicSize == zoomOutMax)
+        // {
+        //     // Nếu zoom đến mức nhỏ nhất, đưa camera về vị trí (0, 0)
+        //     Camera.main.transform.position = new Vector3(0, 0, -10);
+        // }
+        // else
+        // {
+        //     // Giữ camera trong giới hạn tọa độ x và y
+        //     Camera.main.transform.position = new Vector3(
+        //         Mathf.Clamp(Camera.main.transform.position.x, minX * Camera.main.orthographicSize / zoomOutMax, maxX * Camera.main.orthographicSize / zoomOutMax),
+        //         Mathf.Clamp(Camera.main.transform.position.y, minY * Camera.main.orthographicSize / zoomOutMax, maxY * Camera.main.orthographicSize / zoomOutMax),
+        //         -10 // Đảm bảo Z = -10 sau khi zoom
+        //     );
+        // }
+        Camera.main.transform.position = new Vector3(0, 0, -10);
+        Camera.main.orthographicSize = 5;
     }
 
     void ClampCameraPosition()

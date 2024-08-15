@@ -61,6 +61,7 @@ public class HomeMng : MonoBehaviour
         //
         gameObject.SetActive(true);
         btnImage();
+        PanZoom.instance.Resetcamera();
 
         if (Tutorial.instance.lstTutorialImages[5].activeSelf)
         {
