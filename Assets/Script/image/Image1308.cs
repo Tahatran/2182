@@ -186,6 +186,7 @@ public class Image1308 : MonoBehaviour
                             {
                                 screw.gameObject.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sprite = lstSprites[screw.idSprite];
                                 screw.gameObject.gameObject.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().color = new Color(255, 255, 255, 255);
+                                screw.gameObject.transform.GetChild(1).gameObject.SetActive(false);
                                 // Color semiTransparentRed = new Color(screw.gameObject.gameObject.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().color.r, screw.gameObject.gameObject.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().color.g, screw.gameObject.gameObject.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().color.b, 255);
                                 // spriteColor = semiTransparentRed; // 1f is the maximum value for alpha in Unity's Color, equivalent to 255
 
