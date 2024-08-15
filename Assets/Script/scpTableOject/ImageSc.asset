@@ -15,26 +15,32 @@ MonoBehaviour:
   Items:
   - Id: 0
     IsBuy: 1
-    ItemImg: {fileID: 21300000, guid: af3d607bd5309b748b7afc3f8ea5c98d, type: 3}
-    ItemPrefab: {fileID: 4105357760606371290, guid: b00899c6bb3390449b2faf555a454768, type: 3}
-  - Id: 1
-    IsBuy: 1
     ItemImg: {fileID: 21300000, guid: 1d7c4e44f8f94454fa5c3166f6c4edbd, type: 3}
     ItemPrefab: {fileID: 4105357760606371290, guid: b00899c6bb3390449b2faf555a454768, type: 3}
-  - Id: 2
-    IsBuy: 1
-    ItemImg: {fileID: 21300000, guid: 8276f2bbc87755f429180f2bb6cee894, type: 3}
-    ItemPrefab: {fileID: 4105357760606371290, guid: b00899c6bb3390449b2faf555a454768, type: 3}
-  - Id: 3
-    IsBuy: 1
-    ItemImg: {fileID: 21300000, guid: f34bd2e9bad5fe346b3849a0f59a7a1f, type: 3}
-    ItemPrefab: {fileID: 4105357760606371290, guid: b00899c6bb3390449b2faf555a454768, type: 3}
-  - Id: 4
-    IsBuy: 1
-    ItemImg: {fileID: 21300000, guid: 8c40d3c8bd524b645a79f64a4143f4f3, type: 3}
-    ItemPrefab: {fileID: 4105357760606371290, guid: b00899c6bb3390449b2faf555a454768, type: 3}
-  - Id: 5
+    PreviewImg: {fileID: 0}
+  - Id: 1
     IsBuy: 1
     ItemImg: {fileID: 21300000, guid: c957d115171b4ae4bbf2a4c779d3dada, type: 3}
     ItemPrefab: {fileID: 4105357760606371290, guid: b00899c6bb3390449b2faf555a454768, type: 3}
+    PreviewImg: {fileID: 0}
+  - Id: 2
+    IsBuy: 1
+    ItemImg: {fileID: 21300000, guid: 1ec7c11654f7ef844bd53a6eee102fbf, type: 3}
+    ItemPrefab: {fileID: 4105357760606371290, guid: b00899c6bb3390449b2faf555a454768, type: 3}
+    PreviewImg: {fileID: 0}
+  - Id: 3
+    IsBuy: 1
+    ItemImg: {fileID: 21300000, guid: 8c40d3c8bd524b645a79f64a4143f4f3, type: 3}
+    ItemPrefab: {fileID: 4105357760606371290, guid: b00899c6bb3390449b2faf555a454768, type: 3}
+    PreviewImg: {fileID: 0}
+  - Id: 4
+    IsBuy: 1
+    ItemImg: {fileID: 21300000, guid: 0cdd203bee4cbfb44984af31d14d5464, type: 3}
+    ItemPrefab: {fileID: 4105357760606371290, guid: b00899c6bb3390449b2faf555a454768, type: 3}
+    PreviewImg: {fileID: 0}
+  - Id: 5
+    IsBuy: 1
+    ItemImg: {fileID: 21300000, guid: d74fb93f5a571a146b13ac4d1181f608, type: 3}
+    ItemPrefab: {fileID: 4105357760606371290, guid: b00899c6bb3390449b2faf555a454768, type: 3}
+    PreviewImg: {fileID: 0}
   lockImg: {fileID: 21300000, guid: 3de0150a48e65974c8a2a9afa78bf8ee, type: 3}

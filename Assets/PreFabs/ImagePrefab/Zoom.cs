@@ -104,9 +104,17 @@ public class PanZoom : MonoBehaviour
         clampedMaxX = maxX * (currentOrthographicSize / zoomOutMax);
         clampedMinY = minY * (currentOrthographicSize / zoomOutMax);
         clampedMaxY = maxY * (currentOrthographicSize / zoomOutMax);
-        if (currentOrthographicSize > 3.6f)
+        if (currentOrthographicSize > 2.8f)
         {
             float a = 1f;
+            clampedMinX = -a;
+            clampedMaxX = a;
+            clampedMinY = -a;
+            clampedMaxY = a;
+        }
+        else if (currentOrthographicSize > 1.5f && currentOrthographicSize < 2.8f)
+        {
+            float a = 1.5f;
             clampedMinX = -a;
             clampedMaxX = a;
             clampedMinY = -a;
@@ -137,9 +145,17 @@ public class PanZoom : MonoBehaviour
         clampedMaxX = maxX * (currentOrthographicSize / zoomOutMax);
         clampedMinY = minY * (currentOrthographicSize / zoomOutMax);
         clampedMaxY = maxY * (currentOrthographicSize / zoomOutMax);
-        if (currentOrthographicSize > 3.6f)
+        if (currentOrthographicSize > 2.8f)
         {
             float a = 1f;
+            clampedMinX = -a;
+            clampedMaxX = a;
+            clampedMinY = -a;
+            clampedMaxY = a;
+        }
+        else if (currentOrthographicSize > 1.5f && currentOrthographicSize < 2.8f)
+        {
+            float a = 1.5f;
             clampedMinX = -a;
             clampedMaxX = a;
             clampedMinY = -a;
