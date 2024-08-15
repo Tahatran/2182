@@ -130,6 +130,36 @@ public class Image1308 : MonoBehaviour
         }
     }
 
+    public void DisableAllRaycasts1308()
+    {
+        for (int i = 0; i < lstDown.Count; i++)
+        {
+            for (int j = 0; j < lstDown[i].transform.childCount; j++)
+            {
+                var screw = lstDown[i].transform.GetChild(j).GetComponent<setScrew>();
+                if (screw != null)
+                {
+                    screw.enabled = false;
+                }
+            }
+        }
+    }
+
+    public void EnableAllRaycasts1308()
+    {
+        for (int i = 0; i < lstDown.Count; i++)
+        {
+            for (int j = 0; j < lstDown[i].transform.childCount; j++)
+            {
+                var screw = lstDown[i].transform.GetChild(j).GetComponent<setScrew>();
+                if (screw != null)
+                {
+                    screw.enabled = true;
+                }
+            }
+        }
+    }
+
 
     public void SaveImage()
     {

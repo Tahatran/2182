@@ -85,6 +85,7 @@ public class PanZoom : MonoBehaviour
 
     void zoom(float increment)
     {
+        Image1308.instance.DisableAllRaycasts1308();
         Vector3 beforeZoom = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
         Camera.main.orthographicSize = Mathf.Clamp(Camera.main.orthographicSize - increment, zoomOutMin, zoomOutMax);
@@ -109,6 +110,7 @@ public class PanZoom : MonoBehaviour
         }
         // Giữ camera trong giới hạn tọa độ x và y
         ClampCameraPosition();
+        Image1308.instance.EnableAllRaycasts1308();
     }
 
     public void Resetcamera()

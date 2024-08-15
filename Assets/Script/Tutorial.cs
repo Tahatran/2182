@@ -74,13 +74,6 @@ public class Tutorial : MonoBehaviour
         }
     }
 
-    public void DisableAllRaycasts1308()
-    {
-        foreach (GameObject uiElement in uiElements)
-        {
-            SetRaycastTarget(uiElement, false);
-        }
-    }
 
     public void EnbleAllRaycasts()
     {
