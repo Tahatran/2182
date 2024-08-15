@@ -10324,6 +10324,10 @@ MonoBehaviour:
   maxX: 10
   minY: -10
   maxY: 10
+  clampedMinX: -1.6
+  clampedMaxX: 1.6
+  clampedMinY: -1.6
+  clampedMaxY: 1.6
 --- !u!1 &521277385 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6068343976603955782, guid: 88b178159b39f684b84ea75d78c4973e, type: 3}
@@ -17964,7 +17968,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0.0612, y: -0.245, z: 0}
-  m_LocalScale: {x: 5, y: 5, z: 5}
+  m_LocalScale: {x: 0.6, y: 0.6, z: 0.6}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 1880016150}
@@ -18009,7 +18013,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 9
+  m_SortingOrder: 8
   m_Sprite: {fileID: 21300000, guid: d911c0ab93ab0624e9f11fb27d8e18ea, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

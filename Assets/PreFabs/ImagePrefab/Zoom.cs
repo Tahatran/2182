@@ -16,6 +16,10 @@ public class PanZoom : MonoBehaviour
     public float maxX = 10f;
     public float minY = -10f;
     public float maxY = 10f;
+    public float clampedMinX;
+    public float clampedMaxX;
+    public float clampedMinY;
+    public float clampedMaxY;
 
     void Update()
     {
@@ -75,7 +79,20 @@ public class PanZoom : MonoBehaviour
         Vector3 difference = beforeZoom - afterZoom;
 
         Camera.main.transform.position += difference;
-
+        if (Camera.main.orthographicSize == zoomOutMax)
+        {
+            // Nếu zoom đến mức nhỏ nhất, đưa camera về vị trí (0, 0)
+            Camera.main.transform.position = new Vector3(0, 0, -10);
+        }
+        else
+        {
+            // Giữ camera trong giới hạn tọa độ x và y
+            Camera.main.transform.position = new Vector3(
+                Mathf.Clamp(Camera.main.transform.position.x, minX * Camera.main.orthographicSize / zoomOutMax, maxX * Camera.main.orthographicSize / zoomOutMax),
+                Mathf.Clamp(Camera.main.transform.position.y, minY * Camera.main.orthographicSize / zoomOutMax, maxY * Camera.main.orthographicSize / zoomOutMax),
+                -10 // Đảm bảo Z = -10 sau khi zoom
+            );
+        }
         // Giữ camera trong giới hạn tọa độ x và y
         ClampCameraPosition();
     }
@@ -83,10 +100,25 @@ public class PanZoom : MonoBehaviour
     void ClampCameraPosition()
     {
         float currentOrthographicSize = Camera.main.orthographicSize;
-        float clampedMinX = minX * (currentOrthographicSize / zoomOutMax);
-        float clampedMaxX = maxX * (currentOrthographicSize / zoomOutMax);
-        float clampedMinY = minY * (currentOrthographicSize / zoomOutMax);
-        float clampedMaxY = maxY * (currentOrthographicSize / zoomOutMax);
+        clampedMinX = minX * (currentOrthographicSize / zoomOutMax);
+        clampedMaxX = maxX * (currentOrthographicSize / zoomOutMax);
+        clampedMinY = minY * (currentOrthographicSize / zoomOutMax);
+        clampedMaxY = maxY * (currentOrthographicSize / zoomOutMax);
+        if (currentOrthographicSize > 3.6f)
+        {
+            float a = 1f;
+            clampedMinX = -a;
+            clampedMaxX = a;
+            clampedMinY = -a;
+            clampedMaxY = a;
+        }
+        // float b = 3f;
+        // float a = 1.6f;
+        // if (clampedMinX < -b) clampedMinX = -a;
+        // if (clampedMaxX > b) clampedMaxX = a;
+        // if (clampedMinY < -b) clampedMinY = -a;
+        // if (clampedMaxY > b) clampedMaxY = a;
+        Debug.LogError("cu---" + currentOrthographicSize + "-----zooom" + zoomOutMax + "----ket qua" + currentOrthographicSize / zoomOutMax);
 
         Camera.main.transform.position = new Vector3(
             Mathf.Clamp(Camera.main.transform.position.x, clampedMinX, clampedMaxX),
@@ -101,11 +133,24 @@ public class PanZoom : MonoBehaviour
 
         // Calculate the camera's zoom level and its effect on the movement boundaries
         float currentOrthographicSize = Camera.main != null ? Camera.main.orthographicSize : zoomOutMax;
-        float clampedMinX = minX * (currentOrthographicSize / zoomOutMax);
-        float clampedMaxX = maxX * (currentOrthographicSize / zoomOutMax);
-        float clampedMinY = minY * (currentOrthographicSize / zoomOutMax);
-        float clampedMaxY = maxY * (currentOrthographicSize / zoomOutMax);
-
+        clampedMinX = minX * (currentOrthographicSize / zoomOutMax);
+        clampedMaxX = maxX * (currentOrthographicSize / zoomOutMax);
+        clampedMinY = minY * (currentOrthographicSize / zoomOutMax);
+        clampedMaxY = maxY * (currentOrthographicSize / zoomOutMax);
+        if (currentOrthographicSize > 3.6f)
+        {
+            float a = 1f;
+            clampedMinX = -a;
+            clampedMaxX = a;
+            clampedMinY = -a;
+            clampedMaxY = a;
+        }
+        // float b = 3f;
+        // float a = 1.6f;
+        // if (clampedMinX < -b) clampedMinX = -a;
+        // if (clampedMaxX > b) clampedMaxX = a;
+        // if (clampedMinY < -b) clampedMinY = -a;
+        // if (clampedMaxY > b) clampedMaxY = a;
         // Draw the boundary box
         Vector3 bottomLeft = new Vector3(clampedMinX, clampedMinY, -10);
         Vector3 bottomRight = new Vector3(clampedMaxX, clampedMinY, -10);
