@@ -110,7 +110,7 @@ public class GameCtr : MonoBehaviour
         //     PlayerPrefs.SetInt("Check3ads", check3ads);
         // }
         // DataConfig.ScoreImage = PlayerPrefs.GetInt("ScoreImage", 0);
-        DataConfig.ScoreImage = PlayerPrefs.GetInt("ScoreImage", 9999);
+        DataConfig.ScoreImage = PlayerPrefs.GetInt("ScoreImage", 999);
         //BuildTurnoff
         // DataConfig.ScoreImage = 100;
         // SaveReward();
