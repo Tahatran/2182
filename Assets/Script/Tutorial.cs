@@ -32,7 +32,7 @@ public class Tutorial : MonoBehaviour
     public IEnumerator TurnOffAfterDelay()
     {
         // Đợi 30 giây
-        yield return new WaitForSeconds(28f);
+        yield return new WaitForSeconds(27.2f);
         // Debug.LogError("AAAAAAAAAAAAAAAAAAA");
 
         // Tắt GameObject
