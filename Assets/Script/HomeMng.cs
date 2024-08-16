@@ -300,9 +300,7 @@ public class HomeMng : MonoBehaviour
         {
             PlayerPrefs.SetInt("CheckTutorialImage", 1);
             Tutorial.instance.Time_line.SetActive(true);
-            // var tl = Instantiate(Tutorial.instance.Time_line, new Vector3(0, 0, 0), Quaternion.identity, Tutorial.instance.gameObject.transform);
-            // tl.SetActive(true);
-            StartCoroutine(Tutorial.instance.TurnOffAfterDelay());
+            // StartCoroutine(Tutorial.instance.TurnOffAfterDelay());
             gameObject.SetActive(false);
             // Image1308.instance.lstUpgameobject.SetActive(true);
             TweenOnOff tt = GameObject.FindObjectOfType<TweenOnOff>();

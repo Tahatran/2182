@@ -698,6 +698,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8201899969781165129}
   - component: {fileID: 4398948166722467308}
+  - component: {fileID: 3611543310889187875}
   m_Layer: 0
   m_Name: Time_Line
   m_TagString: Untagged
@@ -779,6 +780,18 @@ PlayableDirector:
     m_References:
     - 3c57d7e35dd5cfb4380e13693eda964d: {fileID: 5822357608330984225}
     - 2fb08cb3bf1361646afbbbceff456802: {fileID: 7451041958091011631}
+--- !u!114 &3611543310889187875
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3451601034720833584}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83af8ce23a8ff484394f830eb7d3dfb1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4155684401112905797
 GameObject:
   m_ObjectHideFlags: 0

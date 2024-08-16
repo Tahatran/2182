@@ -32,11 +32,12 @@ public class Tutorial : MonoBehaviour
     public IEnumerator TurnOffAfterDelay()
     {
         // Đợi 30 giây
-        yield return new WaitForSeconds(6f);
+        yield return new WaitForSeconds(28f);
+        // Debug.LogError("AAAAAAAAAAAAAAAAAAA");
 
         // Tắt GameObject
         Tutorial.instance.Time_line.SetActive(false);
-        gameObject.SetActive(true);
+        HomeMng.instance.gameObject.SetActive(true);
         Image1308.instance.LoadSaveImage();
         HomeMng.instance.ImageMng.GetComponent<ImageMng>().LoadShop();
         Image1308.instance.ResetImage();
