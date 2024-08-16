@@ -314,7 +314,7 @@ public class HomeMng : MonoBehaviour
             Image1308.instance.LoadSaveImage();
             ImageMng.GetComponent<ImageMng>().LoadShop();
             Image1308.instance.ResetImage();
-            Audio.instance.sfxClick.Play();
+            // Audio.instance.sfxClick.Play();
             if (Tutorial.instance.lstTutorialImages[1].activeSelf)
             {
                 Tutorial.instance.lstTutorialImages[1].SetActive(false);

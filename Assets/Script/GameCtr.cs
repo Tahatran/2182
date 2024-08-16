@@ -109,8 +109,8 @@ public class GameCtr : MonoBehaviour
         //     checktime = 0;
         //     PlayerPrefs.SetInt("Check3ads", check3ads);
         // }
-        // DataConfig.ScoreImage = PlayerPrefs.GetInt("ScoreImage", 0);
-        DataConfig.ScoreImage = PlayerPrefs.GetInt("ScoreImage", 999);
+        DataConfig.ScoreImage = PlayerPrefs.GetInt("ScoreImage", 0);
+        // DataConfig.ScoreImage = PlayerPrefs.GetInt("ScoreImage", 999);
         //BuildTurnoff
         // DataConfig.ScoreImage = 100;
         // SaveReward();
@@ -806,7 +806,9 @@ public class GameCtr : MonoBehaviour
         // }
 
         int scoreImage = PlayerPrefs.GetInt("ScoreImage", 0);
-        PlayerPrefs.SetInt("ScoreImage", scoreImage + 1);
+        // PlayerPrefs.SetInt("ScoreImage", scoreImage + 1);
+        //1308
+        PlayerPrefs.SetInt("ScoreImage", scoreImage + 12);
         DataConfig.ScoreImage = PlayerPrefs.GetInt("ScoreImage", 0);
         PlayerPrefs.Save();
 
@@ -822,7 +824,9 @@ public class GameCtr : MonoBehaviour
             if (onComplete)
             {
                 int scoreImage = PlayerPrefs.GetInt("ScoreImage", 0);
-                PlayerPrefs.SetInt("ScoreImage", scoreImage + 2);
+                // PlayerPrefs.SetInt("ScoreImage", scoreImage + 2);
+                //1308
+                PlayerPrefs.SetInt("ScoreImage", scoreImage + 24);
                 DataConfig.ScoreImage = PlayerPrefs.GetInt("ScoreImage", 0);
                 PlayerPrefs.Save();
 

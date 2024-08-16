@@ -49,9 +49,10 @@ public class ShopMng : MonoBehaviour
         demoImage.GetComponent<Image>().sprite = SkinItemData.Items[id].PreviewImg;
         if (id == 0)
         {
-            demoImage.GetComponent<Image>().SetNativeSize();
-            demoImage.GetComponent<RectTransform>().localScale = new Vector3(1.4f, 1.4f, 1.4f);
-            demoImage.GetComponent<RectTransform>().eulerAngles = new Vector3(0, 0, 90f);
+            //1308 tat di vi co asset moi
+            // demoImage.GetComponent<Image>().SetNativeSize();
+            // demoImage.GetComponent<RectTransform>().localScale = new Vector3(1.4f, 1.4f, 1.4f);
+            // demoImage.GetComponent<RectTransform>().eulerAngles = new Vector3(0, 0, 90f);
         }
         else
         {
