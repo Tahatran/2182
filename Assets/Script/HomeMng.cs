@@ -273,28 +273,64 @@ public class HomeMng : MonoBehaviour
         HomeSelect.SetActive(false);
         ImgageSelect.SetActive(false);
     }
+    // private IEnumerator TurnOffAfterDelay()
+    // {
+    //     // Đợi 30 giây
+    //     yield return new WaitForSeconds(6f);
+
+    //     // Tắt GameObject
+    //     Tutorial.instance.Time_line.SetActive(false);
+    //     gameObject.SetActive(true);
+    //     Image1308.instance.LoadSaveImage();
+    //     ImageMng.GetComponent<ImageMng>().LoadShop();
+    //     Image1308.instance.ResetImage();
+
+    //     ImgageSelect.SetActive(true);
+    //     Skin.SetActive(false);
+    //     Image.SetActive(true);
+    //     HomeSelect.SetActive(false);
+    //     SkinSelect.SetActive(false);
+    //     // Image1308.instance.lstUpgameobject.SetActive(false);
+    // }
 
     public void btnImage()
     {
+        Audio.instance.sfxClick.Play();
+        if (PlayerPrefs.GetInt("CheckTutorialImage") == 0)
+        {
+            PlayerPrefs.SetInt("CheckTutorialImage", 1);
+            Tutorial.instance.Time_line.SetActive(true);
+            // var tl = Instantiate(Tutorial.instance.Time_line, new Vector3(0, 0, 0), Quaternion.identity, Tutorial.instance.gameObject.transform);
+            // tl.SetActive(true);
+            StartCoroutine(Tutorial.instance.TurnOffAfterDelay());
+            gameObject.SetActive(false);
+            // Image1308.instance.lstUpgameobject.SetActive(true);
+            TweenOnOff tt = GameObject.FindObjectOfType<TweenOnOff>();
+            tt.gameObject.SetActive(false);
+        }
         // if (PlayerPrefs.GetInt("lv") >= 5)
         // {
         // Image1308.instance.LoadImage();
-        Image1308.instance.LoadSaveImage();
-        ImageMng.GetComponent<ImageMng>().LoadShop();
-        Image1308.instance.ResetImage();
-        Audio.instance.sfxClick.Play();
-        if (Tutorial.instance.lstTutorialImages[1].activeSelf)
+        else
         {
-            Tutorial.instance.lstTutorialImages[1].SetActive(false);
-            Tutorial.instance.lstTutorialImages[2].SetActive(true);
-            Tutorial.instance.ImageBlur[1].SetActive(false);
-            Tutorial.instance.ImageBlur[2].SetActive(true);
+            Image1308.instance.LoadSaveImage();
+            ImageMng.GetComponent<ImageMng>().LoadShop();
+            Image1308.instance.ResetImage();
+            Audio.instance.sfxClick.Play();
+            if (Tutorial.instance.lstTutorialImages[1].activeSelf)
+            {
+                Tutorial.instance.lstTutorialImages[1].SetActive(false);
+                Tutorial.instance.lstTutorialImages[2].SetActive(true);
+                Tutorial.instance.ImageBlur[1].SetActive(false);
+                Tutorial.instance.ImageBlur[2].SetActive(true);
+            }
+            ImgageSelect.SetActive(true);
+            Skin.SetActive(false);
+            Image.SetActive(true);
+            HomeSelect.SetActive(false);
+            SkinSelect.SetActive(false);
         }
-        ImgageSelect.SetActive(true);
-        Skin.SetActive(false);
-        Image.SetActive(true);
-        HomeSelect.SetActive(false);
-        SkinSelect.SetActive(false);
+
 
         // }
     }

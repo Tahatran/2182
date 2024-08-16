@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class Tutorial : MonoBehaviour
 {
+    public GameObject Time_line;
     public List<GameObject> ImageBlur;
     public List<GameObject> SKinBlur;
     public List<GameObject> uiElements;
@@ -27,6 +28,25 @@ public class Tutorial : MonoBehaviour
     {
         TutorialSkin();
         TutorialImage();
+    }
+    public IEnumerator TurnOffAfterDelay()
+    {
+        // Đợi 30 giây
+        yield return new WaitForSeconds(6f);
+
+        // Tắt GameObject
+        Tutorial.instance.Time_line.SetActive(false);
+        gameObject.SetActive(true);
+        Image1308.instance.LoadSaveImage();
+        HomeMng.instance.ImageMng.GetComponent<ImageMng>().LoadShop();
+        Image1308.instance.ResetImage();
+
+        HomeMng.instance.ImgageSelect.SetActive(true);
+        HomeMng.instance.Skin.SetActive(false);
+        HomeMng.instance.Image.SetActive(true);
+        HomeMng.instance.HomeSelect.SetActive(false);
+        HomeMng.instance.SkinSelect.SetActive(false);
+        // Image1308.instance.lstUpgameobject.SetActive(false);
     }
     public void TutorialSkin()
     {
@@ -63,6 +83,8 @@ public class Tutorial : MonoBehaviour
         //         ImageBlur[0].SetActive(true);
         //     }
         // }
+
+
 
 
     }
