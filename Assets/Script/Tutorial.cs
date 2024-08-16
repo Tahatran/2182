@@ -32,22 +32,25 @@ public class Tutorial : MonoBehaviour
     public IEnumerator TurnOffAfterDelay()
     {
         // Đợi 30 giây
-        yield return new WaitForSeconds(27.2f);
+        yield return new WaitForSeconds(30f);
+
         // Debug.LogError("AAAAAAAAAAAAAAAAAAA");
 
         // Tắt GameObject
         Tutorial.instance.Time_line.SetActive(false);
         HomeMng.instance.gameObject.SetActive(true);
-        Image1308.instance.LoadSaveImage();
-        HomeMng.instance.ImageMng.GetComponent<ImageMng>().LoadShop();
-        Image1308.instance.ResetImage();
+        Tutorial.instance.EnbleAllRaycasts();
+        // HomeMng.instance.gameObject.SetActive(true);
+        // Image1308.instance.LoadSaveImage();
+        // HomeMng.instance.ImageMng.GetComponent<ImageMng>().LoadShop();
+        // Image1308.instance.ResetImage();
 
-        HomeMng.instance.ImgageSelect.SetActive(true);
-        HomeMng.instance.Skin.SetActive(false);
-        HomeMng.instance.Image.SetActive(true);
-        HomeMng.instance.HomeSelect.SetActive(false);
-        HomeMng.instance.SkinSelect.SetActive(false);
-        // Image1308.instance.lstUpgameobject.SetActive(false);
+        // HomeMng.instance.ImgageSelect.SetActive(true);
+        // HomeMng.instance.Skin.SetActive(false);
+        // HomeMng.instance.Image.SetActive(true);
+        // HomeMng.instance.HomeSelect.SetActive(false);
+        // HomeMng.instance.SkinSelect.SetActive(false);
+
     }
     public void TutorialSkin()
     {
@@ -76,13 +79,13 @@ public class Tutorial : MonoBehaviour
         // int activeCount = PlayerPrefs.GetInt("0");
         // if (activeCount != 4)
         // {
-        //     if (PlayerPrefs.GetInt("lv") == 5 && PlayerPrefs.GetInt("CheckTutorialImage") == 0)
-        //     {
-        //         lstTutorialImages[0].SetActive(true);
-        //         // DisableAllRaycasts();
-        //         EnableRaycast(uiElements[1]);
-        //         ImageBlur[0].SetActive(true);
-        //     }
+        if (PlayerPrefs.GetInt("lv") == 3 && PlayerPrefs.GetInt("CheckTutorialImage") == 0)
+        {
+            lstTutorialImages[0].SetActive(true);
+            // DisableAllRaycasts();
+            EnableRaycast(uiElements[1]);
+            ImageBlur[0].SetActive(true);
+        }
         // }
 
 

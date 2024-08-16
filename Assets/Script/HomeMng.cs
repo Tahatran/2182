@@ -98,8 +98,6 @@ public class HomeMng : MonoBehaviour
             Tutorial.instance.EnbleAllRaycasts();
             ImageMng.GetComponent<ImageMng>().LoadShop();
         }
-
-
     }
 
     public void btncometoHome()
@@ -129,14 +127,29 @@ public class HomeMng : MonoBehaviour
             Tutorial.instance.lstTutorialSkins[1].SetActive(true);
             Tutorial.instance.EnableRaycast(Tutorial.instance.uiElements[7]);
         }
+        //1308 tat, cai cu bat len
+        // if (Tutorial.instance.lstTutorialImages[0].activeSelf)
+        // {
+        //     Tutorial.instance.ImageBlur[0].SetActive(false);
+        //     Tutorial.instance.ImageBlur[1].SetActive(true);
+        //     Tutorial.instance.lstTutorialImages[0].SetActive(false);
+        //     Tutorial.instance.lstTutorialImages[1].SetActive(true);
+        //     Tutorial.instance.EnableRaycast(Tutorial.instance.uiElements[8]);
+        // }
+
         if (Tutorial.instance.lstTutorialImages[0].activeSelf)
         {
-            Tutorial.instance.ImageBlur[0].SetActive(false);
-            Tutorial.instance.ImageBlur[1].SetActive(true);
             Tutorial.instance.lstTutorialImages[0].SetActive(false);
-            Tutorial.instance.lstTutorialImages[1].SetActive(true);
-            Tutorial.instance.EnableRaycast(Tutorial.instance.uiElements[8]);
+            Tutorial.instance.ImageBlur[0].SetActive(false);
+            PlayerPrefs.SetInt("CheckTutorialImage", 1);
+            Tutorial.instance.Time_line.SetActive(true);
+            // StartCoroutine(Tutorial.instance.TurnOffAfterDelay());
+            gameObject.SetActive(false);
+            // Image1308.instance.lstUpgameobject.SetActive(true);
+            TweenOnOff tt = GameObject.FindObjectOfType<TweenOnOff>();
+            tt.gameObject.SetActive(false);
         }
+
     }
     // IEnumerator delay()
     // {
