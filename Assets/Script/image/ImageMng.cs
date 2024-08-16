@@ -120,20 +120,20 @@ public class ImageMng : MonoBehaviour
             //     Item.GetComponent<Image>().sprite = lstImage2[1];
             // }
 
-            //1308
-            var a = Image1308.instance.ImageShowPanel(i);
-            if (a == 0)
-            {
-                Item.GetComponent<Image>().sprite = lstImage2[0];
-            }
-            else if (a == 1)
-            {
-                Item.GetComponent<Image>().sprite = item.ItemImg;
-            }
-            else if (a == 2)
-            {
-                Item.GetComponent<Image>().sprite = lstImage2[1];
-            }
+            //1308 neu can tinh xem dang select toi dau de hien thi hoi cham va ba cham
+            // var a = Image1308.instance.ImageShowPanel(i);
+            // if (a == 0)
+            // {
+            //     Item.GetComponent<Image>().sprite = lstImage2[0];
+            // }
+            // else if (a == 1)
+            // {
+            //     Item.GetComponent<Image>().sprite = item.ItemImg;
+            // }
+            // else if (a == 2)
+            // {
+            //     Item.GetComponent<Image>().sprite = lstImage2[1];
+            // }
 
             lstImage.Add(Item);
             if (i < itemsPerPage)
@@ -154,7 +154,8 @@ public class ImageMng : MonoBehaviour
             {
 
                 item.IsBuy = true; // Ensure item state is updated
-                // Item.GetComponent<Image>().sprite = item.ItemImg;
+                //1308 bat len, cai cu thi tat cai nay di bat o tren
+                Item.GetComponent<Image>().sprite = item.ItemImg;
                 Item.GetComponent<Button>().onClick.AddListener(() =>
                 {
                     DeactivateAllItems();
