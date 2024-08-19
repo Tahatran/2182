@@ -139,16 +139,10 @@ public class GameCtr : MonoBehaviour
     {
         foreach (GameObject obj in lstCrew)
         {
-            Screw collider = obj.GetComponent<Screw>();
-            if (collider != null)
-            {
-                collider.enabled = false;
-            }
-            CircleCollider2D collider2 = obj.GetComponent<CircleCollider2D>();
-            if (collider != null)
-            {
-                collider2.enabled = false;
-            }
+            // Debug.LogError("|AAa");
+            obj.GetComponent<Screw>().enabled = false;
+            obj.GetComponent<CircleCollider2D>().enabled = false;
+
         }
     }
     public void EnbleAllColliders()
@@ -1010,7 +1004,8 @@ public class GameCtr : MonoBehaviour
         }
 
         // ReadTags();
-        if (PlayerPrefs.GetInt("lv") == 2 && PlayerPrefs.GetInt("CheckTutorialSkin") == 0 || PlayerPrefs.GetInt("lv") == 5 && PlayerPrefs.GetInt("CheckTutorialImage") == 0)
+        //1308 thay bang lv 3
+        if (PlayerPrefs.GetInt("lv") == 2 && PlayerPrefs.GetInt("CheckTutorialSkin") == 0 || PlayerPrefs.GetInt("lv") == 3 && PlayerPrefs.GetInt("CheckTutorialImage") == 0)
         {
             DisableAllColliders();
         }

@@ -146,8 +146,9 @@ public class HomeMng : MonoBehaviour
             // StartCoroutine(Tutorial.instance.TurnOffAfterDelay());
             gameObject.SetActive(false);
             // Image1308.instance.lstUpgameobject.SetActive(true);
-            TweenOnOff tt = GameObject.FindObjectOfType<TweenOnOff>();
-            tt.gameObject.SetActive(false);
+            //lv1 thi bat cai nay len
+            // TweenOnOff tt = GameObject.FindObjectOfType<TweenOnOff>();
+            // tt.gameObject.SetActive(false);
         }
 
     }

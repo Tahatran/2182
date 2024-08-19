@@ -82,6 +82,7 @@ public class Tutorial : MonoBehaviour
         if (PlayerPrefs.GetInt("lv") == 3 && PlayerPrefs.GetInt("CheckTutorialImage") == 0)
         {
             lstTutorialImages[0].SetActive(true);
+            GameCtr.instance.DisableAllColliders();
             // DisableAllRaycasts();
             EnableRaycast(uiElements[1]);
             ImageBlur[0].SetActive(true);
