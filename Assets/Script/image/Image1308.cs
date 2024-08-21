@@ -257,7 +257,7 @@ public class Image1308 : MonoBehaviour
 
     public void SetScore(GameObject parentScoreImage)
     {
-        Debug.LogError(DataConfig.ScoreImage);
+        // Debug.LogError(DataConfig.ScoreImage);
         string levelString = DataConfig.ScoreImage.ToString();
 
         // Xóa tất cả các hình ảnh con trước đó (nếu có)

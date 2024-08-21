@@ -137,19 +137,20 @@ public class HomeMng : MonoBehaviour
         //     Tutorial.instance.EnableRaycast(Tutorial.instance.uiElements[8]);
         // }
 
-        if (Tutorial.instance.lstTutorialImages[0].activeSelf)
-        {
-            Tutorial.instance.lstTutorialImages[0].SetActive(false);
-            Tutorial.instance.ImageBlur[0].SetActive(false);
-            PlayerPrefs.SetInt("CheckTutorialImage", 1);
-            Tutorial.instance.Time_line.SetActive(true);
-            // StartCoroutine(Tutorial.instance.TurnOffAfterDelay());
-            gameObject.SetActive(false);
-            // Image1308.instance.lstUpgameobject.SetActive(true);
-            //lv1 thi bat cai nay len
-            // TweenOnOff tt = GameObject.FindObjectOfType<TweenOnOff>();
-            // tt.gameObject.SetActive(false);
-        }
+        //2108tat
+        // if (Tutorial.instance.lstTutorialImages[0].activeSelf)
+        // {
+        //     Tutorial.instance.lstTutorialImages[0].SetActive(false);
+        //     Tutorial.instance.ImageBlur[0].SetActive(false);
+        //     PlayerPrefs.SetInt("CheckTutorialImage", 1);
+        //     Tutorial.instance.Time_line.SetActive(true);
+        //     // StartCoroutine(Tutorial.instance.TurnOffAfterDelay());
+        //     gameObject.SetActive(false);
+        //     // Image1308.instance.lstUpgameobject.SetActive(true);
+        //     //lv1 thi bat cai nay len
+        //     // TweenOnOff tt = GameObject.FindObjectOfType<TweenOnOff>();
+        //     // tt.gameObject.SetActive(false);
+        // }
 
     }
     // IEnumerator delay()
@@ -310,38 +311,40 @@ public class HomeMng : MonoBehaviour
     public void btnImage()
     {
         Audio.instance.sfxClick.Play();
-        if (PlayerPrefs.GetInt("CheckTutorialImage") == 0)
-        {
-            PlayerPrefs.SetInt("CheckTutorialImage", 1);
-            Tutorial.instance.Time_line.SetActive(true);
-            // StartCoroutine(Tutorial.instance.TurnOffAfterDelay());
-            gameObject.SetActive(false);
-            // Image1308.instance.lstUpgameobject.SetActive(true);
-            TweenOnOff tt = GameObject.FindObjectOfType<TweenOnOff>();
-            tt.gameObject.SetActive(false);
-        }
+
+        //2108tat
+        // if (PlayerPrefs.GetInt("CheckTutorialImage") == 0)
+        // {
+        //     PlayerPrefs.SetInt("CheckTutorialImage", 1);
+        //     Tutorial.instance.Time_line.SetActive(true);
+        //     // StartCoroutine(Tutorial.instance.TurnOffAfterDelay());
+        //     gameObject.SetActive(false);
+        //     // Image1308.instance.lstUpgameobject.SetActive(true);
+        //     TweenOnOff tt = GameObject.FindObjectOfType<TweenOnOff>();
+        //     tt.gameObject.SetActive(false);
+        // }
         // if (PlayerPrefs.GetInt("lv") >= 5)
         // {
         // Image1308.instance.LoadImage();
-        else
+        // else
+        // {
+        Image1308.instance.LoadSaveImage();
+        ImageMng.GetComponent<ImageMng>().LoadShop();
+        Image1308.instance.ResetImage();
+        // Audio.instance.sfxClick.Play();
+        if (Tutorial.instance.lstTutorialImages[1].activeSelf)
         {
-            Image1308.instance.LoadSaveImage();
-            ImageMng.GetComponent<ImageMng>().LoadShop();
-            Image1308.instance.ResetImage();
-            // Audio.instance.sfxClick.Play();
-            if (Tutorial.instance.lstTutorialImages[1].activeSelf)
-            {
-                Tutorial.instance.lstTutorialImages[1].SetActive(false);
-                Tutorial.instance.lstTutorialImages[2].SetActive(true);
-                Tutorial.instance.ImageBlur[1].SetActive(false);
-                Tutorial.instance.ImageBlur[2].SetActive(true);
-            }
-            ImgageSelect.SetActive(true);
-            Skin.SetActive(false);
-            Image.SetActive(true);
-            HomeSelect.SetActive(false);
-            SkinSelect.SetActive(false);
+            Tutorial.instance.lstTutorialImages[1].SetActive(false);
+            Tutorial.instance.lstTutorialImages[2].SetActive(true);
+            Tutorial.instance.ImageBlur[1].SetActive(false);
+            Tutorial.instance.ImageBlur[2].SetActive(true);
         }
+        ImgageSelect.SetActive(true);
+        Skin.SetActive(false);
+        Image.SetActive(true);
+        HomeSelect.SetActive(false);
+        SkinSelect.SetActive(false);
+        // }
 
 
         // }

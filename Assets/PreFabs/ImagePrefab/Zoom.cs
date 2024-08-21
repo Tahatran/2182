@@ -169,7 +169,7 @@ public class PanZoom : MonoBehaviour
         // if (clampedMaxX > b) clampedMaxX = a;
         // if (clampedMinY < -b) clampedMinY = -a;
         // if (clampedMaxY > b) clampedMaxY = a;
-        Debug.LogError("cu---" + currentOrthographicSize + "-----zooom" + zoomOutMax + "----ket qua" + currentOrthographicSize / zoomOutMax);
+        // Debug.LogError("cu---" + currentOrthographicSize + "-----zooom" + zoomOutMax + "----ket qua" + currentOrthographicSize / zoomOutMax);
 
         Camera.main.transform.position = new Vector3(
             Mathf.Clamp(Camera.main.transform.position.x, clampedMinX, clampedMaxX),

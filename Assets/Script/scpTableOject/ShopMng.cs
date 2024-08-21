@@ -62,11 +62,17 @@ public class ShopMng : MonoBehaviour
         }
         if (Tutorial.instance.lstTutorialSkins[3].activeSelf)
         {
+            // Tutorial.instance.SKinBlur[3].SetActive(false);
+            // Tutorial.instance.SKinBlur[4].SetActive(true);
+            // Tutorial.instance.lstTutorialSkins[3].SetActive(false);
+            // Tutorial.instance.lstTutorialSkins[4].SetActive(true);
+            // Tutorial.instance.EnableRaycast(Tutorial.instance.uiElements[6]);
+            //2108 tat cai tren bat cai duoi
             Tutorial.instance.SKinBlur[3].SetActive(false);
-            Tutorial.instance.SKinBlur[4].SetActive(true);
+            Tutorial.instance.ImageBlur[1].SetActive(true);
             Tutorial.instance.lstTutorialSkins[3].SetActive(false);
-            Tutorial.instance.lstTutorialSkins[4].SetActive(true);
-            Tutorial.instance.EnableRaycast(Tutorial.instance.uiElements[6]);
+            Tutorial.instance.lstTutorialImages[1].SetActive(true);
+            Tutorial.instance.EnableRaycast(Tutorial.instance.uiElements[8]);
         }
     }
 

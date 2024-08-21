@@ -153,6 +153,7 @@ public class ImageMng : MonoBehaviour
             if (isUnlocked)
             {
 
+
                 item.IsBuy = true; // Ensure item state is updated
                 //1308 bat len, cai cu thi tat cai nay di bat o tren
                 Item.GetComponent<Image>().sprite = item.ItemImg;
@@ -167,15 +168,28 @@ public class ImageMng : MonoBehaviour
                     Item.transform.GetChild(2).gameObject.SetActive(true); // Activate some UI element
                     if (Tutorial.instance.lstTutorialImages[2].activeSelf)
                     {
+                        // //tang len 1 do sua luong, bo select
+                        // Tutorial.instance.ImageBlur[2].SetActive(false);
+                        // // Tutorial.instance.ImageBlur[3].SetActive(true);
+                        // Tutorial.instance.ImageBlur[4].SetActive(true);
+                        // Tutorial.instance.lstTutorialImages[2].SetActive(false);
+                        // // Tutorial.instance.lstTutorialImages[3].SetActive(true);
+                        // Tutorial.instance.lstTutorialImages[4].SetActive(true);
+                        // // Tutorial.instance.EnableRaycast(Tutorial.instance.uiElements[5]);
+                        // Tutorial.instance.EnableRaycast(Tutorial.instance.uiElements[3]);
+
+                        //2108 tat cai o tren
                         //tang len 1 do sua luong, bo select
                         Tutorial.instance.ImageBlur[2].SetActive(false);
                         // Tutorial.instance.ImageBlur[3].SetActive(true);
-                        Tutorial.instance.ImageBlur[4].SetActive(true);
+                        // Tutorial.instance.ImageBlur[4].SetActive(true);
+                        // Tutorial.instance.lstTutorialImages[2].SetActive(false);
                         Tutorial.instance.lstTutorialImages[2].SetActive(false);
-                        // Tutorial.instance.lstTutorialImages[3].SetActive(true);
-                        Tutorial.instance.lstTutorialImages[4].SetActive(true);
+                        int CheckTutorialSkin = 1;
+                        PlayerPrefs.SetInt("CheckTutorialSkin", CheckTutorialSkin);
+                        // Tutorial.instance.lstTutorialImages[4].SetActive(true);
                         // Tutorial.instance.EnableRaycast(Tutorial.instance.uiElements[5]);
-                        Tutorial.instance.EnableRaycast(Tutorial.instance.uiElements[3]);
+                        // Tutorial.instance.EnableRaycast(Tutorial.instance.uiElements[3]);
                     }
                 });
             }
@@ -207,6 +221,15 @@ public class ImageMng : MonoBehaviour
                 // }
 
             }
+
+        }
+        if (PlayerPrefs.GetInt("lv") == 2 && PlayerPrefs.GetInt("CheckTutorialSkin") == 0)
+        {
+            lstImage[1].GetComponent<Button>().enabled = false;
+            lstImage[2].GetComponent<Button>().enabled = false;
+            lstImage[3].GetComponent<Button>().enabled = false;
+            lstImage[4].GetComponent<Button>().enabled = false;
+            lstImage[5].GetComponent<Button>().enabled = false;
         }
         // lstImage[DataConfig.EffectIndex].transform.GetChild(2).gameObject.SetActive(true);
         ShopContent.SetActive(true); // Ensure ShopContent is active after loading

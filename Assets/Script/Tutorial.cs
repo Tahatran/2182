@@ -56,6 +56,7 @@ public class Tutorial : MonoBehaviour
         Image1308.instance.lstUpgameobject.SetActive(true);
         Image1308.instance.SetScore(Image1308.instance.parentScoreImage);
         Time_line.SetActive(false);
+        EnbleAllRaycasts();
         // HomeMng.instance.gameObject.SetActive(true);
         // Image1308.instance.LoadSaveImage();
         // HomeMng.instance.ImageMng.GetComponent<ImageMng>().LoadShop();
@@ -95,14 +96,18 @@ public class Tutorial : MonoBehaviour
         // int activeCount = PlayerPrefs.GetInt("0");
         // if (activeCount != 4)
         // {
-        if (PlayerPrefs.GetInt("lv") == 3 && PlayerPrefs.GetInt("CheckTutorialImage") == 0)
-        {
-            lstTutorialImages[0].SetActive(true);
-            GameCtr.instance.DisableAllColliders();
-            // DisableAllRaycasts();
-            EnableRaycast(uiElements[1]);
-            ImageBlur[0].SetActive(true);
-        }
+
+        //2108 tat
+        // if (PlayerPrefs.GetInt("lv") == 3 && PlayerPrefs.GetInt("CheckTutorialImage") == 0)
+        // {
+        //     lstTutorialImages[0].SetActive(true);
+        //     GameCtr.instance.DisableAllColliders();
+        //     // DisableAllRaycasts();
+        //     EnableRaycast(uiElements[1]);
+        //     ImageBlur[0].SetActive(true);
+        // }
+
+
         // }
 
 
