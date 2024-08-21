@@ -82,7 +82,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2986d16281164964099f807197a13f41, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  idSprite: 0
+  idSprite: -1
   Checkfill: 0
 --- !u!1 &7336898777854741682
 GameObject:

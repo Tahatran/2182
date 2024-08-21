@@ -18,7 +18,7 @@ public class Image1308 : MonoBehaviour
     public GameObject menuPanel;
     public int idSelect = 0;
     [SerializeField] private GameObject scoreImagePrefab;
-    [SerializeField] private GameObject parentScoreImage;
+    [SerializeField] public GameObject parentScoreImage;
     private const string SaveKey = "SavedIdSprites";
 
     public static Image1308 instance;

@@ -24,7 +24,7 @@ public class setScrew : MonoBehaviour
         // {
         //     Image1308.instance.FillandSaveScore();
         // }
-        if (DataConfig.ScoreImage > 0)
+        if (DataConfig.ScoreImage > 0 && idSprite != Image1308.instance.idSelect)
         {
             Image1308.instance.FillandSaveScore();
             gameObject.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sprite = Image1308.instance.lstSprites[Image1308.instance.idSelect];

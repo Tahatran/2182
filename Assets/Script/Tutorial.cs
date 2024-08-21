@@ -29,6 +29,17 @@ public class Tutorial : MonoBehaviour
         TutorialSkin();
         TutorialImage();
     }
+
+    public void WatchTutorial()
+    {
+        Image1308.instance.lstUpgameobject.SetActive(false);
+        HomeMng.instance.btnBack2.SetActive(false);
+        HomeMng.instance.ImageGameObject1308.SetActive(false);
+        Time_line.SetActive(true);
+        int scoreImage = PlayerPrefs.GetInt("ScoreImage", 0);
+        PlayerPrefs.SetInt("ScoreImage", scoreImage + 4);
+        DataConfig.ScoreImage = PlayerPrefs.GetInt("ScoreImage", 0);
+    }
     public IEnumerator TurnOffAfterDelay()
     {
         // Đợi 30 giây
@@ -37,9 +48,14 @@ public class Tutorial : MonoBehaviour
         // Debug.LogError("AAAAAAAAAAAAAAAAAAA");
 
         // Tắt GameObject
-        Tutorial.instance.Time_line.SetActive(false);
-        HomeMng.instance.gameObject.SetActive(true);
-        Tutorial.instance.EnbleAllRaycasts();
+
+        // HomeMng.instance.gameObject.SetActive(true);
+        EnbleAllRaycasts();
+        HomeMng.instance.ImageGameObject1308.SetActive(true);
+        HomeMng.instance.btnBack2.SetActive(true);
+        Image1308.instance.lstUpgameobject.SetActive(true);
+        Image1308.instance.SetScore(Image1308.instance.parentScoreImage);
+        Time_line.SetActive(false);
         // HomeMng.instance.gameObject.SetActive(true);
         // Image1308.instance.LoadSaveImage();
         // HomeMng.instance.ImageMng.GetComponent<ImageMng>().LoadShop();
