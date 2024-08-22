@@ -23,6 +23,7 @@ public class GameCtr : MonoBehaviour
     // public List<Texture> lstTexture;
     // public List<int> LstReward;
 
+    public GameObject WinRewardPanel;
     public GameObject bglose;
     public GameObject TutorLv2;
     public GameObject Loading;
@@ -771,18 +772,42 @@ public class GameCtr : MonoBehaviour
         yield return new WaitForSeconds(delay);
         // autonextlvwhenwin();
         Winpanel.SetActive(false);
-        Winpanel2.SetActive(true);
-        Winpanel2.transform.GetChild(2).DOScale(0.5f, 0.8f).SetEase(Ease.OutQuad)
-        .OnComplete(() =>
-                  {
-                      DOVirtual.DelayedCall(0.2f, () =>
-                         {
-                             //   yield return new WaitForSeconds(0.3f);
-                             Winpanel2.transform.GetChild(3).gameObject.SetActive(true);
-                             Winpanel2.transform.GetChild(4).gameObject.SetActive(true);
-                         });
+        if (PlayerPrefs.GetInt("lv") == 2 || PlayerPrefs.GetInt("lv") == 3 || PlayerPrefs.GetInt("lv") == 7 || PlayerPrefs.GetInt("lv") == 10
+        || PlayerPrefs.GetInt("lv") == 11 || PlayerPrefs.GetInt("lv") == 14 && PlayerPrefs.GetInt("lv") == 19)
+        {
+            if (PlayerPrefs.GetInt("lv") == 1 || PlayerPrefs.GetInt("lv") == 10)
+            {
+                WinRewardPanel.SetActive(true);
+                WinRewardPanel.transform.GetChild(2).DOScale(0.5f, 0.8f).SetEase(Ease.OutQuad)
+                .OnComplete(() =>
+                      {
+                          DOVirtual.DelayedCall(0.2f, () =>
+                             {
+                                 //   yield return new WaitForSeconds(0.3f);
+                                 WinRewardPanel.transform.GetChild(3).gameObject.SetActive(true);
+                                 WinRewardPanel.transform.GetChild(4).gameObject.SetActive(true);
+                             });
+                      }}
+            else
+            {
 
-                  });
+            }
+        }
+        else
+        {
+            Winpanel2.SetActive(true);
+            Winpanel2.transform.GetChild(2).DOScale(0.5f, 0.8f).SetEase(Ease.OutQuad)
+            .OnComplete(() =>
+                      {
+                          DOVirtual.DelayedCall(0.2f, () =>
+                             {
+                                 //   yield return new WaitForSeconds(0.3f);
+                                 Winpanel2.transform.GetChild(3).gameObject.SetActive(true);
+                                 Winpanel2.transform.GetChild(4).gameObject.SetActive(true);
+                             });
+
+                      });
+        }
 
         // StartCoroutine(DelayedbtnNext(2f));
     }

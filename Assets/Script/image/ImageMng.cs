@@ -90,6 +90,31 @@ public class ImageMng : MonoBehaviour
 
     public void LoadShop()
     {
+        if (PlayerPrefs.GetInt("lv") == 3)
+        {
+            ImageItemData.Items[2].IsBuy = true;
+            PlayerPrefs.SetInt("ImageUnlocked_" + 2, 1); // Save the unlock status
+        }
+        if (PlayerPrefs.GetInt("lv") == 7)
+        {
+            ImageItemData.Items[3].IsBuy = true;
+            PlayerPrefs.SetInt("ImageUnlocked_" + 3, 1); // Save the unlock status
+        }
+        if (PlayerPrefs.GetInt("lv") == 10)
+        {
+            ImageItemData.Items[4].IsBuy = true;
+            PlayerPrefs.SetInt("ImageUnlocked_" + 4, 1); // Save the unlock status
+        }
+        if (PlayerPrefs.GetInt("lv") == 14)
+        {
+            ImageItemData.Items[5].IsBuy = true;
+            PlayerPrefs.SetInt("ImageUnlocked_" + 5, 1); // Save the unlock status
+        }
+        if (PlayerPrefs.GetInt("lv") == 19)
+        {
+            ImageItemData.Items[6].IsBuy = true;
+            PlayerPrefs.SetInt("ImageUnlocked_" + 6, 1); // Save the unlock status
+        }
         // Debug.LogError("aaaaa");
         int itemsPerPage = 8; // Number of items per page
 
@@ -102,38 +127,6 @@ public class ImageMng : MonoBehaviour
         {
             ItemData item = ImageItemData.Items[i];
             GameObject Item = Instantiate(ItemPrefab);
-
-            //1308 nen se dong, code cu, dung thi bat len
-            // Lấy giá trị đã lưu trong PlayerPrefs
-            // int value = PlayerPrefs.GetInt((i).ToString());
-            // // Kiểm tra và gán hình ảnh dựa trên giá trị
-            // if (value == 0)
-            // {
-            //     Item.GetComponent<Image>().sprite = lstImage2[0];
-            // }
-            // else if (value == 4)
-            // {
-            //     Item.GetComponent<Image>().sprite = item.ItemImg;
-            // }
-            // else if (value >= 1 && value < 4)
-            // {
-            //     Item.GetComponent<Image>().sprite = lstImage2[1];
-            // }
-
-            //1308 neu can tinh xem dang select toi dau de hien thi hoi cham va ba cham
-            // var a = Image1308.instance.ImageShowPanel(i);
-            // if (a == 0)
-            // {
-            //     Item.GetComponent<Image>().sprite = lstImage2[0];
-            // }
-            // else if (a == 1)
-            // {
-            //     Item.GetComponent<Image>().sprite = item.ItemImg;
-            // }
-            // else if (a == 2)
-            // {
-            //     Item.GetComponent<Image>().sprite = lstImage2[1];
-            // }
 
             lstImage.Add(Item);
             if (i < itemsPerPage)
@@ -153,9 +146,7 @@ public class ImageMng : MonoBehaviour
             if (isUnlocked)
             {
 
-
                 item.IsBuy = true; // Ensure item state is updated
-                //1308 bat len, cai cu thi tat cai nay di bat o tren
                 Item.GetComponent<Image>().sprite = item.ItemImg;
                 Item.GetComponent<Button>().onClick.AddListener(() =>
                 {
@@ -168,28 +159,11 @@ public class ImageMng : MonoBehaviour
                     Item.transform.GetChild(2).gameObject.SetActive(true); // Activate some UI element
                     if (Tutorial.instance.lstTutorialImages[2].activeSelf)
                     {
-                        // //tang len 1 do sua luong, bo select
-                        // Tutorial.instance.ImageBlur[2].SetActive(false);
-                        // // Tutorial.instance.ImageBlur[3].SetActive(true);
-                        // Tutorial.instance.ImageBlur[4].SetActive(true);
-                        // Tutorial.instance.lstTutorialImages[2].SetActive(false);
-                        // // Tutorial.instance.lstTutorialImages[3].SetActive(true);
-                        // Tutorial.instance.lstTutorialImages[4].SetActive(true);
-                        // // Tutorial.instance.EnableRaycast(Tutorial.instance.uiElements[5]);
-                        // Tutorial.instance.EnableRaycast(Tutorial.instance.uiElements[3]);
-
-                        //2108 tat cai o tren
-                        //tang len 1 do sua luong, bo select
                         Tutorial.instance.ImageBlur[2].SetActive(false);
-                        // Tutorial.instance.ImageBlur[3].SetActive(true);
-                        // Tutorial.instance.ImageBlur[4].SetActive(true);
-                        // Tutorial.instance.lstTutorialImages[2].SetActive(false);
                         Tutorial.instance.lstTutorialImages[2].SetActive(false);
                         int CheckTutorialSkin = 1;
                         PlayerPrefs.SetInt("CheckTutorialSkin", CheckTutorialSkin);
-                        // Tutorial.instance.lstTutorialImages[4].SetActive(true);
-                        // Tutorial.instance.EnableRaycast(Tutorial.instance.uiElements[5]);
-                        // Tutorial.instance.EnableRaycast(Tutorial.instance.uiElements[3]);
+
                     }
                 });
             }
@@ -216,10 +190,6 @@ public class ImageMng : MonoBehaviour
                                        }
                                    });
                 }
-                // if (PlayerPrefs.GetInt("CheckTutorialImage") != 0){
-                //     Item.GetComponent<Button>().enabled = false;
-                // }
-
             }
 
         }
