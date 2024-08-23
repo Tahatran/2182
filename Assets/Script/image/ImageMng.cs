@@ -198,7 +198,7 @@ public class ImageMng : MonoBehaviour
             }
 
         }
-        if (PlayerPrefs.GetInt("lv") == 2 && PlayerPrefs.GetInt("CheckTutorialSkin") == 0)
+        if (PlayerPrefs.GetInt("lv") == 3 && Tutorial.instance.lstTutorialImages[2].activeSelf)
         {
             lstImage[1].GetComponent<Button>().enabled = false;
             lstImage[2].GetComponent<Button>().enabled = false;

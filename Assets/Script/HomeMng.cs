@@ -76,18 +76,23 @@ public class HomeMng : MonoBehaviour
         gameObject.SetActive(true);
         btnImage();
         PanZoom.instance.Resetcamera();
-
-        if (Tutorial.instance.lstTutorialImages[5].activeSelf)
+        if (Tutorial.instance.lstTutorialImages[2].activeSelf)
         {
-            Tutorial.instance.ImageBlur[5].SetActive(false);
-            Tutorial.instance.lstTutorialImages[5].SetActive(false);
-
-            // Tutorial.instance.lstTutorialImages[5].SetActive(true);
-            int CheckTutorialImage = 1;
-            PlayerPrefs.SetInt("CheckTutorialImage", CheckTutorialImage);
+            Tutorial.instance.ImageBlur[2].SetActive(false);
+            Tutorial.instance.lstTutorialImages[2].SetActive(false);
             Tutorial.instance.EnbleAllRaycasts();
-            ImageMng.GetComponent<ImageMng>().LoadShop();
         }
+        // if (Tutorial.instance.lstTutorialImages[5].activeSelf)
+        // {
+        //     Tutorial.instance.ImageBlur[5].SetActive(false);
+        //     Tutorial.instance.lstTutorialImages[5].SetActive(false);
+
+        //     // Tutorial.instance.lstTutorialImages[5].SetActive(true);
+        //     int CheckTutorialImage = 1;
+        //     PlayerPrefs.SetInt("CheckTutorialImage", CheckTutorialImage);
+        //     Tutorial.instance.EnbleAllRaycasts();
+        //     ImageMng.GetComponent<ImageMng>().LoadShop();
+        // }
 
     }
     public void btnBacktoImage()
@@ -100,6 +105,12 @@ public class HomeMng : MonoBehaviour
         gameObject.SetActive(true);
 
         btnImage();
+        if (Tutorial.instance.lstTutorialImages[2].activeSelf)
+        {
+            Tutorial.instance.ImageBlur[2].SetActive(false);
+            Tutorial.instance.lstTutorialImages[2].SetActive(false);
+            Tutorial.instance.EnbleAllRaycasts();
+        }
 
         // if (Tutorial.instance.lstTutorialImages[5].activeSelf)
         // {
@@ -286,13 +297,14 @@ public class HomeMng : MonoBehaviour
     public void btnSkin()
     {
         //thay vi start o shopmng thi goi o day 
-        ShopMng.GetComponent<ShopMng>().LoadShop();
-        Audio.instance.sfxClick.Play();
         if (PlayerPrefs.GetInt("lv") == 2)
         {
             Tutorial.instance.lstTutorialSkins[2].SetActive(true);
             Tutorial.instance.SKinBlur[2].SetActive(true);
         }
+        ShopMng.GetComponent<ShopMng>().LoadShop();
+        Audio.instance.sfxClick.Play();
+
         // if (Tutorial.instance.lstTutorialSkins[1].activeSelf)
         // {
         //     Tutorial.instance.lstTutorialSkins[1].SetActive(false);
@@ -329,6 +341,7 @@ public class HomeMng : MonoBehaviour
 
     public void btnImage()
     {
+        Input.multiTouchEnabled = true;
         Audio.instance.sfxClick.Play();
 
         //2108tat

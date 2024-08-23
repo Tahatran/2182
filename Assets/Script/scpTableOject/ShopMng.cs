@@ -218,6 +218,14 @@ public class ShopMng : MonoBehaviour
               });
             }
         }
+        if (PlayerPrefs.GetInt("lv") == 2 && Tutorial.instance.lstTutorialSkins[2].activeSelf)
+        {
+            lstSkin[0].GetComponent<Button>().enabled = false;
+            lstSkin[2].GetComponent<Button>().enabled = false;
+            lstSkin[3].GetComponent<Button>().enabled = false;
+            lstSkin[4].GetComponent<Button>().enabled = false;
+            // lstSkin[5].GetComponent<Button>().enabled = false;
+        }
         lstSkin[DataConfig.EffectIndex].transform.GetChild(2).gameObject.SetActive(true);
         lstSkin[DataConfig.EffectIndex].transform.GetChild(3).gameObject.SetActive(true);
         id = DataConfig.EffectIndex;

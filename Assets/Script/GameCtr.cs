@@ -8,16 +8,16 @@ using DG.Tweening;
 using System;
 using Unity.VisualScripting;
 
-[System.Serializable]
-public class Serialization<T>
-{
-    public List<T> target;
+// [System.Serializable]
+// public class Serialization<T>
+// {
+//     public List<T> target;
 
-    public Serialization(List<T> target)
-    {
-        this.target = target;
-    }
-}
+//     public Serialization(List<T> target)
+//     {
+//         this.target = target;
+//     }
+// }
 public class GameCtr : MonoBehaviour
 {
     // adb shell setprop debug.firebase.analytics.app nami.screw.tinkerer.puzzlegame
@@ -60,21 +60,12 @@ public class GameCtr : MonoBehaviour
     public int colNumber;
     public int rowNumber;
 
-    // public List<Sprite> BulongfacespriteList;
-    // public List<Sprite> BulongbodyspriteList;
-    // public List<Sprite> ScrewspriteList;
     public List<GridPrefab> lstGrid;
 
     public List<GameObject> lstBulong;
     public List<GameObject> lstCrew;
 
-    // public List<string> bulongTags = new List<string>(); // List chứa các tag của Bulong
-    // public List<string> crewTags = new List<string>(); // List chứa các tag của Screw
     public int lv = 1;
-    // public int check3ads = 0;
-    // public float checktime = 0;
-    // public bool checkads = false;
-
     private float hexWidth = 1.0f; // chiều rộng của một hexagon
     private float hexHeight = Mathf.Sqrt(0.8f) / 2 * 1.0f;
     private bool isNextLvCalled = false;
@@ -98,38 +89,18 @@ public class GameCtr : MonoBehaviour
         GameAds.Get.ShowBanner();
         GameAds.Get.ShowInterstitialAd();
 
-        // if (checkads == true)
-        // {
-        //     GameAds.Get.ShowInterstitialAd();
-        //     checkads = false;
-        // }
-        // if (PlayerPrefs.GetInt("Check3ads") > 2 && checktime > 180f)
-        // {
-        //     GameAds.Get.ShowInterstitialAd();
-        //     check3ads = 0;
-        //     checktime = 0;
-        //     PlayerPrefs.SetInt("Check3ads", check3ads);
-        // }
-        DataConfig.ScoreImage = PlayerPrefs.GetInt("ScoreImage", 0);
-        // DataConfig.ScoreImage = PlayerPrefs.GetInt("ScoreImage", 999);
+        // DataConfig.ScoreImage = PlayerPrefs.GetInt("ScoreImage", 0);
+        DataConfig.ScoreImage = PlayerPrefs.GetInt("ScoreImage", 12);
         //BuildTurnoff
         // DataConfig.ScoreImage = 100;
-        // SaveReward();
-        // LoadReward();
         DOTween.KillAll();
         // Input.multiTouchEnabled = false;
         setUpLv();
-        // lv = 1;
-        // PlayerPrefs.SetInt("lv", lv);
         SetLevelText(parentLevelText);
         //tools thì tắt
-        loadgame();
-
-        // GameFirebase.SendEvent("start_level", "id_level", PlayerPrefs.GetInt("lv").ToString());
+        Loadgame();
         ShowLogFireBase.Instance.ShowStartLevel();
         ShowLogFireBase.Instance.time_win = Time.time;
-        // Debug.Log("log-event-start_level----id_level: " + PlayerPrefs.GetInt("lv"));
-        // StartCoroutine(DelayedGenerateGrid());
     }
     public void TurnOffTurtorialLv2()
     {
@@ -140,10 +111,8 @@ public class GameCtr : MonoBehaviour
     {
         foreach (GameObject obj in lstCrew)
         {
-            // Debug.LogError("|AAa");
             obj.GetComponent<Screw>().enabled = false;
             obj.GetComponent<CircleCollider2D>().enabled = false;
-
         }
     }
     public void EnbleAllColliders()
@@ -158,9 +127,9 @@ public class GameCtr : MonoBehaviour
         }
     }
 
-    public void loadgame()
+    public void Loadgame()
     {
-
+        Input.multiTouchEnabled = false;
         UI.transform.DOMoveY(-0.4f, 0.3f).SetEase(Ease.OutQuad).OnUpdate(() =>
         {
             SoundandReplay.GetComponent<RectTransform>().DOAnchorPosY(-185, 0.3f).SetEase(Ease.OutQuad);
@@ -180,7 +149,6 @@ public class GameCtr : MonoBehaviour
         // DisableAllColliders();
         btnReset.SetActive(false);
         audioToggle.SetActive(false);
-
         foreach (Transform child in gridContainer.transform)
         {
             Destroy(child.gameObject);
@@ -195,101 +163,59 @@ public class GameCtr : MonoBehaviour
     {
         yield return new WaitForSeconds(0.5f); // Change the delay time as needed
         onGenerateGrid();
-
     }
-    public void buttonNext()
+    public void ButtonNext()
     {
         nextLv();
         SceneManager.LoadScene(0);
     }
     public void ReplayLoseBtn()
     {
-        // Audio.instance.sfxClick.Stop();
         Audio.instance.sfxClick.Play();
-        // CheckLogFirebase.Instance.TotalNumberTries += 1;
-
-        // Debug.Log("aaaa");
-
         GameFirebase.SendEvent("Level", "level-game-lose " + PlayerPrefs.GetInt("lv"));
         SceneManager.LoadScene(0);
-        // var rect = losePopup.GetComponent<RectTransform>();
-        // rect.DOAnchorPos(new Vector2(rect.anchoredPosition.x, 2000), 0.5f)
-        //     .SetEase(Ease.InFlash)
-        //     .OnComplete(() => { SceneManager.LoadScene(0); });
     }
     public void SetLevelText(GameObject parentLevelText)
     {
-        // Lấy giá trị level từ PlayerPrefs
-        var level = PlayerPrefs.GetInt("lv");
-
-        // Chuyển giá trị level thành chuỗi
-        // string levelString = level.ToString();
-        string levelString = level.ToString();
+        var level = PlayerPrefs.GetInt("lv");  // Lấy giá trị level từ PlayerPrefs
+        string levelString = level.ToString();     // Chuyển giá trị level thành chuỗi
         // string levelString = "2";
-        // Debug.Log("level" + levelString);
-
-        // Xóa tất cả các hình ảnh con trước đó (nếu có)
-        foreach (Transform child in parentLevelText.transform)
+        foreach (Transform child in parentLevelText.transform)   // Xóa tất cả các hình ảnh con trước đó (nếu có)
         {
             Destroy(child.gameObject);
         }
-
-        // Đặt khoảng cách giữa các chữ số
         float spacing = 0.89f; // điều chỉnh khoảng cách giữa các chữ số tùy thuộc vào yêu cầu của bạn
 
-        // Duyệt qua từng chữ số trong chuỗi levelString
-        for (int i = 0; i < levelString.Length; i++)
+        for (int i = 0; i < levelString.Length; i++)   // Duyệt qua từng chữ số trong chuỗi levelString
         {
-            // Chuyển chữ số thành giá trị số nguyên
-            int digitValue = (int)char.GetNumericValue(levelString[i]);
-
-            // Instantiate một bản sao của levelText và đặt nó làm con của parentLevelText
-            var imageLevelClone = Instantiate(levelText, Vector2.zero, Quaternion.identity, parentLevelText.transform);
-
-            // Tính toán vị trí x của hình ảnh chữ số
-            float xPos = i * spacing;
-
-            // Đặt vị trí của imageLevelClone
+            int digitValue = (int)char.GetNumericValue(levelString[i]);   // Chuyển chữ số thành giá trị số nguyên
+            var imageLevelClone = Instantiate(levelText, Vector2.zero, Quaternion.identity, parentLevelText.transform); // Instantiate một bản sao của levelText và đặt nó làm con của parentLevelText
+            float xPos = i * spacing;  // Tính toán vị trí x của hình ảnh chữ số
             if (int.Parse(levelString) < 10)
             {
-                imageLevelClone.transform.localPosition = new Vector3(xPos - 0.03f, 0, 0);
+                imageLevelClone.transform.localPosition = new Vector3(xPos - 0.03f, 0, 0);    // Đặt vị trí của imageLevelClone
             }
             else
             {
                 imageLevelClone.transform.localPosition = new Vector3(xPos - 0.48f, 0, 0);
             }
-
             imageLevelClone.transform.localScale = new Vector3(0.8f, 0.8f, 0.8f);
-
             var imageLevel = imageLevelClone.GetComponent<SpriteRenderer>();
-
-            // Gắn sprite tương ứng với chữ số
-            imageLevel.sprite = sprites[digitValue];
+            imageLevel.sprite = sprites[digitValue];  // Gắn sprite tương ứng với chữ số
         }
     }
 
     public void SetLevelTextEnd(GameObject parentLevelText)
     {
-        // Lấy giá trị level từ PlayerPrefs
-        var level = PlayerPrefs.GetInt("lv");
-
-        // Chuyển giá trị level thành chuỗi
-        // string levelString = level.ToString();
-        string levelString = level.ToString();
-        // string levelString = "10";
-        // Debug.Log("level" + levelString);
-
-        // Xóa tất cả các hình ảnh con trước đó (nếu có)
+        var level = PlayerPrefs.GetInt("lv");  // Lấy giá trị level từ PlayerPrefs
+        string levelString = level.ToString();      // Chuyển giá trị level thành chuỗi
+        // string levelString = "10";   
         foreach (Transform child in parentLevelText.transform)
         {
-            Destroy(child.gameObject);
+            Destroy(child.gameObject);  // Xóa tất cả các hình ảnh con trước đó (nếu có)
         }
-
-        // Đặt khoảng cách giữa các chữ số
         float spacing = 108f; // điều chỉnh khoảng cách giữa các chữ số tùy thuộc vào yêu cầu của bạn
-
-        // Duyệt qua từng chữ số trong chuỗi levelString
-        for (int i = 0; i < levelString.Length; i++)
+        for (int i = 0; i < levelString.Length; i++)   // Duyệt qua từng chữ số trong chuỗi levelString
         {
             // Chuyển chữ số thành giá trị số nguyên
             int digitValue = (int)char.GetNumericValue(levelString[i]);
@@ -323,11 +249,7 @@ public class GameCtr : MonoBehaviour
     {
         // Audio.instance.sfxClick.Stop();
         Audio.instance.sfxClick.Play();
-        // GameAds.Get.LoadAdsInter();
-        // GameAds.Get.ShowInterstitialAd();
         ShowLogFireBase.Instance.AddNumberTriesLevel();
-        // Debug.Log(ShowLogFireBase.Instance.numberTrise);
-
         // xoa cac phan tu 
         lstBulong.Clear();
         lstCrew.Clear();
@@ -361,106 +283,16 @@ public class GameCtr : MonoBehaviour
             lv = 1;
             PlayerPrefs.SetInt("lv", lv);
         }
-
-        // check 3 game bawns ads
-        // if (!PlayerPrefs.HasKey("Check3ads"))
-        // {
-        //     check3ads = 0;
-        //     PlayerPrefs.SetInt("Check3ads", check3ads);
-        // }
-
-        // if (!PlayerPrefs.HasKey("number_tries"))
-        // {
-        //     int number = 0;
-        //     PlayerPrefs.SetInt("number_tries", number);
-        // }
-        // if (!PlayerPrefs.HasKey("time_play"))
-        // {
-        //     int time = 0;
-        //     PlayerPrefs.SetFloat("time_play", time);
-        // }
-
-
     }
 
     public void nextLv()
     {
-        // Debug.Log("next");
-        // GameFirebase.SendEvent("level-win", PlayerPrefs.GetInt("lv").ToString());
-
-        // CheckLogFirebase.Instance.TimeEnd = Time.time;
-        // CheckLogFirebase.Instance.TotalTimeMap();
-        // GameFirebase.SendEvent("complete_level",
-        // "id_level", PlayerPrefs.GetInt("lv").ToString(),
-        // "number_tries", (CheckLogFirebase.Instance.TotalNumberTries + PlayerPrefs.GetInt("number_tries")).ToString(),
-        // "time_play", Math.Round(CheckLogFirebase.Instance.TotalTime + PlayerPrefs.GetFloat("time_play")).ToString());
-        // PlayerPrefs.SetInt("number_tries", 0);
-        // PlayerPrefs.SetFloat("time_play", 0);
-        // Debug.Log("check-log-complete_level----id_level: " + PlayerPrefs.GetInt("lv"));
-        // Debug.Log("check-log-complete_level----number_tries: " + CheckLogFirebase.Instance.TotalNumberTries);
-        // Debug.Log("check-log-complete-level----time_play: " + CheckLogFirebase.Instance.TotalTime.ToString());
-        // CheckLogFirebase.Instance.TotalNumberTries = 1;
         int lv = PlayerPrefs.GetInt("lv") + 1;
         if (lv > 25)
         {
             lv = 1;
         }
         PlayerPrefs.SetInt("lv", lv);
-        // checkads = true;
-        // Debug.Log(PlayerPrefs.GetInt("lv"));
-
-        //3 game ban ads
-        // check3ads = PlayerPrefs.GetInt("Check3ads") + 1;
-        // PlayerPrefs.SetInt("Check3ads", check3ads);
-
-        //
-
-    }
-
-    protected void OnApplicationPause(bool pauseStatus)
-    {
-        // if (pauseStatus)
-        // {
-        //     CheckLogFirebase.Instance.TotalTimePause();
-        //     if (CheckLogFirebase.Instance.TimePause > 0)
-        //     {
-        //         GameFirebase.SendEvent("pause_game",
-        //         "time_play", Math.Round(CheckLogFirebase.Instance.TimePause).ToString(),
-        //         "id_level", PlayerPrefs.GetInt("lv").ToString(),
-        //         "number_tries", CheckLogFirebase.Instance.TotalNumberTries.ToString()
-        //         );
-        //         PlayerPrefs.SetInt("number_tries", CheckLogFirebase.Instance.TotalNumberTries);
-        //         PlayerPrefs.SetFloat("time_play", CheckLogFirebase.Instance.TimePause);
-        //         Debug.Log("check-log-pause_game----time_play" + CheckLogFirebase.Instance.TimePause);
-        //         Debug.Log("check-log-pause_game----id_level" + PlayerPrefs.GetInt("lv"));
-        //         Debug.Log("check-log-pause_game----number_tries" + CheckLogFirebase.Instance.TotalNumberTries);
-
-        //     }
-        // }
-        // else
-        // {
-        // }
-    }
-    protected void OnApplicationQuit()
-    {
-        // CheckLogFirebase.Instance.TotalTimePause();
-        // if (CheckLogFirebase.Instance.TimePause > 0)
-        // {
-        //     GameFirebase.SendEvent("pause_game",
-        //     "time_play", Math.Round(CheckLogFirebase.Instance.TimePause).ToString(),
-        //     "id_level", PlayerPrefs.GetInt("lv").ToString(),
-        //     "number_tries", CheckLogFirebase.Instance.TotalNumberTries.ToString()
-        //     );
-        //     PlayerPrefs.SetInt("number_tries", CheckLogFirebase.Instance.TotalNumberTries);
-        //     PlayerPrefs.SetFloat("time_play", CheckLogFirebase.Instance.TimePause);
-        //     Debug.Log("check-log-pause_game----time_play" + CheckLogFirebase.Instance.TimePause);
-        //     Debug.Log("check-log-pause_game----id_level" + PlayerPrefs.GetInt("lv").ToString());
-        //     Debug.Log("check-log-pause_game----number_tries" + CheckLogFirebase.Instance.TotalNumberTries);
-
-        // }
-        // check3ads = 0;
-        // PlayerPrefs.SetInt("Check3ads", check3ads);
-
     }
 
     void onGenerateGrid()
@@ -555,38 +387,8 @@ public class GameCtr : MonoBehaviour
 
     }
 
-    // void ReadTags()
-    // {
-    //     bulongTags.Clear();
-    //     crewTags.Clear();
-
-    //     foreach (GameObject bulong in lstBulong)
-    //     {
-    //         bulongTags.Add(bulong.tag);
-    //     }
-
-    //     foreach (GameObject crew in lstCrew)
-    //     {
-    //         if (crew.GetComponent<Screw>().HasBulong == false)
-    //         {
-    //             crewTags.Add(crew.tag);
-    //         }
-    //     }
-    // }
-
     void CheckTags()
     {
-        // foreach (string tag in crewTags)
-        // {
-        //     if (!bulongTags.Contains(tag))
-        //     {
-        //         bgblue.transform.DOMoveY(-0.5f, 0.3f).SetEase(Ease.OutQuad).OnComplete(() =>
-        //           {
-        //               LosePanel.SetActive(true);
-        //               SetLevelText(parentLevelTextLose);
-        //           });
-        //     }
-        // }
         foreach (var screwObject in lstCrew)
         {
             var screw = screwObject.GetComponent<Screw>();
@@ -608,15 +410,11 @@ public class GameCtr : MonoBehaviour
 
                 if (!tagExists)
                 {
-                    // Debug.Log("aaa");
-                    // Audio.instance.sfxLose.Stop();
-                    // Input.
                     btnReset.SetActive(false);
                     audioToggle.gameObject.SetActive(false);
                     Audio.instance.sfxLose.Play();
                     ShowLogFireBase.Instance.AddNumberTriesLevel();
                     Debug.Log(ShowLogFireBase.Instance.numberTrise);
-                    // ShowLogFireBase.Instance.AddNumberTriesLevel();
                     GameFirebase.SendEvent("Level", "level-game-lose " + PlayerPrefs.GetInt("lv"));
                     var screw2 = screwObject.transform.Find("Screw").gameObject;
                     var spriteRenderer = screw2.GetComponent<SpriteRenderer>();
@@ -638,23 +436,10 @@ public class GameCtr : MonoBehaviour
                                                  bglose.SetActive(true);
                                                  LosePanel.SetActive(true);
                                                  SetLevelTextEnd(parentLevelTextLose);
-                                                 // Dontdestroyonload.instance.ads();
-                                                 //  GameAds.Get.ShowInterstitialAd();
                                              });
                                       });
-                             //  LevelPannel.SetActive(false);
-                             //  TweenScrews();
-                             //  bgblue.transform.DOMoveY(-0.65f, 0.3f).SetEase(Ease.OutQuad).OnComplete(() =>
-                             //     {
-                             //         bglose.SetActive(true);
-                             //         LosePanel.SetActive(true);
-                             //         SetLevelTextEnd(parentLevelTextLose);
-                             //         // Dontdestroyonload.instance.ads();
-                             //         GameAds.Get.ShowInterstitialAd();
-                             //     });
                          });
                     }
-
                     break; // Thực hiện hàm khác và dừng kiểm tra thêm các `screw` khác
                 }
             }
@@ -704,7 +489,6 @@ public class GameCtr : MonoBehaviour
         if (lstBulong.Count == 0)
         {
             // Audio.instance.sfxWin.Stop();
-            // CheckLogFirebase.Instance.TimeStart = Time.time;
             Audio.instance.sfxWin.Play();
             ShowLogFireBase.Instance.ShowCompleteLevel();
             GameObject lastCrew = lstCrew[0];
@@ -737,10 +521,6 @@ public class GameCtr : MonoBehaviour
                                         {
                                             isNextLvCalled = true;
                                             StartCoroutine(ToggleGameObjectsContinuously(0.05f));
-                                            // NextLV();
-                                            // Dontdestroyonload.instance.ads();
-                                            // GameAds.Get.ShowInterstitialAd();
-
                                             StartCoroutine(DelayedNextLevel(1f));
                                         }
                                     });
@@ -761,12 +541,6 @@ public class GameCtr : MonoBehaviour
     //     });
     // }
 
-
-    // Method to handle the delay
-    // public void DelayMethod(float delay, System.Action action)
-    // {
-    //     StartCoroutine(DelayCoroutine(delay, action));
-    // }
     private IEnumerator DelayedNextLevel(float delay)
     {
         yield return new WaitForSeconds(delay);
@@ -783,12 +557,13 @@ public class GameCtr : MonoBehaviour
                 WinRewardPanel.transform.GetChild(4).transform.GetChild(2).gameObject.SetActive(true);
                 if (PlayerPrefs.GetInt("lv") == 2)
                 {
-                    WinRewardPanel.transform.GetChild(3).transform.GetChild(0).transform.GetComponent<Image>().sprite = lstWinSprite[0];
+                    // WinRewardPanel.transform.GetChild(3).transform.GetChild(0).transform.GetComponent<Image>().sprite = lstWinSprite[0];
+                    WinRewardPanel.transform.GetChild(3).transform.GetComponent<Image>().sprite = lstWinSprite[0];
                     WinRewardPanel.transform.GetChild(4).transform.GetChild(0).gameObject.SetActive(false);
                 }
                 if (PlayerPrefs.GetInt("lv") == 16)
                 {
-                    WinRewardPanel.transform.GetChild(3).transform.GetChild(0).transform.GetComponent<Image>().sprite = lstWinSprite[1];
+                    WinRewardPanel.transform.GetChild(3).transform.GetComponent<Image>().sprite = lstWinSprite[1];
                 }
             }
             else
@@ -797,7 +572,7 @@ public class GameCtr : MonoBehaviour
                 WinRewardPanel.transform.GetChild(4).transform.GetChild(1).gameObject.SetActive(true);
                 if (PlayerPrefs.GetInt("lv") == 3)
                 {
-                    WinRewardPanel.transform.GetChild(4).transform.GetChild(1).gameObject.SetActive(false);
+                    WinRewardPanel.transform.GetChild(4).transform.GetChild(0).gameObject.SetActive(false);
                     WinRewardPanel.transform.GetChild(2).transform.GetComponent<Image>().sprite = lstWinSprite[2];
                 }
                 if (PlayerPrefs.GetInt("lv") == 6)
@@ -840,11 +615,6 @@ public class GameCtr : MonoBehaviour
         }
 
         // StartCoroutine(DelayedbtnNext(2f));
-    }
-    private IEnumerator DelayedbtnNext(float delay)
-    {
-        yield return new WaitForSeconds(delay);
-        // btnNextlvAds.transform.DOLocalMoveY(-500f, 0.2f).SetEase(Ease.OutQuad);
     }
 
     public void autonextlvwhenwin()
@@ -894,47 +664,6 @@ public class GameCtr : MonoBehaviour
 
     }
 
-    //reward
-    // public void SaveReward()
-    // {
-    //     string json = JsonUtility.ToJson(new Serialization<int>(LstReward));
-    //     PlayerPrefs.SetString("Reward", json);
-    //     PlayerPrefs.Save();
-    //     Debug.Log("Rewards saved: " + json);
-    // }
-    // public void LoadReward()
-    // {
-    //     // Đọc chuỗi JSON từ PlayerPrefs với key là "Reward"
-    //     string json = PlayerPrefs.GetString("Reward", "");
-
-    //     // Kiểm tra nếu chuỗi JSON không rỗng
-    //     if (!string.IsNullOrEmpty(json))
-    //     {
-    //         // Chuyển đổi chuỗi JSON thành đối tượng Serialization<int>
-    //         Serialization<int> serializedReward = JsonUtility.FromJson<Serialization<int>>(json);
-
-    //         // Lưu danh sách từ serializedReward.target vào LstReward
-    //         LstReward = serializedReward.target;
-
-    //         Debug.Log("Rewards loaded: " + json);
-    //     }
-    //     else
-    //     {
-    //         Debug.LogWarning("No rewards found in PlayerPrefs.");
-    //     }
-    // }
-
-    // Coroutine to handle the delay and call the action
-    // private IEnumerator DelayCoroutine(float delay, System.Action action)
-    // {
-    //     // Wait for the specified amount of time
-    //     yield return new WaitForSeconds(delay);
-
-    //     // Execute the action
-    //     action.Invoke();
-    // }
-
-
     IEnumerator ToggleGameObjectsContinuously(float toggleInterval)
     {
         while (true)
@@ -949,9 +678,6 @@ public class GameCtr : MonoBehaviour
         }
     }
 
-
-    //dongf nafy de chay lai lan nua
-    // [ContextMenu("onGenerateObject")]
     void onGenerateObject()
     {
 
@@ -965,10 +691,6 @@ public class GameCtr : MonoBehaviour
         // int randomSubLevelIndex = Random.Range(0, currentLevel.subLevelsLists.Count);
         int randomSubLevelIndex = 0;
         var subLevels = currentLevel.subLevelsLists[randomSubLevelIndex];
-
-        // Cập nhật text của Map với chỉ số sub-level được chọn
-        // Map.text = "Map: " + randomSubLevelIndex.ToString();
-        // Debug.Log("Map: " + randomSubLevelIndex);
 
         // Duyệt qua từng phần tử trong subLevels
         foreach (var subLevel in subLevels)
@@ -1057,8 +779,6 @@ public class GameCtr : MonoBehaviour
                 }
             }
         }
-
-        // ReadTags();
         //1308 thay bang lv 3
         // if (PlayerPrefs.GetInt("lv") == 2 && PlayerPrefs.GetInt("CheckTutorialSkin") == 0 || PlayerPrefs.GetInt("lv") == 3 && PlayerPrefs.GetInt("CheckTutorialImage") == 0)
         // {
@@ -1147,7 +867,6 @@ public class GameCtr : MonoBehaviour
                 scew.sprite = LVConfig.Instance.ScewColorNew[colorIndex];
             }
 
-
             obj.tag = colorIndex.ToString();
         }
     }
@@ -1156,10 +875,6 @@ public class GameCtr : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // checktime += Time.deltaTime;
-        // if (checktime > 180f)
-        // {
-        //     checktime = 0f;
-        // }
+
     }
 }
