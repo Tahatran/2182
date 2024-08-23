@@ -26,8 +26,8 @@ public class Tutorial : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        // TutorialSkin();
-        // TutorialImage();
+        TutorialSkin();
+        TutorialImage();
     }
 
     public void WatchTutorial()
@@ -76,13 +76,13 @@ public class Tutorial : MonoBehaviour
             int CheckTutorialSkin = 0;
             PlayerPrefs.SetInt("CheckTutorialSkin", CheckTutorialSkin);
         }
-        if (PlayerPrefs.GetInt("lv") == 2 && PlayerPrefs.GetInt("CheckTutorialSkin") == 0)
-        {
-            lstTutorialSkins[0].SetActive(true);
-            // DisableAllRaycasts();
-            EnableRaycast(uiElements[1]);
-            SKinBlur[0].SetActive(true);
-        }
+        // if (PlayerPrefs.GetInt("lv") == 2 && PlayerPrefs.GetInt("CheckTutorialSkin") == 0)
+        // {
+        //     lstTutorialSkins[0].SetActive(true);
+        //     // DisableAllRaycasts();
+        //     EnableRaycast(uiElements[1]);
+        //     SKinBlur[0].SetActive(true);
+        // }
     }
 
     public void TutorialImage()

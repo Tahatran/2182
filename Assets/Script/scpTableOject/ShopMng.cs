@@ -150,7 +150,7 @@ public class ShopMng : MonoBehaviour
 
             if (isUnlocked)
             {
-
+                Item.transform.GetChild(4).transform.gameObject.SetActive(false);
                 if (PlayerPrefs.GetInt("lv") == 2 && PlayerPrefs.GetInt("CheckTutorialSkin") == 0)
                 {
                     lstSkin[0].GetComponent<Button>().enabled = false;
@@ -195,8 +195,8 @@ public class ShopMng : MonoBehaviour
             else
             {
                 Item.GetComponent<Image>().sprite = item.ItemImg;
-                Item.transform.GetChild(0).gameObject.SetActive(true);
-
+                // Item.transform.GetChild(0).gameObject.SetActive(true);
+                Item.transform.GetChild(4).transform.gameObject.GetComponent<Image>().sprite = item.activeLevel;
                 Item.GetComponent<Button>().onClick.AddListener(() =>
               {
                   DeactivateAllItems();

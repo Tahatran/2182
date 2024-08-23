@@ -297,10 +297,13 @@ public class HomeMng : MonoBehaviour
     public void btnSkin()
     {
         //thay vi start o shopmng thi goi o day 
-        if (PlayerPrefs.GetInt("lv") == 2)
+        if (PlayerPrefs.GetInt("lv") == 2 && PlayerPrefs.GetInt("CheckTutorialSkin") == 0)
         {
+            int CheckTutorialSkin = 1;
+            PlayerPrefs.SetInt("CheckTutorialSkin", CheckTutorialSkin);
             Tutorial.instance.lstTutorialSkins[2].SetActive(true);
             Tutorial.instance.SKinBlur[2].SetActive(true);
+            Tutorial.instance.DisableAllRaycasts();
         }
         ShopMng.GetComponent<ShopMng>().LoadShop();
         Audio.instance.sfxClick.Play();
@@ -377,8 +380,10 @@ public class HomeMng : MonoBehaviour
         Image.SetActive(true);
         HomeSelect.SetActive(false);
         SkinSelect.SetActive(false);
-        if (PlayerPrefs.GetInt("lv") == 3)
+        if (PlayerPrefs.GetInt("lv") == 3 && PlayerPrefs.GetInt("CheckTutorialImage") == 0)
         {
+            int CheckTutorialImage = 1;
+            PlayerPrefs.SetInt("CheckTutorialImage", CheckTutorialImage);
             Tutorial.instance.lstTutorialImages[2].SetActive(true);
             Tutorial.instance.ImageBlur[2].SetActive(true);
         }

@@ -95,17 +95,17 @@ public class ImageMng : MonoBehaviour
             ImageItemData.Items[0].IsBuy = true;
             PlayerPrefs.SetInt("ImageUnlocked_" + 0, 1); // Save the unlock status
         }
-        if (PlayerPrefs.GetInt("lv") >= 7)
+        if (PlayerPrefs.GetInt("lv") >= 6)
         {
             ImageItemData.Items[1].IsBuy = true;
             PlayerPrefs.SetInt("ImageUnlocked_" + 1, 1); // Save the unlock status
         }
-        if (PlayerPrefs.GetInt("lv") >= 10)
+        if (PlayerPrefs.GetInt("lv") >= 9)
         {
             ImageItemData.Items[2].IsBuy = true;
             PlayerPrefs.SetInt("ImageUnlocked_" + 2, 1); // Save the unlock status
         }
-        if (PlayerPrefs.GetInt("lv") >= 14)
+        if (PlayerPrefs.GetInt("lv") >= 13)
         {
             ImageItemData.Items[3].IsBuy = true;
             PlayerPrefs.SetInt("ImageUnlocked_" + 3, 1); // Save the unlock status
@@ -132,7 +132,7 @@ public class ImageMng : MonoBehaviour
         {
             ItemData item = ImageItemData.Items[i];
             GameObject Item = Instantiate(ItemPrefab);
-
+            Item.GetComponent<Image>().sprite = item.ItemImg;
             lstImage.Add(Item);
             if (i < itemsPerPage)
             {
@@ -150,9 +150,10 @@ public class ImageMng : MonoBehaviour
 
             if (isUnlocked)
             {
+                Item.transform.GetChild(3).transform.gameObject.SetActive(false);
 
                 item.IsBuy = true; // Ensure item state is updated
-                Item.GetComponent<Image>().sprite = item.ItemImg;
+                // Item.GetComponent<Image>().sprite = item.ItemImg;
                 Item.GetComponent<Button>().onClick.AddListener(() =>
                 {
                     DeactivateAllItems();
@@ -175,7 +176,8 @@ public class ImageMng : MonoBehaviour
             else
             {
                 // Item.GetComponent<Image>().sprite = item.ItemImg;
-                Item.transform.GetChild(0).gameObject.SetActive(true);
+                // Item.transform.GetChild(0).gameObject.SetActive(true);
+                Item.transform.GetChild(3).transform.gameObject.GetComponent<Image>().sprite = item.activeLevel;
                 if (PlayerPrefs.GetInt("CheckTutorialImage") != 0)
                 {
                     Item.GetComponent<Button>().onClick.AddListener(() =>

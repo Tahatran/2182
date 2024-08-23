@@ -90,7 +90,11 @@ public class GameCtr : MonoBehaviour
         GameAds.Get.ShowInterstitialAd();
 
         // DataConfig.ScoreImage = PlayerPrefs.GetInt("ScoreImage", 0);
+        // if (PlayerPrefs.GetInt("lv") == 1)
+        // {
         DataConfig.ScoreImage = PlayerPrefs.GetInt("ScoreImage", 12);
+        PlayerPrefs.SetInt("ScoreImage", DataConfig.ScoreImage);
+        // }
         //BuildTurnoff
         // DataConfig.ScoreImage = 100;
         DOTween.KillAll();

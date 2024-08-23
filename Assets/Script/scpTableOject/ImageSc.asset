@@ -18,29 +18,35 @@ MonoBehaviour:
     ItemImg: {fileID: 21300000, guid: 1d7c4e44f8f94454fa5c3166f6c4edbd, type: 3}
     ItemPrefab: {fileID: 4105357760606371290, guid: b00899c6bb3390449b2faf555a454768, type: 3}
     PreviewImg: {fileID: 0}
+    activeLevel: {fileID: 21300000, guid: 4ba18e82800dc74458ae596ca3b5ceff, type: 3}
   - Id: 1
     IsBuy: 0
     ItemImg: {fileID: 21300000, guid: c957d115171b4ae4bbf2a4c779d3dada, type: 3}
     ItemPrefab: {fileID: 4105357760606371290, guid: b00899c6bb3390449b2faf555a454768, type: 3}
     PreviewImg: {fileID: 0}
+    activeLevel: {fileID: 21300000, guid: 35185900f4cf80a45b0028d7a2ab1e22, type: 3}
   - Id: 2
     IsBuy: 0
     ItemImg: {fileID: 21300000, guid: 1ec7c11654f7ef844bd53a6eee102fbf, type: 3}
     ItemPrefab: {fileID: 4105357760606371290, guid: b00899c6bb3390449b2faf555a454768, type: 3}
     PreviewImg: {fileID: 0}
+    activeLevel: {fileID: 21300000, guid: d828639582429da488369ed6799e1567, type: 3}
   - Id: 3
     IsBuy: 0
     ItemImg: {fileID: 21300000, guid: 8c40d3c8bd524b645a79f64a4143f4f3, type: 3}
     ItemPrefab: {fileID: 4105357760606371290, guid: b00899c6bb3390449b2faf555a454768, type: 3}
     PreviewImg: {fileID: 0}
+    activeLevel: {fileID: 21300000, guid: 5b22f4af56fbaa243a6b9812c93b19a3, type: 3}
   - Id: 4
     IsBuy: 0
     ItemImg: {fileID: 21300000, guid: 0cdd203bee4cbfb44984af31d14d5464, type: 3}
     ItemPrefab: {fileID: 4105357760606371290, guid: b00899c6bb3390449b2faf555a454768, type: 3}
     PreviewImg: {fileID: 0}
+    activeLevel: {fileID: 21300000, guid: 44af2881be148fc44b571f3849b29e40, type: 3}
   - Id: 5
     IsBuy: 0
     ItemImg: {fileID: 21300000, guid: d74fb93f5a571a146b13ac4d1181f608, type: 3}
     ItemPrefab: {fileID: 4105357760606371290, guid: b00899c6bb3390449b2faf555a454768, type: 3}
     PreviewImg: {fileID: 0}
+    activeLevel: {fileID: 21300000, guid: 30cdc70945d6a624aaf62f0c6e7b5839, type: 3}
   lockImg: {fileID: 21300000, guid: 3de0150a48e65974c8a2a9afa78bf8ee, type: 3}

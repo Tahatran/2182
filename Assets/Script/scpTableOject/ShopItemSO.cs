@@ -27,6 +27,7 @@ public class ItemData
     public Sprite ItemImg;
     public GameObject ItemPrefab;
     public Sprite PreviewImg;
+    public Sprite activeLevel;
     // public int Price;
 }
 
