@@ -44,6 +44,20 @@ public class HomeMng : MonoBehaviour
     {
 
     }
+
+    public void BtnFillImage()
+    {
+        GameCtr.instance.WinRewardPanel.SetActive(false);
+        btncometoHome();
+        btnImage();
+    }
+
+    public void BtnSetSkin()
+    {
+        GameCtr.instance.WinRewardPanel.SetActive(false);
+        btncometoHome();
+        btnSkin();
+    }
     public void btnBacktoImage1308()
     {
         ImageMng.GetComponent<ImageMng>().LoadShop();
@@ -87,17 +101,17 @@ public class HomeMng : MonoBehaviour
 
         btnImage();
 
-        if (Tutorial.instance.lstTutorialImages[5].activeSelf)
-        {
-            Tutorial.instance.ImageBlur[5].SetActive(false);
-            Tutorial.instance.lstTutorialImages[5].SetActive(false);
+        // if (Tutorial.instance.lstTutorialImages[5].activeSelf)
+        // {
+        //     Tutorial.instance.ImageBlur[5].SetActive(false);
+        //     Tutorial.instance.lstTutorialImages[5].SetActive(false);
 
-            // Tutorial.instance.lstTutorialImages[5].SetActive(true);
-            int CheckTutorialImage = 1;
-            PlayerPrefs.SetInt("CheckTutorialImage", CheckTutorialImage);
-            Tutorial.instance.EnbleAllRaycasts();
-            ImageMng.GetComponent<ImageMng>().LoadShop();
-        }
+        //     // Tutorial.instance.lstTutorialImages[5].SetActive(true);
+        //     int CheckTutorialImage = 1;
+        //     PlayerPrefs.SetInt("CheckTutorialImage", CheckTutorialImage);
+        //     Tutorial.instance.EnbleAllRaycasts();
+        //     ImageMng.GetComponent<ImageMng>().LoadShop();
+        // }
     }
 
     public void btncometoHome()
@@ -274,14 +288,19 @@ public class HomeMng : MonoBehaviour
         //thay vi start o shopmng thi goi o day 
         ShopMng.GetComponent<ShopMng>().LoadShop();
         Audio.instance.sfxClick.Play();
-        if (Tutorial.instance.lstTutorialSkins[1].activeSelf)
+        if (PlayerPrefs.GetInt("lv") == 2)
         {
-            Tutorial.instance.lstTutorialSkins[1].SetActive(false);
             Tutorial.instance.lstTutorialSkins[2].SetActive(true);
-            Tutorial.instance.SKinBlur[1].SetActive(false);
             Tutorial.instance.SKinBlur[2].SetActive(true);
-
         }
+        // if (Tutorial.instance.lstTutorialSkins[1].activeSelf)
+        // {
+        //     Tutorial.instance.lstTutorialSkins[1].SetActive(false);
+        //     Tutorial.instance.lstTutorialSkins[2].SetActive(true);
+        //     Tutorial.instance.SKinBlur[1].SetActive(false);
+        //     Tutorial.instance.SKinBlur[2].SetActive(true);
+
+        // }
         SkinSelect.SetActive(true);
         Skin.SetActive(true);
         Image.SetActive(false);
@@ -331,19 +350,25 @@ public class HomeMng : MonoBehaviour
         Image1308.instance.LoadSaveImage();
         ImageMng.GetComponent<ImageMng>().LoadShop();
         Image1308.instance.ResetImage();
+
         // Audio.instance.sfxClick.Play();
-        if (Tutorial.instance.lstTutorialImages[1].activeSelf)
-        {
-            Tutorial.instance.lstTutorialImages[1].SetActive(false);
-            Tutorial.instance.lstTutorialImages[2].SetActive(true);
-            Tutorial.instance.ImageBlur[1].SetActive(false);
-            Tutorial.instance.ImageBlur[2].SetActive(true);
-        }
+        // if (Tutorial.instance.lstTutorialImages[1].activeSelf)
+        // {
+        //     Tutorial.instance.lstTutorialImages[1].SetActive(false);
+        //     Tutorial.instance.lstTutorialImages[2].SetActive(true);
+        //     Tutorial.instance.ImageBlur[1].SetActive(false);
+        //     Tutorial.instance.ImageBlur[2].SetActive(true);
+        // }
         ImgageSelect.SetActive(true);
         Skin.SetActive(false);
         Image.SetActive(true);
         HomeSelect.SetActive(false);
         SkinSelect.SetActive(false);
+        if (PlayerPrefs.GetInt("lv") == 3)
+        {
+            Tutorial.instance.lstTutorialImages[2].SetActive(true);
+            Tutorial.instance.ImageBlur[2].SetActive(true);
+        }
         // }
 
 

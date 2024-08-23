@@ -6,6 +6,7 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using DG.Tweening;
 using System;
+using Unity.VisualScripting;
 
 [System.Serializable]
 public class Serialization<T>
@@ -20,9 +21,8 @@ public class Serialization<T>
 public class GameCtr : MonoBehaviour
 {
     // adb shell setprop debug.firebase.analytics.app nami.screw.tinkerer.puzzlegame
-    // public List<Texture> lstTexture;
-    // public List<int> LstReward;
 
+    public List<Sprite> lstWinSprite;
     public GameObject WinRewardPanel;
     public GameObject bglose;
     public GameObject TutorLv2;
@@ -772,24 +772,54 @@ public class GameCtr : MonoBehaviour
         yield return new WaitForSeconds(delay);
         // autonextlvwhenwin();
         Winpanel.SetActive(false);
-        if (PlayerPrefs.GetInt("lv") == 2 || PlayerPrefs.GetInt("lv") == 3 || PlayerPrefs.GetInt("lv") == 7 || PlayerPrefs.GetInt("lv") == 10
-        || PlayerPrefs.GetInt("lv") == 11 || PlayerPrefs.GetInt("lv") == 14 && PlayerPrefs.GetInt("lv") == 19)
+        if (PlayerPrefs.GetInt("lv") == 2 || PlayerPrefs.GetInt("lv") == 3 || PlayerPrefs.GetInt("lv") == 6 || PlayerPrefs.GetInt("lv") == 9
+        || PlayerPrefs.GetInt("lv") == 13 || PlayerPrefs.GetInt("lv") == 16 && PlayerPrefs.GetInt("lv") == 19 && PlayerPrefs.GetInt("lv") == 21)
         {
-            if (PlayerPrefs.GetInt("lv") == 1 || PlayerPrefs.GetInt("lv") == 10)
+            WinRewardPanel.SetActive(true);
+            WinRewardPanel.transform.GetChild(4).transform.GetChild(0).gameObject.SetActive(true);
+            if (PlayerPrefs.GetInt("lv") == 2 || PlayerPrefs.GetInt("lv") == 16)
             {
-                WinRewardPanel.SetActive(true);
-                WinRewardPanel.transform.GetChild(2).DOScale(0.5f, 0.8f).SetEase(Ease.OutQuad)
-                .OnComplete(() =>
-                      {
-                          DOVirtual.DelayedCall(0.2f, () =>
-                             {
-                                 //   yield return new WaitForSeconds(0.3f);
-                                 WinRewardPanel.transform.GetChild(3).gameObject.SetActive(true);
-                                 WinRewardPanel.transform.GetChild(4).gameObject.SetActive(true);
-                             });
-                      }}
+                WinRewardPanel.transform.GetChild(3).gameObject.SetActive(true);
+                WinRewardPanel.transform.GetChild(4).transform.GetChild(2).gameObject.SetActive(true);
+                if (PlayerPrefs.GetInt("lv") == 2)
+                {
+                    WinRewardPanel.transform.GetChild(3).transform.GetChild(0).transform.GetComponent<Image>().sprite = lstWinSprite[0];
+                    WinRewardPanel.transform.GetChild(4).transform.GetChild(0).gameObject.SetActive(false);
+                }
+                if (PlayerPrefs.GetInt("lv") == 16)
+                {
+                    WinRewardPanel.transform.GetChild(3).transform.GetChild(0).transform.GetComponent<Image>().sprite = lstWinSprite[1];
+                }
+            }
             else
             {
+                WinRewardPanel.transform.GetChild(2).gameObject.SetActive(true);
+                WinRewardPanel.transform.GetChild(4).transform.GetChild(1).gameObject.SetActive(true);
+                if (PlayerPrefs.GetInt("lv") == 3)
+                {
+                    WinRewardPanel.transform.GetChild(4).transform.GetChild(1).gameObject.SetActive(false);
+                    WinRewardPanel.transform.GetChild(2).transform.GetComponent<Image>().sprite = lstWinSprite[2];
+                }
+                if (PlayerPrefs.GetInt("lv") == 6)
+                {
+                    WinRewardPanel.transform.GetChild(2).transform.GetComponent<Image>().sprite = lstWinSprite[3];
+                }
+                if (PlayerPrefs.GetInt("lv") == 9)
+                {
+                    WinRewardPanel.transform.GetChild(2).transform.GetComponent<Image>().sprite = lstWinSprite[4];
+                }
+                if (PlayerPrefs.GetInt("lv") == 13)
+                {
+                    WinRewardPanel.transform.GetChild(2).transform.GetComponent<Image>().sprite = lstWinSprite[5];
+                }
+                if (PlayerPrefs.GetInt("lv") == 19)
+                {
+                    WinRewardPanel.transform.GetChild(2).transform.GetComponent<Image>().sprite = lstWinSprite[6];
+                }
+                if (PlayerPrefs.GetInt("lv") == 21)
+                {
+                    WinRewardPanel.transform.GetChild(2).transform.GetComponent<Image>().sprite = lstWinSprite[7];
+                }
 
             }
         }
@@ -1030,10 +1060,10 @@ public class GameCtr : MonoBehaviour
 
         // ReadTags();
         //1308 thay bang lv 3
-        if (PlayerPrefs.GetInt("lv") == 2 && PlayerPrefs.GetInt("CheckTutorialSkin") == 0 || PlayerPrefs.GetInt("lv") == 3 && PlayerPrefs.GetInt("CheckTutorialImage") == 0)
-        {
-            DisableAllColliders();
-        }
+        // if (PlayerPrefs.GetInt("lv") == 2 && PlayerPrefs.GetInt("CheckTutorialSkin") == 0 || PlayerPrefs.GetInt("lv") == 3 && PlayerPrefs.GetInt("CheckTutorialImage") == 0)
+        // {
+        //     DisableAllColliders();
+        // }
         // try
         // {
         if (!btnReset.activeSelf)

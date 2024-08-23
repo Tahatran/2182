@@ -9836,7 +9836,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &465747555
 RectTransform:
   m_ObjectHideFlags: 0
@@ -11319,7 +11319,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &539523879
 RectTransform:
   m_ObjectHideFlags: 0
@@ -11382,7 +11382,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 539523881}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 286971412}
+        m_TargetAssemblyTypeName: HomeMng, Assembly-CSharp
+        m_MethodName: BtnSetSkin
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &539523881
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12646,7 +12658,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4105357760606371290, guid: bf5af315b3fdfab4782b18e5595e10c6, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4882446611578856374, guid: bf5af315b3fdfab4782b18e5595e10c6, type: 3}
       propertyPath: m_Sprite
@@ -13104,6 +13116,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94dcffd7ac6e38d47829615fcfd44694, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lstWinSprite:
+  - {fileID: 21300000, guid: dccf94bfabde5da41bde7a137ac01e94, type: 3}
+  - {fileID: 21300000, guid: 03f0b27d0aea1934eae33e2588c5a4f7, type: 3}
+  - {fileID: 21300000, guid: 1d7c4e44f8f94454fa5c3166f6c4edbd, type: 3}
+  - {fileID: 21300000, guid: c957d115171b4ae4bbf2a4c779d3dada, type: 3}
+  - {fileID: 21300000, guid: 1ec7c11654f7ef844bd53a6eee102fbf, type: 3}
+  - {fileID: 21300000, guid: 8c40d3c8bd524b645a79f64a4143f4f3, type: 3}
+  - {fileID: 21300000, guid: 0cdd203bee4cbfb44984af31d14d5464, type: 3}
+  - {fileID: 21300000, guid: d74fb93f5a571a146b13ac4d1181f608, type: 3}
   WinRewardPanel: {fileID: 465747554}
   bglose: {fileID: 1358368526}
   TutorLv2: {fileID: 1357893339}
@@ -22923,8 +22944,8 @@ RectTransform:
   - {fileID: 1357893340}
   - {fileID: 286971411}
   - {fileID: 1539109761}
-  - {fileID: 1294170602}
   - {fileID: 1270558842}
+  - {fileID: 1294170602}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -26113,7 +26134,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1183372824
 RectTransform:
   m_ObjectHideFlags: 0
@@ -26176,7 +26197,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1183372826}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 286971412}
+        m_TargetAssemblyTypeName: HomeMng, Assembly-CSharp
+        m_MethodName: BtnFillImage
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1183372826
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -28052,8 +28085,8 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 242304731}
   - {fileID: 1484380445}
+  - {fileID: 242304731}
   m_Father: {fileID: 1038540293}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -44237,7 +44270,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2045087280
 RectTransform:
   m_ObjectHideFlags: 0
@@ -44297,10 +44330,22 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 2045087282}
+  m_TargetGraphic: {fileID: 1251069119}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 628836615}
+        m_TargetAssemblyTypeName: GameCtr, Assembly-CSharp
+        m_MethodName: autonextlvwhenwin
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2045087282
 MonoBehaviour:
   m_ObjectHideFlags: 0

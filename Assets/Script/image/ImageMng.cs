@@ -90,30 +90,35 @@ public class ImageMng : MonoBehaviour
 
     public void LoadShop()
     {
-        if (PlayerPrefs.GetInt("lv") == 3)
+        if (PlayerPrefs.GetInt("lv") >= 3)
+        {
+            ImageItemData.Items[0].IsBuy = true;
+            PlayerPrefs.SetInt("ImageUnlocked_" + 0, 1); // Save the unlock status
+        }
+        if (PlayerPrefs.GetInt("lv") >= 7)
+        {
+            ImageItemData.Items[1].IsBuy = true;
+            PlayerPrefs.SetInt("ImageUnlocked_" + 1, 1); // Save the unlock status
+        }
+        if (PlayerPrefs.GetInt("lv") >= 10)
         {
             ImageItemData.Items[2].IsBuy = true;
             PlayerPrefs.SetInt("ImageUnlocked_" + 2, 1); // Save the unlock status
         }
-        if (PlayerPrefs.GetInt("lv") == 7)
+        if (PlayerPrefs.GetInt("lv") >= 14)
         {
             ImageItemData.Items[3].IsBuy = true;
             PlayerPrefs.SetInt("ImageUnlocked_" + 3, 1); // Save the unlock status
         }
-        if (PlayerPrefs.GetInt("lv") == 10)
+        if (PlayerPrefs.GetInt("lv") >= 19)
         {
             ImageItemData.Items[4].IsBuy = true;
             PlayerPrefs.SetInt("ImageUnlocked_" + 4, 1); // Save the unlock status
         }
-        if (PlayerPrefs.GetInt("lv") == 14)
+        if (PlayerPrefs.GetInt("lv") >= 21)
         {
             ImageItemData.Items[5].IsBuy = true;
             PlayerPrefs.SetInt("ImageUnlocked_" + 5, 1); // Save the unlock status
-        }
-        if (PlayerPrefs.GetInt("lv") == 19)
-        {
-            ImageItemData.Items[6].IsBuy = true;
-            PlayerPrefs.SetInt("ImageUnlocked_" + 6, 1); // Save the unlock status
         }
         // Debug.LogError("aaaaa");
         int itemsPerPage = 8; // Number of items per page

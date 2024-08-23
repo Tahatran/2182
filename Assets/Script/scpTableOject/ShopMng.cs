@@ -62,17 +62,17 @@ public class ShopMng : MonoBehaviour
         }
         if (Tutorial.instance.lstTutorialSkins[3].activeSelf)
         {
-            // Tutorial.instance.SKinBlur[3].SetActive(false);
-            // Tutorial.instance.SKinBlur[4].SetActive(true);
-            // Tutorial.instance.lstTutorialSkins[3].SetActive(false);
-            // Tutorial.instance.lstTutorialSkins[4].SetActive(true);
-            // Tutorial.instance.EnableRaycast(Tutorial.instance.uiElements[6]);
-            //2108 tat cai tren bat cai duoi
             Tutorial.instance.SKinBlur[3].SetActive(false);
-            Tutorial.instance.ImageBlur[1].SetActive(true);
+            Tutorial.instance.SKinBlur[4].SetActive(true);
             Tutorial.instance.lstTutorialSkins[3].SetActive(false);
-            Tutorial.instance.lstTutorialImages[1].SetActive(true);
-            Tutorial.instance.EnableRaycast(Tutorial.instance.uiElements[8]);
+            Tutorial.instance.lstTutorialSkins[4].SetActive(true);
+            Tutorial.instance.EnableRaycast(Tutorial.instance.uiElements[6]);
+            //2108 tat cai tren bat cai duoi
+            // Tutorial.instance.SKinBlur[3].SetActive(false);
+            // Tutorial.instance.ImageBlur[1].SetActive(true);
+            // Tutorial.instance.lstTutorialSkins[3].SetActive(false);
+            // Tutorial.instance.lstTutorialImages[1].SetActive(true);
+            // Tutorial.instance.EnableRaycast(Tutorial.instance.uiElements[8]);
         }
     }
 
@@ -112,15 +112,15 @@ public class ShopMng : MonoBehaviour
     public void LoadShop()
     {
 
-        if (PlayerPrefs.GetInt("lv") == 1)
+        if (PlayerPrefs.GetInt("lv") >= 2)
         {
             SkinItemData.Items[1].IsBuy = true;
             PlayerPrefs.SetInt("SkinUnlocked_" + 1, 1); // Save the unlock status
         }
-        if (PlayerPrefs.GetInt("lv") == 10)
+        if (PlayerPrefs.GetInt("lv") >= 16)
         {
-            SkinItemData.Items[3].IsBuy = true;
-            PlayerPrefs.SetInt("SkinUnlocked_" + 3, 1); // Save the unlock status
+            SkinItemData.Items[2].IsBuy = true;
+            PlayerPrefs.SetInt("SkinUnlocked_" + 2, 1); // Save the unlock status
         }
         int itemsPerPage = 8; // Number of items per page
 
