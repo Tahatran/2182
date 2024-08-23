@@ -178,25 +178,26 @@ public class ImageMng : MonoBehaviour
                 // Item.GetComponent<Image>().sprite = item.ItemImg;
                 // Item.transform.GetChild(0).gameObject.SetActive(true);
                 Item.transform.GetChild(3).transform.gameObject.GetComponent<Image>().sprite = item.activeLevel;
-                if (PlayerPrefs.GetInt("CheckTutorialImage") != 0)
-                {
-                    Item.GetComponent<Button>().onClick.AddListener(() =>
-                                   {
-                                       DeactivateAllItems();
-                                       idSelecSkinLock = item.Id;
+                //neu ma xem ads thi bat len
+                // if (PlayerPrefs.GetInt("CheckTutorialImage") != 0)
+                // {
+                //     Item.GetComponent<Button>().onClick.AddListener(() =>
+                //                    {
+                //                        DeactivateAllItems();
+                //                        idSelecSkinLock = item.Id;
 
-                                       // Handle non-buyable items
-                                       if (idSelecSkinLock > 0 && !ImageItemData.Items[idSelecSkinLock - 1].IsBuy)
-                                       {
-                                           btnAds.SetActive(false);
-                                           btnGet.SetActive(false);
-                                       }
-                                       else
-                                       {
-                                           btnAds.SetActive(true);
-                                       }
-                                   });
-                }
+                //                        // Handle non-buyable items
+                //                        if (idSelecSkinLock > 0 && !ImageItemData.Items[idSelecSkinLock - 1].IsBuy)
+                //                        {
+                //                            btnAds.SetActive(false);
+                //                            btnGet.SetActive(false);
+                //                        }
+                //                        else
+                //                        {
+                //                            btnAds.SetActive(true);
+                //                        }
+                //                    });
+                // }
             }
 
         }

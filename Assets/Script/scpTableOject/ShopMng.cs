@@ -197,25 +197,49 @@ public class ShopMng : MonoBehaviour
                 Item.GetComponent<Image>().sprite = item.ItemImg;
                 // Item.transform.GetChild(0).gameObject.SetActive(true);
                 Item.transform.GetChild(4).transform.gameObject.GetComponent<Image>().sprite = item.activeLevel;
-                Item.GetComponent<Button>().onClick.AddListener(() =>
-              {
-                  DeactivateAllItems();
-                  idSelecSkinLock = item.Id;
-                  Item.transform.GetChild(2).gameObject.SetActive(true);
-                  // Handle non-buyable items, bat len de select lan luot skin
-                  //   if (idSelecSkinLock > 0 && !SkinItemData.Items[idSelecSkinLock - 1].IsBuy)
-                  //   {
-                  //       btnAds.SetActive(false);
-                  //       btnGet.SetActive(false);
-                  //   }
-                  //   else
-                  //   {
-                  //       btnGet.SetActive(true);
-                  //       btnAds.SetActive(true);
-                  //   }
-                  btnGet.SetActive(true);
-                  btnAds.SetActive(true);
-              });
+
+                //     Item.GetComponent<Button>().onClick.AddListener(() =>
+                //   {
+                //       DeactivateAllItems();
+                //       idSelecSkinLock = item.Id;
+                //       Item.transform.GetChild(2).gameObject.SetActive(true);
+                //       // Handle non-buyable items, bat len de select lan luot skin
+                //       //   if (idSelecSkinLock > 0 && !SkinItemData.Items[idSelecSkinLock - 1].IsBuy)
+                //       //   {
+                //       //       btnAds.SetActive(false);
+                //       //       btnGet.SetActive(false);
+                //       //   }
+                //       //   else
+                //       //   {
+                //       //       btnGet.SetActive(true);
+                //       //       btnAds.SetActive(true);
+                //       //   }
+                //       btnGet.SetActive(true);
+                //       btnAds.SetActive(true);
+                //   });
+
+                if (i == 3 || i == 4)
+                {
+                    Item.GetComponent<Button>().onClick.AddListener(() =>
+                  {
+                      DeactivateAllItems();
+                      idSelecSkinLock = item.Id;
+                      Item.transform.GetChild(2).gameObject.SetActive(true);
+                      // Handle non-buyable items, bat len de select lan luot skin
+                      //   if (idSelecSkinLock > 0 && !SkinItemData.Items[idSelecSkinLock - 1].IsBuy)
+                      //   {
+                      //       btnAds.SetActive(false);
+                      //       btnGet.SetActive(false);
+                      //   }
+                      //   else
+                      //   {
+                      //       btnGet.SetActive(true);
+                      //       btnAds.SetActive(true);
+                      //   }
+                      btnGet.SetActive(true);
+                      btnAds.SetActive(true);
+                  });
+                }
             }
         }
         if (PlayerPrefs.GetInt("lv") == 2 && Tutorial.instance.lstTutorialSkins[2].activeSelf)
