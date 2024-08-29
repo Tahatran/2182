@@ -23,7 +23,8 @@ public class GameCtr : MonoBehaviour
     // adb shell setprop debug.firebase.analytics.app nami.screw.tinkerer.puzzlegame
 
     public List<Sprite> lstWinSprite;
-    public GameObject WinRewardPanel;
+    public GameObject WinRewardPanelCanvas;
+    public GameObject WinRewardPanelobj;
     public GameObject bglose;
     public GameObject TutorLv2;
     public GameObject Loading;
@@ -553,51 +554,52 @@ public class GameCtr : MonoBehaviour
         if (PlayerPrefs.GetInt("lv") == 2 || PlayerPrefs.GetInt("lv") == 3 || PlayerPrefs.GetInt("lv") == 6 || PlayerPrefs.GetInt("lv") == 9
         || PlayerPrefs.GetInt("lv") == 13 || PlayerPrefs.GetInt("lv") == 16 && PlayerPrefs.GetInt("lv") == 19 && PlayerPrefs.GetInt("lv") == 21)
         {
-            WinRewardPanel.SetActive(true);
-            WinRewardPanel.transform.GetChild(4).transform.GetChild(0).gameObject.SetActive(true);
+            WinRewardPanelCanvas.SetActive(true);
+            WinRewardPanelobj.SetActive(true);
+            WinRewardPanelCanvas.transform.GetChild(4).transform.GetChild(0).gameObject.SetActive(true);
             if (PlayerPrefs.GetInt("lv") == 2 || PlayerPrefs.GetInt("lv") == 16)
             {
-                WinRewardPanel.transform.GetChild(3).gameObject.SetActive(true);
-                WinRewardPanel.transform.GetChild(4).transform.GetChild(2).gameObject.SetActive(true);
+                WinRewardPanelobj.transform.GetChild(3).gameObject.SetActive(true);
+                WinRewardPanelCanvas.transform.GetChild(4).transform.GetChild(2).gameObject.SetActive(true);
                 if (PlayerPrefs.GetInt("lv") == 2)
                 {
                     // WinRewardPanel.transform.GetChild(3).transform.GetChild(0).transform.GetComponent<Image>().sprite = lstWinSprite[0];
-                    WinRewardPanel.transform.GetChild(3).transform.GetComponent<Image>().sprite = lstWinSprite[0];
-                    WinRewardPanel.transform.GetChild(4).transform.GetChild(0).gameObject.SetActive(false);
+                    WinRewardPanelobj.transform.GetChild(3).transform.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = lstWinSprite[0];
+                    WinRewardPanelCanvas.transform.GetChild(4).transform.GetChild(0).gameObject.SetActive(false);
                 }
                 if (PlayerPrefs.GetInt("lv") == 16)
                 {
-                    WinRewardPanel.transform.GetChild(3).transform.GetComponent<Image>().sprite = lstWinSprite[1];
+                    WinRewardPanelobj.transform.GetChild(3).transform.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = lstWinSprite[1];
                 }
             }
             else
             {
-                WinRewardPanel.transform.GetChild(2).gameObject.SetActive(true);
-                WinRewardPanel.transform.GetChild(4).transform.GetChild(1).gameObject.SetActive(true);
+                WinRewardPanelobj.transform.GetChild(2).gameObject.SetActive(true);
+                WinRewardPanelCanvas.transform.GetChild(4).transform.GetChild(1).gameObject.SetActive(true);
                 if (PlayerPrefs.GetInt("lv") == 3)
                 {
-                    WinRewardPanel.transform.GetChild(4).transform.GetChild(0).gameObject.SetActive(false);
-                    WinRewardPanel.transform.GetChild(2).transform.GetComponent<Image>().sprite = lstWinSprite[2];
+                    WinRewardPanelCanvas.transform.GetChild(4).transform.GetChild(0).gameObject.SetActive(false);
+                    WinRewardPanelobj.transform.GetChild(2).transform.GetComponent<SpriteRenderer>().sprite = lstWinSprite[2];
                 }
                 if (PlayerPrefs.GetInt("lv") == 6)
                 {
-                    WinRewardPanel.transform.GetChild(2).transform.GetComponent<Image>().sprite = lstWinSprite[3];
+                    WinRewardPanelobj.transform.GetChild(2).transform.GetComponent<SpriteRenderer>().sprite = lstWinSprite[3];
                 }
                 if (PlayerPrefs.GetInt("lv") == 9)
                 {
-                    WinRewardPanel.transform.GetChild(2).transform.GetComponent<Image>().sprite = lstWinSprite[4];
+                    WinRewardPanelobj.transform.GetChild(2).transform.GetComponent<SpriteRenderer>().sprite = lstWinSprite[4];
                 }
                 if (PlayerPrefs.GetInt("lv") == 13)
                 {
-                    WinRewardPanel.transform.GetChild(2).transform.GetComponent<Image>().sprite = lstWinSprite[5];
+                    WinRewardPanelobj.transform.GetChild(2).transform.GetComponent<SpriteRenderer>().sprite = lstWinSprite[5];
                 }
                 if (PlayerPrefs.GetInt("lv") == 19)
                 {
-                    WinRewardPanel.transform.GetChild(2).transform.GetComponent<Image>().sprite = lstWinSprite[6];
+                    WinRewardPanelobj.transform.GetChild(2).transform.GetComponent<SpriteRenderer>().sprite = lstWinSprite[6];
                 }
                 if (PlayerPrefs.GetInt("lv") == 21)
                 {
-                    WinRewardPanel.transform.GetChild(2).transform.GetComponent<Image>().sprite = lstWinSprite[7];
+                    WinRewardPanelobj.transform.GetChild(2).transform.GetComponent<SpriteRenderer>().sprite = lstWinSprite[7];
                 }
 
             }

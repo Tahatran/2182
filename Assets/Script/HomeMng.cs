@@ -47,14 +47,16 @@ public class HomeMng : MonoBehaviour
 
     public void BtnFillImage()
     {
-        GameCtr.instance.WinRewardPanel.SetActive(false);
+        GameCtr.instance.WinRewardPanelCanvas.SetActive(false);
+        GameCtr.instance.WinRewardPanelobj.SetActive(false);
         btncometoHome();
         btnImage();
     }
 
     public void BtnSetSkin()
     {
-        GameCtr.instance.WinRewardPanel.SetActive(false);
+        GameCtr.instance.WinRewardPanelCanvas.SetActive(false);
+        GameCtr.instance.WinRewardPanelobj.SetActive(false);
         btncometoHome();
         btnSkin();
     }
