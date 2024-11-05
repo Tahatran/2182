@@ -132,8 +132,8 @@ public class BulongAction : MonoBehaviour
     // }
 
     // Handle click event on GameObject
-    void OnMouseDown()
-    {
-        // TweenBulongObjects();
-    }
+    // void OnMouseDown()
+    // {
+    //     // TweenBulongObjects();
+    // }
 }

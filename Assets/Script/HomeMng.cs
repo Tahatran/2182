@@ -130,22 +130,10 @@ public class HomeMng : MonoBehaviour
     public void btncometoHome()
     {
         Audio.instance.sfxClick.Play();
-        // GameCtr.instance.DisableAllColliders();
-
         GameCtr.instance.GameClear();
-        // GameCtr.instance.audioToggle.SetActive(true);
-        // StartCoroutine(delay());
-        // ImageGameObject.SetActive(true);
-        // ImageGameObject1308.SetActive(true);
         gameObject.SetActive(true);
         Audio.instance.AudioLoad();
-        //1308
-        // if (PlayerPrefs.GetInt("lv") < 5)
-        // {
-        //     // ImgageSelect.SetActive(true);
-        //     // ImgageSelect.transform.GetChild(0).gameObject.SetActive(true);
-        //     ImgageSelect2.SetActive(true);
-        // }
+
         if (Tutorial.instance.lstTutorialSkins[0].activeSelf)
         {
             Tutorial.instance.SKinBlur[0].SetActive(false);
@@ -154,39 +142,8 @@ public class HomeMng : MonoBehaviour
             Tutorial.instance.lstTutorialSkins[1].SetActive(true);
             Tutorial.instance.EnableRaycast(Tutorial.instance.uiElements[7]);
         }
-        //1308 tat, cai cu bat len
-        // if (Tutorial.instance.lstTutorialImages[0].activeSelf)
-        // {
-        //     Tutorial.instance.ImageBlur[0].SetActive(false);
-        //     Tutorial.instance.ImageBlur[1].SetActive(true);
-        //     Tutorial.instance.lstTutorialImages[0].SetActive(false);
-        //     Tutorial.instance.lstTutorialImages[1].SetActive(true);
-        //     Tutorial.instance.EnableRaycast(Tutorial.instance.uiElements[8]);
-        // }
-
-        //2108tat
-        // if (Tutorial.instance.lstTutorialImages[0].activeSelf)
-        // {
-        //     Tutorial.instance.lstTutorialImages[0].SetActive(false);
-        //     Tutorial.instance.ImageBlur[0].SetActive(false);
-        //     PlayerPrefs.SetInt("CheckTutorialImage", 1);
-        //     Tutorial.instance.Time_line.SetActive(true);
-        //     // StartCoroutine(Tutorial.instance.TurnOffAfterDelay());
-        //     gameObject.SetActive(false);
-        //     // Image1308.instance.lstUpgameobject.SetActive(true);
-        //     //lv1 thi bat cai nay len
-        //     // TweenOnOff tt = GameObject.FindObjectOfType<TweenOnOff>();
-        //     // tt.gameObject.SetActive(false);
-        // }
 
     }
-    // IEnumerator delay()
-    // {
-    //     yield return new WaitForSeconds(1f);
-    //     Debug.Log("delay");
-    //     GameCtr.instance.GameClear();
-
-    // }
     IEnumerator ToggleFacesWhileTweening(GameObject BuLongface, GameObject Bulongface2)
     {
         while (true)

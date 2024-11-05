@@ -16,7 +16,7 @@ public class SelectScrew : MonoBehaviour
                                                   Image1308.instance.ResetSelect();
                                                   gameObject.transform.GetChild(0).gameObject.SetActive(true);
                                                   Image1308.instance.idSelect = int.Parse(gameObject.tag);
-                                                  Debug.Log("id" + Image1308.instance.idSelect);
+                                                  //   Debug.Log("id" + Image1308.instance.idSelect);
                                               }
                                           });
     }
@@ -40,7 +40,7 @@ public class SelectScrew : MonoBehaviour
             Image1308.instance.ResetSelect();
             gameObject.transform.GetChild(1).gameObject.SetActive(true);
             Image1308.instance.idSelect = int.Parse(gameObject.tag);
-            Debug.Log("id" + Image1308.instance.idSelect);
+            // Debug.Log("id" + Image1308.instance.idSelect);
         }
     }
 

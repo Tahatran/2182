@@ -6638,7 +6638,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SkinItemData: {fileID: 11400000, guid: 4cd38d0f1c7c5174084c78f0e9ededec, type: 2}
-  pnlTutorial: {fileID: 0}
   ShopContent: {fileID: 792778591}
   ShopContent2: {fileID: 870906499}
   ItemPrefab: {fileID: 4105357760606371290, guid: 25ad42f9f642c184cabb8cc7b76f0c6d, type: 3}
@@ -25913,7 +25912,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _checkUMP: 1
-  isSkipOpenAdAfterIntersAd: 0
+  isSkipOpenAdAfterIntersAd: 1
   time_inter_ad: 60
   time_reload_inter_ad: 15
 --- !u!4 &1152596599

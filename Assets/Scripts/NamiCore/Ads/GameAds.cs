@@ -111,7 +111,7 @@ namespace Nami.Controller
         {
             LoadAppOpenAd(() =>
             {
-                ShowAppOpenAd();
+                // ShowAppOpenAd();
             });
             //LoadRewardAd();
             //LoadInterstitialAd();

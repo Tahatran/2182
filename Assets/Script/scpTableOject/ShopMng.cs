@@ -10,7 +10,7 @@ public class ShopMng : MonoBehaviour
     [Header("Data")]
     public ShopItemSO SkinItemData;
 
-    public GameObject pnlTutorial;
+    // public GameObject pnlTutorial;
     public GameObject ShopContent;
     public GameObject ShopContent2;
     public GameObject ItemPrefab;
@@ -67,12 +67,6 @@ public class ShopMng : MonoBehaviour
             Tutorial.instance.lstTutorialSkins[3].SetActive(false);
             Tutorial.instance.lstTutorialSkins[4].SetActive(true);
             Tutorial.instance.EnableRaycast(Tutorial.instance.uiElements[6]);
-            //2108 tat cai tren bat cai duoi
-            // Tutorial.instance.SKinBlur[3].SetActive(false);
-            // Tutorial.instance.ImageBlur[1].SetActive(true);
-            // Tutorial.instance.lstTutorialSkins[3].SetActive(false);
-            // Tutorial.instance.lstTutorialImages[1].SetActive(true);
-            // Tutorial.instance.EnableRaycast(Tutorial.instance.uiElements[8]);
         }
     }
 
